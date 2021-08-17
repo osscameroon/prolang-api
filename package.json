@@ -1,0 +1,32 @@
+{
+  "name": "proloang-api",
+  "version": "1.0.0",
+  "description": "Get information about programming languages",
+  "author": {
+    "email": "tericcabrel@yahoo.com",
+    "name": "Eric Cabrel TIOGO",
+    "url": "https://tericcabrel.com"
+  },
+  "homepage": "https://localhost",
+  "keywords": ["programming languages", "rest", "api", "graphql", ""],
+  "main": "build/app/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "yarn tsc",
+    "start": "nodemon --watch \\\"*.ts\\\" --exec \\\"ts-node\\\" app/index.ts",
+    "eslint:fix": "eslint --fix"
+  },
+  "devDependencies": {
+    "@types/node": "^16.6.1",
+    "@typescript-eslint/eslint-plugin": "^4.29.2",
+    "@typescript-eslint/parser": "^4.29.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-sort-destructure-keys": "^1.3.5",
+    "nodemon": "^2.0.12",
+    "prettier": "^2.3.2",
+    "ts-node": "^10.2.0",
+    "typescript": "^4.3.5"
+  }
+}

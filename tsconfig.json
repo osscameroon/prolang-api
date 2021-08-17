@@ -1,0 +1,29 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    // "lib": ["dom"],
+    "outDir": "./build",
+    "removeComments": true,
+    "strict": true,
+    "noImplicitAny": true,
+    "strictNullChecks": true,
+    "strictFunctionTypes": false,
+    "strictPropertyInitialization": false,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noImplicitReturns": false,
+    "moduleResolution": "node",
+    "baseUrl": "./",
+    "types": [],
+    "esModuleInterop": true,
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true
+  },
+  "include": [
+    "./app/**/*"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
