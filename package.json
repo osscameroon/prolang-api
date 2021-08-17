@@ -8,7 +8,13 @@
     "url": "https://tericcabrel.com"
   },
   "homepage": "https://localhost",
-  "keywords": ["programming languages", "rest", "api", "graphql", ""],
+  "keywords": [
+    "programming languages",
+    "rest",
+    "api",
+    "graphql",
+    ""
+  ],
   "main": "build/app/index.js",
   "license": "MIT",
   "scripts": {
