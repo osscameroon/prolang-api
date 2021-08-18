@@ -13,7 +13,7 @@
     "rest",
     "api",
     "graphql",
-    ""
+    "open-api"
   ],
   "main": "build/app/index.js",
   "license": "MIT",
@@ -34,5 +34,8 @@
     "prettier": "^2.3.2",
     "ts-node": "^10.2.0",
     "typescript": "^4.3.5"
+  },
+  "dependencies": {
+    "dotenv": "^10.0.0"
   }
 }
