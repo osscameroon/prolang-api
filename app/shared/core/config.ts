@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { EnvironmentName } from './types/common';
+import { EnvironmentName } from '../types/common';
 
 const getEnvironmentFile = () => {
   const envName = (process.env.NODE_ENV || 'development') as EnvironmentName;
@@ -18,3 +18,4 @@ dotenv.config({ path: getEnvironmentFile() });
 const e = process.env;
 
 export const ENV = e.NODE_ENV || 'development';
+export const DATABASE_URL = e.DATABASE_URL || '';
