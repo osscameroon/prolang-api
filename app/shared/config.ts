@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { EnvironmentName } from './types';
+import { EnvironmentName } from './types/common';
 
 const getEnvironmentFile = () => {
   const envName = (process.env.NODE_ENV || 'development') as EnvironmentName;
