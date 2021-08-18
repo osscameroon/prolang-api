@@ -19,3 +19,4 @@ const e = process.env;
 
 export const ENV = e.NODE_ENV || 'development';
 export const DATABASE_URL = e.DATABASE_URL || '';
+export const PAGINATION_LIMIT = e.PAGINATION_LIMIT || 20;
