@@ -1,4 +1,6 @@
 import mongoose, { Model, Schema } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
+
 import { LanguageDocument } from '../../shared/types/models';
 
 const languageSchema = new Schema(
@@ -44,6 +46,7 @@ const languageSchema = new Schema(
 );
 
 languageSchema.index({ name: 1, years: 1 }, { unique: true });
+languageSchema.plugin(mongoosePaginate);
 
 const LanguageModel: Model<LanguageDocument> = mongoose.model<LanguageDocument>('LanguageModel', languageSchema);
 

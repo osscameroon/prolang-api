@@ -1,4 +1,6 @@
 import mongoose, { Model, Schema } from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate';
+
 import { AuthorDocument } from '../../shared/types/models';
 
 const authorSchema = new Schema(
@@ -19,6 +21,8 @@ const authorSchema = new Schema(
     timestamps: true,
   },
 );
+
+authorSchema.plugin(mongoosePaginate);
 
 const AuthorModel: Model<AuthorDocument> = mongoose.model<AuthorDocument>('AuthorModel', authorSchema);
 
