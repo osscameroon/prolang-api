@@ -21,13 +21,24 @@ describe("Test Extract language's name", () => {
     });
   });
 
+  test('Content with link and name only', () => {
+    const content =
+      '<a href="/w/index.php?title=ENIAC_Short_Code&amp;action=edit&amp;redlink=1" class="new" title="ENIAC Short Code (page does not exist)">ENIAC Short Code</a>';
+
+    expect(extractInfoFromName(content)).toMatchObject({
+      name: 'ENIAC Short Code',
+      nameExtra: null,
+      link: null,
+    });
+  });
+
   test('Content with link, name and nameExtra', () => {
     const content =
       '<a href="/wiki/Swift_(parallel_scripting_language)" title="Swift (parallel scripting language)">Swift (parallel scripting language)</a>';
 
     expect(extractInfoFromName(content)).toMatchObject({
       name: 'Swift',
-      nameExtra: '(parallel scripting language)',
+      nameExtra: 'parallel scripting language',
       link: `${WIKIPEDIA_URL}/wiki/Swift_(parallel_scripting_language)`,
     });
   });
@@ -37,7 +48,7 @@ describe("Test Extract language's name", () => {
 
     expect(extractInfoFromName(content)).toMatchObject({
       name: 'GDScript',
-      nameExtra: '(GDS)',
+      nameExtra: 'GDS',
       link: `${WIKIPEDIA_URL}/wiki/GDScript`,
     });
   });
@@ -240,7 +251,6 @@ describe('Test Extract language author and place', () => {
       {
         name: 'Joseph Marie Jacquard',
         link: `${WIKIPEDIA_URL}/wiki/Joseph_Marie_Jacquard`,
-        place: null,
       },
     ]);
   });
@@ -251,9 +261,8 @@ describe('Test Extract language author and place', () => {
 
     expect(extractAuthorAndPlace(content)).toMatchObject([
       {
-        name: 'Kathleen Boot',
+        name: 'Kathleen Booth',
         link: `${WIKIPEDIA_URL}/wiki/Kathleen_Booth`,
-        place: null,
       },
     ]);
   });
@@ -266,29 +275,25 @@ describe('Test Extract language author and place', () => {
       {
         name: 'John von Neumann',
         link: `${WIKIPEDIA_URL}/wiki/John_von_Neumann`,
-        place: null,
       },
       {
         name: 'Herman Goldstine',
         link: `${WIKIPEDIA_URL}/wiki/Herman_Goldstine`,
-        place: null,
       },
     ]);
   });
 
-  test.only('Two author with no place - Edge case 1', () => {
+  test('Two author with no place - Edge case 1', () => {
     const content = '<a href="/wiki/John_Mauchly" title="John Mauchly">John Mauchly</a> and William F. Schmitt';
 
     expect(extractAuthorAndPlace(content)).toMatchObject([
       {
         name: 'John Mauchly',
         link: `${WIKIPEDIA_URL}/wiki/John_Mauchly`,
-        place: null,
       },
       {
         name: 'William F. Schmitt',
         link: null,
-        place: null,
       },
     ]);
   });

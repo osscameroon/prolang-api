@@ -7,5 +7,4 @@ export type LanguageInfo = {
 export type AuthorInfo = {
   name: string;
   link: string | null;
-  place: string | null;
 };
