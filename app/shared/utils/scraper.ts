@@ -15,6 +15,25 @@ const appendLink = (link: string | undefined) => {
   return `${WIKIPEDIA_URL}${link}`;
 };
 
+const removeParenthesis = (text: string) => {
+  return text.replace('(', '').replace(')', '');
+};
+
+const removeParenthesisFromExtra = (nameExtra: LanguageInfo['nameExtra']) => {
+  if (!nameExtra) {
+    return nameExtra;
+  }
+
+  if (typeof nameExtra === 'string') {
+    return removeParenthesis(nameExtra);
+  }
+
+  return {
+    ...nameExtra,
+    name: removeParenthesis(nameExtra.name),
+  };
+};
+
 const extractName = (name: string): [name: string, nameExtra: string | null] => {
   const parenthesisMathPosition = name.search(/\(.*\)/);
 
@@ -31,8 +50,9 @@ const extractName = (name: string): [name: string, nameExtra: string | null] => 
   }
 
   const nameExtra = name.substr(parenthesisMathPosition);
+  const nameExtraExcept = nameExtra.indexOf('page does not exist') < 0 ? nameExtra : null;
 
-  return [name.replace(nameExtra, '').trim(), nameExtra];
+  return [name.replace(nameExtra, '').trim(), nameExtraExcept];
 };
 
 const extractNameExtra = (content: string, nameExtra: string | null) => {
@@ -84,7 +104,7 @@ const extractInfoFromName = (content: string): LanguageInfo => {
 
   return {
     name,
-    nameExtra: handleSQLExtra(content, name, nameExtraFallback),
+    nameExtra: removeParenthesisFromExtra(handleSQLExtra(content, name, nameExtraFallback)),
     link: appendLink(link),
   };
 };
@@ -148,7 +168,6 @@ const extractAuthorAndPlace = (content: string): AuthorInfo[] => {
 
         return {
           name: hasTag ? aTag.text().trim() : author.trim(),
-          place: null,
           link: hasTag ? appendLink(aTag.attr('href')) : null,
         };
       });

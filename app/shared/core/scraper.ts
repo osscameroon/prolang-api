@@ -2,33 +2,16 @@
 import * as cheerio from 'cheerio';
 
 import * as fs from 'fs';
+import { extractAuthorAndPlace, extractInfoFromName, extractPredecessors, extractYearOfCreation } from '../utils/scraper';
 
 // const PAGE_URL = 'https://en.wikipedia.org/wiki/Timeline_of_programming_languages';
-
-type ProgrammingLanguage = {
-  yearCategory: string;
-  year: number[];
-  yearConfirmed: boolean;
-  name: string;
-  author: string;
-  predecessors: string[];
-};
-
-const parseYear = (input: string) => {
-  const array = input.split('–');
-
-  if (array.length < 2) {
-    return [+input.substr(0, 4)];
-  }
-  return [+array[0], +(array[1].length < 4 ? `${array[0].substr(0, 2)}${array[1]}` : array[1])];
-};
 
 const retrieveData = (content: string) => {
   const $ = cheerio.load(content);
 
   const headers = $('body h2');
 
-  const languages: ProgrammingLanguage[] = [];
+  const languages = [];
 
   for (let i = 0; i < headers.length; i++) {
     const header = headers.eq(i);
@@ -38,32 +21,26 @@ const retrieveData = (content: string) => {
       continue;
     }
 
-    const yearCategory = header.children('span').first().text();
+    const yearGroup = header.children('span').first().text();
     const tableRows = table.children('tbody').children('tr');
 
     for (let i = 0; i < tableRows.length; i++) {
       const rowColumns = tableRows.eq(i).children('td');
-      const name = rowColumns.eq(1).text().replace('\n', '');
 
-      if (!name) {
+      const nameInfo = extractInfoFromName(rowColumns.eq(1).html()?.replace('\n', '') || '');
+
+      if (!nameInfo.name) {
         continue;
       }
 
-      //if (i === 0) {
-      console.log(rowColumns.eq(0).text(), rowColumns.eq(2).html());
-      //}
-
-      const language: ProgrammingLanguage = {
-        author: rowColumns.eq(2).text().replace('\n', ''),
-        name,
-        predecessors: rowColumns
-          .eq(3)
-          .text()
-          .split(',')
-          .map((value) => value.trim()),
-        year: parseYear(rowColumns.eq(0).text()),
+      const language = {
+        ...nameInfo,
+        authors: extractAuthorAndPlace(rowColumns.eq(2).html()?.replace('\n', '') || ''),
+        place: null,
+        predecessors: extractPredecessors(rowColumns.eq(3).html()?.replace('\n', '') || ''),
+        years: extractYearOfCreation(rowColumns.eq(0).text().replace('\n', '')),
         yearConfirmed: !rowColumns.eq(0).text().endsWith('?'),
-        yearCategory,
+        yearGroup,
       };
 
       languages.push(language);
@@ -81,9 +58,9 @@ const scraper = async () => {
 
   const languages = retrieveData(data);
 
-  console.log(languages.length);
+  // console.log(languages);
 
-  console.log(languages[0]);
+  fs.writeFileSync(`${__dirname}/page.json`, JSON.stringify(languages, null, 2));
 
   /*await connectToDatabase();
 
