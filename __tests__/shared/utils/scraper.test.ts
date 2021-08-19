@@ -1,4 +1,4 @@
-import { extractInfoFromName, extractPredecessors, extractYearOfCreation } from '../../../app/shared/utils/scraper';
+import { extractAuthorAndPlace, extractInfoFromName, extractPredecessors, extractYearOfCreation } from '../../../app/shared/utils/scraper';
 import { WIKIPEDIA_URL } from '../../../app/shared/utils/constants';
 import { LanguageInfo } from '../../../app/shared/types/scraper';
 
@@ -223,6 +223,72 @@ describe('Test Extract language predecessors', () => {
         name: 'Operator programming',
         nameExtra: null,
         link: null,
+      },
+    ]);
+  });
+});
+
+describe('Test Extract language author and place', () => {
+  test('Empty content', () => {
+    expect(extractAuthorAndPlace('')).toMatchObject([]);
+  });
+
+  test('Single author with no place', () => {
+    const content = '<a href="/wiki/Joseph_Marie_Jacquard" title="Joseph Marie Jacquard">Joseph Marie Jacquard</a>';
+
+    expect(extractAuthorAndPlace(content)).toMatchObject([
+      {
+        name: 'Joseph Marie Jacquard',
+        link: `${WIKIPEDIA_URL}/wiki/Joseph_Marie_Jacquard`,
+        place: null,
+      },
+    ]);
+  });
+
+  test('Single author with no place - Edge case 1', () => {
+    const content =
+      '<a href="/wiki/Kathleen_Booth" title="Kathleen Booth">Kathleen Booth</a><sup id="cite_ref-1" class="reference"><a href="#cite_note-1">[1]</a></sup><sup id="cite_ref-2" class="reference"><a href="#cite_note-2">[2]</a></sup>';
+
+    expect(extractAuthorAndPlace(content)).toMatchObject([
+      {
+        name: 'Kathleen Boot',
+        link: `${WIKIPEDIA_URL}/wiki/Kathleen_Booth`,
+        place: null,
+      },
+    ]);
+  });
+
+  test('Two author with no place', () => {
+    const content =
+      '<a href="/wiki/John_von_Neumann" title="John von Neumann">John von Neumann</a> and <a href="/wiki/Herman_Goldstine" title="Herman Goldstine">Herman Goldstine</a>';
+
+    expect(extractAuthorAndPlace(content)).toMatchObject([
+      {
+        name: 'John von Neumann',
+        link: `${WIKIPEDIA_URL}/wiki/John_von_Neumann`,
+        place: null,
+      },
+      {
+        name: 'Herman Goldstine',
+        link: `${WIKIPEDIA_URL}/wiki/Herman_Goldstine`,
+        place: null,
+      },
+    ]);
+  });
+
+  test.only('Two author with no place - Edge case 1', () => {
+    const content = '<a href="/wiki/John_Mauchly" title="John Mauchly">John Mauchly</a> and William F. Schmitt';
+
+    expect(extractAuthorAndPlace(content)).toMatchObject([
+      {
+        name: 'John Mauchly',
+        link: `${WIKIPEDIA_URL}/wiki/John_Mauchly`,
+        place: null,
+      },
+      {
+        name: 'William F. Schmitt',
+        link: null,
+        place: null,
       },
     ]);
   });

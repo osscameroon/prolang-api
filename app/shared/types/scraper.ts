@@ -3,3 +3,9 @@ export type LanguageInfo = {
   nameExtra: { name: string; link: string | null } | string | null;
   link: string | null;
 };
+
+export type AuthorInfo = {
+  name: string;
+  link: string | null;
+  place: string | null;
+};

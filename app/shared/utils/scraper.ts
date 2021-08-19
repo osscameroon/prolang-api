@@ -1,6 +1,6 @@
 import * as cheerio from 'cheerio';
 
-import { LanguageInfo } from '../types/scraper';
+import { LanguageInfo, AuthorInfo } from '../types/scraper';
 import { WIKIPEDIA_URL } from './constants';
 
 const appendLink = (link: string | undefined) => {
@@ -131,4 +131,29 @@ const extractPredecessors = (content: string): LanguageInfo[] => {
   });
 };
 
-export { extractInfoFromName, extractYearOfCreation, extractPredecessors };
+const extractAuthorAndPlace = (content: string): AuthorInfo[] => {
+  if (!content) {
+    return [];
+  }
+
+  return content
+    .split(', ')
+    .map((text) => {
+      const authors = text.split(text.indexOf(' and ') >= 0 ? ' and ' : ', ');
+
+      return authors.map((author) => {
+        const $ = cheerio.load(author.replace(/<sup.*>.*<\/sup>/, ''));
+        const aTag = $('a');
+        const hasTag = aTag.length > 0;
+
+        return {
+          name: hasTag ? aTag.text().trim() : author.trim(),
+          place: null,
+          link: hasTag ? appendLink(aTag.attr('href')) : null,
+        };
+      });
+    })
+    .flat();
+};
+
+export { extractInfoFromName, extractYearOfCreation, extractPredecessors, extractAuthorAndPlace };
