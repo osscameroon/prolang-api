@@ -50,7 +50,7 @@ const retrieveData = (content: string) => {
       }
 
       //if (i === 0) {
-      console.log(rowColumns.eq(0).text(), rowColumns.eq(1).html());
+      console.log(rowColumns.eq(0).text(), rowColumns.eq(2).html());
       //}
 
       const language: ProgrammingLanguage = {

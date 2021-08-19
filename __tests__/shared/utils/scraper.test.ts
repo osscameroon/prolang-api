@@ -1,4 +1,4 @@
-import { extractInfoFromName, extractYearOfCreation } from '../../../app/shared/utils/scraper';
+import { extractInfoFromName, extractPredecessors, extractYearOfCreation } from '../../../app/shared/utils/scraper';
 import { WIKIPEDIA_URL } from '../../../app/shared/utils/constants';
 import { LanguageInfo } from '../../../app/shared/types/scraper';
 
@@ -91,7 +91,7 @@ describe("Test Extract language's name", () => {
   });
 });
 
-describe.only('Test Extract year of creation', () => {
+describe('Test Extract year of creation', () => {
   test('Empty content', () => {
     expect(extractYearOfCreation('')).toMatchObject([]);
   });
@@ -106,5 +106,124 @@ describe.only('Test Extract year of creation', () => {
   });
   test('Range year - Edge case 1', () => {
     expect(extractYearOfCreation('1958–62')).toMatchObject([1958, 1962]);
+  });
+});
+
+describe('Test Extract language predecessors', () => {
+  test('Empty content', () => {
+    expect(extractPredecessors('')).toMatchObject([]);
+  });
+
+  test('Link with Plain text', () => {
+    const content =
+      '<a href="/wiki/C%2B%2B" title="C++">C++</a>, Standard C, <a href="/wiki/C_(programming_language)" title="C (programming language)">C</a>';
+
+    expect(extractPredecessors(content)).toMatchObject([
+      {
+        name: 'C++',
+        nameExtra: null,
+        link: `${WIKIPEDIA_URL}/wiki/C%2B%2B`,
+      },
+      {
+        name: 'Standard C',
+        nameExtra: null,
+        link: null,
+      },
+      {
+        name: 'C',
+        nameExtra: null,
+        link: `${WIKIPEDIA_URL}/wiki/C_(programming_language)`,
+      },
+    ]);
+  });
+
+  test('Link only', () => {
+    const content =
+      '<a href="/wiki/JavaScript" title="JavaScript">JavaScript</a>, <a href="/wiki/CoffeeScript" title="CoffeeScript">CoffeeScript</a>';
+
+    expect(extractPredecessors(content)).toMatchObject([
+      {
+        name: 'JavaScript',
+        nameExtra: null,
+        link: `${WIKIPEDIA_URL}/wiki/JavaScript`,
+      },
+      {
+        name: 'CoffeeScript',
+        nameExtra: null,
+        link: `${WIKIPEDIA_URL}/wiki/CoffeeScript`,
+      },
+    ]);
+  });
+
+  test('Text only', () => {
+    const content = 'Ada 2005, ISO/IEC 8652:1995/Amd 1:2007';
+
+    expect(extractPredecessors(content)).toMatchObject([
+      {
+        name: 'Ada 2005',
+        nameExtra: null,
+        link: null,
+      },
+      {
+        name: 'ISO/IEC 8652:1995/Amd 1:2007',
+        nameExtra: null,
+        link: null,
+      },
+    ]);
+  });
+
+  test('Link - Edge case 1', () => {
+    const content =
+      '<a href="/wiki/JavaScript" title="JavaScript">JavaScript</a>, <a href="/wiki/OCaml" title="OCaml">OCaml</a><sup id="cite_ref-13" class="reference"><a href="#cite_note-13">[13]</a></sup>';
+
+    expect(extractPredecessors(content)).toMatchObject([
+      {
+        name: 'JavaScript',
+        nameExtra: null,
+        link: `${WIKIPEDIA_URL}/wiki/JavaScript`,
+      },
+      {
+        name: 'OCaml',
+        nameExtra: null,
+        link: `${WIKIPEDIA_URL}/wiki/OCaml`,
+      },
+    ]);
+  });
+
+  test('Link - With dead link', () => {
+    const content =
+      '<a href="/w/index.php?title=FARGO&amp;action=edit&amp;redlink=1" class="new" title="FARGO (page does not exist)">FARGO</a>, <a href="/wiki/IBM_RPG" title="IBM RPG">RPG</a>';
+
+    expect(extractPredecessors(content)).toMatchObject([
+      {
+        name: 'FARGO',
+        nameExtra: null,
+        link: null,
+      },
+      {
+        name: 'RPG',
+        nameExtra: null,
+        link: `${WIKIPEDIA_URL}/wiki/IBM_RPG`,
+      },
+    ]);
+  });
+
+  test('No predecessors', () => {
+    const content = 'none (unique language)';
+
+    expect(extractPredecessors(content)).toMatchObject([]);
+  });
+
+  test('No predecessors', () => {
+    const content =
+      'Operator programming - Alexey Andreevich Lyapunov &amp; <a href="/wiki/Kateryna_Yushchenko_(scientist)" title="Kateryna Yushchenko (scientist)">Kateryna Yushchenko</a> &amp; <a href="/wiki/MESM" title="MESM">MESM</a>';
+
+    expect(extractPredecessors(content)).toMatchObject([
+      {
+        name: 'Operator programming',
+        nameExtra: null,
+        link: null,
+      },
+    ]);
   });
 });

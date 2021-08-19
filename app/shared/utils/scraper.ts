@@ -3,6 +3,18 @@ import * as cheerio from 'cheerio';
 import { LanguageInfo } from '../types/scraper';
 import { WIKIPEDIA_URL } from './constants';
 
+const appendLink = (link: string | undefined) => {
+  if (!link) {
+    return null;
+  }
+
+  if (link.indexOf('redlink=1') >= 0) {
+    return null;
+  }
+
+  return `${WIKIPEDIA_URL}${link}`;
+};
+
 const extractName = (name: string): [name: string, nameExtra: string | null] => {
   const parenthesisMathPosition = name.search(/\(.*\)/);
 
@@ -38,10 +50,8 @@ const extractNameExtra = (content: string, nameExtra: string | null) => {
   const aTag = $('a').first();
 
   if (aTag.length > 0) {
-    const link = aTag.attr('href');
-
     return {
-      link: link ? `${WIKIPEDIA_URL}${link}` : null,
+      link: appendLink(aTag.attr('href')),
       name: aTag.text(),
     };
   }
@@ -75,7 +85,7 @@ const extractInfoFromName = (content: string): LanguageInfo => {
   return {
     name,
     nameExtra: handleSQLExtra(content, name, nameExtraFallback),
-    link: link ? `${WIKIPEDIA_URL}${link}` : null,
+    link: appendLink(link),
   };
 };
 
@@ -93,4 +103,32 @@ const extractYearOfCreation = (content: string): number[] => {
   return [+yearStart, +(yearEnd.length < 4 ? `${yearStart.substr(0, 2)}${yearEnd}` : yearEnd)];
 };
 
-export { extractInfoFromName, extractYearOfCreation };
+const extractPredecessors = (content: string): LanguageInfo[] => {
+  if (!content || content.startsWith('none')) {
+    return [];
+  }
+
+  if (content.startsWith('Operator programming')) {
+    return [
+      {
+        name: 'Operator programming',
+        nameExtra: null,
+        link: null,
+      },
+    ];
+  }
+
+  return content.split(',').map((text) => {
+    const $ = cheerio.load(text.replace(/<sup.*>.*<\/sup>/, ''));
+    const aTag = $('a');
+    const hasTag = aTag.length > 0;
+
+    return {
+      name: hasTag ? aTag.text().trim() : text.trim(),
+      nameExtra: null,
+      link: hasTag ? appendLink(aTag.attr('href')) : null,
+    };
+  });
+};
+
+export { extractInfoFromName, extractYearOfCreation, extractPredecessors };
