@@ -79,4 +79,18 @@ const extractInfoFromName = (content: string): LanguageInfo => {
   };
 };
 
-export { extractInfoFromName };
+const extractYearOfCreation = (content: string): number[] => {
+  if (!content) {
+    return [];
+  }
+
+  const [yearStart, yearEnd] = content.split('–');
+
+  if (!yearEnd) {
+    return [+yearStart.substr(0, 4)];
+  }
+
+  return [+yearStart, +(yearEnd.length < 4 ? `${yearStart.substr(0, 2)}${yearEnd}` : yearEnd)];
+};
+
+export { extractInfoFromName, extractYearOfCreation };
