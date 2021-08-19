@@ -1,8 +1,8 @@
-import { extractInfoFromName } from '../../../app/shared/utils/scraper';
+import { extractInfoFromName, extractYearOfCreation } from '../../../app/shared/utils/scraper';
 import { WIKIPEDIA_URL } from '../../../app/shared/utils/constants';
 import { LanguageInfo } from '../../../app/shared/types/scraper';
 
-describe('Test extractInfoFromName', () => {
+describe("Test Extract language's name", () => {
   test('Empty content', () => {
     expect(extractInfoFromName('')).toMatchObject({
       name: '',
@@ -88,5 +88,23 @@ describe('Test extractInfoFromName', () => {
       nameExtra: 'Structured Query language',
       link: `${WIKIPEDIA_URL}/wiki/SQL`,
     });
+  });
+});
+
+describe.only('Test Extract year of creation', () => {
+  test('Empty content', () => {
+    expect(extractYearOfCreation('')).toMatchObject([]);
+  });
+  test('Single year confirmed', () => {
+    expect(extractYearOfCreation('1987')).toMatchObject([1987]);
+  });
+  test('Single year not confirmed', () => {
+    expect(extractYearOfCreation('1987?')).toMatchObject([1987]);
+  });
+  test('Range year', () => {
+    expect(extractYearOfCreation('2009–2010')).toMatchObject([2009, 2010]);
+  });
+  test('Range year - Edge case 1', () => {
+    expect(extractYearOfCreation('1958–62')).toMatchObject([1958, 1962]);
   });
 });
