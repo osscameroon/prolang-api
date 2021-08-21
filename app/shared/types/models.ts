@@ -2,10 +2,12 @@ import { Document } from 'mongoose';
 
 export type YearGroupDocument = Document & {
   name: string;
+  position: number;
 };
 
 export type CreateYearGroupInput = {
   name: YearGroupDocument['name'];
+  position: number;
 };
 
 export type AuthorDocument = Document & {

@@ -9,6 +9,10 @@ const yearGroupSchema = new Schema(
       type: Schema.Types.String,
       unique: true,
     },
+    position: {
+      required: true,
+      type: Schema.Types.Number,
+    },
   },
   {
     collection: 'years_groups',

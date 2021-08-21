@@ -13,7 +13,7 @@ const getOne = async (req: Request, res: Response) => {
   const item = await yearGroupService.findById(id);
 
   if (!item) {
-    return res.status(404).json({ message: RECORD_NOT_FOUND_MESSAGE('LofEvent', id) });
+    return res.status(404).json({ message: RECORD_NOT_FOUND_MESSAGE('YearGroup', id) });
   }
 
   return res.json({ data: item });
