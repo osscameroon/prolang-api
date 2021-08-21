@@ -18,5 +18,7 @@ dotenv.config({ path: getEnvironmentFile() });
 const e = process.env;
 
 export const ENV = e.NODE_ENV || 'development';
-export const DATABASE_URL = e.DATABASE_URL || '';
+export const SERVER_PORT = parseInt(e.SERVER_PORT || '5700', 10);
+export const BASE_URL = e.BASE_URL || '';
 export const PAGINATION_LIMIT = e.PAGINATION_LIMIT || 20;
+export const DATABASE_URL = e.DATABASE_URL || '';

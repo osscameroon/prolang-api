@@ -1,13 +1,21 @@
-import { ENV } from './shared/core/config';
+import http from 'http';
+import express from 'express';
+
+import { BASE_URL, SERVER_PORT } from './shared/core/config';
 import { connectToDatabase } from './shared/core/database';
+import { setupRestEndpoints } from './rest/server';
 
-console.log('Environment', ENV);
+const app = express();
 
-(async () => {
+setupRestEndpoints(app);
+
+const server = http.createServer(app);
+
+server.listen(SERVER_PORT, async () => {
   await connectToDatabase();
 
-  console.log('Connected successfully to the database!');
-})();
+  console.log(`Server started at ${BASE_URL}`);
+});
 
 process.on('unhandledRejection', (e: any) => {
   console.error(e);
@@ -16,3 +24,5 @@ process.on('unhandledRejection', (e: any) => {
     process.exit(1);
   }
 });
+
+export { server };
