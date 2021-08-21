@@ -28,12 +28,12 @@ const findPaginate = async (page: number, limit: number, search?: string, fields
   const filter: FilterQuery<AuthorDocument> = { name: search ? new RegExp(`.*${search}.*`, 'gim') : undefined };
 
   // @ts-ignore
-  return AuthorModel.paginate(filter, { page, limit, select: fields || '*' }).sort({ name: 1 });
+  return AuthorModel.paginate(filter, { limit, page, select: fields || '*' }).sort({ name: 1 });
 };
 
 export default {
-  findOrCreate,
-  findById,
   findAll,
+  findById,
+  findOrCreate,
   findPaginate,
 };

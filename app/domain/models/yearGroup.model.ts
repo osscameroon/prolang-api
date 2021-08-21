@@ -4,10 +4,10 @@ import { YearGroupDocument } from '../../shared/types/models';
 const yearGroupSchema = new Schema(
   {
     name: {
-      type: Schema.Types.String,
-      required: true,
-      unique: true,
       index: true,
+      required: true,
+      type: Schema.Types.String,
+      unique: true,
     },
   },
   {

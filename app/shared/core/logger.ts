@@ -17,12 +17,12 @@ if (!fs.existsSync(logFileDir)) {
 }
 
 const transport = new t({
+  datePattern: 'YYYY-MM-DD',
   dirname: logFileDir,
   filename: 'app-%DATE%.log',
-  datePattern: 'YYYY-MM-DD',
-  zippedArchive: true,
-  maxSize: '20m',
   maxFiles: '14d',
+  maxSize: '20m',
+  zippedArchive: true,
 });
 
 const logMessage = (message: any): string => {
@@ -38,13 +38,13 @@ const myFormat = printf((info) => {
 
 const winstonLogger: Logger = createLogger({
   format: combine(timestamp(), myFormat),
-  transports: [transport, new transports.Console()],
   silent: ENV === 'test',
+  transports: [transport, new transports.Console()],
 });
 
 const logger: EnhancedLogger = {
-  info: (output: unknown) => winstonLogger.info(logMessage(output)),
   error: (output: unknown) => winstonLogger.error(logMessage(output)),
+  info: (output: unknown) => winstonLogger.info(logMessage(output)),
 };
 
 export { logger };

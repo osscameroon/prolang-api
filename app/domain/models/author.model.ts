@@ -5,15 +5,15 @@ import { AuthorDocument } from '../../shared/types/models';
 
 const authorSchema = new Schema(
   {
-    name: {
-      type: Schema.Types.String,
-      required: true,
-      unique: true,
-      index: true,
-    },
     birthDate: Schema.Types.Date,
     country: Schema.Types.String,
     link: Schema.Types.String,
+    name: {
+      index: true,
+      required: true,
+      type: Schema.Types.String,
+      unique: true,
+    },
     picture: Schema.Types.String,
   },
   {

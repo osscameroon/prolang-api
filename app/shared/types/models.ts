@@ -9,65 +9,65 @@ export type CreateYearGroupInput = {
 };
 
 export type AuthorDocument = Document & {
-  name: string;
   birthDate: Date | null;
   country: string | null;
   link: string | null;
+  name: string;
   picture: string | null;
 };
 
 export type CreateAuthorInput = {
-  name: AuthorDocument['name'];
   birthDate: AuthorDocument['birthDate'];
   country: AuthorDocument['country'];
   link: AuthorDocument['link'];
+  name: AuthorDocument['name'];
   picture: AuthorDocument['picture'];
 };
 
 export type LanguageDocument = Document & {
-  name: string;
-  nameExtra: {
-    name: string;
-    link: string | null;
-  } | null;
-  years: number[];
+  authors: AuthorDocument[];
   company: string | null;
   link: string | null;
+  listed: boolean;
+  name: string;
+  nameExtra: {
+    link: string | null;
+    name: string;
+  } | null;
+  predecessors: LanguageDocument[];
   yearConfirmed: boolean;
   yearGroup: YearGroupDocument;
-  authors: AuthorDocument[];
-  predecessors: LanguageDocument[];
-  listed: boolean;
+  years: number[];
 };
 
 export type CreateLanguageInput = {
-  name: LanguageDocument['name'];
-  nameExtra: LanguageDocument['nameExtra'];
-  years: LanguageDocument['years'];
+  authors: string[];
   company: LanguageDocument['company'];
   link: LanguageDocument['link'];
+  listed: LanguageDocument['listed'];
+  name: LanguageDocument['name'];
+  nameExtra: LanguageDocument['nameExtra'];
+  predecessors: string[];
   yearConfirmed: LanguageDocument['yearConfirmed'];
   yearGroup: string;
-  authors: string[];
-  predecessors: string[];
-  listed: LanguageDocument['listed'];
+  years: LanguageDocument['years'];
 };
 
 export enum RequestTypeEnum {
-  rest = 'rest',
   graphql = 'graphql',
+  rest = 'rest',
 }
 
 export type RequestLogDocument = Document & {
-  type: RequestTypeEnum;
   endpoint: string;
   ipAddress: string;
   succeed: boolean;
+  type: RequestTypeEnum;
 };
 
 export type CreateRequestLogInput = {
-  type: RequestLogDocument['type'];
   endpoint: RequestLogDocument['endpoint'];
   ipAddress: RequestLogDocument['ipAddress'];
   succeed: RequestLogDocument['succeed'];
+  type: RequestLogDocument['type'];
 };

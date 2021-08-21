@@ -3,23 +3,23 @@ import { RequestLogDocument, RequestTypeEnum } from '../../shared/types/models';
 
 const requestLogSchema = new Schema(
   {
-    type: {
-      type: Schema.Types.String,
-      enum: RequestTypeEnum,
-    },
     endpoint: {
-      type: Schema.Types.String,
       required: true,
+      type: Schema.Types.String,
     },
     ipAddress: {
-      type: Schema.Types.String,
       required: true,
+      type: Schema.Types.String,
     },
     succeed: {
-      type: Schema.Types.Boolean,
-      required: true,
-      index: true,
       default: true,
+      index: true,
+      required: true,
+      type: Schema.Types.Boolean,
+    },
+    type: {
+      enum: RequestTypeEnum,
+      type: Schema.Types.String,
     },
   },
   {
@@ -28,6 +28,9 @@ const requestLogSchema = new Schema(
   },
 );
 
-const RequestLogModel: Model<RequestLogDocument> = mongoose.model<RequestLogDocument>('RequestLogModel', requestLogSchema);
+const RequestLogModel: Model<RequestLogDocument> = mongoose.model<RequestLogDocument>(
+  'RequestLogModel',
+  requestLogSchema,
+);
 
 export { RequestLogModel };

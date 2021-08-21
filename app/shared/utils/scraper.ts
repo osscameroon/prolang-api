@@ -91,7 +91,7 @@ const handleSQLExtra = (content: string, name: string, nameExtra: LanguageInfo['
 
 const extractInfoFromName = (content: string): LanguageInfo => {
   if (!content) {
-    return { name: '', nameExtra: null, link: null };
+    return { link: null, name: '', nameExtra: null };
   }
 
   const $ = cheerio.load(content);
@@ -103,9 +103,9 @@ const extractInfoFromName = (content: string): LanguageInfo => {
   const nameExtraFallback = extractNameExtra(content, nameExtra);
 
   return {
+    link: appendLink(link),
     name,
     nameExtra: removeParenthesisFromExtra(handleSQLExtra(content, name, nameExtraFallback)),
-    link: appendLink(link),
   };
 };
 
@@ -131,9 +131,9 @@ const extractPredecessors = (content: string): LanguageInfo[] => {
   if (content.startsWith('Operator programming')) {
     return [
       {
+        link: null,
         name: 'Operator programming',
         nameExtra: null,
-        link: null,
       },
     ];
   }
@@ -144,9 +144,9 @@ const extractPredecessors = (content: string): LanguageInfo[] => {
     const hasTag = aTag.length > 0;
 
     return {
+      link: hasTag ? appendLink(aTag.attr('href')) : null,
       name: hasTag ? aTag.text().trim() : text.trim(),
       nameExtra: null,
-      link: hasTag ? appendLink(aTag.attr('href')) : null,
     };
   });
 };
@@ -167,8 +167,8 @@ const extractAuthorAndPlace = (content: string): AuthorInfo[] => {
         const hasTag = aTag.length > 0;
 
         return {
-          name: hasTag ? aTag.text().trim() : author.trim(),
           link: hasTag ? appendLink(aTag.attr('href')) : null,
+          name: hasTag ? aTag.text().trim() : author.trim(),
         };
       });
     })
