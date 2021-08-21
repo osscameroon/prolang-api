@@ -7,7 +7,7 @@ export type YearGroupDocument = Document & {
 
 export type CreateYearGroupInput = {
   name: YearGroupDocument['name'];
-  position: number;
+  position: YearGroupDocument['position'];
 };
 
 export type AuthorDocument = Document & {
