@@ -5,47 +5,47 @@ import { LanguageDocument } from '../../shared/types/models';
 
 const languageSchema = new Schema(
   {
-    name: {
-      type: Schema.Types.String,
-      required: true,
+    authors: {
       index: true,
-    },
-    years: {
-      type: [Schema.Types.Number],
-      required: true,
-      index: true,
-    },
-    yearConfirmed: {
-      type: Schema.Types.Boolean,
-      required: true,
-      default: true,
-    },
-    nameExtra: {
-      name: Schema.Types.String,
-      link: Schema.Types.String,
+      ref: 'Author',
+      type: [Schema.Types.ObjectId],
     },
     company: Schema.Types.String,
     link: Schema.Types.String,
-    yearGroup: {
-      type: Schema.Types.ObjectId,
-      ref: 'YearGroup',
+    listed: {
+      default: false,
       required: true,
-      index: true,
+      type: Schema.Types.Boolean,
     },
-    authors: {
-      type: [Schema.Types.ObjectId],
-      ref: 'Author',
+    name: {
       index: true,
+      required: true,
+      type: Schema.Types.String,
+    },
+    nameExtra: {
+      link: Schema.Types.String,
+      name: Schema.Types.String,
     },
     predecessors: {
-      type: [Schema.Types.ObjectId],
-      ref: 'Language',
       index: true,
+      ref: 'Language',
+      type: [Schema.Types.ObjectId],
     },
-    listed: {
-      type: Schema.Types.Boolean,
+    yearConfirmed: {
+      default: true,
       required: true,
-      default: false,
+      type: Schema.Types.Boolean,
+    },
+    yearGroup: {
+      index: true,
+      ref: 'YearGroup',
+      required: true,
+      type: Schema.Types.ObjectId,
+    },
+    years: {
+      index: true,
+      required: true,
+      type: [Schema.Types.Number],
     },
   },
   {

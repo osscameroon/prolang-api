@@ -5,9 +5,9 @@ const getEnvironmentFile = () => {
   const envName = (process.env.NODE_ENV || 'development') as EnvironmentName;
 
   const environmentMap: Record<EnvironmentName, string> = {
+    development: '.env',
     production: '.env.prod',
     test: '.env.test',
-    development: '.env',
   };
 
   return environmentMap[envName] || '.env';

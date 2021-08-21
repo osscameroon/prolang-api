@@ -1,11 +1,17 @@
 import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-import { extractAuthorAndPlace, extractInfoFromName, extractPredecessors, extractYearOfCreation } from '../utils/scraper';
+import {
+  extractAuthorAndPlace,
+  extractInfoFromName,
+  extractPredecessors,
+  extractYearOfCreation,
+} from '../utils/scraper';
 import { PROGRAMMING_PAGE_URL, YEAR_GROUP_NOT_CREATED_MESSAGE } from '../utils/constants';
 import { LanguageInfo, ScraperResult } from '../types/scraper';
 import { AuthorDocument, LanguageDocument, YearGroupDocument } from '../types/models';
 import { connectToDatabase } from './database';
+import { logger } from './logger';
 import languageService from '../../domain/services/language.service';
 import authorService from '../../domain/services/author.service';
 import yearGroupService from '../../domain/services/yearGroup.service';
@@ -42,9 +48,9 @@ const retrieveData = (content: string) => {
         authors: extractAuthorAndPlace(rowColumns.eq(2).html()?.replace('\n', '') || ''),
         place: null,
         predecessors: extractPredecessors(rowColumns.eq(3).html()?.replace('\n', '') || ''),
-        years: extractYearOfCreation(rowColumns.eq(0).text().replace('\n', '')),
         yearConfirmed: !rowColumns.eq(0).text().endsWith('?'),
         yearGroup,
+        years: extractYearOfCreation(rowColumns.eq(0).text().replace('\n', '')),
       };
 
       languages.push(language);
@@ -60,7 +66,7 @@ const selectPredecessors = async (input: LanguageInfo[]) => {
 
     if (!language) {
       const { link, name, nameExtra } = languageInfo;
-      const nameExtraInput = typeof nameExtra == 'string' ? { name: nameExtra, link: null } : nameExtra;
+      const nameExtraInput = typeof nameExtra == 'string' ? { link: null, name: nameExtra } : nameExtra;
       const notListedGroup: YearGroupDocument | null = await yearGroupService.findNotListedGroup();
 
       if (!notListedGroup) {
@@ -68,16 +74,16 @@ const selectPredecessors = async (input: LanguageInfo[]) => {
       }
 
       return languageService.findOrCreate({
+        authors: [],
+        company: null,
         link,
+        listed: false,
         name,
         nameExtra: nameExtraInput,
-        years: [],
         predecessors: [],
-        yearGroup: notListedGroup._id,
         yearConfirmed: false,
-        company: null,
-        authors: [],
-        listed: false,
+        yearGroup: notListedGroup._id,
+        years: [],
       });
     }
 
@@ -97,10 +103,10 @@ const createLanguage: (language: ScraperResult) => Promise<LanguageDocument> = a
   for (const author of language.authors) {
     authorsCreated.push(
       await authorService.findOrCreate({
-        name: author.name,
-        link: author.link,
         birthDate: null,
         country: null,
+        link: author.link,
+        name: author.name,
         picture: null,
       }),
     );
@@ -110,19 +116,19 @@ const createLanguage: (language: ScraperResult) => Promise<LanguageDocument> = a
 
   const { authors, nameExtra, predecessors, yearGroup, ...languageInput } = language;
 
-  const nameExtraInput = typeof nameExtra == 'string' ? { name: nameExtra, link: null } : nameExtra;
+  const nameExtraInput = typeof nameExtra == 'string' ? { link: null, name: nameExtra } : nameExtra;
 
   return languageService.findOrCreate({
-    name: languageInput.name,
-    link: languageInput.link,
-    years: languageInput.years,
-    yearConfirmed: languageInput.yearConfirmed,
-    nameExtra: nameExtraInput,
-    company: null,
     authors: authorIds,
-    yearGroup: yearGroupDoc._id,
-    predecessors: await selectPredecessors(predecessors),
+    company: null,
+    link: languageInput.link,
     listed: true,
+    name: languageInput.name,
+    nameExtra: nameExtraInput,
+    predecessors: await selectPredecessors(predecessors),
+    yearConfirmed: languageInput.yearConfirmed,
+    yearGroup: yearGroupDoc._id,
+    years: languageInput.years,
   });
 };
 
@@ -138,7 +144,7 @@ const scrapeAndSeedDatabase = async () => {
     await createLanguage(language);
   }
 
-  console.log('Data inserted successfully!');
+  logger.info('Data inserted successfully!');
 };
 
 (async () => {

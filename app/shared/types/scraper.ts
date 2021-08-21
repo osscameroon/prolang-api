@@ -1,19 +1,19 @@
 export type LanguageInfo = {
-  name: string;
-  nameExtra: { name: string; link: string | null } | string | null;
   link: string | null;
+  name: string;
+  nameExtra: { link: string | null; name: string } | string | null;
 };
 
 export type AuthorInfo = {
-  name: string;
   link: string | null;
+  name: string;
 };
 
 export type ScraperResult = LanguageInfo & {
   authors: AuthorInfo[];
   place: string | null;
   predecessors: LanguageInfo[];
-  years: number[];
   yearConfirmed: boolean;
   yearGroup: string;
+  years: number[];
 };

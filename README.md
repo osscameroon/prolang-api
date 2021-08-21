@@ -11,6 +11,14 @@ Get information about programming languages
 ```shell
 yarn install
 ```
+- Create configuration file from the template
+```shell
+cp .env.template .env
+
+# Edit configuration to match your local environment and save
+nano .env
+```
+
 - Start Application
 ```bash
 yarn start

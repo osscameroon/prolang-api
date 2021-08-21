@@ -33,24 +33,24 @@ const findPaginate = async (page: number, limit: number, search?: string, fields
   const filter: FilterQuery<LanguageDocument> = { name: search ? new RegExp(`.*${search}.*`, 'gim') : undefined };
 
   // @ts-ignore
-  return LanguageModel.paginate(filter, { page, limit, select: fields || '*' }).sort({ name: 1 });
+  return LanguageModel.paginate(filter, { limit, page, select: fields || '*' }).sort({ name: 1 });
 };
 
 const findByYearGroup = async (groupName: string, page: number, limit: number, search?: string, fields?: string) => {
   const filter: FilterQuery<LanguageDocument> = {
-    'yearGroup.name': groupName,
     name: search ? new RegExp(`.*${search}.*`, 'gim') : undefined,
+    'yearGroup.name': groupName,
   };
 
   // @ts-ignore
-  return LanguageModel.paginate(filter, { page, limit, select: fields || '*' }).sort({ name: 1 });
+  return LanguageModel.paginate(filter, { limit, page, select: fields || '*' }).sort({ name: 1 });
 };
 
 export default {
-  findOrCreate,
+  findAll,
   findById,
   findByName,
-  findAll,
-  findPaginate,
   findByYearGroup,
+  findOrCreate,
+  findPaginate,
 };

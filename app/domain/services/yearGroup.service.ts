@@ -33,9 +33,9 @@ const findNotListedGroup = async () => {
 };
 
 export default {
-  findOrCreate,
-  findById,
-  findAll,
   createNotListedGroup,
+  findAll,
+  findById,
   findNotListedGroup,
+  findOrCreate,
 };
