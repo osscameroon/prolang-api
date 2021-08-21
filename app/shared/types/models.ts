@@ -26,7 +26,10 @@ export type CreateAuthorInput = {
 
 export type LanguageDocument = Document & {
   name: string;
-  nameExtra: string | null;
+  nameExtra: {
+    name: string;
+    link: string | null;
+  } | null;
   years: number[];
   company: string | null;
   link: string | null;
@@ -34,6 +37,7 @@ export type LanguageDocument = Document & {
   yearGroup: YearGroupDocument;
   authors: AuthorDocument[];
   predecessors: LanguageDocument[];
+  listed: boolean;
 };
 
 export type CreateLanguageInput = {
@@ -46,6 +50,7 @@ export type CreateLanguageInput = {
   yearGroup: string;
   authors: string[];
   predecessors: string[];
+  listed: LanguageDocument['listed'];
 };
 
 export enum RequestTypeEnum {

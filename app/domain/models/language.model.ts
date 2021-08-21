@@ -17,9 +17,13 @@ const languageSchema = new Schema(
     },
     yearConfirmed: {
       type: Schema.Types.Boolean,
+      required: true,
       default: true,
     },
-    nameExtra: Schema.Types.String,
+    nameExtra: {
+      name: Schema.Types.String,
+      link: Schema.Types.String,
+    },
     company: Schema.Types.String,
     link: Schema.Types.String,
     yearGroup: {
@@ -37,6 +41,11 @@ const languageSchema = new Schema(
       type: [Schema.Types.ObjectId],
       ref: 'Language',
       index: true,
+    },
+    listed: {
+      type: Schema.Types.Boolean,
+      required: true,
+      default: false,
     },
   },
   {

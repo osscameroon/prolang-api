@@ -1,19 +1,15 @@
 import { CreateYearGroupInput } from '../../shared/types/models';
 import { YearGroupModel } from '../models/yearGroup.model';
-import { DOCUMENT_EXIST_MESSAGE } from '../../shared/utils/constants';
+import { YEAR_GROUP_NOT_LISTED } from '../../shared/utils/constants';
 
-const create = async (input: CreateYearGroupInput, throwIfExist?: boolean) => {
-  const isPresent = await YearGroupModel.exists({ name: input.name });
+const findOrCreate = async (input: CreateYearGroupInput) => {
+  const yearGroup = await YearGroupModel.findOne({ name: input.name });
 
-  if (!isPresent) {
+  if (!yearGroup) {
     return YearGroupModel.create(input);
   }
 
-  if (throwIfExist) {
-    throw new Error(DOCUMENT_EXIST_MESSAGE);
-  }
-
-  return;
+  return yearGroup;
 };
 
 const findById = async (id: string) => {
@@ -24,8 +20,22 @@ const findAll = async () => {
   return YearGroupModel.find().sort({ name: 1 }).exec();
 };
 
+const createNotListedGroup = async () => {
+  const yearGroup = await YearGroupModel.findOne({ name: YEAR_GROUP_NOT_LISTED });
+
+  if (!yearGroup) {
+    await YearGroupModel.create({ name: YEAR_GROUP_NOT_LISTED });
+  }
+};
+
+const findNotListedGroup = async () => {
+  return YearGroupModel.findOne({ name: YEAR_GROUP_NOT_LISTED });
+};
+
 export default {
-  create,
+  findOrCreate,
   findById,
   findAll,
+  createNotListedGroup,
+  findNotListedGroup,
 };
