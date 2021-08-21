@@ -3,6 +3,8 @@ import path from 'path';
 import cors from 'cors';
 
 import { commonRoute } from './routes/common.route';
+import { yearGroupRoute } from './routes/yearGroup.route';
+import { notFoundMiddleware } from '../shared/core/middleware/notFound';
 
 export const setupRestEndpoints = (app: Application) => {
   const router: express.Router = express.Router();
@@ -15,9 +17,9 @@ export const setupRestEndpoints = (app: Application) => {
 
   app.use('/', router);
   app.use('/', commonRoute());
+  app.use('/api', yearGroupRoute());
 
-  // static content
   app.use(express.static(path.join(__dirname, '../../public')));
 
-  // app.use(notFoundMiddleware);
+  app.use(notFoundMiddleware);
 };
