@@ -20,5 +20,5 @@ const e = process.env;
 export const ENV = e.NODE_ENV || 'development';
 export const SERVER_PORT = parseInt(e.SERVER_PORT || '5700', 10);
 export const BASE_URL = e.BASE_URL || '';
-export const PAGINATION_LIMIT = e.PAGINATION_LIMIT || 20;
+export const PAGINATION_LIMIT = parseInt(e.PAGINATION_LIMIT || '20', 10);
 export const DATABASE_URL = e.DATABASE_URL || '';
