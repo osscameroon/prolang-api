@@ -18,17 +18,28 @@ const findById = async (id: string) => {
 };
 
 const findAll = async (fields?: string) => {
-  return AuthorModel.find()
-    .sort({ name: 1 })
-    .select(fields || '*')
-    .exec();
+  return AuthorModel.find().sort({ name: 1 }).select(fields).exec();
 };
 
 const findPaginate = async (page: number, limit: number, search?: string, fields?: string) => {
-  const filter: FilterQuery<AuthorDocument> = { name: search ? new RegExp(`.*${search}.*`, 'gim') : undefined };
+  const filter: FilterQuery<AuthorDocument> = {
+    name: { $regex: search ? new RegExp(`.*${search}.*`, 'gim') : /.*/ },
+  };
 
-  // @ts-ignore
-  return AuthorModel.paginate(filter, { limit, page, select: fields || '*' }).sort({ name: 1 });
+  const totalItems = await AuthorModel.find(filter).countDocuments();
+
+  const skip = (page - 1) * limit;
+  const totalPages = Math.ceil(totalItems / limit);
+
+  const items: AuthorDocument[] = await AuthorModel.find(filter, fields, { limit, skip, sort: { name: 1 } });
+
+  return {
+    currentPage: page,
+    items,
+    limit,
+    totalItems,
+    totalPages,
+  };
 };
 
 export default {

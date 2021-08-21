@@ -5,6 +5,7 @@ import cors from 'cors';
 import { commonRoute } from './routes/common.route';
 import { yearGroupRoute } from './routes/yearGroup.route';
 import { notFoundMiddleware } from '../shared/core/middleware/notFound';
+import { authorRoute } from './routes/author.route';
 
 export const setupRestEndpoints = (app: Application) => {
   const router: express.Router = express.Router();
@@ -18,6 +19,7 @@ export const setupRestEndpoints = (app: Application) => {
   app.use('/', router);
   app.use('/', commonRoute());
   app.use('/api', yearGroupRoute());
+  app.use('/api', authorRoute());
 
   app.use(express.static(path.join(__dirname, '../../public')));
 
