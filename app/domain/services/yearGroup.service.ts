@@ -17,14 +17,14 @@ const findById = async (id: string) => {
 };
 
 const findAll = async () => {
-  return YearGroupModel.find().sort({ name: 1 }).exec();
+  return YearGroupModel.find().sort({ position: 1 }).exec();
 };
 
 const createNotListedGroup = async () => {
   const yearGroup = await YearGroupModel.findOne({ name: YEAR_GROUP_NOT_LISTED });
 
   if (!yearGroup) {
-    await YearGroupModel.create({ name: YEAR_GROUP_NOT_LISTED });
+    await YearGroupModel.create({ name: YEAR_GROUP_NOT_LISTED, position: 100 });
   }
 };
 

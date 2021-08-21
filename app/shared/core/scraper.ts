@@ -96,7 +96,7 @@ const selectPredecessors = async (input: LanguageInfo[]) => {
 };
 
 const createLanguage: (language: ScraperResult) => Promise<LanguageDocument> = async (language: ScraperResult) => {
-  const yearGroupDoc = await yearGroupService.findOrCreate({ name: language.yearGroup });
+  const yearGroupDoc = await yearGroupService.findOrCreate({ name: language.yearGroup, position: 1 });
 
   const authorsCreated: AuthorDocument[] = [];
 
