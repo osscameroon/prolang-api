@@ -16,6 +16,10 @@ const findById = async (id: string) => {
   return YearGroupModel.findById(id);
 };
 
+const findByName = async (name: string) => {
+  return YearGroupModel.findOne({ name });
+};
+
 const findAll = async () => {
   return YearGroupModel.find().sort({ position: 1 }).exec();
 };
@@ -36,6 +40,7 @@ export default {
   createNotListedGroup,
   findAll,
   findById,
+  findByName,
   findNotListedGroup,
   findOrCreate,
 };

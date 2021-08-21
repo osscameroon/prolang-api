@@ -1,6 +1,6 @@
 import { FilterQuery } from 'mongoose';
 
-import { AuthorDocument, CreateAuthorInput } from '../../shared/types/models';
+import { AuthorDocument, CreateAuthorInput, PaginatedResult } from '../../shared/types/models';
 import { AuthorModel } from '../models/author.model';
 
 const findOrCreate = async (input: CreateAuthorInput) => {
@@ -21,7 +21,12 @@ const findAll = async (fields?: string) => {
   return AuthorModel.find().sort({ name: 1 }).select(fields).exec();
 };
 
-const findPaginate = async (page: number, limit: number, search?: string, fields?: string) => {
+const findPaginate = async (
+  page: number,
+  limit: number,
+  search?: string,
+  fields?: string,
+): Promise<PaginatedResult<AuthorDocument>> => {
   const filter: FilterQuery<AuthorDocument> = {
     name: { $regex: search ? new RegExp(`.*${search}.*`, 'gim') : /.*/ },
   };
