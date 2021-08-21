@@ -2,24 +2,24 @@ import { FilterQuery } from 'mongoose';
 
 import { LanguageDocument, CreateLanguageInput } from '../../shared/types/models';
 import { LanguageModel } from '../models/language.model';
-import { DOCUMENT_EXIST_MESSAGE } from '../../shared/utils/constants';
 
-const create = async (input: CreateLanguageInput, throwIfExist?: boolean) => {
-  const isPresent = await LanguageModel.exists({ name: input.name });
+const findOrCreate = async (input: CreateLanguageInput) => {
+  const language = await LanguageModel.findOne({ name: input.name, years: input.years });
 
-  if (!isPresent) {
+  if (!language) {
     return LanguageModel.create(input);
   }
 
-  if (throwIfExist) {
-    throw new Error(DOCUMENT_EXIST_MESSAGE);
-  }
-
-  return;
+  // @ts-ignore
+  return LanguageModel.findOneAndUpdate({ _id: language._id }, input);
 };
 
 const findById = async (id: string) => {
   return LanguageModel.findById(id);
+};
+
+const findByName = async (name: string) => {
+  return LanguageModel.findOne({ name });
 };
 
 const findAll = async (fields?: string) => {
@@ -47,8 +47,9 @@ const findByYearGroup = async (groupName: string, page: number, limit: number, s
 };
 
 export default {
-  create,
+  findOrCreate,
   findById,
+  findByName,
   findAll,
   findPaginate,
   findByYearGroup,

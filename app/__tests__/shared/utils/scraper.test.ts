@@ -1,6 +1,6 @@
-import { extractAuthorAndPlace, extractInfoFromName, extractPredecessors, extractYearOfCreation } from '../../../app/shared/utils/scraper';
-import { WIKIPEDIA_URL } from '../../../app/shared/utils/constants';
-import { LanguageInfo } from '../../../app/shared/types/scraper';
+import { extractAuthorAndPlace, extractInfoFromName, extractPredecessors, extractYearOfCreation } from '../../../shared/utils/scraper';
+import { WIKIPEDIA_URL } from '../../../shared/utils/constants';
+import { LanguageInfo } from '../../../shared/types/scraper';
 
 describe("Test Extract language's name", () => {
   test('Empty content', () => {

@@ -2,20 +2,15 @@ import { FilterQuery } from 'mongoose';
 
 import { AuthorDocument, CreateAuthorInput } from '../../shared/types/models';
 import { AuthorModel } from '../models/author.model';
-import { DOCUMENT_EXIST_MESSAGE } from '../../shared/utils/constants';
 
-const create = async (input: CreateAuthorInput, throwIfExist?: boolean) => {
-  const isPresent = await AuthorModel.exists({ name: input.name });
+const findOrCreate = async (input: CreateAuthorInput) => {
+  const author = await AuthorModel.findOne({ name: input.name });
 
-  if (!isPresent) {
+  if (!author) {
     return AuthorModel.create(input);
   }
 
-  if (throwIfExist) {
-    throw new Error(DOCUMENT_EXIST_MESSAGE);
-  }
-
-  return;
+  return author;
 };
 
 const findById = async (id: string) => {
@@ -37,7 +32,7 @@ const findPaginate = async (page: number, limit: number, search?: string, fields
 };
 
 export default {
-  create,
+  findOrCreate,
   findById,
   findAll,
   findPaginate,

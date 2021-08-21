@@ -1,10 +1,14 @@
-// import axios from 'axios';
+import axios from 'axios';
 import * as cheerio from 'cheerio';
 
-import * as fs from 'fs';
 import { extractAuthorAndPlace, extractInfoFromName, extractPredecessors, extractYearOfCreation } from '../utils/scraper';
-
-// const PAGE_URL = 'https://en.wikipedia.org/wiki/Timeline_of_programming_languages';
+import { PROGRAMMING_PAGE_URL, YEAR_GROUP_NOT_CREATED_MESSAGE } from '../utils/constants';
+import { LanguageInfo, ScraperResult } from '../types/scraper';
+import { AuthorDocument, LanguageDocument, YearGroupDocument } from '../types/models';
+import { connectToDatabase } from './database';
+import languageService from '../../domain/services/language.service';
+import authorService from '../../domain/services/author.service';
+import yearGroupService from '../../domain/services/yearGroup.service';
 
 const retrieveData = (content: string) => {
   const $ = cheerio.load(content);
@@ -33,7 +37,7 @@ const retrieveData = (content: string) => {
         continue;
       }
 
-      const language = {
+      const language: ScraperResult = {
         ...nameInfo,
         authors: extractAuthorAndPlace(rowColumns.eq(2).html()?.replace('\n', '') || ''),
         place: null,
@@ -50,29 +54,93 @@ const retrieveData = (content: string) => {
   return languages;
 };
 
-const scraper = async () => {
-  // const response = await axios.get(PAGE_URL);
-  // const languages = retrieveData(response.data);
+const selectPredecessors = async (input: LanguageInfo[]) => {
+  const promises = input.map(async (languageInfo) => {
+    const language = await languageService.findByName(languageInfo.name);
 
-  const data = fs.readFileSync(`${__dirname}/page.txt`, { encoding: 'utf-8' });
+    if (!language) {
+      const { link, name, nameExtra } = languageInfo;
+      const nameExtraInput = typeof nameExtra == 'string' ? { name: nameExtra, link: null } : nameExtra;
+      const notListedGroup: YearGroupDocument | null = await yearGroupService.findNotListedGroup();
 
-  const languages = retrieveData(data);
+      if (!notListedGroup) {
+        throw new Error(YEAR_GROUP_NOT_CREATED_MESSAGE);
+      }
 
-  // console.log(languages);
+      return languageService.findOrCreate({
+        link,
+        name,
+        nameExtra: nameExtraInput,
+        years: [],
+        predecessors: [],
+        yearGroup: notListedGroup._id,
+        yearConfirmed: false,
+        company: null,
+        authors: [],
+        listed: false,
+      });
+    }
 
-  fs.writeFileSync(`${__dirname}/page.json`, JSON.stringify(languages, null, 2));
-
-  /*await connectToDatabase();
-
-  const insertPromises = languages.map(async (language) => {
-    return languageService.create(language);
+    return language;
   });
 
-  await Promise.all(insertPromises);*/
+  const result: LanguageDocument[] = await Promise.all(promises);
 
-  // console.log('Data inserted successfully!');
+  return result.map((language) => language._id);
+};
+
+const createLanguage: (language: ScraperResult) => Promise<LanguageDocument> = async (language: ScraperResult) => {
+  const yearGroupDoc = await yearGroupService.findOrCreate({ name: language.yearGroup });
+
+  const authorsCreated: AuthorDocument[] = [];
+
+  for (const author of language.authors) {
+    authorsCreated.push(
+      await authorService.findOrCreate({
+        name: author.name,
+        link: author.link,
+        birthDate: null,
+        country: null,
+        picture: null,
+      }),
+    );
+  }
+
+  const authorIds = authorsCreated.filter((author) => Boolean(author)).map((author) => author._id);
+
+  const { authors, nameExtra, predecessors, yearGroup, ...languageInput } = language;
+
+  const nameExtraInput = typeof nameExtra == 'string' ? { name: nameExtra, link: null } : nameExtra;
+
+  return languageService.findOrCreate({
+    name: languageInput.name,
+    link: languageInput.link,
+    years: languageInput.years,
+    yearConfirmed: languageInput.yearConfirmed,
+    nameExtra: nameExtraInput,
+    company: null,
+    authors: authorIds,
+    yearGroup: yearGroupDoc._id,
+    predecessors: await selectPredecessors(predecessors),
+    listed: true,
+  });
+};
+
+const scrapeAndSeedDatabase = async () => {
+  const response = await axios.get(PROGRAMMING_PAGE_URL);
+  const languages = retrieveData(response.data);
+
+  await connectToDatabase();
+
+  await yearGroupService.createNotListedGroup();
+
+  for (const language of languages) {
+    await createLanguage(language);
+  }
+
+  console.log('Data inserted successfully!');
 };
 
 (async () => {
-  await scraper();
+  await scrapeAndSeedDatabase();
 })();
