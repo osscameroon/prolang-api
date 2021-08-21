@@ -73,3 +73,11 @@ export type CreateRequestLogInput = {
   succeed: RequestLogDocument['succeed'];
   type: RequestLogDocument['type'];
 };
+
+export type PaginatedResult<T> = {
+  currentPage: number;
+  items: T[];
+  limit: number;
+  totalItems: number;
+  totalPages: number;
+};

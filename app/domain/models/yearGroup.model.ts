@@ -20,6 +20,6 @@ const yearGroupSchema = new Schema(
   },
 );
 
-const YearGroupModel: Model<YearGroupDocument> = mongoose.model<YearGroupDocument>('YearGroup', yearGroupSchema);
+const YearGroupModel: Model<YearGroupDocument> = mongoose.model<YearGroupDocument>('YearGroupModel', yearGroupSchema);
 
 export { YearGroupModel };

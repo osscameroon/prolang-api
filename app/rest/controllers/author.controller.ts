@@ -19,7 +19,7 @@ const search = async (req: Request, res: Response) => {
 
   const result = await authorService.findPaginate(page, PAGINATION_LIMIT, keyword, fields);
 
-  return res.json({ data: result });
+  return res.json({ data: { ...result, items: transformAuthorResponse(result.items) } });
 };
 
 const getOne = async (req: Request, res: Response) => {

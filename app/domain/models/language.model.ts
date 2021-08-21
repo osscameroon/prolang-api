@@ -7,7 +7,7 @@ const languageSchema = new Schema(
   {
     authors: {
       index: true,
-      ref: 'Author',
+      ref: 'AuthorModel',
       type: [Schema.Types.ObjectId],
     },
     company: Schema.Types.String,
@@ -28,7 +28,7 @@ const languageSchema = new Schema(
     },
     predecessors: {
       index: true,
-      ref: 'Language',
+      ref: 'LanguageModel',
       type: [Schema.Types.ObjectId],
     },
     yearConfirmed: {
@@ -38,7 +38,7 @@ const languageSchema = new Schema(
     },
     yearGroup: {
       index: true,
-      ref: 'YearGroup',
+      ref: 'YearGroupModel',
       required: true,
       type: Schema.Types.ObjectId,
     },
