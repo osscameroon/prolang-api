@@ -16,12 +16,14 @@
     "moduleResolution": "node",
     "baseUrl": "./",
     "types": ["jest"],
+    "resolveJsonModule": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
   "include": [
-    "./app/**/*"
+    "./app/**/*",
+    "./app/**/*.graphql"
   ],
   "exclude": [
     "node_modules"

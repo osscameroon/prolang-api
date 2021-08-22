@@ -1,20 +1,27 @@
-import { ApolloServer, gql } from 'apollo-server-express';
+import { ApolloServer } from 'apollo-server-express';
+import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import { loadSchemaSync } from '@graphql-tools/load';
+import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
+import { addResolversToSchema } from '@graphql-tools/schema';
+
 import { Application } from 'express';
+import { resolvers } from './resolvers';
 
 export const startGraphqlServer = async (app: Application) => {
-  const typeDefs = gql`
-    type Query {
-      hello: String
-    }
-  `;
+  const schema = loadSchemaSync('**/*.graphql', {
+    loaders: [new GraphQLFileLoader()],
+  });
 
-  const resolvers = {
-    Query: {
-      hello: () => 'Hello world!',
-    },
-  };
+  const schemaWithResolvers = addResolversToSchema({
+    resolvers,
+    schema,
+  });
 
-  const server = new ApolloServer({ resolvers, typeDefs });
+  const server = new ApolloServer({
+    introspection: true,
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    schema: schemaWithResolvers,
+  });
 
   await server.start();
 

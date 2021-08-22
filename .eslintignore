@@ -1,3 +1,4 @@
 build
 .eslintrc.js
 jest.config.js
+app/graphql/types
