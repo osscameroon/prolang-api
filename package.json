@@ -19,11 +19,15 @@
   "license": "MIT",
   "scripts": {
     "build": "yarn tsc",
-    "start": "nodemon --watch \"*.ts\" --watch \".env\" --exec \"ts-node\" app/index.ts",
     "eslint:fix": "eslint --fix",
+    "generate:types": "graphql-codegen",
+    "start": "nodemon --watch \"*.ts\" --watch \".env\" --exec \"ts-node\" app/index.ts",
     "test": "jest"
   },
   "devDependencies": {
+    "@graphql-codegen/cli": "^2.1.1",
+    "@graphql-codegen/typescript": "^2.1.0",
+    "@graphql-codegen/typescript-resolvers": "^2.1.0",
     "@types/cheerio": "^0.22.30",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
@@ -46,7 +50,11 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "@graphql-tools/graphql-file-loader": "^7.0.5",
+    "@graphql-tools/load": "^7.1.8",
+    "@graphql-tools/schema": "^8.1.2",
     "@types/lodash": "^4.14.172",
+    "apollo-server-core": "^3.1.2",
     "apollo-server-express": "^3.1.2",
     "axios": "^0.21.1",
     "cheerio": "^1.0.0-rc.10",
