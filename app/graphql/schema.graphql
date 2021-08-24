@@ -1,3 +1,5 @@
+scalar Date
+
 type YearGroup {
   id: ID!
   name: String!
@@ -6,7 +8,7 @@ type YearGroup {
 
 type Author {
   id: ID!
-  birthDate: String
+  birthDate: Date
   country: String
   link: String
   name: String!
@@ -32,10 +34,20 @@ type Language {
   years: [Int!]!
 }
 
+type PaginatedAuthor {
+  currentPage: Int!
+  limit: Int!
+  totalItems: Int!
+  totalPages: Int!
+  items: [Author!]!
+}
+
+
 type Query {
   hello: String
   allYearGroups: [YearGroup!]!
   oneYearGroup(idOrName: ID!): YearGroup!
-  allAuthors(page: Int, search: String): [Author!]!
-  authors(page: Int, search: String): [Author!]!
+  allAuthors: [Author!]!
+  authors(page: Int, search: String): PaginatedAuthor!
+  oneAuthor(id: ID!): Author!
 }
