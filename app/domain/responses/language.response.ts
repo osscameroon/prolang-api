@@ -1,10 +1,10 @@
-import { LanguageDocument } from '../../shared/types/models';
+import { LanguagePopulatedDocument } from '../../shared/types/models';
 import { AuthorResponse, LanguageResponse, YearGroupResponse } from '../../shared/types/responses';
 import { transformResponse } from './response';
 import { transformYearGroupResponse } from './yearGroup.response';
 import { transformAuthorResponse } from './author.response';
 
-const generateLanguageResponse = (item: LanguageDocument): LanguageResponse => {
+const generateLanguageResponse = (item: LanguagePopulatedDocument): LanguageResponse => {
   return {
     authors: !item.authors ? undefined : (transformAuthorResponse(item.authors) as AuthorResponse[]),
     company: item.company,
@@ -20,6 +20,6 @@ const generateLanguageResponse = (item: LanguageDocument): LanguageResponse => {
   };
 };
 
-export const transformLanguageResponse = (data: LanguageDocument | LanguageDocument[]) => {
-  return transformResponse<LanguageDocument, LanguageResponse>(data, generateLanguageResponse);
+export const transformLanguageResponse = (data: LanguagePopulatedDocument | LanguagePopulatedDocument[]) => {
+  return transformResponse<LanguagePopulatedDocument, LanguageResponse>(data, generateLanguageResponse);
 };

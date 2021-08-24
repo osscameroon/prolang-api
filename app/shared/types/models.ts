@@ -27,19 +27,25 @@ export type CreateAuthorInput = {
 };
 
 export type LanguageDocument = Document & {
-  authors: AuthorDocument[];
+  authors: string[];
   company: string | null;
   link: string | null;
   listed: boolean;
   name: string;
   nameExtra: {
     link: string | null;
-    name: string;
-  } | null;
-  predecessors: LanguageDocument[];
+    name: string | null;
+  };
+  predecessors: string[];
   yearConfirmed: boolean;
-  yearGroup: YearGroupDocument;
+  yearGroup: string;
   years: number[];
+};
+
+export type LanguagePopulatedDocument = Omit<LanguageDocument, 'authors' | 'predecessors' | 'yearGroup'> & {
+  authors: AuthorDocument[];
+  predecessors: LanguagePopulatedDocument[];
+  yearGroup: YearGroupDocument;
 };
 
 export type CreateLanguageInput = {
