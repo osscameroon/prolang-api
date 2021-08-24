@@ -24,7 +24,7 @@ const findAll = async (fields?: string) => {
 const findPaginate = async (
   page: number,
   limit: number,
-  search?: string,
+  search?: string | null,
   fields?: string,
 ): Promise<PaginatedResult<AuthorDocument>> => {
   const filter: FilterQuery<AuthorDocument> = {
