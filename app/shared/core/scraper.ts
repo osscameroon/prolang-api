@@ -60,13 +60,20 @@ const retrieveData = (content: string) => {
   return languages;
 };
 
+const formatNameExtra = (nameExtra: LanguageInfo['nameExtra']): LanguageDocument['nameExtra'] => {
+  if (nameExtra === null || typeof nameExtra === 'string') {
+    return { link: null, name: nameExtra };
+  }
+
+  return nameExtra;
+};
+
 const selectPredecessors = async (input: LanguageInfo[]) => {
   const promises = input.map(async (languageInfo) => {
-    const language = await languageService.findByName(languageInfo.name);
+    const language = await languageService.findByIdOrName(languageInfo.name);
 
     if (!language) {
       const { link, name, nameExtra } = languageInfo;
-      const nameExtraInput = typeof nameExtra == 'string' ? { link: null, name: nameExtra } : nameExtra;
       const notListedGroup: YearGroupDocument | null = await yearGroupService.findNotListedGroup();
 
       if (!notListedGroup) {
@@ -79,7 +86,7 @@ const selectPredecessors = async (input: LanguageInfo[]) => {
         link,
         listed: false,
         name,
-        nameExtra: nameExtraInput,
+        nameExtra: formatNameExtra(nameExtra),
         predecessors: [],
         yearConfirmed: false,
         yearGroup: notListedGroup._id,
@@ -116,15 +123,13 @@ const createLanguage: (language: ScraperResult) => Promise<LanguageDocument> = a
 
   const { authors, nameExtra, predecessors, yearGroup, ...languageInput } = language;
 
-  const nameExtraInput = typeof nameExtra == 'string' ? { link: null, name: nameExtra } : nameExtra;
-
   return languageService.findOrCreate({
     authors: authorIds,
     company: null,
     link: languageInput.link,
     listed: true,
     name: languageInput.name,
-    nameExtra: nameExtraInput,
+    nameExtra: formatNameExtra(nameExtra),
     predecessors: await selectPredecessors(predecessors),
     yearConfirmed: languageInput.yearConfirmed,
     yearGroup: yearGroupDoc._id,
