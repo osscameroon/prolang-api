@@ -1,3 +1,41 @@
+type YearGroup {
+  id: ID!
+  name: String!
+  position: Int!
+}
+
+type Author {
+  id: ID!
+  birthDate: String
+  country: String
+  link: String
+  name: String!
+  picture: String
+}
+
+type NameExtra {
+  name: String
+  link: String
+}
+
+type Language {
+  id: ID!
+  authors: [Author!]!
+  company: String
+  link: String
+  listed: Boolean!
+  name: String!
+  nameExtra: NameExtra
+  predecessors: [Language!]!
+  yearConfirmed: Boolean!
+  yearGroup: YearGroup!
+  years: [Int!]!
+}
+
 type Query {
-    hello: String
+  hello: String
+  allYearGroups: [YearGroup!]!
+  oneYearGroup(idOrName: ID!): YearGroup!
+  allAuthors(page: Int, search: String): [Author!]!
+  authors(page: Int, search: String): [Author!]!
 }

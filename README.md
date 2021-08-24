@@ -18,6 +18,10 @@ cp .env.template .env
 # Edit configuration to match your local environment and save
 nano .env
 ```
+Generate types for graphql schemas and resolvers
+```shell
+yarn generate:types
+```
 
 - Start Application
 ```bash
