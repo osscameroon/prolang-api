@@ -47,14 +47,14 @@ const getByYearGroup = async (req: Request, res: Response) => {
   const { name } = req.params;
   const { fields, keyword, page } = extractQueryFields(req.query);
 
-  const item = await yearGroupService.findByName(name);
+  const yearGroup = await yearGroupService.findByName(name);
 
-  if (!item) {
+  if (!yearGroup) {
     return res.status(404).json({ message: RECORD_NOT_FOUND_MESSAGE('YearGroup', name) });
   }
 
   const result = await languageService.findByYearGroup(
-    item._id,
+    yearGroup._id,
     page,
     PAGINATION_LIMIT,
     keyword,

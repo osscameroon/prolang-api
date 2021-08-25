@@ -23,7 +23,6 @@
   },
   "include": [
     "./app/**/*",
-    "./app/**/*.graphql"
   ],
   "exclude": [
     "node_modules"

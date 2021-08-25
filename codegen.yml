@@ -3,6 +3,11 @@ schema: app/graphql/**/*.graphql
 documents: null
 generates:
   app/graphql/types/types.d.ts:
+    config:
+      mappers:
+        Language: ../../shared/types/models#LanguageDocument
+        Author: ../../shared/types/models#AuthorDocument
+        YearGroup: ../../shared/types/models#YearGroupDocument
     plugins:
       - "typescript"
       - "typescript-resolvers"

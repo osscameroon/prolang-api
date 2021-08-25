@@ -42,12 +42,23 @@ type PaginatedAuthor {
   items: [Author!]!
 }
 
+type PaginatedLanguage {
+  currentPage: Int!
+  limit: Int!
+  totalItems: Int!
+  totalPages: Int!
+  items: [Language!]!
+}
+
 
 type Query {
-  hello: String
   allYearGroups: [YearGroup!]!
   oneYearGroup(idOrName: ID!): YearGroup!
   allAuthors: [Author!]!
   authors(page: Int, search: String): PaginatedAuthor!
   oneAuthor(id: ID!): Author!
+  allLanguages: [Language!]!
+  languages(page: Int, search: String): PaginatedLanguage!
+  languagesByYearGroup(name: String!, page: Int, search: String): PaginatedLanguage!
+  oneLanguage(id: ID!): Language!
 }
