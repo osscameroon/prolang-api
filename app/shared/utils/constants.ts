@@ -7,6 +7,7 @@ export const RECORD_NOT_FOUND_CODE = 'RECORD_NOT_FOUND';
 export const INVALID_DATE_TYPE_CODE = 'INVALID_TYPE';
 export const INVALID_DATE_TYPE_MESSAGE = 'The date format must be YYYY-MM-DD';
 export const DATE_REGEX = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/;
+export const TOO_MANY_REQUESTS_MESSAGE = 'Too Many Requests';
 export const RECORD_NOT_FOUND_MESSAGE = (model: string, id: string) => {
   return `No ${model} found with id: ${id}`;
 };

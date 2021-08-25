@@ -14,11 +14,11 @@ export const startServer = async () => {
 
   const graphqlServer = await startGraphqlServer(app);
 
+  await connectToDatabase();
+
   setupRestEndpoints(app);
 
   httpServer.listen(SERVER_PORT, async () => {
-    await connectToDatabase();
-
     logger.info(`Rest server ready at ${BASE_URL}/api`);
 
     logger.info(`GraphQL server ready at ${BASE_URL}${graphqlServer.graphqlPath}`);

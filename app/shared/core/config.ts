@@ -22,3 +22,5 @@ export const SERVER_PORT = parseInt(e.SERVER_PORT || '5700', 10);
 export const BASE_URL = e.BASE_URL || '';
 export const PAGINATION_LIMIT = parseInt(e.PAGINATION_LIMIT || '20', 10);
 export const DATABASE_URL = e.DATABASE_URL || '';
+export const MAX_REQUEST_LIMIT = parseInt(e.MAX_REQUEST_LIMIT || '100', 10);
+export const MAX_REQUEST_WINDOW = parseInt(e.MAX_REQUEST_WINDOW || '900', 10);
