@@ -62,6 +62,7 @@ export type CreateLanguageInput = {
 };
 
 export enum RequestTypeEnum {
+  common = 'common',
   graphql = 'graphql',
   rest = 'rest',
 }
@@ -69,14 +70,12 @@ export enum RequestTypeEnum {
 export type RequestLogDocument = Document & {
   endpoint: string;
   ipAddress: string;
-  succeed: boolean;
   type: RequestTypeEnum;
 };
 
 export type CreateRequestLogInput = {
   endpoint: RequestLogDocument['endpoint'];
   ipAddress: RequestLogDocument['ipAddress'];
-  succeed: RequestLogDocument['succeed'];
   type: RequestLogDocument['type'];
 };
 

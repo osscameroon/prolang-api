@@ -7,6 +7,7 @@ import { yearGroupRoute } from './routes/yearGroup.route';
 import { notFoundMiddleware } from '../shared/core/middleware/notFound';
 import { authorRoute } from './routes/author.route';
 import { languageRoute } from './routes/language.route';
+import { logRequestMiddleware } from '../shared/core/middleware/logRequest';
 
 export const setupRestEndpoints = (app: Application) => {
   const router: express.Router = express.Router();
@@ -16,6 +17,8 @@ export const setupRestEndpoints = (app: Application) => {
   app.use(cors());
 
   // app.use(errorHandlerMiddleware);
+
+  app.use(logRequestMiddleware);
 
   app.use('/', router);
   app.use('/', commonRoute());

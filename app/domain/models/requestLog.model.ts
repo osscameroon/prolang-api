@@ -11,12 +11,6 @@ const requestLogSchema = new Schema(
       required: true,
       type: Schema.Types.String,
     },
-    succeed: {
-      default: true,
-      index: true,
-      required: true,
-      type: Schema.Types.Boolean,
-    },
     type: {
       enum: RequestTypeEnum,
       type: Schema.Types.String,
