@@ -17,6 +17,10 @@ const findById = async (id: string) => {
   return AuthorModel.findById(id);
 };
 
+const findByIds = async (ids: string[]) => {
+  return AuthorModel.find({ _id: { $in: ids } });
+};
+
 const findAll = async (fields?: string) => {
   return AuthorModel.find().sort({ name: 1 }).select(fields).exec();
 };
@@ -50,6 +54,7 @@ const findPaginate = async (
 export default {
   findAll,
   findById,
+  findByIds,
   findOrCreate,
   findPaginate,
 };

@@ -53,6 +53,10 @@ const findByIdOrName = async (idOrName: string, populate?: string): Promise<any>
   return queryBuilder.exec();
 };
 
+const findByIds = async (ids: string[]) => {
+  return LanguageModel.find({ _id: { $in: ids } });
+};
+
 const findAll = async (fields?: string, populate?: string): Promise<any[]> => {
   const queryBuilder = LanguageModel.find().sort({ name: 1 }).select(fields);
 
@@ -83,7 +87,6 @@ const findByYearGroup = async (
 ) => {
   const filter: FilterQuery<LanguageDocument> = {
     name: { $regex: search ? new RegExp(`.*${search}.*`, 'gim') : /.*/ },
-    // @ts-ignore
     yearGroup: yearGroupId,
   };
 
@@ -93,6 +96,7 @@ const findByYearGroup = async (
 export default {
   findAll,
   findByIdOrName,
+  findByIds,
   findByYearGroup,
   findOrCreate,
   findPaginate,
