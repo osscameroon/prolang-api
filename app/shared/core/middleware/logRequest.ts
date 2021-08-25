@@ -4,11 +4,11 @@ import { CreateRequestLogInput } from '../../types/models';
 import { selectRequestType } from '../../utils/helpers';
 
 export const logRequestMiddleware = async (req: Request, _res: Response, next: NextFunction) => {
-  const { ip, url } = req;
+  const { connection, ip, url } = req;
 
   const input: CreateRequestLogInput = {
     endpoint: url,
-    ipAddress: ip,
+    ipAddress: connection?.remoteAddress || ip,
     type: selectRequestType(url),
   };
 

@@ -21,10 +21,6 @@ export const extractQueryFields = (query: Request['query']) => {
 };
 
 export const selectRequestType = (requestUrl: string) => {
-  if (requestUrl.startsWith('/graphql')) {
-    return RequestTypeEnum.graphql;
-  }
-
   if (requestUrl.startsWith('/api')) {
     return RequestTypeEnum.rest;
   }

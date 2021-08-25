@@ -19,6 +19,8 @@ export const setupRestEndpoints = (app: Application) => {
   app.use(express.json());
   app.use(cors());
 
+  app.set('trust proxy', true);
+
   app.use(Sentry.Handlers.requestHandler());
 
   app.use(rateLimiterMiddleware);

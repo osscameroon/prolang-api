@@ -7,6 +7,8 @@ import { addResolversToSchema } from '@graphql-tools/schema';
 import { createComplexityRule, simpleEstimator } from 'graphql-query-complexity';
 import depthLimit from 'graphql-depth-limit';
 
+import sentryPlugin from './utils/sentryPlugin';
+import requestPlugin from './utils/requestPlugin';
 import { resolvers } from './resolvers';
 
 export const startGraphqlServer = async (app: Application) => {
@@ -27,7 +29,7 @@ export const startGraphqlServer = async (app: Application) => {
 
   const server = new ApolloServer({
     introspection: true,
-    plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
+    plugins: [ApolloServerPluginLandingPageGraphQLPlayground(), sentryPlugin, requestPlugin],
     schema: schemaWithResolvers,
     validationRules: [depthLimitRule, complexityRule],
   });
