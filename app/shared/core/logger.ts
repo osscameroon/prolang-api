@@ -3,8 +3,9 @@ import fs from 'fs';
 import { createLogger, format, transports, Logger } from 'winston';
 import { isObject } from 'lodash';
 
-import { ENV } from './config';
+import { ENV, SENTRY_ENABLED } from './config';
 import { EnhancedLogger } from '../types/common';
+import { logErrorToSentry } from './sentry';
 
 const { combine, printf, timestamp }: typeof format = format;
 // eslint-disable-next-line @typescript-eslint/no-var-requires
@@ -43,7 +44,12 @@ const winstonLogger: Logger = createLogger({
 });
 
 const logger: EnhancedLogger = {
-  error: (output: unknown) => winstonLogger.error(logMessage(output)),
+  error: (error: unknown, toSentry = true) => {
+    winstonLogger.error(logMessage(error));
+    if (toSentry && SENTRY_ENABLED) {
+      logErrorToSentry(error);
+    }
+  },
   info: (output: unknown) => winstonLogger.info(logMessage(output)),
 };
 
