@@ -8182,6 +8182,7 @@ fsevents@~2.3.1:
     mongoose-paginate: ^5.0.3
     nodemon: ^2.0.12
     prettier: ^2.3.2
+    rate-limiter-flexible: ^2.2.4
     ts-jest: ^27.0.5
     ts-node: ^10.2.0
     typescript: ^4.3.5
@@ -8287,6 +8288,13 @@ fsevents@~2.3.1:
   version: 1.2.1
   resolution: "range-parser@npm:1.2.1"
   checksum: 0a268d4fea508661cf5743dfe3d5f47ce214fd6b7dec1de0da4d669dd4ef3d2144468ebe4179049eff253d9d27e719c88dae55be64f954e80135a0cada804ec9
+  languageName: node
+  linkType: hard
+
+"rate-limiter-flexible@npm:^2.2.4":
+  version: 2.2.4
+  resolution: "rate-limiter-flexible@npm:2.2.4"
+  checksum: d6ceae356713a25acc9f1438a83f21a72a47f4eb0c52fd54fb28a40c2213a95c6ac12d651958d4c8f1bb12235a59f1de57899b3259f7e64cee6c53eda613a033
   languageName: node
   linkType: hard
 
