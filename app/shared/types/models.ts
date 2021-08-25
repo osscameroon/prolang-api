@@ -69,7 +69,7 @@ export enum RequestTypeEnum {
 
 export type RequestLogDocument = Document & {
   endpoint: string;
-  ipAddress: string;
+  ipAddress: string | null;
   type: RequestTypeEnum;
 };
 

@@ -8,7 +8,7 @@ const requestLogSchema = new Schema(
       type: Schema.Types.String,
     },
     ipAddress: {
-      required: true,
+      index: true,
       type: Schema.Types.String,
     },
     type: {
