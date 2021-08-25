@@ -9,15 +9,17 @@ import { authorRoute } from './routes/author.route';
 import { languageRoute } from './routes/language.route';
 import { logRequestMiddleware } from '../shared/core/middleware/logRequest';
 import { rateLimiterMiddleware } from '../shared/core/middleware/rateLimiter';
+import { Sentry } from '../shared/core/sentry';
+import { errorHandlerMiddleware } from '../shared/core/middleware/errorMiddleware';
 
 export const setupRestEndpoints = (app: Application) => {
-  const router: express.Router = express.Router();
+  const router = express.Router();
 
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(cors());
 
-  // app.use(errorHandlerMiddleware);
+  app.use(Sentry.Handlers.requestHandler());
 
   app.use(rateLimiterMiddleware);
 
@@ -32,4 +34,8 @@ export const setupRestEndpoints = (app: Application) => {
   app.use(express.static(path.join(__dirname, '../../public')));
 
   app.use(notFoundMiddleware);
+
+  app.use(Sentry.Handlers.errorHandler());
+
+  app.use(errorHandlerMiddleware);
 };

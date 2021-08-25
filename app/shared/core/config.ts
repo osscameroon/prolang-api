@@ -24,3 +24,5 @@ export const PAGINATION_LIMIT = parseInt(e.PAGINATION_LIMIT || '20', 10);
 export const DATABASE_URL = e.DATABASE_URL || '';
 export const MAX_REQUEST_LIMIT = parseInt(e.MAX_REQUEST_LIMIT || '100', 10);
 export const MAX_REQUEST_WINDOW = parseInt(e.MAX_REQUEST_WINDOW || '900', 10);
+export const SENTRY_ENABLED = e.SENTRY_ENABLED === 'true';
+export const SENTRY_DSN = e.SENTRY_DSN || '';

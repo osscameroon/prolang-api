@@ -38,3 +38,7 @@ process.on('unhandledRejection', (e: any) => {
     process.exit(1);
   }
 });
+
+process.on('uncaughtException', (e) => {
+  logger.error(e);
+});
