@@ -1,15 +1,23 @@
+import { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
+import { createComplexityRule, simpleEstimator } from 'graphql-query-complexity';
+import depthLimit from 'graphql-depth-limit';
 
-import { Application } from 'express';
 import { resolvers } from './resolvers';
 
 export const startGraphqlServer = async (app: Application) => {
   const schema = loadSchemaSync('**/*.graphql', {
     loaders: [new GraphQLFileLoader()],
+  });
+
+  const depthLimitRule = depthLimit(4, { ignore: [] });
+  const complexityRule = createComplexityRule({
+    estimators: [simpleEstimator({ defaultComplexity: 1 })],
+    maximumComplexity: 100,
   });
 
   const schemaWithResolvers = addResolversToSchema({
@@ -21,6 +29,7 @@ export const startGraphqlServer = async (app: Application) => {
     introspection: true,
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground()],
     schema: schemaWithResolvers,
+    validationRules: [depthLimitRule, complexityRule],
   });
 
   await server.start();

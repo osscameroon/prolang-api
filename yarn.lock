@@ -1921,6 +1921,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/graphql-depth-limit@npm:^1.1.2":
+  version: 1.1.2
+  resolution: "@types/graphql-depth-limit@npm:1.1.2"
+  dependencies:
+    graphql: ^14.5.3
+  checksum: f24857ff9b299144c76a72ff058ad9b310ceeea53daad8a33216d98f789789441a8946b79e400d5dedccf605ae0e8d1f0ebad6179afd170326c28fa23088917d
+  languageName: node
+  linkType: hard
+
 "@types/istanbul-lib-coverage@npm:*, @types/istanbul-lib-coverage@npm:^2.0.0, @types/istanbul-lib-coverage@npm:^2.0.1":
   version: 2.0.3
   resolution: "@types/istanbul-lib-coverage@npm:2.0.3"
@@ -2701,6 +2710,13 @@ __metadata:
     es-abstract: ^1.18.0-next.1
     function-bind: ^1.1.1
   checksum: 1d32ec6747611e88a5f55b49df0fb38d1d6a3824e451b760a1b7ca87d22874f638d784a6dbdd2b7eba01d7dea6e48e2cce4848bd2e8b48f1f53013605ddef08b
+  languageName: node
+  linkType: hard
+
+"arrify@npm:^1.0.1":
+  version: 1.0.1
+  resolution: "arrify@npm:1.0.1"
+  checksum: 745075dd4a4624ff0225c331dacb99be501a515d39bcb7c84d24660314a6ec28e68131b137e6f7e16318170842ce97538cd298fc4cd6b2cc798e0b957f2747e7
   languageName: node
   linkType: hard
 
@@ -5209,6 +5225,28 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
+"graphql-depth-limit@npm:^1.1.0":
+  version: 1.1.0
+  resolution: "graphql-depth-limit@npm:1.1.0"
+  dependencies:
+    arrify: ^1.0.1
+  peerDependencies:
+    graphql: "*"
+  checksum: e43c8c0462612870797c0691e2c9488d6773eb794dda2b71c2c5659f721ec28be42e6c1f381e3b05a892c25d212d9babe08888a8ce6fd4f83ecc19a988675e56
+  languageName: node
+  linkType: hard
+
+"graphql-query-complexity@npm:^0.9.0":
+  version: 0.9.0
+  resolution: "graphql-query-complexity@npm:0.9.0"
+  dependencies:
+    lodash.get: ^4.4.2
+  peerDependencies:
+    graphql: ^0.13.0 || ^14.0.0 || ^15.0.0
+  checksum: b21b995660044a1d99df4b93b499acd466bffc7ced4c814f395819fd544d02a77d847b566b918b78e221e2fa1cbf3547201ad848a5af88afce7eef489e447667
+  languageName: node
+  linkType: hard
+
 "graphql-request@npm:^3.3.0":
   version: 3.5.0
   resolution: "graphql-request@npm:3.5.0"
@@ -5239,6 +5277,15 @@ fsevents@~2.3.1:
   peerDependencies:
     graphql: ">=0.11 <=15"
   checksum: 5f10b53b6d75e85950642e47852c96dee2f07f5631bbf1e48f36268e571aa355c4e7a97fa41075cf11ef04012df32cf26f8ae29b28f1d11d3201aa291fee7ce5
+  languageName: node
+  linkType: hard
+
+"graphql@npm:^14.5.3":
+  version: 14.7.0
+  resolution: "graphql@npm:14.7.0"
+  dependencies:
+    iterall: ^1.2.2
+  checksum: e5f4e60799421a573904f390e1ec0aa76360f751688dbbe62e9c35baa0d3727c8d59a659bfc524f126dffe3518da87fd8ecaa78c94fd5c0fe4e035c670745242
   languageName: node
   linkType: hard
 
@@ -6062,7 +6109,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"iterall@npm:^1.2.1":
+"iterall@npm:^1.2.1, iterall@npm:^1.2.2":
   version: 1.3.0
   resolution: "iterall@npm:1.3.0"
   checksum: c78b99678f8c99be488cca7f33e4acca9b72c1326e050afbaf023f086e55619ee466af0464af94a0cb3f292e60cb5bac53a8fd86bd4249ecad26e09f17bb158b
@@ -6902,7 +6949,7 @@ fsevents@~2.3.1:
   languageName: node
   linkType: hard
 
-"lodash.get@npm:^4":
+"lodash.get@npm:^4, lodash.get@npm:^4.4.2":
   version: 4.4.2
   resolution: "lodash.get@npm:4.4.2"
   checksum: e403047ddb03181c9d0e92df9556570e2b67e0f0a930fcbbbd779370972368f5568e914f913e93f3b08f6d492abc71e14d4e9b7a18916c31fa04bd2306efe545
@@ -8156,6 +8203,7 @@ fsevents@~2.3.1:
     "@types/cheerio": ^0.22.30
     "@types/cors": ^2.8.12
     "@types/express": ^4.17.13
+    "@types/graphql-depth-limit": ^1.1.2
     "@types/jest": ^27.0.1
     "@types/lodash": ^4.14.172
     "@types/mongoose-paginate": ^5.0.10
@@ -8176,6 +8224,8 @@ fsevents@~2.3.1:
     eslint-plugin-typescript-sort-keys: ^1.8.0
     express: ^4.17.1
     graphql: ^15.5.1
+    graphql-depth-limit: ^1.1.0
+    graphql-query-complexity: ^0.9.0
     jest: ^27.0.6
     lodash: ^4.17.21
     mongoose: ^5.13.7
