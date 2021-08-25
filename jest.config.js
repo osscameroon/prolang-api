@@ -8,4 +8,5 @@ module.exports = {
   testEnvironment: 'node',
   clearMocks: true,
   maxWorkers: 1,
+  setupFilesAfterEnv: ['./app/__tests__/utils/databaseConnection.ts'],
 };
