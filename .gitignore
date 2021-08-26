@@ -125,4 +125,4 @@ build
 !.yarn/sdks
 !.yarn/versions
 
-app/graphql/types
+backend/app/graphql/types
