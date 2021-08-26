@@ -29,10 +29,10 @@ export type UserResponseData = HttpResponse<User>;
 export type BgColorVariants = 'primary' | 'red' | 'whiteGray';
 
 export type DashboardSummary = {
-  total: number;
-  pending: number;
-  confirmed: number;
-  cancelled: number;
+  author: number;
+  language: number;
+  user: number;
+  yearGroup: number;
 };
 
 export type DashboardSummaryData = HttpResponse<DashboardSummary>;

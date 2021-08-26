@@ -51,7 +51,12 @@ const findPaginate = async (
   };
 };
 
+const count = async () => {
+  return AuthorModel.count();
+};
+
 export default {
+  count,
   findAll,
   findById,
   findByIds,

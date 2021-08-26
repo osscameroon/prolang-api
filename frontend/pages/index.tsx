@@ -37,8 +37,6 @@ export default function Home() {
           toast.error(BAD_LOGIN_MESSAGE);
         },
         onSuccess: async (response) => {
-          console.log(response);
-
           saveToken(response.data.data.token);
 
           await router.push('/dashboard');

@@ -93,7 +93,12 @@ const findByYearGroup = async (
   return paginateLanguage(filter, page, limit, fields, populate);
 };
 
+const count = async () => {
+  return LanguageModel.count();
+};
+
 export default {
+  count,
   findAll,
   findByIdOrName,
   findByIds,
