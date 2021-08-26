@@ -13,10 +13,12 @@ const parseQueryFields = (fields?: string) => {
 };
 
 export const extractQueryFields = (query: Request['query']) => {
+  const page = parseInt((query.page as string | undefined) || '1');
+
   return {
     fields: parseQueryFields(query.fields as string | undefined),
     keyword: query.search as string | undefined,
-    page: parseInt((query.page as string | undefined) || '1'),
+    page: page || 1,
   };
 };
 
