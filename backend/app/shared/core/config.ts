@@ -26,3 +26,6 @@ export const MAX_REQUEST_LIMIT = parseInt(e.MAX_REQUEST_LIMIT || '100', 10);
 export const MAX_REQUEST_WINDOW = parseInt(e.MAX_REQUEST_WINDOW || '900', 10);
 export const SENTRY_ENABLED = e.SENTRY_ENABLED === 'true';
 export const SENTRY_DSN = e.SENTRY_DSN || '';
+export const JWT_SECRET = e.JWT_SECRET || '';
+export const JWT_EXPIRE = parseInt(e.JWT_EXPIRE || '86400', 10);
+export const AUTH_ENABLED = e.AUTH_ENABLED === 'true';

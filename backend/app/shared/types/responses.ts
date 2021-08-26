@@ -1,4 +1,4 @@
-import { YearGroupDocument, AuthorDocument, LanguageDocument } from './models';
+import { YearGroupDocument, AuthorDocument, LanguageDocument, UserDocument } from './models';
 
 export type YearGroupResponse = {
   id: YearGroupDocument['_id'];
@@ -27,4 +27,11 @@ export type LanguageResponse = {
   yearConfirmed: LanguageDocument['yearConfirmed'];
   yearGroup?: YearGroupResponse;
   years: LanguageDocument['years'];
+};
+
+export type UserResponse = {
+  email: UserDocument['email'];
+  id: UserDocument['_id'];
+  name: UserDocument['name'];
+  role: UserDocument['role'];
 };

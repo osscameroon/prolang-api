@@ -9,6 +9,10 @@ export const INVALID_DATE_TYPE_MESSAGE = 'The date format must be YYYY-MM-DD';
 export const DATE_REGEX = /^([12]\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\d|3[01]))$/;
 export const TOO_MANY_REQUESTS_MESSAGE = 'Too Many Requests';
 export const INTERNAL_SERVER_ERROR = 'Internal server error';
+export const USER_ALREADY_EXISTS = 'User already exists!';
+export const LOGIN_FAILED = 'Login failed: Invalid credentials';
+export const NOT_AUTHENTICATED = 'Access to this resource requires authentication';
+
 export const RECORD_NOT_FOUND_MESSAGE = (model: string, id: string) => {
   return `No ${model} found with id: ${id}`;
 };
