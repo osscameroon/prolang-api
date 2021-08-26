@@ -8,6 +8,8 @@ const userRoute = () => {
 
   router.post(`${prefix}/auth`, userController.login);
 
+  router.post(`${prefix}`, userController.create);
+
   router.get(`${prefix}`, userController.getAll);
 
   router.get(`${prefix}/me`, userController.current);

@@ -29,3 +29,4 @@ export const SENTRY_DSN = e.SENTRY_DSN || '';
 export const JWT_SECRET = e.JWT_SECRET || '';
 export const JWT_EXPIRE = parseInt(e.JWT_EXPIRE || '86400', 10);
 export const AUTH_ENABLED = e.AUTH_ENABLED === 'true';
+export const ADMIN_PASSWORD = e.ADMIN_PASSWORD || '';

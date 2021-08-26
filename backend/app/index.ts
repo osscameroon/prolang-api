@@ -6,6 +6,7 @@ import { connectToDatabase } from './shared/core/database';
 import { setupRestEndpoints } from './rest/server';
 import { logger } from './shared/core/logger';
 import { startGraphqlServer } from './graphql/server';
+import { loadUsers } from './shared/core/seed';
 
 export const startServer = async () => {
   const app = express();
@@ -15,6 +16,8 @@ export const startServer = async () => {
   const graphqlServer = await startGraphqlServer(app);
 
   await connectToDatabase();
+
+  await loadUsers();
 
   setupRestEndpoints(app);
 

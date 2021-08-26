@@ -3,9 +3,9 @@ import { UserModel } from '../models/user.model';
 import { USER_ALREADY_EXISTS } from '../../shared/utils/constants';
 
 const create = async (input: CreateUserInput) => {
-  const author = await UserModel.findOne({ email: input.email });
+  const user = await UserModel.findOne({ email: input.email });
 
-  if (author) {
+  if (user) {
     throw new Error(USER_ALREADY_EXISTS);
   }
 
