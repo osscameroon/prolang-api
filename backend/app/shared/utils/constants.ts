@@ -12,6 +12,7 @@ export const INTERNAL_SERVER_ERROR = 'Internal server error';
 export const USER_ALREADY_EXISTS = 'User already exists!';
 export const LOGIN_FAILED = 'Login failed: Invalid credentials';
 export const NOT_AUTHENTICATED = 'Access to this resource requires authentication';
+export const ADMIN_PASSWORD_NOT_SET = 'The admin password not set.';
 
 export const RECORD_NOT_FOUND_MESSAGE = (model: string, id: string) => {
   return `No ${model} found with id: ${id}`;

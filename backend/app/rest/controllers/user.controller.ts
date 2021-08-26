@@ -3,11 +3,30 @@ import * as bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import userService from '../../domain/services/user.service';
-import { LOGIN_FAILED, RECORD_NOT_FOUND_MESSAGE } from '../../shared/utils/constants';
+import { LOGIN_FAILED, RECORD_NOT_FOUND_MESSAGE, USER_ALREADY_EXISTS } from '../../shared/utils/constants';
 import { transformUserResponse } from '../../domain/responses/user.response';
-import { LoginInput } from '../../shared/types/models';
+import { CreateUserInput, LoginInput } from '../../shared/types/models';
 import { TokenPayload } from '../../shared/types/common';
 import { JWT_EXPIRE, JWT_SECRET } from '../../shared/core/config';
+
+const create = async (req: Request, res: Response) => {
+  const { email, name, password, role }: CreateUserInput = req.body;
+
+  const user = await userService.findByEmail(email);
+
+  if (user) {
+    return res.status(400).json({ message: USER_ALREADY_EXISTS });
+  }
+
+  const createdUser = await userService.create({
+    email,
+    name,
+    password: bcrypt.hashSync(password),
+    role,
+  });
+
+  return res.json({ data: transformUserResponse(createdUser) });
+};
 
 const login = async (req: Request, res: Response) => {
   const { email, password }: LoginInput = req.body;
@@ -62,4 +81,4 @@ const current = async (req: any, res: Response) => {
   return res.json({ data: transformUserResponse(user) });
 };
 
-export { current, getAll, getOne, login };
+export { create, current, getAll, getOne, login };
