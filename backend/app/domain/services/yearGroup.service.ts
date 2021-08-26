@@ -36,7 +36,12 @@ const findNotListedGroup = async () => {
   return YearGroupModel.findOne({ name: YEAR_GROUP_NOT_LISTED });
 };
 
+const count = async () => {
+  return YearGroupModel.count();
+};
+
 export default {
+  count,
   createNotListedGroup,
   findAll,
   findById,

@@ -19,19 +19,19 @@ const Dashboard = () => {
       <PageHeader text="Dashboard" />
 
       <div className="bg- grid gap-6 mb-8 md:grid-cols-2 xl:grid-cols-4">
-        <DashboardCard color="blue" label="Year Groups" value={padZero(data?.total || 0)}>
+        <DashboardCard color="blue" label="Year Groups" value={padZero(data?.yearGroup || 0)}>
           <FolderIcon className="w-5 h-5" />
         </DashboardCard>
 
-        <DashboardCard color="green" label="Languages" value={padZero(data?.confirmed || 0)}>
+        <DashboardCard color="green" label="Languages" value={padZero(data?.language || 0)}>
           <BadgeCheckIcon className="w-5 h-5" />
         </DashboardCard>
 
-        <DashboardCard color="yellow" label="Authors" value={padZero(data?.pending || 0)}>
+        <DashboardCard color="yellow" label="Authors" value={padZero(data?.author || 0)}>
           <ClockIcon className="w-5 h-5" />
         </DashboardCard>
 
-        <DashboardCard color="pink" label="Users" value={padZero(data?.cancelled || 0)}>
+        <DashboardCard color="pink" label="Users" value={padZero(data?.user || 0)}>
           <BanIcon className="w-5 h-5" />
         </DashboardCard>
       </div>

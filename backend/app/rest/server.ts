@@ -14,6 +14,7 @@ import { errorHandlerMiddleware } from '../shared/core/middleware/errorMiddlewar
 import { AUTH_ENABLED, SENTRY_ENABLED } from '../shared/core/config';
 import { authMiddleware } from '../shared/core/middleware/authMiddleware';
 import { userRoute } from './routes/user.route';
+import { statRoute } from './routes/stat.route';
 
 export const setupRestEndpoints = (app: Application) => {
   const router = express.Router();
@@ -41,6 +42,7 @@ export const setupRestEndpoints = (app: Application) => {
   app.use('/api', authorRoute());
   app.use('/api', languageRoute());
   app.use('/private', userRoute());
+  app.use('/private', statRoute());
 
   app.use(express.static(path.join(__dirname, '../../public')));
 

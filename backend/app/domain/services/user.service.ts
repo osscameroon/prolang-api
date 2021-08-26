@@ -24,7 +24,12 @@ const findAll = async () => {
   return UserModel.find().sort({ name: 1 }).exec();
 };
 
+const count = async () => {
+  return UserModel.count();
+};
+
 export default {
+  count,
   create,
   findAll,
   findByEmail,
