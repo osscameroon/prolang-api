@@ -126,3 +126,5 @@ build
 !.yarn/versions
 
 backend/app/graphql/types
+
+!frontend/typings
