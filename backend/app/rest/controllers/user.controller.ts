@@ -50,7 +50,7 @@ const login = async (req: Request, res: Response) => {
 
   const token = jwt.sign(tokenInfo, JWT_SECRET, { expiresIn: JWT_EXPIRE });
 
-  return res.json({ expiresIn: JWT_EXPIRE, token });
+  return res.json({ data: { expiresIn: JWT_EXPIRE, token } });
 };
 
 const getAll = async (_req: Request, res: Response) => {
