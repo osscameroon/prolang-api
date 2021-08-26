@@ -11,7 +11,9 @@ import { logRequestMiddleware } from '../shared/core/middleware/logRequest';
 import { rateLimiterMiddleware } from '../shared/core/middleware/rateLimiter';
 import { Sentry } from '../shared/core/sentry';
 import { errorHandlerMiddleware } from '../shared/core/middleware/errorMiddleware';
-import { SENTRY_ENABLED } from '../shared/core/config';
+import { AUTH_ENABLED, SENTRY_ENABLED } from '../shared/core/config';
+import { authMiddleware } from '../shared/core/middleware/authMiddleware';
+import { userRoute } from './routes/user.route';
 
 export const setupRestEndpoints = (app: Application) => {
   const router = express.Router();
@@ -27,6 +29,10 @@ export const setupRestEndpoints = (app: Application) => {
   }
   app.use(rateLimiterMiddleware);
 
+  if (AUTH_ENABLED) {
+    app.use(authMiddleware);
+  }
+
   app.use(logRequestMiddleware);
 
   app.use('/', router);
@@ -34,6 +40,7 @@ export const setupRestEndpoints = (app: Application) => {
   app.use('/api', yearGroupRoute());
   app.use('/api', authorRoute());
   app.use('/api', languageRoute());
+  app.use('/private', userRoute());
 
   app.use(express.static(path.join(__dirname, '../../public')));
 

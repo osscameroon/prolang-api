@@ -27,3 +27,13 @@ export const selectRequestType = (requestUrl: string) => {
 
   return RequestTypeEnum.common;
 };
+
+export const removeQueryStringIfExist = (route: string) => {
+  if (route.indexOf('?') >= 0) {
+    const routeSplit = route.split('?');
+
+    return routeSplit.length > 0 ? routeSplit[0] : '';
+  }
+
+  return route;
+};

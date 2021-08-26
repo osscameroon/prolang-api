@@ -86,3 +86,27 @@ export type PaginatedResult<T> = {
   totalItems: number;
   totalPages: number;
 };
+
+export enum UserRoleEnum {
+  admin = 'admin',
+  user = 'user',
+}
+
+export type UserDocument = Document & {
+  email: string;
+  name: string;
+  password: string;
+  role: UserRoleEnum;
+};
+
+export type CreateUserInput = {
+  email: UserDocument['email'];
+  name: UserDocument['name'];
+  password: UserDocument['password'];
+  role: UserDocument['role'];
+};
+
+export type LoginInput = {
+  email: UserDocument['email'];
+  password: UserDocument['password'];
+};
