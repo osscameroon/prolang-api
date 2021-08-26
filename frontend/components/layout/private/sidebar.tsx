@@ -1,4 +1,4 @@
-import { HomeIcon, CollectionIcon } from '@heroicons/react/outline';
+import { HomeIcon, CollectionIcon, ViewBoardsIcon } from '@heroicons/react/outline';
 
 import SidebarLink from '@components/common/sidebar-link';
 
@@ -23,6 +23,12 @@ const PrivateSidebar = () => {
               <SidebarLink href="/languages">
                 <CollectionIcon className="w-5 h-5" aria-hidden="true"/>
                 <span className="ml-4">Languages</span>
+              </SidebarLink>
+            </li>
+            <li className="relative px-6 py-3">
+              <SidebarLink href="/authors">
+                <ViewBoardsIcon className="w-6 h-6" />
+                <span className="ml-4">Authors</span>
               </SidebarLink>
             </li>
           </ul>
