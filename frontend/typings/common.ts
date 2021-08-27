@@ -32,11 +32,13 @@ export type LoginResponseData = HttpResponse<{
 export type User = {
   id: string;
   email: string;
-  name: null;
+  name: string;
   role: UserRoleEnum;
 };
 
 export type UserResponseData = HttpResponse<User>;
+
+export type UserResponseListData = HttpResponse<User[]>;
 
 export type BgColorVariants = 'primary' | 'red' | 'whiteGray';
 

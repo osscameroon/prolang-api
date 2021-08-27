@@ -31,6 +31,12 @@ const PrivateSidebar = () => {
                 <span className="ml-4">Authors</span>
               </SidebarLink>
             </li>
+            <li className="relative px-6 py-3">
+              <SidebarLink href="/users">
+                <ViewBoardsIcon className="w-6 h-6" />
+                <span className="ml-4">Users</span>
+              </SidebarLink>
+            </li>
           </ul>
         </div>
       </aside>
