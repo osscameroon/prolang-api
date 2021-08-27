@@ -67,7 +67,7 @@ export type YearGroup = {
 }
 
 export type Author = {
-  birthDate: string | null;
+  birthDate: Date | null;
   country: string | null;
   id: string;
   link: string | null;
@@ -106,6 +106,7 @@ export type AuthorList = PaginatedList & {
 };
 
 export type AuthorListResponseData = HttpResponse<AuthorList>;
+export type AuthorResponseData = HttpResponse<Author>;
 
 export type LanguageList = PaginatedList & {
   items: Language[];
@@ -114,3 +115,19 @@ export type LanguageList = PaginatedList & {
 export type LanguageListResponseData = HttpResponse<LanguageList>;
 
 export type YearGroupResponseData = HttpResponse<YearGroup[]>;
+
+export type CreateAuthorInput = {
+  birthDate?: Date | null;
+  country?: string | null;
+  link?: string | null;
+  name: string;
+  picture?: string | null;
+};
+
+export type UpdateAuthorInput = {
+  birthDate?: Date | null;
+  country?: string | null;
+  link?: string | null;
+  name: string;
+  picture?: string | null;
+};
