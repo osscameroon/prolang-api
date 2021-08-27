@@ -1,3 +1,8 @@
+export type SelectOption = {
+  label: string;
+  value: string;
+};
+
 export type LoginInput = {
   email: string;
   password: string;
@@ -49,6 +54,16 @@ export type FilterQueryParams = {
   search?: string;
 };
 
+export type FilterLanguageParams = FilterQueryParams & {
+  name?: string
+}
+
+export type YearGroup = {
+  id: string;
+  name: string;
+  position: string;
+}
+
 export type Author = {
   birthDate: string | null;
   country: string | null;
@@ -58,12 +73,42 @@ export type Author = {
   picture: string | null;
 };
 
-export type AuthorList = {
-  items: Author[];
+type NameExtra = {
+  link: string | null;
+  name: string | null;
+}
+
+export type Language = {
+  authors?: Author[];
+  company: string | null;
+  id: string;
+  link: string | null;
+  listed: boolean;
+  name:string;
+  nameExtra: NameExtra;
+  predecessors?: Language[];
+  yearConfirmed: boolean;
+  yearGroup?: YearGroup;
+  years: number[];
+};
+
+type PaginatedList = {
   currentPage: number;
   limit: number;
   totalItems: number;
   totalPages: number;
+}
+
+export type AuthorList = PaginatedList & {
+  items: Author[];
 };
 
 export type AuthorListResponseData = HttpResponse<AuthorList>;
+
+export type LanguageList = PaginatedList & {
+  items: Language[];
+};
+
+export type LanguageListResponseData = HttpResponse<LanguageList>;
+
+export type YearGroupResponseData = HttpResponse<YearGroup[]>;

@@ -14,9 +14,12 @@ export const BAD_LOGIN_MESSAGE = 'The credential is invalid.';
 export const NETWORK_ERROR_MESSAGE = 'Failed to processed the request.';
 
 export const AUTHOR_DELETED_MESSAGE = 'The author deleted successfully.';
+export const LANGUAGE_DELETED_MESSAGE = 'The language deleted successfully.';
 
 export const QUERY_KEYS = {
   dashboardSummary: 'dashboardSummary',
-  getAuthor: 'getAuthor',
+  getAuthors: 'getAuthors',
+  getLanguages: 'getLanguages',
   getUser: 'getUser',
+  getYearGroups: 'getYearGroups',
 };

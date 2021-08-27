@@ -19,7 +19,13 @@ const getAll = async (req: Request, res: Response) => {
 };
 
 const search = async (req: Request, res: Response) => {
-  const { fields, keyword, page } = extractQueryFields(req.query);
+  const { fields, keyword, name, page } = extractQueryFields(req.query);
+
+  let yearGroup = null;
+
+  if (name) {
+    yearGroup = await yearGroupService.findByName(name);
+  }
 
   const result: PaginatedResult<LanguagePopulatedDocument> = await languageService.findPaginate(
     page,
@@ -27,6 +33,7 @@ const search = async (req: Request, res: Response) => {
     keyword,
     fields,
     populateFields,
+    yearGroup?._id,
   );
 
   return res.json({ data: { ...result, items: transformLanguageResponse(result.items) } });
