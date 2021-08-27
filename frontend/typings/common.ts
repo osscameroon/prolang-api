@@ -152,3 +152,17 @@ export type UpdateLanguageInput = {
   yearGroup?: string;
   years?: number[];
 }
+
+export type CreateUserInput = {
+  email: string;
+  name: string;
+  password: string;
+  role: string;
+}
+
+export type UpdateUserInput = {
+  email?: string;
+  name?: string;
+  password?: string;
+  role?: string;
+}

@@ -15,7 +15,7 @@ const useAuth = () => {
   const user = queryClient.getQueryData<User>('getUser');
 
   const { data, isLoading } = useQuery(
-    'getUser',
+    'getAuthenticated',
     async () => {
       const response = await axiosInstance.get<UserResponseData>('users/me');
 
