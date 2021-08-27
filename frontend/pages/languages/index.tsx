@@ -4,7 +4,7 @@ import { PlusIcon } from '@heroicons/react/outline';
 import Link from 'next/link';
 import { toast } from 'react-toastify';
 
-import { FilterQueryParams, PaginationChangeEventData, SelectOption, YearGroup } from '@typings/common';
+import { FilterQueryParams, PaginationChangeEventData, SelectOption } from '@typings/common';
 import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { Pagination } from '@components/pagination/pagination';
 import { SelectInput } from '@components/common/select-input';
@@ -16,16 +16,11 @@ import { PageHeader } from '@components/common/page-header';
 import { useBooleanState } from '@hooks/useBooleanState';
 import { useRetrieveLanguages } from '@hooks/request/query/useRetrieveLanguages';
 import { useRetrieveYearGroups } from '@hooks/request/query/useRetrieveYearGroups';
-import { LANGUAGE_DELETED_MESSAGE } from '@utils/constants';
+import { DEFAULT_YEAR_GROUP, LANGUAGE_DELETED_MESSAGE } from '@utils/constants';
+import { formatYearGroupOption } from '@utils/forms';
 
 type LanguageSearchParams = FilterQueryParams & {
   yearGroup: SelectOption;
-};
-
-const defaultYearGroup = { label: 'All', value: '' };
-const formatYearGroupOption = (yearGroups: YearGroup[]) => {
-  return yearGroups.map((yearGroup): SelectOption => ({ label: yearGroup.name, value: yearGroup.name }))
-    .concat([defaultYearGroup]);
 };
 
 const Languages = () => {
@@ -34,7 +29,7 @@ const Languages = () => {
   const [searchParams, setSearchParams] = useState<LanguageSearchParams>({
     page: 1,
     search: undefined,
-    yearGroup: defaultYearGroup,
+    yearGroup: DEFAULT_YEAR_GROUP,
   });
 
   const { data: yearGroupListData } = useRetrieveYearGroups();

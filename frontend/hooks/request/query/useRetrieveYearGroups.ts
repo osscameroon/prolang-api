@@ -1,10 +1,10 @@
-import { useQuery } from 'react-query';
+import { useQuery, UseQueryOptions } from 'react-query';
 
 import { usePublicClient } from '@hooks/useAxios';
-import { YearGroupResponseData } from '@typings/common';
+import { YearGroup, YearGroupResponseData } from '@typings/common';
 import { QUERY_KEYS } from '@utils/constants';
 
-export const useRetrieveYearGroups = () => {
+export const useRetrieveYearGroups = (options?: UseQueryOptions<YearGroup> | undefined) => {
   const axiosInstance = usePublicClient();
 
   return useQuery(QUERY_KEYS.getYearGroups, async () => {

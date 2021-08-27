@@ -1,11 +1,11 @@
+import { SelectOption } from '@typings/common';
+
 export const FORM_ERRORS = {
   emailInvalid: 'The email address is invalid.',
   endTimeError: 'The end time must be greater than the start time',
   fieldRequired: 'This field is required.',
   maxCharacters: (numChar: number) => `Must be at most ${numChar} characters`,
-  maxNumbers: (numChar: number) => `Must be lower than ${numChar} characters`,
   minCharacters: (numChar: number) => `Must be at least ${numChar} characters`,
-  minNumbers: (numChar: number) => `Must be greater than ${numChar}.`,
 };
 
 export const COOKIE_NAME = 'prlusrtkn';
@@ -18,13 +18,23 @@ export const LANGUAGE_DELETED_MESSAGE = 'The language deleted successfully.';
 export const USER_DELETED_MESSAGE = 'The user deleted successfully.';
 export const AUTHOR_UPDATED_MESSAGE = 'The author updated successfully.';
 export const AUTHOR_CREATED_MESSAGE = 'The author created successfully.';
+export const LANGUAGE_UPDATED_MESSAGE = 'The language updated successfully.';
+export const LANGUAGE_CREATED_MESSAGE = 'The language created successfully.';
 
 export const QUERY_KEYS = {
   dashboardSummary: 'dashboardSummary',
-  getAuthors: 'getAuthors',
   getAuthor: 'getAuthor',
+  getAuthors: 'getAuthors',
+  getLanguage: 'getLanguage',
   getLanguages: 'getLanguages',
   getUser: 'getUser',
   getUsers: 'getUsers',
   getYearGroups: 'getYearGroups',
 };
+
+export const YEAR_CONFIRMED_OPTION: SelectOption[] = [
+  { label: 'Yes', value: 'true' },
+  { label: 'No', value: 'false' },
+];
+
+export const DEFAULT_YEAR_GROUP = { label: 'All', value: '' };
