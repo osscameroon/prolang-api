@@ -14,7 +14,7 @@ export const useRetrieveAuthors = (
     .join('&');
 
   return useQuery(
-    `${QUERY_KEYS.getAuthor}-${queryString}`,
+    `${QUERY_KEYS.getAuthors}-${queryString}`,
     async () => {
       const response = await axiosInstance.get<AuthorListResponseData>(`authors?${queryString}`);
 

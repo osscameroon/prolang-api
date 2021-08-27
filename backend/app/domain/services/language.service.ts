@@ -69,9 +69,18 @@ const findAll = async (fields?: string, populate?: string): Promise<any[]> => {
   return queryBuilder.exec();
 };
 
-const findPaginate = async (page: number, limit: number, search?: string, fields?: string, populate?: string) => {
+const findPaginate = async (
+  page: number,
+  limit: number,
+  search?: string,
+  fields?: string,
+  populate?: string,
+  yearGroupId?: string,
+) => {
   const filter: FilterQuery<LanguageDocument> = {
     name: { $regex: search ? new RegExp(`.*${search}.*`, 'gim') : /.*/ },
+    // @ts-ignore
+    yearGroup: !yearGroupId ? { $ne: null } : yearGroupId,
   };
 
   return paginateLanguage(filter, page, limit, fields, populate);
