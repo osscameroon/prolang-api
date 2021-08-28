@@ -28,6 +28,8 @@ export const LANGUAGE_CREATED_MESSAGE = 'The language created successfully.';
 
 export const QUERY_KEYS = {
   dashboardSummary: 'dashboardSummary',
+  getAllAuthors: 'getAllAuthors',
+  getAllLanguages: 'getAllLanguages',
   getAuthenticated: 'getAuthenticated',
   getAuthor: 'getAuthor',
   getAuthors: 'getAuthors',

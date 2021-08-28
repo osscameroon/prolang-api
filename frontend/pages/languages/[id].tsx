@@ -5,22 +5,27 @@ import { Loader } from '@components/common/loader';
 import { UpdateLanguage } from '@components/languages/update-language';
 import { ResourceNotFound } from '@components/common/resource-not-found';
 import { useRetrieveLanguage } from '@hooks/request/query/useRetrieveLanguage';
-import { useRetrieveYearGroups } from '@hooks/request/query/useRetrieveYearGroups';
+import { useLoadLanguageFormData } from '@hooks/useLoadLanguageFormData';
 
 const UpdateLanguageDataLoader = () => {
   const { query } = useRouter();
 
   const { data, isLoading } = useRetrieveLanguage(query.id as string, { enabled: Boolean(query.id) });
-  const { data: yearGroupData, isLoading: isYearGroupLoading } = useRetrieveYearGroups({ enabled: Boolean(query.id) });
+  const { authorData, isLoading: isDataLoading, languageData, yearGroupData } = useLoadLanguageFormData();
 
-  const loading = isLoading || isYearGroupLoading;
+  const loading = isLoading || isDataLoading;
 
   if (loading) {
     return <Loader />;
   }
 
-  if (!loading && data && yearGroupData) {
-    return <UpdateLanguage language={data} yearGroups={yearGroupData || []} />;
+  if (!loading && data && yearGroupData && authorData && languageData) {
+    return <UpdateLanguage 
+      language={data}
+      yearGroups={yearGroupData || []}
+      languages={languageData}
+      authors={authorData}
+    />;
   }
 
   return <ResourceNotFound name="Language" />;

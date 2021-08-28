@@ -46,7 +46,7 @@ const LanguageRow = ({ item, triggerDeleteDialog }: LanguageRowProps) => {
           <div className="ml-4">
             <div className="text-sm font-medium text-gray-900">
               {renderNameWithLink(name, link)}
-              { nameExtra.name && <> ({renderNameWithLink(name, link)}) </>}
+              { nameExtra.name && <> ({renderNameWithLink(nameExtra.name, link)}) </>}
             </div>
           </div>
         </div>

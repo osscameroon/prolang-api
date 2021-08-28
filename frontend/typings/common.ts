@@ -107,13 +107,14 @@ export type AuthorList = PaginatedList & {
 
 export type AuthorListResponseData = HttpResponse<AuthorList>;
 export type AuthorResponseData = HttpResponse<Author>;
+export type AuthorsResponseData = HttpResponse<Author[]>;
 
 export type LanguageList = PaginatedList & {
   items: Language[];
 };
 export type LanguageResponseData = HttpResponse<Language>;
-
 export type LanguageListResponseData = HttpResponse<LanguageList>;
+export type LanguagesResponseData = HttpResponse<Language[]>;
 
 export type YearGroupResponseData = HttpResponse<YearGroup[]>;
 
@@ -134,7 +135,9 @@ export type UpdateAuthorInput = {
 };
 
 export type CreateLanguageInput = {
+  authors: string[];
   company?: string | null;
+  predecessors: string[];
   link?: string | null;
   name: string;
   nameExtra?: NameExtra;
@@ -144,7 +147,9 @@ export type CreateLanguageInput = {
 }
 
 export type UpdateLanguageInput = {
+  authors?: string[];
   company?: string | null;
+  predecessors?: string[];
   link?: string | null;
   name?:string;
   nameExtra?: NameExtra;

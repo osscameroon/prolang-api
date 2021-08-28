@@ -18,3 +18,7 @@ export const formatYearGroupOption = (yearGroups: YearGroup[]) => {
   
   return [DEFAULT_YEAR_GROUP].concat(yearGroupOptions);
 };
+
+export const formatOptions = <T extends { id: string, name: string }>(data: T[]) => {
+  return data.map((yearGroup): SelectOption => ({ label: yearGroup.name, value: yearGroup.id }));
+};
