@@ -1,7 +1,8 @@
 import { FilterQuery } from 'mongoose';
 
-import { LanguageDocument, CreateLanguageInput, PaginatedResult } from '../../shared/types/models';
+import { LanguageDocument, CreateLanguageInput, PaginatedResult, UpdateLanguageInput } from '../../shared/types/models';
 import { LanguageModel } from '../models/language.model';
+import { RESOURCE_NOT_FOUND } from '../../shared/utils/constants';
 
 const paginateLanguage = async (
   filter: FilterQuery<LanguageDocument>,
@@ -51,6 +52,10 @@ const findByIdOrName = async (idOrName: string, populate?: string): Promise<any>
   }
 
   return queryBuilder.exec();
+};
+
+const findById = async (id: string) => {
+  return LanguageModel.findById(id);
 };
 
 const findByIds = async (ids: string[]) => {
@@ -106,12 +111,29 @@ const count = async () => {
   return LanguageModel.count();
 };
 
+const update = async (id: string, input: UpdateLanguageInput) => {
+  await LanguageModel.updateOne({ id }, { ...input });
+};
+
+const findOneOrFail = async (filter: FilterQuery<LanguageDocument>, populateFields?: string) => {
+  const language = await LanguageModel.findOne(filter, undefined, { populate: populateFields });
+
+  if (!language) {
+    throw new Error(RESOURCE_NOT_FOUND);
+  }
+
+  return language;
+};
+
 export default {
   count,
   findAll,
+  findById,
   findByIdOrName,
   findByIds,
   findByYearGroup,
+  findOneOrFail,
   findOrCreate,
   findPaginate,
+  update,
 };

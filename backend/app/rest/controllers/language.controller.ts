@@ -6,9 +6,35 @@ import { RECORD_NOT_FOUND_MESSAGE } from '../../shared/utils/constants';
 import { transformLanguageResponse } from '../../domain/responses/language.response';
 import { extractQueryFields } from '../../shared/utils/helpers';
 import { PAGINATION_LIMIT } from '../../shared/core/config';
-import { LanguagePopulatedDocument, PaginatedResult } from '../../shared/types/models';
+import {
+  CreateLanguageBody,
+  CreateLanguageInput,
+  LanguagePopulatedDocument,
+  PaginatedResult,
+} from '../../shared/types/models';
 
 const populateFields = 'authors predecessors yearGroup';
+
+const create = async (req: Request, res: Response) => {
+  const { company, link, name, nameExtra, yearConfirmed, yearGroup, years }: CreateLanguageBody = req.body;
+  const input: CreateLanguageInput = {
+    authors: [],
+    company,
+    link,
+    listed: false,
+    name,
+    nameExtra,
+    predecessors: [],
+    yearConfirmed,
+    yearGroup,
+    years,
+  };
+  const languageCreated = await languageService.findOrCreate(input);
+
+  const language = await languageService.findOneOrFail({ id: languageCreated._id }, populateFields);
+
+  return res.json({ data: transformLanguageResponse(language as LanguagePopulatedDocument) });
+};
 
 const getAll = async (req: Request, res: Response) => {
   const { fields } = extractQueryFields(req.query);
@@ -72,4 +98,19 @@ const getByYearGroup = async (req: Request, res: Response) => {
   return res.json({ data: { ...result, items: transformLanguageResponse(result.items) } });
 };
 
-export { getAll, getByIdOrName, getByYearGroup, search };
+const update = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const item = await languageService.findById(id);
+
+  if (!item) {
+    return res.status(404).json({ message: RECORD_NOT_FOUND_MESSAGE('Language', id) });
+  }
+
+  await languageService.update(id, req.body);
+
+  const language = await languageService.findOneOrFail({ id }, populateFields);
+
+  return res.json({ data: transformLanguageResponse(language as LanguagePopulatedDocument) });
+};
+
+export { getAll, getByIdOrName, getByYearGroup, search, update, create };

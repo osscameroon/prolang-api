@@ -38,11 +38,11 @@ export const setupRestEndpoints = (app: Application) => {
 
   app.use('/', router);
   app.use('/', commonRoute());
-  app.use('/api', yearGroupRoute());
-  app.use('/api', authorRoute());
-  app.use('/api', languageRoute());
-  app.use('/private', userRoute());
-  app.use('/private', statRoute());
+  app.use('/', yearGroupRoute());
+  app.use('/', authorRoute());
+  app.use('/', languageRoute());
+  app.use('/', userRoute());
+  app.use('/', statRoute());
 
   app.use(express.static(path.join(__dirname, '../../public')));
 
