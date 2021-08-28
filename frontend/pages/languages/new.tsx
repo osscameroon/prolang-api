@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-
 import { toast } from 'react-toastify';
-import { SelectOption, YearGroup } from '@typings/common';
+
+import { Author, Language, YearGroup } from '@typings/common';
 import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { LanguageForm } from '@components/languages/language-form';
 import { LanguageFormValues, languageFormSchema } from '@components/languages/form-schema';
@@ -11,20 +11,25 @@ import { PageHeader } from '@components/common/page-header';
 import { useCreateLanguage } from '@hooks/request/mutation/useCreateLanguage';
 import { LANGUAGE_CREATED_MESSAGE, NETWORK_ERROR_MESSAGE, YEAR_CONFIRMED_OPTION } from '@utils/constants';
 import { getErrorMessage } from '@utils/axios';
-import { useRetrieveYearGroups } from '@hooks/request/query/useRetrieveYearGroups';
 import { Loader } from '@components/common/loader';
+import { formatOptions } from '@utils/forms';
+import { useLoadLanguageFormData } from '@hooks/useLoadLanguageFormData';
 
-const NewLanguage = ({ yearGroups }: { yearGroups: YearGroup[]; }) => {
-  const yearGroupOptions = useMemo(() => {
-    return yearGroups.map(
-      (yearGroup): SelectOption => ({ label: yearGroup.name, value: yearGroup.id })
-    );
-  }, [yearGroups]);
+type NewLanguageProps = {
+  authors: Author[];
+  languages: Language[];
+  yearGroups: YearGroup[];
+};
+
+const NewLanguage = ({ authors, languages, yearGroups }: NewLanguageProps) => {
+  const authorOptions = useMemo(() => formatOptions(authors), [authors]);
+  const languageOptions = useMemo(() => formatOptions(languages), [languages]);
+  const yearGroupOptions = useMemo(() => formatOptions(yearGroups), [yearGroups]);
   
-  const initialValues: Partial<LanguageFormValues> = {
-    // @ts-ignore
+  const initialValues: Partial<any> = {
+    authors: [],
+    predecessors: [],
     yearConfirmed: YEAR_CONFIRMED_OPTION[0],
-    // @ts-ignore
     yearGroup: yearGroupOptions[0],
   };
 
@@ -38,6 +43,7 @@ const NewLanguage = ({ yearGroups }: { yearGroups: YearGroup[]; }) => {
   const handleCreateLanguage = (data: LanguageFormValues) => {
     createLanguageMutation.mutate(
       {
+        authors: data.authors.map(({ value }) => value),
         company: data.company,
         link: data.link,
         name: data.name,
@@ -45,6 +51,7 @@ const NewLanguage = ({ yearGroups }: { yearGroups: YearGroup[]; }) => {
           link: data.extraLink || null,
           name: data.extraName || null,
         },
+        predecessors: data.predecessors.map(({ value }) => value),
         yearConfirmed: data.yearConfirmed?.value === 'true',
         yearGroup: data.yearGroup.value,
         years: data.years?.split('-').map((year) => parseInt(year.trim(), 10))
@@ -67,6 +74,8 @@ const NewLanguage = ({ yearGroups }: { yearGroups: YearGroup[]; }) => {
       <FormProvider {...formMethods}>
         <form onSubmit={formMethods.handleSubmit(handleCreateLanguage)}>
           <LanguageForm
+            authorOptions={authorOptions}
+            languageOptions={languageOptions}
             isSubmitting={formMethods.formState.isSubmitting || createLanguageMutation.isLoading}
             yearGroupOptions={yearGroupOptions}
           />
@@ -77,14 +86,14 @@ const NewLanguage = ({ yearGroups }: { yearGroups: YearGroup[]; }) => {
 };
 
 const NewLanguageLoader = () => {
-  const { data, isLoading } = useRetrieveYearGroups();
-  
+  const { authorData, isLoading, languageData, yearGroupData } = useLoadLanguageFormData();
+
   if (isLoading) {
     return <Loader />;
   }
 
-  if (!isLoading && data) {
-    return <NewLanguage yearGroups={data} />;
+  if (!isLoading && (authorData && languageData && yearGroupData)) {
+    return <NewLanguage yearGroups={yearGroupData} authors={authorData} languages={languageData} />;
   }
   
   return null;

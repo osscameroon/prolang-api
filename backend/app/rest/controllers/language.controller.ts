@@ -6,29 +6,26 @@ import { RECORD_DELETED_MESSAGE, RECORD_NOT_FOUND_MESSAGE } from '../../shared/u
 import { transformLanguageResponse } from '../../domain/responses/language.response';
 import { extractQueryFields } from '../../shared/utils/helpers';
 import { PAGINATION_LIMIT } from '../../shared/core/config';
-import {
-  CreateLanguageBody,
-  CreateLanguageInput,
-  LanguagePopulatedDocument,
-  PaginatedResult,
-} from '../../shared/types/models';
+import { CreateLanguageInput, LanguagePopulatedDocument, PaginatedResult } from '../../shared/types/models';
 
 const populateFields = 'authors predecessors yearGroup';
 
 const create = async (req: Request, res: Response) => {
-  const { company, link, name, nameExtra, yearConfirmed, yearGroup, years }: CreateLanguageBody = req.body;
+  const { body } = req;
+
   const input: CreateLanguageInput = {
-    authors: [],
-    company,
-    link,
+    authors: body.authors,
+    company: body.company,
+    link: body.link,
     listed: false,
-    name,
-    nameExtra,
-    predecessors: [],
-    yearConfirmed,
-    yearGroup,
-    years,
+    name: body.name,
+    nameExtra: body.nameExtra,
+    predecessors: body.predecessors,
+    yearConfirmed: body.yearConfirmed,
+    yearGroup: body.yearGroup,
+    years: body.years,
   };
+
   const languageCreated = await languageService.findOrCreate(input);
 
   const language = await languageService.findOneOrFail({ _id: languageCreated._id }, populateFields);

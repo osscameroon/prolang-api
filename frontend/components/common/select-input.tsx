@@ -2,18 +2,14 @@ import { forwardRef, Fragment } from 'react';
 import classNames from 'classnames';
 import { Listbox, Transition } from '@headlessui/react';
 import { CheckIcon, SelectorIcon } from '@heroicons/react/solid';
-
-type SelectInputOption = {
-  label: string;
-  value: string;
-};
+import { SelectOption } from '@typings/common';
 
 type SelectInputProps = {
   className?: string;
-  defaultValue?: SelectInputOption;
-  options: SelectInputOption[];
-  value: SelectInputOption;
-  onChange: (value: SelectInputOption) => void;
+  defaultValue?: SelectOption;
+  options: SelectOption[];
+  value: SelectOption;
+  onChange: (value: SelectOption) => void;
 };
 
 const SelectInput = forwardRef<HTMLDivElement, SelectInputProps>((props: SelectInputProps, ref) => {

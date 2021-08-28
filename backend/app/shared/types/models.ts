@@ -131,21 +131,13 @@ type NameExtra = {
   name: string | null;
 };
 
-export type CreateLanguageBody = {
-  company: string | null;
-  link: string | null;
-  name: string;
-  nameExtra: NameExtra;
-  yearConfirmed: boolean;
-  yearGroup: string;
-  years: number[];
-};
-
 export type UpdateLanguageInput = {
+  authors: string[];
   company?: string | null;
   link?: string | null;
   name?: string;
   nameExtra?: NameExtra;
+  predecessors: string[];
   yearConfirmed?: boolean;
   yearGroup?: string;
   years?: number[];
