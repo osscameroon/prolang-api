@@ -20,10 +20,10 @@ const AuthorForm = ({ isEditMode = false, isSubmitting }: AuthorFormProps) => {
 
       <div className="w-full flex justify-between">
         <div className="wp-45">
-          <FormInput label="Link to bio" name="link" type="text" placeholder="France" />
+          <FormInput label="Link to bio" name="link" type="text" placeholder="" />
         </div>
         <div className="wp-45">
-          <FormInput label="Picture link" name="picture" type="text" placeholder="France" />
+          <FormInput label="Picture link" name="picture" type="text" placeholder="" />
         </div>
       </div>
 
@@ -45,6 +45,7 @@ const AuthorForm = ({ isEditMode = false, isSubmitting }: AuthorFormProps) => {
                   selectsEnd
                   startDate={new Date()}
                   nextMonthButtonLabel=">"
+                  placeholderText="DD/MM/YYYY"
                   previousMonthButtonLabel="<"
                 />
               )}

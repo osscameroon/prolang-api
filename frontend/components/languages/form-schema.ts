@@ -11,7 +11,7 @@ export const languageFormSchema = yup.object().shape({
   name: yup
     .string()
     .required(FORM_ERRORS.fieldRequired)
-    .min(2, FORM_ERRORS.minCharacters(2))
+    .min(1, FORM_ERRORS.minCharacters(1))
     .max(100, FORM_ERRORS.maxCharacters(100)),
   yearConfirmed: yup.object().required(),
   yearGroup: yup.object().required(),

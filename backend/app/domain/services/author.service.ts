@@ -53,7 +53,7 @@ const findPaginate = async (
 };
 
 const count = async () => {
-  return AuthorModel.count();
+  return AuthorModel.countDocuments();
 };
 
 const update = async (id: string, input: UpdateAuthorInput) => {

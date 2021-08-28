@@ -31,7 +31,7 @@ const create = async (req: Request, res: Response) => {
   };
   const languageCreated = await languageService.findOrCreate(input);
 
-  const language = await languageService.findOneOrFail({ id: languageCreated._id }, populateFields);
+  const language = await languageService.findOneOrFail({ _id: languageCreated._id }, populateFields);
 
   return res.json({ data: transformLanguageResponse(language as LanguagePopulatedDocument) });
 };
