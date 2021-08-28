@@ -37,7 +37,7 @@ const findNotListedGroup = async () => {
 };
 
 const count = async () => {
-  return YearGroupModel.count();
+  return YearGroupModel.countDocuments();
 };
 
 export default {

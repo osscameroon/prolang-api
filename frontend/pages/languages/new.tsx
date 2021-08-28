@@ -1,8 +1,9 @@
+import { useMemo } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { toast } from 'react-toastify';
 
-import { SelectOption } from '@typings/common';
+import { toast } from 'react-toastify';
+import { SelectOption, YearGroup } from '@typings/common';
 import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { LanguageForm } from '@components/languages/language-form';
 import { LanguageFormValues, languageFormSchema } from '@components/languages/form-schema';
@@ -12,9 +13,14 @@ import { LANGUAGE_CREATED_MESSAGE, NETWORK_ERROR_MESSAGE, YEAR_CONFIRMED_OPTION 
 import { getErrorMessage } from '@utils/axios';
 import { useRetrieveYearGroups } from '@hooks/request/query/useRetrieveYearGroups';
 import { Loader } from '@components/common/loader';
-import { formatYearGroupOption } from '@utils/forms';
 
-const NewLanguage = ({ yearGroupOptions }: { yearGroupOptions: SelectOption[]; }) => {
+const NewLanguage = ({ yearGroups }: { yearGroups: YearGroup[]; }) => {
+  const yearGroupOptions = useMemo(() => {
+    return yearGroups.map(
+      (yearGroup): SelectOption => ({ label: yearGroup.name, value: yearGroup.id })
+    );
+  }, [yearGroups]);
+  
   const initialValues: Partial<LanguageFormValues> = {
     // @ts-ignore
     yearConfirmed: YEAR_CONFIRMED_OPTION[0],
@@ -78,7 +84,7 @@ const NewLanguageLoader = () => {
   }
 
   if (!isLoading && data) {
-    return <NewLanguage yearGroupOptions={formatYearGroupOption(data)} />;
+    return <NewLanguage yearGroups={data} />;
   }
   
   return null;

@@ -27,7 +27,7 @@ const findAll = async () => {
 };
 
 const count = async () => {
-  return UserModel.count();
+  return UserModel.countDocuments();
 };
 
 const update = async (id: string, input: UpdateUserInput) => {

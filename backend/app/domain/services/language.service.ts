@@ -94,7 +94,7 @@ const findByYearGroup = async (
 };
 
 const count = async () => {
-  return LanguageModel.count();
+  return LanguageModel.countDocuments();
 };
 
 const update = async (id: string, input: UpdateLanguageInput) => {
