@@ -19,6 +19,9 @@ import { RECORD_NOT_FOUND_CODE, RECORD_NOT_FOUND_MESSAGE } from '../../shared/ut
 const resolvers: Resolvers = {
   Author: {
     id: (author) => author._id,
+    languages: (author) => {
+      return languageService.findByAuthor(author._id);
+    },
   },
   Date: dateScalar,
   Language: {

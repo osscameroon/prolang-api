@@ -11,15 +11,18 @@ import { TableNoRow } from '@components/common/table-no-row';
 import { TableRowHeader } from '@components/common/table-row-header';
 import { useBooleanState } from '@hooks/useBooleanState';
 import { useRetrieveUsers } from '@hooks/request/query/useRetrieveUsers';
-import { USER_DELETED_MESSAGE } from '@utils/constants';
+import { NETWORK_ERROR_MESSAGE, USER_DELETED_MESSAGE } from '@utils/constants';
 import { PageHeader } from '@components/common/page-header';
 import { useAuth } from '@hooks/useAuth';
+import { useDeleteUser } from '@hooks/request/mutation/useDeleteUser';
+import { getErrorMessage } from '@utils/axios';
 
 const Users = () => {
   const { user } = useAuth();
   const [isDialogOpen, openDialog, closeDialog] = useBooleanState(false);
   const [selectedId, setSelectedId] = useState<string | null>();
 
+  const deleteMutation = useDeleteUser();
   const { data, isLoading, refetch } = useRetrieveUsers();
 
   if (isLoading) {
@@ -36,9 +39,17 @@ const Users = () => {
       return;
     }
 
-    await refetch();
-    closeDialog();
-    toast.success(USER_DELETED_MESSAGE);
+    deleteMutation.mutate(selectedId, {
+      onError: (error) => {
+        closeDialog();
+        toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
+      },
+      onSuccess: async () => {
+        await refetch();
+        closeDialog();
+        toast.success(USER_DELETED_MESSAGE);
+      },
+    });
   };
 
   return (

@@ -16,8 +16,14 @@ import { PageHeader } from '@components/common/page-header';
 import { useBooleanState } from '@hooks/useBooleanState';
 import { useRetrieveLanguages } from '@hooks/request/query/useRetrieveLanguages';
 import { useRetrieveYearGroups } from '@hooks/request/query/useRetrieveYearGroups';
-import { DEFAULT_YEAR_GROUP, LANGUAGE_DELETED_MESSAGE } from '@utils/constants';
+import { useDeleteLanguage } from '@hooks/request/mutation/useDeleteLanguage';
+import {
+  DEFAULT_YEAR_GROUP,
+  LANGUAGE_DELETED_MESSAGE,
+  NETWORK_ERROR_MESSAGE
+} from '@utils/constants';
 import { formatYearGroupOption } from '@utils/forms';
+import { getErrorMessage } from '@utils/axios';
 
 type LanguageSearchParams = FilterQueryParams & {
   yearGroup: SelectOption;
@@ -32,6 +38,7 @@ const Languages = () => {
     yearGroup: DEFAULT_YEAR_GROUP,
   });
 
+  const deleteMutation = useDeleteLanguage();
   const { data: yearGroupListData } = useRetrieveYearGroups();
   
   const { data, refetch } = useRetrieveLanguages(
@@ -53,9 +60,17 @@ const Languages = () => {
       return;
     }
 
-    await refetch();
-    closeDialog();
-    toast.success(LANGUAGE_DELETED_MESSAGE);
+    deleteMutation.mutate(selectedId, {
+      onError: (error) => {
+        closeDialog();
+        toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
+      },
+      onSuccess: async () => {
+        await refetch();
+        closeDialog();
+        toast.success(LANGUAGE_DELETED_MESSAGE);
+      },
+    });
   };
 
   const handleYearGroupChange = (value: SelectOption) => {

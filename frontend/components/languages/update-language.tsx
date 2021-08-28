@@ -2,20 +2,27 @@ import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 
-import { Language, SelectOption, UpdateLanguageInput } from '@typings/common';
+import { Language, SelectOption, UpdateLanguageInput, YearGroup } from '@typings/common';
 import { languageFormSchema, UpdateLanguageFormValues } from '@components/languages/form-schema';
 import { LanguageForm } from '@components/languages/language-form';
 import { useUpdateLanguage } from '@hooks/request/mutation/useUpdateLanguage';
 import { YEAR_CONFIRMED_OPTION, NETWORK_ERROR_MESSAGE, LANGUAGE_UPDATED_MESSAGE } from '@utils/constants';
 import { getErrorMessage } from '@utils/axios';
 import { PageHeader } from '@components/common/page-header';
+import { memo, useMemo } from 'react';
 
 type UpdateLanguageProps = {
   language: Language;
-  yearGroupOptions: SelectOption[];
+  yearGroups: YearGroup[];
 };
 
-const UpdateLanguage = ({ language, yearGroupOptions }: UpdateLanguageProps) => {
+const UpdateLanguage = ({ language, yearGroups }: UpdateLanguageProps) => {
+  const yearGroupOptions = useMemo(() => {
+    return yearGroups.map(
+      (yearGroup): SelectOption => ({ label: yearGroup.name, value: yearGroup.id })
+    );
+  }, [yearGroups]);
+  
   const formMethods = useForm<UpdateLanguageFormValues>({
     defaultValues: {
       company: language.company || undefined,
@@ -24,7 +31,7 @@ const UpdateLanguage = ({ language, yearGroupOptions }: UpdateLanguageProps) => 
       link: language.link || undefined,
       name: language.name,
       yearConfirmed: YEAR_CONFIRMED_OPTION.find((option) => option.value === `${language.yearConfirmed}`) || YEAR_CONFIRMED_OPTION[0],
-      yearGroup: yearGroupOptions.find(option => option.value === language.yearGroup?.name) || yearGroupOptions[0],
+      yearGroup: yearGroupOptions.find(option => option.value === language.yearGroup?.id) || yearGroupOptions[0],
       years: language.years.join(' - ')
     },
     resolver: yupResolver(languageFormSchema),

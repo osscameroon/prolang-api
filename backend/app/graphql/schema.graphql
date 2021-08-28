@@ -13,6 +13,7 @@ type Author {
   link: String
   name: String!
   picture: String
+  languages: [Language!]!
 }
 
 type NameExtra {

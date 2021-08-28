@@ -57,7 +57,7 @@ const count = async () => {
 };
 
 const update = async (id: string, input: UpdateAuthorInput) => {
-  await AuthorModel.updateOne({ id }, { ...input });
+  await AuthorModel.updateOne({ _id: id }, { ...input });
 };
 
 const findOneOrFail = async (filter: FilterQuery<AuthorDocument>) => {
@@ -71,7 +71,7 @@ const findOneOrFail = async (filter: FilterQuery<AuthorDocument>) => {
 };
 
 const deleteById = async (id: string) => {
-  return AuthorModel.deleteOne({ id });
+  return AuthorModel.deleteOne({ _id: id });
 };
 
 export default {

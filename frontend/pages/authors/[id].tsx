@@ -9,17 +9,17 @@ import { useRetrieveAuthor } from '@hooks/request/query/useRetrieveAuthor';
 const UpdateAuthorDataLoader = () => {
   const { query } = useRouter();
 
-  const { data, isLoading } = useRetrieveAuthor(query.id as string, { enabled: Boolean(query.id) });
+  const { data, isLoading, isError, isSuccess } = useRetrieveAuthor(query.id as string, { enabled: Boolean(query.id) });
 
-  if (isLoading) {
-    return <Loader />;
+  if (!isLoading && isError) {
+    return <ResourceNotFound name="Author" />;
   }
 
-  if (!isLoading && data) {
+  if (isSuccess && data) {
     return <UpdateAuthor author={data} />;
   }
 
-  return <ResourceNotFound name="Author" />;
+  return <Loader />;
 };
 
 export default withPrivateLayout(UpdateAuthorDataLoader);

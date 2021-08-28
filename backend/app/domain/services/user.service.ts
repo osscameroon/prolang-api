@@ -31,7 +31,7 @@ const count = async () => {
 };
 
 const update = async (id: string, input: UpdateUserInput) => {
-  await UserModel.updateOne({ id }, { ...input });
+  await UserModel.updateOne({ _id: id }, { ...input });
 };
 
 const findOneOrFail = async (filter: FilterQuery<UserDocument>) => {
@@ -45,7 +45,7 @@ const findOneOrFail = async (filter: FilterQuery<UserDocument>) => {
 };
 
 const deleteById = async (id: string) => {
-  return UserModel.deleteOne({ id });
+  return UserModel.deleteOne({ _id: id });
 };
 
 export default {

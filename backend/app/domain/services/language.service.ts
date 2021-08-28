@@ -1,4 +1,4 @@
-import { FilterQuery } from 'mongoose';
+import { FilterQuery, isValidObjectId } from 'mongoose';
 
 import { LanguageDocument, CreateLanguageInput, PaginatedResult, UpdateLanguageInput } from '../../shared/types/models';
 import { LanguageModel } from '../models/language.model';
@@ -43,15 +43,9 @@ const findOrCreate = async (input: CreateLanguageInput) => {
 };
 
 const findByIdOrName = async (idOrName: string, populate?: string): Promise<any> => {
-  const queryBuilder = LanguageModel.findOne({ $or: [{ _id: idOrName }, { name: idOrName }] });
+  const filter = isValidObjectId(idOrName) ? { _id: idOrName } : { name: new RegExp(`${idOrName}`, 'gi') };
 
-  if (populate) {
-    populate.split(' ').forEach((model) => {
-      queryBuilder.populate(model);
-    });
-  }
-
-  return queryBuilder.exec();
+  return LanguageModel.findOne(filter).populate(populate).exec();
 };
 
 const findById = async (id: string) => {
@@ -63,15 +57,7 @@ const findByIds = async (ids: string[]) => {
 };
 
 const findAll = async (fields?: string, populate?: string): Promise<any[]> => {
-  const queryBuilder = LanguageModel.find().sort({ name: 1 }).select(fields);
-
-  if (populate) {
-    populate.split(' ').forEach((model) => {
-      queryBuilder.populate(model);
-    });
-  }
-
-  return queryBuilder.exec();
+  return LanguageModel.find().sort({ name: 1 }).populate(populate).select(fields).exec();
 };
 
 const findPaginate = async (
@@ -112,7 +98,7 @@ const count = async () => {
 };
 
 const update = async (id: string, input: UpdateLanguageInput) => {
-  await LanguageModel.updateOne({ id }, { ...input });
+  await LanguageModel.updateOne({ _id: id }, { ...input });
 };
 
 const findOneOrFail = async (filter: FilterQuery<LanguageDocument>, populateFields?: string) => {
@@ -126,13 +112,18 @@ const findOneOrFail = async (filter: FilterQuery<LanguageDocument>, populateFiel
 };
 
 const deleteById = async (id: string) => {
-  return LanguageModel.deleteOne({ id });
+  return LanguageModel.deleteOne({ _id: id });
+};
+
+const findByAuthor = async (auhorId: string) => {
+  return LanguageModel.find({ authors: { $in: [auhorId] } });
 };
 
 export default {
   count,
   deleteById,
   findAll,
+  findByAuthor,
   findById,
   findByIdOrName,
   findByIds,
