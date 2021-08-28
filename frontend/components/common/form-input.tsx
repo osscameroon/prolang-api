@@ -27,7 +27,7 @@ const FormInput = (props: FormInputProps) => {
         {label}
         {isRequired ? '*' : ''}
       </span>
-      <input className={inputClasses} {...inputProps} {...(inputProps.name ? register(inputProps.name) : {})} />
+      <input className={inputClasses} autoComplete="off" {...inputProps} {...(inputProps.name ? register(inputProps.name) : {})} />
       {errorMessage && <span className="text-xs text-red-600 dark:text-red-400">{errorMessage}</span>}
     </label>
   );
