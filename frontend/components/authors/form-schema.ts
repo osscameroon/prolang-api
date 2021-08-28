@@ -14,12 +14,13 @@ export const authorFormSchema = yup.object().shape({
   picture: yup.string().nullable(),
 });
 
-export type AuthorFormValues = yup.InferType<typeof authorFormSchema>;
 
-export type UpdateAuthorFormValues = {
-  birthDate?: Date | null;
-  country?: string | null;
-  link?: string | null;
+export type AuthorFormValues = {
+  birthDate: Date | null;
+  country: string | null;
+  link: string | null;
   name: string;
-  picture?: string | null;
+  picture: string | null;
 };
+
+export type UpdateAuthorFormValues = AuthorFormValues;

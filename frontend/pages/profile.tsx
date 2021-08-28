@@ -12,7 +12,7 @@ const ProfileDataLoader = () => {
   }
 
   if (!loading && user) {
-    return <ProfileForm planner={user} />;
+    return <ProfileForm user={user} />;
   }
 
   return <ResourceNotFound name="Planner" />;
