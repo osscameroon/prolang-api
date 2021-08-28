@@ -10,7 +10,7 @@ const generateLanguageResponse = (item: LanguagePopulatedDocument): LanguageResp
     company: item.company,
     id: item._id,
     link: item.link,
-    listed: item.listed,
+    longName: item.longName,
     name: item.name,
     nameExtra: item.nameExtra,
     predecessors: !item.predecessors ? undefined : item.predecessors.map(generateLanguageResponse),

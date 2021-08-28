@@ -9,6 +9,7 @@ export const languageFormSchema = yup.object().shape({
   extraLink: yup.string().nullable(),
   extraName: yup.string().nullable(),
   link: yup.string().nullable(),
+  longName: yup.string().nullable(),
   name: yup
     .string()
     .required(FORM_ERRORS.fieldRequired)
@@ -34,6 +35,7 @@ export type UpdateLanguageFormValues = {
   extraName?: string;
   predecessors: SelectOption[];
   link?: string;
+  longName?: string;
   name: string;
   yearConfirmed?: SelectOption;
   yearGroup: SelectOption;

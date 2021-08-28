@@ -46,6 +46,7 @@ const NewLanguage = ({ authors, languages, yearGroups }: NewLanguageProps) => {
         authors: data.authors.map(({ value }) => value),
         company: data.company,
         link: data.link,
+        longName: data.longName,
         name: data.name,
         nameExtra: {
           link: data.extraLink || null,

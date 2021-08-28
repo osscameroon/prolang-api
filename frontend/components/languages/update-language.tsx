@@ -31,6 +31,7 @@ const UpdateLanguage = ({ authors, language, languages, yearGroups }: UpdateLang
       extraLink: language.nameExtra.link || undefined,
       extraName: language.nameExtra.name || undefined,
       link: language.link || undefined,
+      longName: language.longName || undefined,
       name: language.name,
       predecessors: languageOptions.filter(({ value }) => Boolean(language.predecessors?.find(({ id }) => value === id))),
       yearConfirmed: YEAR_CONFIRMED_OPTION.find((option) => option.value === `${language.yearConfirmed}`) || YEAR_CONFIRMED_OPTION[0],
@@ -47,6 +48,7 @@ const UpdateLanguage = ({ authors, language, languages, yearGroups }: UpdateLang
       authors: data.authors.map(({ value }) => value),
       company: data.company,
       link: data.link,
+      longName: data.longName,
       name: data.name,
       nameExtra: {
         link: data.extraLink || null,
