@@ -1,16 +1,22 @@
 import { Router } from 'express';
 
 import * as authorController from '../controllers/author.controller';
+import { generateRoutePrefix } from '../../shared/utils/helpers';
 
 const authorRoute = () => {
-  const prefix = '/authors';
+  const [publicPrefix, privatePrefix] = generateRoutePrefix('authors');
+
   const router = Router();
 
-  router.get(`${prefix}`, authorController.search);
+  router.get(`${publicPrefix}`, authorController.search);
 
-  router.get(`${prefix}/all`, authorController.getAll);
+  router.get(`${publicPrefix}/all`, authorController.getAll);
 
-  router.get(`${prefix}/:id`, authorController.getOne);
+  router.get(`${publicPrefix}/:id`, authorController.getOne);
+
+  router.post(`${privatePrefix}`, authorController.create);
+
+  router.put(`${privatePrefix}/:id`, authorController.update);
 
   return router;
 };

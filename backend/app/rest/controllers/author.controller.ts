@@ -6,6 +6,12 @@ import { transformAuthorResponse } from '../../domain/responses/author.response'
 import { extractQueryFields } from '../../shared/utils/helpers';
 import { PAGINATION_LIMIT } from '../../shared/core/config';
 
+const create = async (req: Request, res: Response) => {
+  const author = await authorService.findOrCreate(req.body);
+
+  return res.json({ data: transformAuthorResponse(author) });
+};
+
 const getAll = async (req: Request, res: Response) => {
   const { fields } = extractQueryFields(req.query);
 
@@ -33,4 +39,19 @@ const getOne = async (req: Request, res: Response) => {
   return res.json({ data: transformAuthorResponse(item) });
 };
 
-export { getAll, getOne, search };
+const update = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const item = await authorService.findById(id);
+
+  if (!item) {
+    return res.status(404).json({ message: RECORD_NOT_FOUND_MESSAGE('Author', id) });
+  }
+
+  await authorService.update(id, req.body);
+
+  const author = await authorService.findOneOrFail({ id });
+
+  return res.json({ data: transformAuthorResponse(author) });
+};
+
+export { getAll, getOne, search, update, create };

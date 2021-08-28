@@ -118,11 +118,11 @@ export type LanguageListResponseData = HttpResponse<LanguageList>;
 export type YearGroupResponseData = HttpResponse<YearGroup[]>;
 
 export type CreateAuthorInput = {
-  birthDate?: Date | null;
-  country?: string | null;
-  link?: string | null;
+  birthDate: Date | null;
+  country: string | null;
+  link: string | null;
   name: string;
-  picture?: string | null;
+  picture: string | null;
 };
 
 export type UpdateAuthorInput = {
@@ -136,7 +136,7 @@ export type UpdateAuthorInput = {
 export type CreateLanguageInput = {
   company?: string | null;
   link?: string | null;
-  name:string;
+  name: string;
   nameExtra?: NameExtra;
   yearConfirmed: boolean;
   yearGroup: string;

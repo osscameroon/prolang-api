@@ -1,5 +1,6 @@
 import { Request } from 'express';
 import { RequestTypeEnum } from '../types/models';
+import { PRIVATE_ROUTE_PREFIX, PUBLIC_ROUTE_PREFIX } from './constants';
 
 const parseQueryFields = (fields?: string) => {
   if (!fields) {
@@ -39,4 +40,11 @@ export const removeQueryStringIfExist = (route: string) => {
   }
 
   return route;
+};
+
+export const generateRoutePrefix = (endpoint: string) => {
+  const publicPrefix = `${PUBLIC_ROUTE_PREFIX}/${endpoint}`;
+  const privatePrefix = `${PRIVATE_ROUTE_PREFIX}/${endpoint}`;
+
+  return [publicPrefix, privatePrefix];
 };

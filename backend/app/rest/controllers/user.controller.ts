@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 import userService from '../../domain/services/user.service';
 import { LOGIN_FAILED, RECORD_NOT_FOUND_MESSAGE, USER_ALREADY_EXISTS } from '../../shared/utils/constants';
 import { transformUserResponse } from '../../domain/responses/user.response';
-import { CreateUserInput, LoginInput } from '../../shared/types/models';
+import { CreateUserInput, LoginInput, UpdateUserInput } from '../../shared/types/models';
 import { TokenPayload } from '../../shared/types/common';
 import { JWT_EXPIRE, JWT_SECRET } from '../../shared/core/config';
 
@@ -81,4 +81,28 @@ const current = async (req: any, res: Response) => {
   return res.json({ data: transformUserResponse(user) });
 };
 
-export { create, current, getAll, getOne, login };
+const update = async (req: any, res: Response) => {
+  const userId = req.user.id;
+  const { email, name, password, role }: UpdateUserInput = req.body;
+
+  const user = await userService.findByEmail(email);
+
+  if (user && user._id !== userId) {
+    return res.status(400).json({ message: USER_ALREADY_EXISTS });
+  }
+
+  const passwordInput = password ? { password: bcrypt.hashSync(password) } : {};
+
+  await userService.update(userId, {
+    email,
+    name,
+    role,
+    ...passwordInput,
+  });
+
+  const updateUser = await userService.findOneOrFail({ id: userId });
+
+  return res.json({ data: transformUserResponse(updateUser) });
+};
+
+export { create, current, getAll, getOne, login, update };

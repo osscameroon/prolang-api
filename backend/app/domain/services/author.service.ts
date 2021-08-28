@@ -1,7 +1,8 @@
 import { FilterQuery } from 'mongoose';
 
-import { AuthorDocument, CreateAuthorInput, PaginatedResult } from '../../shared/types/models';
+import { AuthorDocument, CreateAuthorInput, PaginatedResult, UpdateAuthorInput } from '../../shared/types/models';
 import { AuthorModel } from '../models/author.model';
+import { RESOURCE_NOT_FOUND } from '../../shared/utils/constants';
 
 const findOrCreate = async (input: CreateAuthorInput) => {
   const author = await AuthorModel.findOne({ name: input.name });
@@ -55,11 +56,27 @@ const count = async () => {
   return AuthorModel.count();
 };
 
+const update = async (id: string, input: UpdateAuthorInput) => {
+  await AuthorModel.updateOne({ id }, { ...input });
+};
+
+const findOneOrFail = async (filter: FilterQuery<AuthorDocument>) => {
+  const user = await AuthorModel.findOne(filter);
+
+  if (!user) {
+    throw new Error(RESOURCE_NOT_FOUND);
+  }
+
+  return user;
+};
+
 export default {
   count,
   findAll,
   findById,
   findByIds,
+  findOneOrFail,
   findOrCreate,
   findPaginate,
+  update,
 };

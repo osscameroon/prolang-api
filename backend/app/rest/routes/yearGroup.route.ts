@@ -1,14 +1,16 @@
 import { Router } from 'express';
 
 import * as yearGroupController from '../controllers/yearGroup.controller';
+import { generateRoutePrefix } from '../../shared/utils/helpers';
 
 const yearGroupRoute = () => {
-  const prefix = '/years-groups';
+  const [publicPrefix] = generateRoutePrefix('years-groups');
+
   const router = Router();
 
-  router.get(`${prefix}`, yearGroupController.getAll);
+  router.get(`${publicPrefix}`, yearGroupController.getAll);
 
-  router.get(`${prefix}/:id`, yearGroupController.getOne);
+  router.get(`${publicPrefix}/:id`, yearGroupController.getOne);
 
   return router;
 };

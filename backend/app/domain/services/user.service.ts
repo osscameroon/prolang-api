@@ -1,6 +1,8 @@
-import { CreateUserInput } from '../../shared/types/models';
+import { FilterQuery } from 'mongoose';
+
+import { CreateUserInput, UpdateUserInput, UserDocument } from '../../shared/types/models';
 import { UserModel } from '../models/user.model';
-import { USER_ALREADY_EXISTS } from '../../shared/utils/constants';
+import { RESOURCE_NOT_FOUND, USER_ALREADY_EXISTS } from '../../shared/utils/constants';
 
 const create = async (input: CreateUserInput) => {
   const user = await UserModel.findOne({ email: input.email });
@@ -28,10 +30,26 @@ const count = async () => {
   return UserModel.count();
 };
 
+const update = async (id: string, input: UpdateUserInput) => {
+  await UserModel.updateOne({ id }, { ...input });
+};
+
+const findOneOrFail = async (filter: FilterQuery<UserDocument>) => {
+  const user = await UserModel.findOne(filter);
+
+  if (!user) {
+    throw new Error(RESOURCE_NOT_FOUND);
+  }
+
+  return user;
+};
+
 export default {
   count,
   create,
   findAll,
   findByEmail,
   findById,
+  findOneOrFail,
+  update,
 };

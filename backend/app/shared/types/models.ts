@@ -110,3 +110,43 @@ export type LoginInput = {
   email: UserDocument['email'];
   password: UserDocument['password'];
 };
+
+export type UpdateUserInput = {
+  email: UserDocument['email'];
+  name: UserDocument['name'];
+  password?: UserDocument['password'];
+  role: UserDocument['role'];
+};
+
+export type UpdateAuthorInput = {
+  birthDate: Date | null;
+  country: string | null;
+  link: string | null;
+  name: string;
+  picture: string | null;
+};
+
+type NameExtra = {
+  link: string | null;
+  name: string | null;
+};
+
+export type CreateLanguageBody = {
+  company: string | null;
+  link: string | null;
+  name: string;
+  nameExtra: NameExtra;
+  yearConfirmed: boolean;
+  yearGroup: string;
+  years: number[];
+};
+
+export type UpdateLanguageInput = {
+  company?: string | null;
+  link?: string | null;
+  name?: string;
+  nameExtra?: NameExtra;
+  yearConfirmed?: boolean;
+  yearGroup?: string;
+  years?: number[];
+};

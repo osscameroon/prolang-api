@@ -13,6 +13,10 @@ export const USER_ALREADY_EXISTS = 'User already exists!';
 export const LOGIN_FAILED = 'Login failed: Invalid credentials';
 export const NOT_AUTHENTICATED = 'Access to this resource requires authentication';
 export const ADMIN_PASSWORD_NOT_SET = 'The admin password not set.';
+export const RESOURCE_NOT_FOUND = 'The resource not found.';
+
+export const PUBLIC_ROUTE_PREFIX = '/api';
+export const PRIVATE_ROUTE_PREFIX = '/private';
 
 export const RECORD_NOT_FOUND_MESSAGE = (model: string, id: string) => {
   return `No ${model} found with id: ${id}`;
