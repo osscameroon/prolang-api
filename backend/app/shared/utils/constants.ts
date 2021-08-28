@@ -21,3 +21,6 @@ export const PRIVATE_ROUTE_PREFIX = '/private';
 export const RECORD_NOT_FOUND_MESSAGE = (model: string, id: string) => {
   return `No ${model} found with id: ${id}`;
 };
+export const RECORD_DELETED_MESSAGE = (model: string) => {
+  return `The ${model} deleted successfully!`;
+};

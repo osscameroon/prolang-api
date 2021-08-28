@@ -3,7 +3,12 @@ import * as bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
 import userService from '../../domain/services/user.service';
-import { LOGIN_FAILED, RECORD_NOT_FOUND_MESSAGE, USER_ALREADY_EXISTS } from '../../shared/utils/constants';
+import {
+  LOGIN_FAILED,
+  RECORD_DELETED_MESSAGE,
+  RECORD_NOT_FOUND_MESSAGE,
+  USER_ALREADY_EXISTS,
+} from '../../shared/utils/constants';
 import { transformUserResponse } from '../../domain/responses/user.response';
 import { CreateUserInput, LoginInput, UpdateUserInput } from '../../shared/types/models';
 import { TokenPayload } from '../../shared/types/common';
@@ -105,4 +110,17 @@ const update = async (req: any, res: Response) => {
   return res.json({ data: transformUserResponse(updateUser) });
 };
 
-export { create, current, getAll, getOne, login, update };
+const remove = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const item = await userService.findById(id);
+
+  if (!item) {
+    return res.status(410).json({ message: RECORD_NOT_FOUND_MESSAGE('User', id) });
+  }
+
+  await userService.deleteById(id);
+
+  return res.json({ message: RECORD_DELETED_MESSAGE('User') });
+};
+
+export { create, current, getAll, getOne, login, update, remove };

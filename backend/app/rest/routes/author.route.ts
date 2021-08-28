@@ -18,6 +18,8 @@ const authorRoute = () => {
 
   router.put(`${privatePrefix}/:id`, authorController.update);
 
+  router.delete(`${privatePrefix}/:id`, authorController.remove);
+
   return router;
 };
 

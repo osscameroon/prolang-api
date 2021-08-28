@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 
 import languageService from '../../domain/services/language.service';
 import yearGroupService from '../../domain/services/yearGroup.service';
-import { RECORD_NOT_FOUND_MESSAGE } from '../../shared/utils/constants';
+import { RECORD_DELETED_MESSAGE, RECORD_NOT_FOUND_MESSAGE } from '../../shared/utils/constants';
 import { transformLanguageResponse } from '../../domain/responses/language.response';
 import { extractQueryFields } from '../../shared/utils/helpers';
 import { PAGINATION_LIMIT } from '../../shared/core/config';
@@ -113,4 +113,17 @@ const update = async (req: Request, res: Response) => {
   return res.json({ data: transformLanguageResponse(language as LanguagePopulatedDocument) });
 };
 
-export { getAll, getByIdOrName, getByYearGroup, search, update, create };
+const remove = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const item = await languageService.findById(id);
+
+  if (!item) {
+    return res.status(410).json({ message: RECORD_NOT_FOUND_MESSAGE('Language', id) });
+  }
+
+  await languageService.deleteById(id);
+
+  return res.json({ message: RECORD_DELETED_MESSAGE('Language') });
+};
+
+export { getAll, getByIdOrName, getByYearGroup, search, update, create, remove };

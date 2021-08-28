@@ -19,6 +19,8 @@ const userRoute = () => {
 
   router.put(`${privatePrefix}/:id`, userController.update);
 
+  router.delete(`${privatePrefix}/:id`, userController.remove);
+
   return router;
 };
 

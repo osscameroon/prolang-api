@@ -19,6 +19,8 @@ const languageRoute = () => {
 
   router.put(`${privatePrefix}/:id`, languageController.update);
 
+  router.delete(`${privatePrefix}/:id`, languageController.remove);
+
   return router;
 };
 
