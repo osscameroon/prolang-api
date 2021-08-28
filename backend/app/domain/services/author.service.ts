@@ -70,8 +70,13 @@ const findOneOrFail = async (filter: FilterQuery<AuthorDocument>) => {
   return user;
 };
 
+const deleteById = async (id: string) => {
+  return AuthorModel.deleteOne({ id });
+};
+
 export default {
   count,
+  deleteById,
   findAll,
   findById,
   findByIds,

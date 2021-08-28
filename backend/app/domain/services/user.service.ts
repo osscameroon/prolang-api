@@ -44,9 +44,14 @@ const findOneOrFail = async (filter: FilterQuery<UserDocument>) => {
   return user;
 };
 
+const deleteById = async (id: string) => {
+  return UserModel.deleteOne({ id });
+};
+
 export default {
   count,
   create,
+  deleteById,
   findAll,
   findByEmail,
   findById,

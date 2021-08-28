@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 
 import authorService from '../../domain/services/author.service';
-import { RECORD_NOT_FOUND_MESSAGE } from '../../shared/utils/constants';
+import { RECORD_DELETED_MESSAGE, RECORD_NOT_FOUND_MESSAGE } from '../../shared/utils/constants';
 import { transformAuthorResponse } from '../../domain/responses/author.response';
 import { extractQueryFields } from '../../shared/utils/helpers';
 import { PAGINATION_LIMIT } from '../../shared/core/config';
@@ -54,4 +54,17 @@ const update = async (req: Request, res: Response) => {
   return res.json({ data: transformAuthorResponse(author) });
 };
 
-export { getAll, getOne, search, update, create };
+const remove = async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const item = await authorService.findById(id);
+
+  if (!item) {
+    return res.status(410).json({ message: RECORD_NOT_FOUND_MESSAGE('Author', id) });
+  }
+
+  await authorService.deleteById(id);
+
+  return res.json({ message: RECORD_DELETED_MESSAGE('Author') });
+};
+
+export { getAll, getOne, search, update, create, remove };

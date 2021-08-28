@@ -125,8 +125,13 @@ const findOneOrFail = async (filter: FilterQuery<LanguageDocument>, populateFiel
   return language;
 };
 
+const deleteById = async (id: string) => {
+  return LanguageModel.deleteOne({ id });
+};
+
 export default {
   count,
+  deleteById,
   findAll,
   findById,
   findByIdOrName,
