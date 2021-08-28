@@ -26,20 +26,25 @@ const LanguageForm = ({
 
   return (
     <div className="px-8 py-8 w-1/2 mx-auto bg-white rounded-lg shadow-md dark:bg-gray-800">
-      <div className="w-full">
-        <label className="block text-sm mb-6">
-          <span className="font-bold text-gray-700 dark:text-gray-400">Year's Group*</span>
-          <Controller
-            name="yearGroup"
-            control={control}
-            render={({ field }) => <SelectInput className="wp-45" options={yearGroupOptions} {...field} />}
-          />
-        </label>
+      <div className="w-full flex justify-between">
+        <div className="wp-45">
+          <label className="block text-sm mb-6">
+            <span className="font-bold text-gray-700 dark:text-gray-400">Year's Group*</span>
+            <Controller
+              name="yearGroup"
+              control={control}
+              render={({ field }) => <SelectInput className="w-full" options={yearGroupOptions} {...field} />}
+            />
+          </label>
+        </div>
+        <div className="wp-45">
+          <FormInput label="Name" type="text" placeholder="SQL" name="name" isRequired />
+        </div>
       </div>
         
       <div className="w-full flex justify-between">
         <div className="wp-45">
-          <FormInput label="Name" type="text" placeholder="Java" name="name" isRequired />
+          <FormInput label="Long name" type="text" placeholder="Structured Query Language" name="longName" isRequired />
         </div>
         <div className="wp-45">
           <FormInput label="Link to bio" type="text" placeholder="" name="link" />

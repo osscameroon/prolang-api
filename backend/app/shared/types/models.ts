@@ -31,6 +31,7 @@ export type LanguageDocument = Document & {
   company: string | null;
   link: string | null;
   listed: boolean;
+  longName: string | null;
   name: string;
   nameExtra: {
     link: string | null;
@@ -53,6 +54,7 @@ export type CreateLanguageInput = {
   company: LanguageDocument['company'];
   link: LanguageDocument['link'];
   listed: LanguageDocument['listed'];
+  longName: LanguageDocument['longName'];
   name: LanguageDocument['name'];
   nameExtra: LanguageDocument['nameExtra'];
   predecessors: string[];
@@ -135,6 +137,7 @@ export type UpdateLanguageInput = {
   authors: string[];
   company?: string | null;
   link?: string | null;
+  longName: string | null;
   name?: string;
   nameExtra?: NameExtra;
   predecessors: string[];

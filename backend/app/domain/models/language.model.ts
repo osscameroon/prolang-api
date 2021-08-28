@@ -16,6 +16,7 @@ const languageSchema = new Schema(
       required: true,
       type: Schema.Types.Boolean,
     },
+    longName: Schema.Types.String,
     name: {
       index: true,
       required: true,

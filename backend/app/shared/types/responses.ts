@@ -20,7 +20,7 @@ export type LanguageResponse = {
   company: LanguageDocument['company'];
   id: LanguageDocument['_id'];
   link: LanguageDocument['link'];
-  listed: LanguageDocument['listed'];
+  longName: LanguageDocument['longName'];
   name: LanguageDocument['name'];
   nameExtra: LanguageDocument['nameExtra'];
   predecessors?: LanguageResponse[];

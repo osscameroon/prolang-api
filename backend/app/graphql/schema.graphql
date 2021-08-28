@@ -27,6 +27,7 @@ type Language {
   company: String
   link: String
   listed: Boolean!
+  longName: String
   name: String!
   nameExtra: NameExtra
   predecessors: [Language!]!

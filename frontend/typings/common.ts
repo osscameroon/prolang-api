@@ -85,7 +85,7 @@ export type Language = {
   company: string | null;
   id: string;
   link: string | null;
-  listed: boolean;
+  longName: string | null;
   name:string;
   nameExtra: NameExtra;
   predecessors?: Language[];
@@ -139,6 +139,7 @@ export type CreateLanguageInput = {
   company?: string | null;
   predecessors: string[];
   link?: string | null;
+  longName?: string | null;
   name: string;
   nameExtra?: NameExtra;
   yearConfirmed: boolean;
@@ -151,6 +152,7 @@ export type UpdateLanguageInput = {
   company?: string | null;
   predecessors?: string[];
   link?: string | null;
+  longName?: string | null;
   name?:string;
   nameExtra?: NameExtra;
   yearConfirmed?: boolean;

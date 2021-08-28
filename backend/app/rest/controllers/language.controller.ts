@@ -18,6 +18,7 @@ const create = async (req: Request, res: Response) => {
     company: body.company,
     link: body.link,
     listed: false,
+    longName: body.longName,
     name: body.name,
     nameExtra: body.nameExtra,
     predecessors: body.predecessors,
