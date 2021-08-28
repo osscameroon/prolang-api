@@ -11,7 +11,9 @@ type LanguageRowProps = {
 
 const renderAuthors = (authors: Language['authors']) => {
   if (authors?.length) {
-    return authors.map((author) => author.name).join(', ');
+    const [author1, author2] = authors;
+
+    return `${author1.name}${ author2 ? `, ${ author2.name}` : ''}${authors.length > 2 ? ', ...' : ''}`;
   }
 
   return 'none';
@@ -19,7 +21,9 @@ const renderAuthors = (authors: Language['authors']) => {
 
 const renderPredecessors = (predecessors: Language['predecessors']) => {
   if (predecessors?.length) {
-    return predecessors.map((language) => language.name).join(', ');
+    const [language1, language2] = predecessors;
+
+    return `${language1.name}${ language2 ? `, ${ language2.name}` : ''}${predecessors.length > 2 ? ', ...' : ''}`;
   }
 
   return 'none';
