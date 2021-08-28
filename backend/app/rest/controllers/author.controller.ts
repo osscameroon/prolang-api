@@ -49,7 +49,7 @@ const update = async (req: Request, res: Response) => {
 
   await authorService.update(id, req.body);
 
-  const author = await authorService.findOneOrFail({ id });
+  const author = await authorService.findOneOrFail({ _id: id });
 
   return res.json({ data: transformAuthorResponse(author) });
 };

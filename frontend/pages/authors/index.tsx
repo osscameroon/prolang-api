@@ -12,9 +12,14 @@ import { TableNoRow } from '@components/common/table-no-row';
 import { TableRowHeader } from '@components/common/table-row-header';
 import { PageHeader } from '@components/common/page-header';
 import { useBooleanState } from '@hooks/useBooleanState';
-import { AUTHOR_DELETED_MESSAGE } from '@utils/constants';
+import {
+  AUTHOR_DELETED_MESSAGE,
+  NETWORK_ERROR_MESSAGE
+} from '@utils/constants';
 import { useRetrieveAuthors } from '@hooks/request/query/useRetrieveAuthors';
 import { AuthorRow } from '@components/authors/author-row';
+import { useDeleteAuthor } from '@hooks/request/mutation/useDeleteAuthor';
+import { getErrorMessage } from '@utils/axios';
 
 const Authors = () => {
   const [isDialogOpen, openDialog, closeDialog] = useBooleanState(false);
@@ -24,6 +29,7 @@ const Authors = () => {
     search: '',
   });
 
+  const deleteMutation = useDeleteAuthor();
   const { data, refetch } = useRetrieveAuthors(
     {
       page: searchParams.page,
@@ -42,8 +48,17 @@ const Authors = () => {
       return;
     }
 
-    toast.success(AUTHOR_DELETED_MESSAGE);
-    refetch();
+    deleteMutation.mutate(selectedId, {
+      onError: (error) => {
+        closeDialog();
+        toast.error(getErrorMessage(error) || NETWORK_ERROR_MESSAGE);
+      },
+      onSuccess: async () => {
+        await refetch();
+        closeDialog();
+        toast.success(AUTHOR_DELETED_MESSAGE);
+      },
+    });
   };
 
   const handleSearchChange = async (event: ChangeEvent<HTMLInputElement>) => {

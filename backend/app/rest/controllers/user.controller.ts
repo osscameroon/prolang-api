@@ -105,7 +105,7 @@ const update = async (req: any, res: Response) => {
     ...passwordInput,
   });
 
-  const updateUser = await userService.findOneOrFail({ id: userId });
+  const updateUser = await userService.findOneOrFail({ _id: userId });
 
   return res.json({ data: transformUserResponse(updateUser) });
 };

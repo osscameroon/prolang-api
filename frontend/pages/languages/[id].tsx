@@ -6,7 +6,6 @@ import { UpdateLanguage } from '@components/languages/update-language';
 import { ResourceNotFound } from '@components/common/resource-not-found';
 import { useRetrieveLanguage } from '@hooks/request/query/useRetrieveLanguage';
 import { useRetrieveYearGroups } from '@hooks/request/query/useRetrieveYearGroups';
-import { formatYearGroupOption } from '@utils/forms';
 
 const UpdateLanguageDataLoader = () => {
   const { query } = useRouter();
@@ -21,7 +20,7 @@ const UpdateLanguageDataLoader = () => {
   }
 
   if (!loading && data && yearGroupData) {
-    return <UpdateLanguage language={data} yearGroupOptions={formatYearGroupOption(yearGroupData)} />;
+    return <UpdateLanguage language={data} yearGroups={yearGroupData || []} />;
   }
 
   return <ResourceNotFound name="Language" />;

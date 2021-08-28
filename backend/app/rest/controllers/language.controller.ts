@@ -67,7 +67,7 @@ const search = async (req: Request, res: Response) => {
 
 const getByIdOrName = async (req: Request, res: Response) => {
   const { idOrName } = req.params;
-  const item: LanguagePopulatedDocument = await languageService.findByIdOrName(idOrName);
+  const item: LanguagePopulatedDocument = await languageService.findByIdOrName(idOrName, populateFields);
 
   if (!item) {
     return res.status(404).json({ message: RECORD_NOT_FOUND_MESSAGE('Language', idOrName) });
@@ -108,7 +108,7 @@ const update = async (req: Request, res: Response) => {
 
   await languageService.update(id, req.body);
 
-  const language = await languageService.findOneOrFail({ id }, populateFields);
+  const language = await languageService.findOneOrFail({ _id: id }, populateFields);
 
   return res.json({ data: transformLanguageResponse(language as LanguagePopulatedDocument) });
 };
