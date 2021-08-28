@@ -32,6 +32,9 @@ const resolvers: Resolvers = {
     predecessors: (language) => {
       return languageService.findByIds(language.predecessors);
     },
+    successors: (language) => {
+      return languageService.findSuccessors(language._id);
+    },
     yearGroup: async (language) => {
       const yearGroup = await yearGroupService.findById(language.yearGroup);
 

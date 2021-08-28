@@ -72,7 +72,7 @@ const LanguageForm = ({
       </div>
 
       <div className="w-full flex justify-between">
-        <div className="wp-45">
+        <div className="w-full">
           <FormInput label="Company creator" type="text" name="company" />
         </div>
       </div>

@@ -115,8 +115,12 @@ const deleteById = async (id: string) => {
   return LanguageModel.deleteOne({ _id: id });
 };
 
-const findByAuthor = async (auhorId: string) => {
-  return LanguageModel.find({ authors: { $in: [auhorId] } });
+const findByAuthor = async (authorId: string) => {
+  return LanguageModel.find({ authors: { $in: [authorId] } });
+};
+
+const findSuccessors = async (languageId: string) => {
+  return LanguageModel.find({ predecessors: { $in: [languageId] } });
 };
 
 export default {
@@ -131,5 +135,6 @@ export default {
   findOneOrFail,
   findOrCreate,
   findPaginate,
+  findSuccessors,
   update,
 };

@@ -30,6 +30,7 @@ type Language {
   name: String!
   nameExtra: NameExtra
   predecessors: [Language!]!
+  successors: [Language!]!
   yearConfirmed: Boolean!
   yearGroup: YearGroup!
   years: [Int!]!
