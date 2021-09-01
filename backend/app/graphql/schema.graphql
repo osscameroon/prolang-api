@@ -4,6 +4,7 @@ type YearGroup {
   id: ID!
   name: String!
   position: Int!
+  languageCount: Int
 }
 
 type Author {

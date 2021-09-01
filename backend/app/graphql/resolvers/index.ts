@@ -56,6 +56,7 @@ const resolvers: Resolvers = {
   },
   YearGroup: {
     id: (yearGroup) => yearGroup._id,
+    languageCount: (yearGroup) => languageService.countByYearGroup(yearGroup._id),
   },
 };
 
