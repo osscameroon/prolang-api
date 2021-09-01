@@ -61,7 +61,7 @@ type Query {
   authors(page: Int, search: String): PaginatedAuthor!
   oneAuthor(id: ID!): Author!
   allLanguages: [Language!]!
-  languages(page: Int, search: String): PaginatedLanguage!
+  languages(page: Int, yearGroupName: String, search: String): PaginatedLanguage!
   languagesByYearGroup(name: String!, page: Int, search: String): PaginatedLanguage!
   oneLanguage(id: ID!): Language!
 }
