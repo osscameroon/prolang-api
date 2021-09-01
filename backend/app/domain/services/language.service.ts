@@ -123,8 +123,13 @@ const findSuccessors = async (languageId: string) => {
   return LanguageModel.find({ predecessors: { $in: [languageId] } });
 };
 
+const countByYearGroup = async (yearGroupId: string) => {
+  return LanguageModel.find({ yearGroup: yearGroupId }).countDocuments();
+};
+
 export default {
   count,
+  countByYearGroup,
   deleteById,
   findAll,
   findByAuthor,
