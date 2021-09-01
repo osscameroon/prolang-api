@@ -11,7 +11,6 @@ import { authors } from './queries/authors';
 import { oneAuthor } from './queries/oneAuthor';
 import { allLanguages } from './queries/allLanguages';
 import { languages } from './queries/languages';
-import { languagesByYearGroup } from './queries/languagesByYearGroup';
 import { oneLanguage } from './queries/oneLanguage';
 import { Resolvers } from '../types/types';
 import { RECORD_NOT_FOUND_CODE, RECORD_NOT_FOUND_MESSAGE } from '../../shared/utils/constants';
@@ -51,7 +50,6 @@ const resolvers: Resolvers = {
     allYearGroups,
     authors,
     languages,
-    languagesByYearGroup,
     oneAuthor,
     oneLanguage,
     oneYearGroup,
