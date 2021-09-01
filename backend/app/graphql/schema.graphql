@@ -53,7 +53,6 @@ type PaginatedLanguage {
   items: [Language!]!
 }
 
-
 type Query {
   allYearGroups: [YearGroup!]!
   oneYearGroup(idOrName: ID!): YearGroup!
@@ -62,6 +61,5 @@ type Query {
   oneAuthor(id: ID!): Author!
   allLanguages: [Language!]!
   languages(page: Int, yearGroupName: String, search: String): PaginatedLanguage!
-  languagesByYearGroup(name: String!, page: Int, search: String): PaginatedLanguage!
   oneLanguage(id: ID!): Language!
 }

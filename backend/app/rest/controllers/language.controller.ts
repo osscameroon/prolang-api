@@ -74,28 +74,6 @@ const getByIdOrName = async (req: Request, res: Response) => {
   return res.json({ data: transformLanguageResponse(item) });
 };
 
-const getByYearGroup = async (req: Request, res: Response) => {
-  const { name } = req.params;
-  const { fields, keyword, page } = extractQueryFields(req.query);
-
-  const yearGroup = await yearGroupService.findByName(name);
-
-  if (!yearGroup) {
-    return res.status(404).json({ message: RECORD_NOT_FOUND_MESSAGE('YearGroup', name) });
-  }
-
-  const result = await languageService.findByYearGroup(
-    yearGroup._id,
-    page,
-    PAGINATION_LIMIT,
-    keyword,
-    fields,
-    populateFields,
-  );
-
-  return res.json({ data: { ...result, items: transformLanguageResponse(result.items) } });
-};
-
 const update = async (req: Request, res: Response) => {
   const { id } = req.params;
   const item = await languageService.findById(id);
@@ -124,4 +102,4 @@ const remove = async (req: Request, res: Response) => {
   return res.json({ message: RECORD_DELETED_MESSAGE('Language') });
 };
 
-export { getAll, getByIdOrName, getByYearGroup, search, update, create, remove };
+export { getAll, getByIdOrName, search, update, create, remove };

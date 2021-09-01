@@ -13,8 +13,6 @@ const languageRoute = () => {
 
   router.get(`${publicPrefix}/:idOrName`, languageController.getByIdOrName);
 
-  router.get(`${publicPrefix}/years-groups/:name`, languageController.getByYearGroup);
-
   router.post(`${privatePrefix}`, languageController.create);
 
   router.put(`${privatePrefix}/:id`, languageController.update);
