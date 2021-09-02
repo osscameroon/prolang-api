@@ -1,0 +1,58 @@
+openapi: 3.0.3
+info:
+  title: Programming languages API
+  description: Get information about programming languages
+  version: 1.0.0
+  contact:
+    name: Eric Cabrel TIOGO
+    email: tericcabrel@yahoo.com
+    url: https://tericcabrel.com
+  license:
+    name: MIT License
+servers:
+  - url: 'http://localhost:5700'
+    description: Local development server
+  - url: 'https://prolang.com'
+    description: Production server
+paths:
+  /years-groups:
+    get:
+      operationId: get-all
+      description: Retrieve all the years groups
+      tags:
+        - yearGroups
+      responses:
+        200:
+          description: List retrieved successfully
+          content:
+            "application/json":
+              schema:
+                type: array
+                items:
+                  properties:
+                    languageCount:
+                      description: Number of languages in the year group
+                      type: integer
+                      required: false
+                      example: 43
+                    id:
+                      description: Id of the year group
+                      type: string
+                      required: true
+                      example: 612103bb20aaf1e4d5e84bd4
+                    name:
+                      description: Name of the year group
+                      type: string
+                      required: true
+                      example: 2020s
+                    position:
+                      description: Used to order the year group in ascending or descending direction
+                      type: integer
+                      required: true
+                      example: 1
+      parameters:
+        - name: countLanguage
+          in: query
+          required: false
+          description: Indicate if we want to include the number of languages for each year group
+
