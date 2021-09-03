@@ -17,7 +17,7 @@ servers:
 paths:
   /years-groups:
     get:
-      operationId: get-all
+      operationId: get-all-year-group
       description: Retrieve all the years groups
       tags:
         - yearGroups
@@ -55,4 +55,33 @@ paths:
           in: query
           required: false
           description: Indicate if we want to include the number of languages for each year group
+  /years-groups/{id}:
+    get:
+      operationId: get-one-year-group
+      description: Retrieve on year group by Id
+      tags:
+        - yearGroups
+      responses:
+        200:
+          description: Item retrieved successfully
+          content:
+            "application/json":
+              schema:
+                type: object
+                properties:
+                  id:
+                    description: Id of the year group
+                    type: string
+                    required: true
+                    example: 612103bb20aaf1e4d5e84bd4
+                  name:
+                    description: Name of the year group
+                    type: string
+                    required: true
+                    example: 2020s
+                  position:
+                    description: Used to order the year group in ascending or descending direction
+                    type: integer
+                    required: true
+                    example: 1
 
