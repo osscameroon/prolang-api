@@ -38,14 +38,59 @@ paths:
   /years-groups/{id}:
     get:
       operationId: get-one-year-group
-      description: Retrieve on year group by Id
+      description: Retrieve one year's group by Id
       tags:
         - Year Group
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the year's group to retrieve
       responses:
         200:
-          $ref: "#/components/schemas/yearGroupResponse"
+          $ref: "#/components/responses/yearGroupResponse"
         401:
           $ref: "#/components/responses/401"
+        404:
+          $ref: "#/components/responses/404"
+  /authors:
+    get:
+      operationId: search-authors
+      description: Retrieve authors with filtering capability
+      tags:
+        - Author
+      parameters:
+        - $ref: "#/components/parameters/pageQuery"
+        - $ref: "#/components/parameters/keywordQuery"
+        - $ref: "#/components/parameters/authorFieldsQuery"
+      responses:
+        200:
+          $ref: "#/components/responses/authorPaginatedResponse"
+  /authors/all:
+    get:
+      operationId: get-all-authors
+      description: Retrieve all authors
+      tags:
+        - Author
+      parameters:
+        - $ref: "#/components/parameters/authorFieldsQuery"
+      responses:
+        200:
+          $ref: "#/components/responses/authorListResponse"
+  /authors/{id}:
+    get:
+      operationId: get-one-author
+      description: Retrieve one author by Id
+      tags:
+        - Author
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the author to retrieve
+      responses:
+        200:
+          $ref: "#/components/responses/authorResponse"
         404:
           $ref: "#/components/responses/404"
 components:
@@ -73,13 +118,13 @@ components:
                 required: true
                 example: "No item found with id: 612103bd20aaf1e4d5e85031"
     yearGroupResponse:
-      description: Item retrieved successfully
+      description: Year's group retrieved successfully
       content:
         "application/json":
           schema:
             $ref: "#/components/schemas/yearGroup"
     yearGroupListResponse:
-      description: List retrieved successfully
+      description: List of year's group retrieved successfully
       content:
         "application/json":
           schema:
@@ -89,6 +134,30 @@ components:
                 type: array
                 items:
                   $ref: "#/components/schemas/yearGroupList"
+    authorListResponse:
+      description: List of authors retrieved successfully
+      content:
+        "application/json":
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/components/schemas/author"
+    authorResponse:
+      description: Author retrieved successfully
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/author"
+    authorPaginatedResponse:
+      description: Paginated authors list retrieved successfully
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/paginatedAuthor"
+
   schemas:
     yearGroup:
       type: object
@@ -131,6 +200,113 @@ components:
           type: integer
           required: true
           example: 1
+    paginationMetaData:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          required: true
+          description: Current page of the items pagination
+          example: 1
+        limit:
+          type: integer
+          required: true
+          description: Number of items returned per page
+          example: 30
+        totalItems:
+          type: integer
+          required: true
+          description: Total items retrieve
+          example: 100
+        totalPages:
+          type: integer
+          required: true
+          description: Number of total pages
+          example: 4
+    author:
+      type: object
+      properties:
+        id:
+          type: string
+          required: true
+          description: The author ID
+          example: 612103be20aaf1e4d5e85641
+        birthDate:
+          type: string
+          required: true
+          description: The date of birth of the author
+          nullable: true
+          example: 1955-05-19
+          format: "YYYY-MM-DD"
+        country:
+          type: string
+          required: true
+          description: The country where the author from
+          nullable: true
+          example: Canada
+        link:
+          type: string
+          required: true
+          description: The link to the author biography
+          nullable: true
+          example: https://fr.wikipedia.org/wiki/James_Gosling
+        name:
+          type: string
+          required: true
+          description: The author name
+          example: Jame Gosling
+        picture:
+          type: string
+          required: true
+          description: The link to the author picture
+          nullable: true
+          example: https://link-to-picture.com/author-name
+    authorItems:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/author"
+    paginatedAuthor:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/paginationMetaData"
+        - $ref: "#/components/schemas/authorItems"
+  parameters:
+    authorFieldsQuery:
+      name: fields
+      in: query
+      required: false
+      description: Select specific fields to return in the response
+      schema:
+        type: string
+        required: false
+        anyOf:
+          - $ref: "#/components/schemas/author"
+        format: "field1,field2,...,fieldn"
+        example: "id,name,picture"
+        minProperties: 1
+    keywordQuery:
+      name: search
+      in: query
+      required: false
+      description: Search items containing this keyword
+      schema:
+        type: string
+        example: java
+        required: true
+        minLength: 1
+    pageQuery:
+      name: page
+      in: query
+      required: false
+      description: Page's number of items to retrieve
+      schema:
+        type: integer
+        example: 5
+        minimum: 1
+        required: true
   securitySchemes:
     bearerAuth:
       type: http
