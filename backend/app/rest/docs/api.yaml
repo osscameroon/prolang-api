@@ -88,9 +88,52 @@ paths:
           in: path
           required: true
           description: ID of the author to retrieve
+          example: 612103be20aaf1e4d5e85641
       responses:
         200:
           $ref: "#/components/responses/authorResponse"
+        404:
+          $ref: "#/components/responses/404"
+  /languages:
+    get:
+      operationId: search-languages
+      description: Retrieve languages with filtering capability
+      tags:
+        - Language
+      parameters:
+        - $ref: "#/components/parameters/pageQuery"
+        - $ref: "#/components/parameters/keywordQuery"
+        - $ref: "#/components/parameters/languageFieldsQuery"
+        - $ref: "#/components/parameters/yearGroupQuery"
+      responses:
+        200:
+          $ref: "#/components/responses/languagePaginatedResponse"
+  /languages/all:
+    get:
+      operationId: get-all-languages
+      description: Retrieve all languages
+      tags:
+        - Language
+      parameters:
+        - $ref: "#/components/parameters/languageFieldsQuery"
+      responses:
+        200:
+          $ref: "#/components/responses/languageListResponse"
+  /languages/{id}:
+    get:
+      operationId: get-one-language
+      description: Retrieve one language by Id or Name
+      tags:
+        - Language
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the language to retrieve
+          example: java
+      responses:
+        200:
+          $ref: "#/components/responses/languageResponse"
         404:
           $ref: "#/components/responses/404"
 components:
@@ -157,7 +200,29 @@ components:
         "application/json":
           schema:
             $ref: "#/components/schemas/paginatedAuthor"
-
+    languageListResponse:
+      description: List of languages retrieved successfully
+      content:
+        "application/json":
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/components/schemas/language"
+    languageResponse:
+      description: Language retrieved successfully
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/language"
+    languagePaginatedResponse:
+      description: Paginated languages list retrieved successfully
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/paginatedLanguage"
   schemas:
     yearGroup:
       type: object
@@ -273,6 +338,85 @@ components:
       allOf:
         - $ref: "#/components/schemas/paginationMetaData"
         - $ref: "#/components/schemas/authorItems"
+    language:
+      type: object
+      properties:
+        id:
+          type: string
+          required: true
+          description: ID of the language
+          example: 612103bd20aaf1e4d5e853c0
+        company:
+          type: string
+          required: true
+          nullable: true
+          description: Company where the language was created
+          example: Oracle
+        link:
+          type: string
+          required: true
+          nullable: true
+          description: Link to language biography
+          example: https://link-to-biography.com/java
+        name:
+          type: string
+          required: true
+          description: Language's name
+          example: Java
+        nameExtra:
+          type: object
+          description: Extra information about the language (rfc link, acronym, etc...)
+          properties:
+            link:
+              type: string
+              required: true
+              nullable: true
+              example: https://link-to-biography.com/java
+            name:
+              type: string
+              required: true
+              nullable: true
+              example: null
+        years:
+          type: array
+          required: true
+          description: Years range of creation of the language
+          items:
+            type: integer
+            minLength: 1
+            maxLength: 2
+            example: 1995
+        yearConfirmed:
+          type: boolean
+          description: Indicates if the year of creation is confirmed or not
+          required: true
+          example: true
+        yearGroup:
+          $ref: "#/components/schemas/yearGroup"
+        authors:
+          type: array
+          required: true
+          description: Language authors list
+          items:
+            $ref: "#/components/schemas/author"
+        predecessors:
+          type: array
+          description: Language predecessors Id list
+          items:
+            type: string
+            example: 612103bc20aaf1e4d5e84cc6, 612103bc20aaf1e4d5e84cc6
+    languageItems:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: "#/components/schemas/language"
+    paginatedLanguage:
+      type: object
+      allOf:
+        - $ref: "#/components/schemas/paginationMetaData"
+        - $ref: "#/components/schemas/languageItems"
   parameters:
     authorFieldsQuery:
       name: fields
@@ -307,6 +451,28 @@ components:
         example: 5
         minimum: 1
         required: true
+    yearGroupQuery:
+      name: yearGroup
+      in: query
+      required: false
+      description: Name of a year's group
+      schema:
+        type: string
+        example: 2000s
+        required: true
+    languageFieldsQuery:
+      name: fields
+      in: query
+      required: false
+      description: Select specific fields to return in the response
+      schema:
+        type: string
+        required: false
+        anyOf:
+          - $ref: "#/components/schemas/author"
+        format: "field1,field2,...,fieldn"
+        example: "id,name,company,authors"
+        minProperties: 1
   securitySchemes:
     bearerAuth:
       type: http

@@ -19,8 +19,8 @@ export const extractQueryFields = (query: Request['query']) => {
   return {
     fields: parseQueryFields(query.fields as string | undefined),
     keyword: query.search as string | undefined,
-    name: query.name as string | undefined,
     page: page || 1,
+    yearGroupName: query.yearGroup as string | undefined,
   };
 };
 

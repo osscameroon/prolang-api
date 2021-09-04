@@ -9,14 +9,14 @@ import {
 import { QUERY_KEYS } from '@utils/constants';
 
 export const useRetrieveLanguages = (
-  { name, page, search }: FilterLanguageParams,
+  { yearGroup, page, search }: FilterLanguageParams,
   options?: UseQueryOptions<LanguageList> | undefined,
 ) => {
   const axiosInstance = usePublicClient();
   const queryString = [
     `page=${page}`,
     search ? `search=${search}` : null,
-    name ? `name=${name}` : null
+    yearGroup ? `yearGroup=${yearGroup}` : null
   ]
     .filter((query) => Boolean(query))
     .join('&');

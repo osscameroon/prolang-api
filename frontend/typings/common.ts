@@ -57,7 +57,7 @@ export type FilterQueryParams = {
 };
 
 export type FilterLanguageParams = FilterQueryParams & {
-  name?: string
+  yearGroup?: string
 }
 
 export type YearGroup = {
