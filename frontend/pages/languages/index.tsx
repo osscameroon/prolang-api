@@ -43,9 +43,9 @@ const Languages = () => {
   
   const { data, refetch } = useRetrieveLanguages(
     {
-      name: searchParams.yearGroup?.value,
       page: searchParams.page,
       search: searchParams.search,
+      yearGroup: searchParams.yearGroup?.value,
     },
     { keepPreviousData: true, refetchOnWindowFocus: false },
   );
