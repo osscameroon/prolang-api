@@ -12,44 +12,24 @@ info:
 servers:
   - url: 'http://localhost:5700'
     description: Local development server
+    variables:
+      basePath:
+        default: api
   - url: 'https://prolang.com'
     description: Production server
+    variables:
+      basePath:
+        default: api
 paths:
   /years-groups:
     get:
       operationId: get-all-year-group
-      description: Retrieve all the years groups
+      description: Retrieve all years groups
       tags:
-        - yearGroups
+        - Year Group
       responses:
         200:
-          description: List retrieved successfully
-          content:
-            "application/json":
-              schema:
-                type: array
-                items:
-                  properties:
-                    languageCount:
-                      description: Number of languages in the year group
-                      type: integer
-                      required: false
-                      example: 43
-                    id:
-                      description: Id of the year group
-                      type: string
-                      required: true
-                      example: 612103bb20aaf1e4d5e84bd4
-                    name:
-                      description: Name of the year group
-                      type: string
-                      required: true
-                      example: 2020s
-                    position:
-                      description: Used to order the year group in ascending or descending direction
-                      type: integer
-                      required: true
-                      example: 1
+          $ref: "#/components/responses/yearGroupListResponse"
       parameters:
         - name: countLanguage
           in: query
@@ -60,28 +40,101 @@ paths:
       operationId: get-one-year-group
       description: Retrieve on year group by Id
       tags:
-        - yearGroups
+        - Year Group
       responses:
         200:
-          description: Item retrieved successfully
-          content:
-            "application/json":
-              schema:
-                type: object
-                properties:
-                  id:
-                    description: Id of the year group
-                    type: string
-                    required: true
-                    example: 612103bb20aaf1e4d5e84bd4
-                  name:
-                    description: Name of the year group
-                    type: string
-                    required: true
-                    example: 2020s
-                  position:
-                    description: Used to order the year group in ascending or descending direction
-                    type: integer
-                    required: true
-                    example: 1
-
+          $ref: "#/components/schemas/yearGroupResponse"
+        401:
+          $ref: "#/components/responses/401"
+        404:
+          $ref: "#/components/responses/404"
+components:
+  responses:
+    401:
+      description: Access unauthorized
+      content:
+        "application/json":
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                required: true
+                example: Access to this resource requires authentication
+    404:
+      description: Resource not found
+      content:
+        "application/json":
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                required: true
+                example: "No item found with id: 612103bd20aaf1e4d5e85031"
+    yearGroupResponse:
+      description: Item retrieved successfully
+      content:
+        "application/json":
+          schema:
+            $ref: "#/components/schemas/yearGroup"
+    yearGroupListResponse:
+      description: List retrieved successfully
+      content:
+        "application/json":
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: "#/components/schemas/yearGroupList"
+  schemas:
+    yearGroup:
+      type: object
+      properties:
+        id:
+          description: Id of the year group
+          type: string
+          required: true
+          example: 612103bb20aaf1e4d5e84bd4
+        name:
+          description: Name of the year group
+          type: string
+          required: true
+          example: 2020s
+        position:
+          description: Used to order the year group in ascending or descending direction
+          type: integer
+          required: true
+          example: 1
+    yearGroupList:
+      type: object
+      properties:
+        languageCount:
+          description: Number of languages in the year group (present only if countLanguage passed as query parameter)
+          type: integer
+          required: false
+          example: 43
+        id:
+          description: Id of the year group
+          type: string
+          required: true
+          example: 612103bb20aaf1e4d5e84bd4
+        name:
+          description: Name of the year group
+          type: string
+          required: true
+          example: 2020s
+        position:
+          description: Used to order the year group in ascending or descending direction
+          type: integer
+          required: true
+          example: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: [ ]
