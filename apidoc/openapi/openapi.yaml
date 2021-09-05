@@ -10,6 +10,7 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
+  x-logo: ../template/favicon.png
 servers:
   - url: 'http://localhost:5700/api'
     description: Local development server
