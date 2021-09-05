@@ -9,22 +9,17 @@ info:
     url: https://tericcabrel.com
   license:
     name: MIT License
+    url: https://opensource.org/licenses/MIT
 servers:
-  - url: 'http://localhost:5700'
+  - url: 'http://localhost:5700/api'
     description: Local development server
-    variables:
-      basePath:
-        default: api
-  - url: 'https://prolang.com'
+  - url: 'https://prolang.com/api'
     description: Production server
-    variables:
-      basePath:
-        default: api
 paths:
   /years-groups:
     get:
       operationId: get-all-year-group
-      description: Retrieve all years groups
+      summary: Retrieve all years groups
       tags:
         - Year Group
       responses:
@@ -38,7 +33,7 @@ paths:
   /years-groups/{id}:
     get:
       operationId: get-one-year-group
-      description: Retrieve one year's group by Id
+      summary: Retrieve one year's group by Id
       tags:
         - Year Group
       parameters:
@@ -56,7 +51,7 @@ paths:
   /authors:
     get:
       operationId: search-authors
-      description: Retrieve authors with filtering capability
+      summary: Retrieve authors with filtering capability
       tags:
         - Author
       parameters:
@@ -69,7 +64,7 @@ paths:
   /authors/all:
     get:
       operationId: get-all-authors
-      description: Retrieve all authors
+      summary: Retrieve all authors
       tags:
         - Author
       parameters:
@@ -80,7 +75,7 @@ paths:
   /authors/{id}:
     get:
       operationId: get-one-author
-      description: Retrieve one author by Id
+      summary: Retrieve one author by Id
       tags:
         - Author
       parameters:
@@ -97,7 +92,7 @@ paths:
   /languages:
     get:
       operationId: search-languages
-      description: Retrieve languages with filtering capability
+      summary: Retrieve languages with filtering capability
       tags:
         - Language
       parameters:
@@ -111,7 +106,7 @@ paths:
   /languages/all:
     get:
       operationId: get-all-languages
-      description: Retrieve all languages
+      summary: Retrieve all languages
       tags:
         - Language
       parameters:
@@ -122,7 +117,7 @@ paths:
   /languages/{id}:
     get:
       operationId: get-one-language
-      description: Retrieve one language by Id or Name
+      summary: Retrieve one language by Id or Name
       tags:
         - Language
       parameters:
@@ -147,7 +142,6 @@ components:
             properties:
               message:
                 type: string
-                required: true
                 example: Access to this resource requires authentication
     404:
       description: Resource not found
@@ -158,7 +152,6 @@ components:
             properties:
               message:
                 type: string
-                required: true
                 example: "No item found with id: 612103bd20aaf1e4d5e85031"
     yearGroupResponse:
       description: Year's group retrieved successfully
@@ -230,17 +223,14 @@ components:
         id:
           description: Id of the year group
           type: string
-          required: true
           example: 612103bb20aaf1e4d5e84bd4
         name:
           description: Name of the year group
           type: string
-          required: true
           example: 2020s
         position:
           description: Used to order the year group in ascending or descending direction
           type: integer
-          required: true
           example: 1
     yearGroupList:
       type: object
@@ -248,44 +238,36 @@ components:
         languageCount:
           description: Number of languages in the year group (present only if countLanguage passed as query parameter)
           type: integer
-          required: false
           example: 43
         id:
           description: Id of the year group
           type: string
-          required: true
           example: 612103bb20aaf1e4d5e84bd4
         name:
           description: Name of the year group
           type: string
-          required: true
           example: 2020s
         position:
           description: Used to order the year group in ascending or descending direction
           type: integer
-          required: true
           example: 1
     paginationMetaData:
       type: object
       properties:
         currentPage:
           type: integer
-          required: true
           description: Current page of the items pagination
           example: 1
         limit:
           type: integer
-          required: true
           description: Number of items returned per page
           example: 30
         totalItems:
           type: integer
-          required: true
           description: Total items retrieve
           example: 100
         totalPages:
           type: integer
-          required: true
           description: Number of total pages
           example: 4
     author:
@@ -293,36 +275,30 @@ components:
       properties:
         id:
           type: string
-          required: true
           description: The author ID
           example: 612103be20aaf1e4d5e85641
         birthDate:
           type: string
-          required: true
           description: The date of birth of the author
           nullable: true
           example: 1955-05-19
           format: "YYYY-MM-DD"
         country:
           type: string
-          required: true
           description: The country where the author from
           nullable: true
           example: Canada
         link:
           type: string
-          required: true
           description: The link to the author biography
           nullable: true
           example: https://fr.wikipedia.org/wiki/James_Gosling
         name:
           type: string
-          required: true
           description: The author name
           example: Jame Gosling
         picture:
           type: string
-          required: true
           description: The link to the author picture
           nullable: true
           example: https://link-to-picture.com/author-name
@@ -343,24 +319,20 @@ components:
       properties:
         id:
           type: string
-          required: true
           description: ID of the language
           example: 612103bd20aaf1e4d5e853c0
         company:
           type: string
-          required: true
           nullable: true
           description: Company where the language was created
           example: Oracle
         link:
           type: string
-          required: true
           nullable: true
           description: Link to language biography
           example: https://link-to-biography.com/java
         name:
           type: string
-          required: true
           description: Language's name
           example: Java
         nameExtra:
@@ -369,17 +341,14 @@ components:
           properties:
             link:
               type: string
-              required: true
               nullable: true
               example: https://link-to-biography.com/java
             name:
               type: string
-              required: true
               nullable: true
               example: null
         years:
           type: array
-          required: true
           description: Years range of creation of the language
           items:
             type: integer
@@ -389,13 +358,11 @@ components:
         yearConfirmed:
           type: boolean
           description: Indicates if the year of creation is confirmed or not
-          required: true
           example: true
         yearGroup:
           $ref: "#/components/schemas/yearGroup"
         authors:
           type: array
-          required: true
           description: Language authors list
           items:
             $ref: "#/components/schemas/author"
@@ -421,11 +388,9 @@ components:
     authorFieldsQuery:
       name: fields
       in: query
-      required: false
       description: Select specific fields to return in the response
       schema:
         type: string
-        required: false
         anyOf:
           - $ref: "#/components/schemas/author"
         format: "field1,field2,...,fieldn"
@@ -439,7 +404,6 @@ components:
       schema:
         type: string
         example: java
-        required: true
         minLength: 1
     pageQuery:
       name: page
@@ -450,7 +414,6 @@ components:
         type: integer
         example: 5
         minimum: 1
-        required: true
     yearGroupQuery:
       name: yearGroup
       in: query
@@ -459,7 +422,6 @@ components:
       schema:
         type: string
         example: 2000s
-        required: true
     languageFieldsQuery:
       name: fields
       in: query
@@ -467,7 +429,6 @@ components:
       description: Select specific fields to return in the response
       schema:
         type: string
-        required: false
         anyOf:
           - $ref: "#/components/schemas/author"
         format: "field1,field2,...,fieldn"
