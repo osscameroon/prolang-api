@@ -22,14 +22,12 @@
     "eslint:fix": "eslint --fix",
     "generate:types": "graphql-codegen",
     "start": "nodemon --watch \"*.ts\" --watch \".env\" --exec \"ts-node\" ./app/index.ts",
-    "test": "jest",
-    "lint:doc": "openapi lint app/rest/docs/api.yaml"
+    "test": "jest"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.1.1",
     "@graphql-codegen/typescript": "^2.1.0",
     "@graphql-codegen/typescript-resolvers": "^2.1.0",
-    "@redocly/openapi-cli": "^1.0.0-beta.58",
     "@types/bcryptjs": "^2.4.2",
     "@types/cheerio": "^0.22.30",
     "@types/cors": "^2.8.12",
