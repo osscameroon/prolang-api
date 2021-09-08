@@ -1,7 +1,8 @@
 openapi: 3.0.3
 info:
   title: Programming languages API
-  description: Get information about programming languages
+  description:
+    $ref: ./info-description.md
   version: 1.0.0
   contact:
     name: Eric Cabrel TIOGO
@@ -10,7 +11,12 @@ info:
   license:
     name: MIT License
     url: https://opensource.org/licenses/MIT
-  x-logo: ../template/favicon.png
+#  x-logo:
+#    url: https://raw.githubusercontent.com/osscameroon/prolang-api/main/backend/public/logo.png
+#    altText: Prolang API
+externalDocs:
+  description: If you are looking for the GraphQL version, checkout this link.
+  url: 'http://localhost:5700/graphql' # 'https://prolang.com/graphql'
 servers:
   - url: 'http://localhost:5700/api'
     description: Local development server
@@ -34,7 +40,7 @@ paths:
   /years-groups/{id}:
     get:
       operationId: get-one-year-group
-      summary: Retrieve one year's group by Id
+      summary: Retrieve a year's group
       tags:
         - Year Group
       parameters:
@@ -52,7 +58,7 @@ paths:
   /authors:
     get:
       operationId: search-authors
-      summary: Retrieve authors with filtering capability
+      summary: Retrieve authors with pagination
       tags:
         - Author
       parameters:
@@ -76,7 +82,7 @@ paths:
   /authors/{id}:
     get:
       operationId: get-one-author
-      summary: Retrieve one author by Id
+      summary: Retrieve an author
       tags:
         - Author
       parameters:
@@ -93,7 +99,7 @@ paths:
   /languages:
     get:
       operationId: search-languages
-      summary: Retrieve languages with filtering capability
+      summary: Retrieve languages with pagination
       tags:
         - Language
       parameters:
@@ -118,7 +124,7 @@ paths:
   /languages/{id}:
     get:
       operationId: get-one-language
-      summary: Retrieve one language by Id or Name
+      summary: Retrieve a language
       tags:
         - Language
       parameters:

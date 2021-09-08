@@ -1,0 +1,25 @@
+{
+  "theme": {
+    "sidebar": {
+      "width": "400px",
+      "backgroundColor": "#161B2C",
+      "textColor": "#FFF",
+      "activeTextColor": "#bebfff"
+    },
+    "logo": {
+      "maxHeight": "100px",
+      "maxWidth": "200px",
+      "gutter": "10px"
+    },
+    "colors":{
+      "primary":{
+        "main": "#32329f",
+        "contrastText":"#FFF"
+      }
+    },
+    "rightPanel": {
+      "backgroundColor": "#161B2C",
+      "textColor": "#FFF"
+    }
+  } 
+}
