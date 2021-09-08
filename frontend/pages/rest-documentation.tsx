@@ -1,4 +1,6 @@
-const Documentation = () => {
+import { withPublicLayout } from '@components/hof/with-public-layout';
+
+const RestDocumentation = () => {
   return (
     <div className="w-full h-full overflow-y-auto" >
       <iframe 
@@ -9,4 +11,4 @@ const Documentation = () => {
   );
 };
 
-export default Documentation;
+export default withPublicLayout(RestDocumentation);
