@@ -1,13 +1,18 @@
 {
   "name": "apidoc",
   "version": "1.0.0",
-  "dependencies": {
-    "@redocly/openapi-cli": "1.0.0-beta.50"
-  },
   "private": false,
   "scripts": {
     "start": "openapi preview-docs",
-    "build": "openapi bundle -o dist",
-    "test": "openapi lint"
+    "build:spec": "openapi bundle -o dist/openapi.yaml",
+    "build:doc": "redoc-cli bundle dist/openapi.yaml  --output build/index.html --options openapi/theme.json",
+    "build": "yarn build:spec && yarn build:doc",
+    "lint": "openapi lint"
+  },
+  "dependencies": {
+    "@redocly/openapi-cli": "1.0.0-beta.50"
+  },
+  "devDependencies": {
+    "redoc-cli": "^0.12.3"
   }
 }
