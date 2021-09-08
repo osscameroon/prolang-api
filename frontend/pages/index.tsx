@@ -1,11 +1,11 @@
-import Link from 'next/link';
+import { withPublicLayout } from '@components/hof/with-public-layout';
 
 const Home = () => {
   return (
     <div className="w-full h-full overflow-y-auto" >
-      <Link href="/documentation"><a>Go to documentation</a></Link>
+      Hello World
     </div>
   );
 };
 
-export default Home;
+export default withPublicLayout(Home);
