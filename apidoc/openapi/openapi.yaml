@@ -18,10 +18,16 @@ externalDocs:
   description: If you are looking for the GraphQL version, checkout this link.
   url: 'http://localhost:5700/graphql' # 'https://prolang.com/graphql'
 servers:
-  - url: 'http://localhost:5700/api'
+  - url: 'http://localhost:5700/{basePath}'
     description: Local development server
-  - url: 'https://prolang.com/api'
+    variables:
+      basePath:
+        default: api
+  - url: 'https://prolang.com/{basePath}'
     description: Production server
+    variables:
+      basePath:
+        default: api
 paths:
   /years-groups:
     get:
