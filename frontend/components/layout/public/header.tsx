@@ -4,7 +4,7 @@ import { Img } from '@components/common/img';
 const PublicHeader = () => {
   return (
     <div>
-      <nav className="bg-white dark:bg-gray-800 shadow">
+      <nav className="bg-white dark:bg-gray-800">
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex items-center justify-between h-16">
             <div className=" flex items-center">
@@ -16,17 +16,17 @@ const PublicHeader = () => {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <Link href="/">
-                    <a className="text-gray-300 hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    <a className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-lg font-light">
                       Home
                     </a>
                   </Link>
                   <Link href="/rest-documentation">
-                    <a className="text-gray-800 dark:text-white hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    <a className="text-black dark:text-white hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-lg font-light">
                       Documentation
                     </a>
                   </Link>
                   <Link href="/gql-playground">
-                    <a className="text-gray-300  hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-sm font-medium">
+                    <a className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-lg font-light">
                       GraphQL
                     </a>
                   </Link>

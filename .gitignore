@@ -128,3 +128,4 @@ build
 backend/app/graphql/types
 
 !frontend/typings
+notes.txt
