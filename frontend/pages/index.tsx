@@ -28,9 +28,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-gray-200 py-10 dark:bg-gray-800" >
+      <div className="w-full bg-gray-200 pt-10 pb-20 dark:bg-gray-800" >
         <div className="w-2/3 mx-auto">
-          <div className="w-full text-center uppercase font-bold text-3xl text-purple-800">Features</div>
+          <div className="w-full text-center uppercase font-bold text-3xl text-indigo-500">Features</div>
           <p className="mt-2 text-2xl text-center leading-8 tracking-tight text-gray-900 dark:text-white">
             Two ways to browse programing languages
           </p>
@@ -49,8 +49,8 @@ const Home = () => {
                 View documentation {' '}
                 <ArrowCircleRightIcon className="ml-2 h-6 w-6" />
               </button>
-
             </div>
+
             <div className="w-5/12 px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
               <div className="font-bold text-base flex flex-col items-center">
                 <GraphqlIcon />
@@ -64,6 +64,85 @@ const Home = () => {
                 Go to playground
                 <DesktopComputerIcon className="ml-2 h-6 w-6" />
               </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div className="w-full bg-white py-10 dark:bg-gray-800" >
+        <div className="w-2/3 mx-auto">
+          <div className="w-full text-center uppercase font-bold text-3xl text-indigo-500">Some languages</div>
+          <div className="w-full flex justify-between">
+            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
+              <div className="font-bold text-base flex items-center">
+                <MicroserviceIcon height={48} width={48} />
+                <div className="ml-4">Javascript</div>
+              </div>
+              <div className="border-purple-500 flex mt-4">
+                <div className="w-1/2">Year of creation: </div>
+                <div className="w-1/2 font-bold text-sm">1995</div>
+              </div>
+              <div className="border-purple-500 flex mt-4">
+                <div className="w-1/2">Company: </div>
+                <div className="w-1/2 font-bold text-sm">Sun Microsystems</div>
+              </div>
+              <div className="border-purple-500 flex mt-4">
+                <div className="w-1/2">Author: </div>
+                <div className="w-1/2 font-bold text-sm">Jack Ballard</div>
+              </div>
+              <div className="border-purple-500 flex mt-4">
+                <div className="w-1/2">Predecessors: </div>
+                <div className="w-1/2 font-bold text-sm">Java, Typescript</div>
+              </div>
+            </div>
+            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
+              <div className="font-bold text-base flex items-center">
+                <MicroserviceIcon height={48} width={48} />
+                <div className="ml-4">C#</div>
+              </div>
+            </div>
+            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
+              <div className="font-bold text-base flex items-center">
+                <MicroserviceIcon height={48} width={48} />
+                <div className="ml-4">PHP</div>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full flex justify-between">
+            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
+              <div className="font-bold text-base flex items-center">
+                <MicroserviceIcon height={48} width={48} />
+                <div className="ml-4">Java</div>
+              </div>
+              <div className="border-purple-500 flex mt-4">
+                <div className="w-1/2">Year of creation: </div>
+                <div className="w-1/2 font-bold text-sm">1995</div>
+              </div>
+              <div className="border-purple-500 flex mt-4">
+                <div className="w-1/2">Company: </div>
+                <div className="w-1/2 font-bold text-sm">Sun Microsystems</div>
+              </div>
+              <div className="border-purple-500 flex mt-4">
+                <div className="w-1/2">Author: </div>
+                <div className="w-1/2 font-bold text-sm">Jack Ballard</div>
+              </div>
+              <div className="border-purple-500 flex mt-4">
+                <div className="w-1/2">Predecessors: </div>
+                <div className="w-1/2 font-bold text-sm">Java, Typescript</div>
+              </div>
+            </div>
+            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
+              <div className="font-bold text-base flex items-center">
+                <MicroserviceIcon height={48} width={48} />
+                <div className="ml-4">Go</div>
+              </div>
+            </div>
+            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
+              <div className="font-bold text-base flex items-center">
+                <MicroserviceIcon height={48} width={48} />
+                <div className="ml-4">Python</div>
+              </div>
             </div>
           </div>
         </div>
