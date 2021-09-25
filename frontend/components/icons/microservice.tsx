@@ -1,7 +1,6 @@
 import { IconProps } from '@typings/common';
 
-
-const MicroserviceIcon = ({ height = 64, width = 64 }: IconProps) => {
+const MicroserviceIcon = ({ height = 48, width = 48 }: IconProps) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" data-name="Layer 1" width={width} height={height} viewBox="0 0 168 168">
       <circle cx="2" cy="149" r="2" fill="#2d4356" />

@@ -1,6 +1,6 @@
 import { IconProps } from '@typings/common';
 
-const GolangIcon = ({ height = 64, width = 64 }: IconProps) => {
+const GolangIcon = ({ height = 48, width = 48 }: IconProps) => {
   return (
     <svg viewBox="0 0 128 128" width={width} height={height}>
       <defs>

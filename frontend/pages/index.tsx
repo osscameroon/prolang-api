@@ -10,8 +10,8 @@ import { Tile } from '@components/common/tile';
 
 const Home = () => {
   return (
-    <>
-      <div className="w-full" >
+    <div className="relative top-[65px]">
+      <div className="w-full">
         <div className="w-2/3 mx-auto overflow-y-auto">
           <div className="bg-white dark:bg-gray-800 ">
             <div className="text-center w-full mx-auto py-16 px-4 sm:px-6 lg:py-32 lg:px-8 z-20">
@@ -23,7 +23,7 @@ const Home = () => {
               <div className="lg:mt-8 lg:flex-shrink-0">
                 <div className="mt-12 inline-flex rounded-md shadow">
                   <Link href="/rest-documentation">
-                    <a className="py-4 px-6 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                    <a className="py-4 px-6 bg-indigo-600 hover:bg-indigo-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
                       Go to Documentation
                     </a>
                   </Link>
@@ -93,7 +93,7 @@ const Home = () => {
           </div>
         </div>
       </footer>
-    </>
+    </div>
   );
 };
 
