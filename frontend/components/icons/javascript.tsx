@@ -1,6 +1,6 @@
 import { IconProps } from '@typings/common';
 
-const JavascriptIcon = ({ height = 64, width = 64 }: IconProps) => {
+const JavascriptIcon = ({ height = 48, width = 48 }: IconProps) => {
   return (
     <svg viewBox="0 0 128 128" width={width} height={height}>
       <path fill="#F0DB4F" d="M1.408 1.408h125.184v125.185H1.408z"/>

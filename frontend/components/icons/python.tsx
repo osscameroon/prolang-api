@@ -1,6 +1,6 @@
 import { IconProps } from '@typings/common';
 
-const PythonIcon = ({ height = 64, width = 64 }: IconProps) => {
+const PythonIcon = ({ height = 48, width = 48 }: IconProps) => {
   return (
     <svg viewBox="0 0 128 128" width={width} height={height}>
       <linearGradient id="python-original-a" gradientUnits="userSpaceOnUse" x1="70.252" y1="1237.476" x2="170.659" y2="1151.089" gradientTransform="matrix(.563 0 0 -.568 -29.215 707.817)">
