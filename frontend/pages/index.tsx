@@ -7,7 +7,6 @@ import GraphqlIcon from '@components/icons/graphql';
 import { LanguageCard } from '@components/languages/language-card';
 import { Tile } from '@components/common/tile';
 
-
 const Home = () => {
   return (
     <div className="relative top-[65px]">
@@ -64,35 +63,12 @@ const Home = () => {
           </div>
         </div>
       </div>
-
       <div className="w-full bg-white py-10 dark:bg-gray-800" >
         <div className="w-2/3 mx-auto">
           <div className="w-full text-center uppercase font-bold text-3xl text-indigo-500">Popular languages</div>
           <LanguageCard />
         </div>
       </div>
-
-      <footer className="w-full border-t border-gray-500">
-        <div className="pt-2 w-full">
-          <div className="w-full flex pb-5 px-3 m-auto text-gray-400 text-sm flex-col md:flex-row max-w-6xl">
-            <div className="mt-2">
-              © Copyright 2021. All Rights Reserved.
-            </div>
-
-            <div className="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
-              <a href="#" className="w-6 mx-1">
-                <i className="uil uil-twitter-alt"/>
-              </a>
-              <a href="#" className="w-6 mx-1">
-                <i className="uil uil-youtube"/>
-              </a>
-              <a href="#" className="w-6 mx-1">
-                <i className="uil uil-linkedin"/>
-              </a>
-            </div>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 };
