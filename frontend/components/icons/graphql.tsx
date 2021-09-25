@@ -1,6 +1,5 @@
 import { IconProps } from '@typings/common';
 
-
 const GraphqlIcon = ({ height = 64, width = 64 }: IconProps) => {
   return (
     <svg xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 29.999 30" fill="#e10098">

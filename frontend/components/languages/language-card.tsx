@@ -1,61 +1,66 @@
 import { LightLanguage } from '@typings/common';
-import MicroserviceIcon from '@components/icons/microservice';
 import { LanguageCardItem } from '@components/languages/language-card-item';
+import JavascriptIcon from '@components/icons/javascript';
+import JavaIcon from '@components/icons/java';
+import CsharpIcon from '@components/icons/csharp';
+import PythonIcon from '@components/icons/python';
+import GolangIcon from '@components/icons/golang';
+import CppIcon from '@components/icons/cplusplus';
 
-const list: LightLanguage[] = [
+const languages: LightLanguage[] = [
   {
-    author: 'Breindan Eich',
+    author: 'Brendan Eich',
     company: 'Netscape',
-    icon: <MicroserviceIcon width={48} height={48} />,
-    link: '',
+    icon: <JavascriptIcon/>,
+    link: 'https://en.wikipedia.org/wiki/JavaScript',
     name: 'Javascript',
-    predecessors: [],
+    predecessors: ['LiveScript'],
     yearOfCreation: 1995
   },
   {
-    author: '',
-    company: 'Microsoft',
-    icon: <MicroserviceIcon width={48} height={48} />,
-    link: '',
-    name: 'C#',
-    predecessors: [],
-    yearOfCreation: 1995
+    author: 'Bjarne Stroustrup',
+    company: 'ISO/IEC JTC1',
+    icon: <CppIcon/>,
+    link: 'https://en.wikipedia.org/wiki/C%2B%2B',
+    name: 'C++',
+    predecessors: ['C'],
+    yearOfCreation: 1983
   },
   {
-    author: '',
-    company: '',
-    icon: <MicroserviceIcon width={48} height={48} />,
-    link: '',
-    name: 'PHP',
-    predecessors: [],
-    yearOfCreation: 1995
-  },
-  {
-    author: '',
-    company: '',
-    icon: <MicroserviceIcon width={48} height={48} />,
-    link: '',
-    name: 'Java',
-    predecessors: [],
-    yearOfCreation: 1995
-  },
-  {
-    author: '',
-    company: '',
-    icon: <MicroserviceIcon width={48} height={48} />,
-    link: '',
+    author: 'Ken Thompson',
+    company: 'Google',
+    icon: <GolangIcon/>,
+    link: 'https://en.wikipedia.org/wiki/Go_(programming_language)',
     name: 'Golang',
-    predecessors: [],
+    predecessors: ['C', 'Limbo', 'Oberon'],
+    yearOfCreation: 2009
+  },
+  {
+    author: 'James Gosling',
+    company: 'Sun Microsystems',
+    icon: <JavaIcon/>,
+    link: 'https://en.wikipedia.org/wiki/Java_(programming_language)',
+    name: 'Java',
+    predecessors: ['C', 'C++', 'Objective C'],
     yearOfCreation: 1995
   },
   {
-    author: '',
-    company: '',
-    icon: <MicroserviceIcon width={48} height={48} />,
-    link: '',
+    author: 'Guido Van Rossum',
+    company: 'Python Software Foundation',
+    icon: <PythonIcon/>,
+    link: 'https://en.wikipedia.org/wiki/Python_(programming_language)',
     name: 'Python',
-    predecessors: [],
-    yearOfCreation: 1995
+    predecessors: ['ABC', 'C'],
+    yearOfCreation: 1991
+  },
+  {
+    author: 'Anders Hejlsberg',
+    company: 'Microsoft',
+    icon: <CsharpIcon/>,
+    link: 'https://en.wikipedia.org/wiki/C_Sharp_(programming_language)',
+    name: 'C#',
+    predecessors: ['C', 'C++', 'Delphi', 'Java'],
+    yearOfCreation: 2000
   },
 ];
 
@@ -63,7 +68,7 @@ const list: LightLanguage[] = [
 const LanguageCard = () => {
   return (
     <div className="w-full flex flex-wrap justify-between">
-      {list.map((language) => <LanguageCardItem data={language} key={language.name} />)}
+      {languages.map((language) => <LanguageCardItem data={language} key={language.name} />)}
     </div>
   );
 };
