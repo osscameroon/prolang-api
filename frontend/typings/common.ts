@@ -1,3 +1,5 @@
+import React from 'react';
+
 export type SelectOption = {
   label: string;
   value: string;
@@ -177,4 +179,14 @@ export type UpdateUserInput = {
   name?: string;
   password?: string;
   role?: string;
+}
+
+export type LightLanguage = {
+  name: string;
+  link: string;
+  yearOfCreation: number;
+  company: string;
+  author: string;
+  predecessors: string[];
+  icon: React.ReactNode;
 }

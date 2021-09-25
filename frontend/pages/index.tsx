@@ -1,8 +1,10 @@
-import { ArrowCircleRightIcon, DesktopComputerIcon } from '@heroicons/react/outline';
+import { ArrowCircleRightIcon, DesktopComputerIcon, } from '@heroicons/react/outline';
+
 import { withPublicLayout } from '@components/hof/with-public-layout';
-import { Img } from '@components/common/img';
 import MicroserviceIcon from '@components/icons/microservice';
 import GraphqlIcon from '@components/icons/graphql';
+import { LanguageCard } from '@components/languages/language-card';
+import { Tile } from '@components/common/tile';
 
 
 const Home = () => {
@@ -28,125 +30,66 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-gray-200 pt-10 pb-20 dark:bg-gray-800" >
+      <div className="w-full bg-purple-100 pt-10 pb-20 dark:bg-gray-800" >
         <div className="w-2/3 mx-auto">
           <div className="w-full text-center uppercase font-bold text-3xl text-indigo-500">Features</div>
           <p className="mt-2 text-2xl text-center leading-8 tracking-tight text-gray-900 dark:text-white">
             Two ways to browse programing languages
           </p>
           <div className="w-full flex justify-around">
-            <div className="w-5/12 px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
-              <div className="font-bold text-base flex flex-col items-center">
-                <MicroserviceIcon />
-                <div>REST</div>
-              </div>
-              <p className="text-md text-gray-500 dark:text-gray-300 py-4">
-                Encompassing today’s website design technology to integrated and build solutions
-                relevant to your business.
-              </p>
+            <Tile
+              icon={<MicroserviceIcon />}
+              title="REST"
+              linkText="View documentation"
+              linkHref="/rest-documentation"
+              linkIcon={<ArrowCircleRightIcon className="ml-2 h-6 w-6" />}
+            >
+              Encompassing today’s website design technology to integrated and build solutions
+              relevant to your business.
+            </Tile>
 
-              <button type="button" className="flex justify-center py-2 px-4 mt-6 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-                View documentation {' '}
-                <ArrowCircleRightIcon className="ml-2 h-6 w-6" />
-              </button>
-            </div>
-
-            <div className="w-5/12 px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
-              <div className="font-bold text-base flex flex-col items-center">
-                <GraphqlIcon />
-                <div>GraphQL</div>
-              </div>
-              <p className="text-md text-gray-500 dark:text-gray-300 py-4">
-                Encompassing today’s website design technology to integrated and build solutions
-                relevant to your business.
-              </p>
-              <button type="button" className="flex justify-center py-2 px-4 mt-6 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-                Go to playground
-                <DesktopComputerIcon className="ml-2 h-6 w-6" />
-              </button>
-            </div>
+            <Tile
+              icon={<GraphqlIcon />}
+              title="GraphQL"
+              linkText="Go to playground"
+              linkHref="/gql-playground"
+              linkIcon={<DesktopComputerIcon className="ml-2 h-6 w-6" />}
+            >
+              Encompassing today’s website design technology to integrated and build solutions
+              relevant to your business.
+            </Tile>
           </div>
         </div>
       </div>
 
       <div className="w-full bg-white py-10 dark:bg-gray-800" >
         <div className="w-2/3 mx-auto">
-          <div className="w-full text-center uppercase font-bold text-3xl text-indigo-500">Some languages</div>
-          <div className="w-full flex justify-between">
-            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
-              <div className="font-bold text-base flex items-center">
-                <MicroserviceIcon height={48} width={48} />
-                <div className="ml-4">Javascript</div>
-              </div>
-              <div className="border-purple-500 flex mt-4">
-                <div className="w-1/2">Year of creation: </div>
-                <div className="w-1/2 font-bold text-sm">1995</div>
-              </div>
-              <div className="border-purple-500 flex mt-4">
-                <div className="w-1/2">Company: </div>
-                <div className="w-1/2 font-bold text-sm">Sun Microsystems</div>
-              </div>
-              <div className="border-purple-500 flex mt-4">
-                <div className="w-1/2">Author: </div>
-                <div className="w-1/2 font-bold text-sm">Jack Ballard</div>
-              </div>
-              <div className="border-purple-500 flex mt-4">
-                <div className="w-1/2">Predecessors: </div>
-                <div className="w-1/2 font-bold text-sm">Java, Typescript</div>
-              </div>
-            </div>
-            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
-              <div className="font-bold text-base flex items-center">
-                <MicroserviceIcon height={48} width={48} />
-                <div className="ml-4">C#</div>
-              </div>
-            </div>
-            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
-              <div className="font-bold text-base flex items-center">
-                <MicroserviceIcon height={48} width={48} />
-                <div className="ml-4">PHP</div>
-              </div>
-            </div>
-          </div>
+          <div className="w-full text-center uppercase font-bold text-3xl text-indigo-500">Popular languages</div>
+          <LanguageCard />
+        </div>
+      </div>
 
-          <div className="w-full flex justify-between">
-            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
-              <div className="font-bold text-base flex items-center">
-                <MicroserviceIcon height={48} width={48} />
-                <div className="ml-4">Java</div>
-              </div>
-              <div className="border-purple-500 flex mt-4">
-                <div className="w-1/2">Year of creation: </div>
-                <div className="w-1/2 font-bold text-sm">1995</div>
-              </div>
-              <div className="border-purple-500 flex mt-4">
-                <div className="w-1/2">Company: </div>
-                <div className="w-1/2 font-bold text-sm">Sun Microsystems</div>
-              </div>
-              <div className="border-purple-500 flex mt-4">
-                <div className="w-1/2">Author: </div>
-                <div className="w-1/2 font-bold text-sm">Jack Ballard</div>
-              </div>
-              <div className="border-purple-500 flex mt-4">
-                <div className="w-1/2">Predecessors: </div>
-                <div className="w-1/2 font-bold text-sm">Java, Typescript</div>
-              </div>
+      <footer className="w-full border-t border-gray-500">
+        <div className="pt-2 w-full">
+          <div className="w-full flex pb-5 px-3 m-auto text-gray-400 text-sm flex-col md:flex-row max-w-6xl">
+            <div className="mt-2">
+              © Copyright 2021. All Rights Reserved.
             </div>
-            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
-              <div className="font-bold text-base flex items-center">
-                <MicroserviceIcon height={48} width={48} />
-                <div className="ml-4">Go</div>
-              </div>
-            </div>
-            <div className="w-[30%] px-8 py-8 bg-white mt-6 shadow-lg rounded-lg dark:bg-gray-800 cursor-default">
-              <div className="font-bold text-base flex items-center">
-                <MicroserviceIcon height={48} width={48} />
-                <div className="ml-4">Python</div>
-              </div>
+
+            <div className="md:flex-auto md:flex-row-reverse mt-2 flex-row flex">
+              <a href="#" className="w-6 mx-1">
+                <i className="uil uil-twitter-alt"/>
+              </a>
+              <a href="#" className="w-6 mx-1">
+                <i className="uil uil-youtube"/>
+              </a>
+              <a href="#" className="w-6 mx-1">
+                <i className="uil uil-linkedin"/>
+              </a>
             </div>
           </div>
         </div>
-      </div>
+      </footer>
     </>
   );
 };
