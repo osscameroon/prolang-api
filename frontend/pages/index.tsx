@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { ArrowCircleRightIcon, DesktopComputerIcon, } from '@heroicons/react/outline';
 
 import { withPublicLayout } from '@components/hof/with-public-layout';
@@ -21,9 +22,11 @@ const Home = () => {
               </h2>
               <div className="lg:mt-8 lg:flex-shrink-0">
                 <div className="mt-12 inline-flex rounded-md shadow">
-                  <button type="button" className="py-4 px-6 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
-                    Go to Documentation
-                  </button>
+                  <Link href="/rest-documentation">
+                    <a className="py-4 px-6 bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg">
+                      Go to Documentation
+                    </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -33,7 +36,7 @@ const Home = () => {
       <div className="w-full bg-purple-100 pt-10 pb-20 dark:bg-gray-800" >
         <div className="w-2/3 mx-auto">
           <div className="w-full text-center uppercase font-bold text-3xl text-indigo-500">Features</div>
-          <p className="mt-2 text-2xl text-center leading-8 tracking-tight text-gray-900 dark:text-white">
+          <p className="mt-2 mb-4 text-2xl text-center leading-8 tracking-tight text-gray-900 dark:text-white">
             Two ways to browse programing languages
           </p>
           <div className="w-full flex justify-around">
