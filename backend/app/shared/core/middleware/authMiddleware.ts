@@ -8,7 +8,7 @@ import { TokenPayload } from '../../types/common';
 import { removeQueryStringIfExist } from '../../utils/helpers';
 import { NOT_AUTHENTICATED } from '../../utils/constants';
 
-const allowedRoutes: string[] = ['/', '/health', '/api', '/api/**', '/private/users/auth'];
+const allowedRoutes: string[] = ['/', '/health', '/api', '/api/**', '/private/users/auth', '/spec/prolang.yaml'];
 
 const decodeJwtToken = (token: string, jwtSecret: string): Promise<JwtPayload> => {
   return new Promise((resolve, reject): void => {

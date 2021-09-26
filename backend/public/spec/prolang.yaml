@@ -1,0 +1,511 @@
+openapi: 3.0.3
+info:
+  title: Programming languages API
+  description: >
+    This is an **example** API to demonstrate features of the OpenAPI
+    specification.
+
+
+    # Introduction
+
+
+    This API definition is intended to to be a good starting point for
+
+    describing your API in 
+
+
+    [OpenAPI/Swagger
+
+    format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
+
+
+    It also demonstrates features of the
+
+    [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
+
+    and 
+
+
+    the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
+
+    the standard OpenAPI syntax, we use a few 
+
+
+    [vendor
+
+    extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).
+
+
+
+    # OpenAPI Specification
+
+
+    The goal of The OpenAPI Specification is to define a standard,
+
+    language-agnostic interface to REST APIs which
+
+
+    allows both humans and computers to discover and understand the capabilities
+
+    of the service without access to source
+
+
+    code, documentation, or through network traffic inspection. When properly
+
+    defined via OpenAPI, a consumer can 
+
+
+    understand and interact with the remote service with a minimal amount of
+
+    implementation logic. Similar to what
+
+
+    interfaces have done for lower-level programming, OpenAPI removes the
+
+    guesswork in calling the service.
+  version: 1.0.0
+  contact:
+    name: Eric Cabrel TIOGO
+    email: tericcabrel@yahoo.com
+    url: 'https://tericcabrel.com'
+  license:
+    name: MIT License
+    url: 'https://opensource.org/licenses/MIT'
+externalDocs:
+  description: 'If you are looking for the GraphQL version, checkout this link.'
+  url: 'http://localhost:5700/graphql'
+servers:
+  - url: 'http://localhost:5700/api'
+    description: Local development server
+  - url: 'https://prolang.com/api'
+    description: Production server
+paths:
+  /years-groups:
+    get:
+      operationId: get-all-year-group
+      summary: Retrieve all years groups
+      tags:
+        - Year Group
+      responses:
+        '200':
+          $ref: '#/components/responses/yearGroupListResponse'
+      parameters:
+        - name: countLanguage
+          in: query
+          required: false
+          description: >-
+            Indicate if we want to include the number of languages for each year
+            group
+  '/years-groups/{id}':
+    get:
+      operationId: get-one-year-group
+      summary: Retrieve a year's group
+      tags:
+        - Year Group
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the year's group to retrieve
+      responses:
+        '200':
+          $ref: '#/components/responses/yearGroupResponse'
+        '401':
+          $ref: '#/components/responses/401'
+        '404':
+          $ref: '#/components/responses/404'
+  /authors:
+    get:
+      operationId: search-authors
+      summary: Retrieve authors with pagination
+      tags:
+        - Author
+      parameters:
+        - $ref: '#/components/parameters/pageQuery'
+        - $ref: '#/components/parameters/keywordQuery'
+        - $ref: '#/components/parameters/authorFieldsQuery'
+      responses:
+        '200':
+          $ref: '#/components/responses/authorPaginatedResponse'
+  /authors/all:
+    get:
+      operationId: get-all-authors
+      summary: Retrieve all authors
+      tags:
+        - Author
+      parameters:
+        - $ref: '#/components/parameters/authorFieldsQuery'
+      responses:
+        '200':
+          $ref: '#/components/responses/authorListResponse'
+  '/authors/{id}':
+    get:
+      operationId: get-one-author
+      summary: Retrieve an author
+      tags:
+        - Author
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the author to retrieve
+          example: 612103be20aaf1e4d5e85641
+      responses:
+        '200':
+          $ref: '#/components/responses/authorResponse'
+        '404':
+          $ref: '#/components/responses/404'
+  /languages:
+    get:
+      operationId: search-languages
+      summary: Retrieve languages with pagination
+      tags:
+        - Language
+      parameters:
+        - $ref: '#/components/parameters/pageQuery'
+        - $ref: '#/components/parameters/keywordQuery'
+        - $ref: '#/components/parameters/languageFieldsQuery'
+        - $ref: '#/components/parameters/yearGroupQuery'
+      responses:
+        '200':
+          $ref: '#/components/responses/languagePaginatedResponse'
+  /languages/all:
+    get:
+      operationId: get-all-languages
+      summary: Retrieve all languages
+      tags:
+        - Language
+      parameters:
+        - $ref: '#/components/parameters/languageFieldsQuery'
+      responses:
+        '200':
+          $ref: '#/components/responses/languageListResponse'
+  '/languages/{id}':
+    get:
+      operationId: get-one-language
+      summary: Retrieve a language
+      tags:
+        - Language
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: ID of the language to retrieve
+          example: java
+      responses:
+        '200':
+          $ref: '#/components/responses/languageResponse'
+        '404':
+          $ref: '#/components/responses/404'
+components:
+  responses:
+    '401':
+      description: Access unauthorized
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: Access to this resource requires authentication
+    '404':
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              message:
+                type: string
+                example: 'No item found with id: 612103bd20aaf1e4d5e85031'
+    yearGroupResponse:
+      description: Year's group retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/yearGroup'
+    yearGroupListResponse:
+      description: List of year's group retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/yearGroupList'
+    authorListResponse:
+      description: List of authors retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/author'
+    authorResponse:
+      description: Author retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/author'
+    authorPaginatedResponse:
+      description: Paginated authors list retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/paginatedAuthor'
+    languageListResponse:
+      description: List of languages retrieved successfully
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              data:
+                type: array
+                items:
+                  $ref: '#/components/schemas/language'
+    languageResponse:
+      description: Language retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/language'
+    languagePaginatedResponse:
+      description: Paginated languages list retrieved successfully
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/paginatedLanguage'
+  schemas:
+    yearGroup:
+      type: object
+      properties:
+        id:
+          description: Id of the year group
+          type: string
+          example: 612103bb20aaf1e4d5e84bd4
+        name:
+          description: Name of the year group
+          type: string
+          example: 2020s
+        position:
+          description: Used to order the year group in ascending or descending direction
+          type: integer
+          example: 1
+    yearGroupList:
+      type: object
+      properties:
+        languageCount:
+          description: >-
+            Number of languages in the year group (present only if countLanguage
+            passed as query parameter)
+          type: integer
+          example: 43
+        id:
+          description: Id of the year group
+          type: string
+          example: 612103bb20aaf1e4d5e84bd4
+        name:
+          description: Name of the year group
+          type: string
+          example: 2020s
+        position:
+          description: Used to order the year group in ascending or descending direction
+          type: integer
+          example: 1
+    paginationMetaData:
+      type: object
+      properties:
+        currentPage:
+          type: integer
+          description: Current page of the items pagination
+          example: 1
+        limit:
+          type: integer
+          description: Number of items returned per page
+          example: 30
+        totalItems:
+          type: integer
+          description: Total items retrieve
+          example: 100
+        totalPages:
+          type: integer
+          description: Number of total pages
+          example: 4
+    author:
+      type: object
+      properties:
+        id:
+          type: string
+          description: The author ID
+          example: 612103be20aaf1e4d5e85641
+        birthDate:
+          type: string
+          description: The date of birth of the author
+          nullable: true
+          example: 1955-05-19T00:00:00.000Z
+          format: YYYY-MM-DD
+        country:
+          type: string
+          description: The country where the author from
+          nullable: true
+          example: Canada
+        link:
+          type: string
+          description: The link to the author biography
+          nullable: true
+          example: 'https://fr.wikipedia.org/wiki/James_Gosling'
+        name:
+          type: string
+          description: The author name
+          example: Jame Gosling
+        picture:
+          type: string
+          description: The link to the author picture
+          nullable: true
+          example: 'https://link-to-picture.com/author-name'
+    authorItems:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/author'
+    paginatedAuthor:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/paginationMetaData'
+        - $ref: '#/components/schemas/authorItems'
+    language:
+      type: object
+      properties:
+        id:
+          type: string
+          description: ID of the language
+          example: 612103bd20aaf1e4d5e853c0
+        company:
+          type: string
+          nullable: true
+          description: Company where the language was created
+          example: Oracle
+        link:
+          type: string
+          nullable: true
+          description: Link to language biography
+          example: 'https://link-to-biography.com/java'
+        name:
+          type: string
+          description: Language's name
+          example: Java
+        nameExtra:
+          type: object
+          description: 'Extra information about the language (rfc link, acronym, etc...)'
+          properties:
+            link:
+              type: string
+              nullable: true
+              example: 'https://link-to-biography.com/java'
+            name:
+              type: string
+              nullable: true
+              example: null
+        years:
+          type: array
+          description: Years range of creation of the language
+          items:
+            type: integer
+            minLength: 1
+            maxLength: 2
+            example: 1995
+        yearConfirmed:
+          type: boolean
+          description: Indicates if the year of creation is confirmed or not
+          example: true
+        yearGroup:
+          $ref: '#/components/schemas/yearGroup'
+        authors:
+          type: array
+          description: Language authors list
+          items:
+            $ref: '#/components/schemas/author'
+        predecessors:
+          type: array
+          description: Language predecessors Id list
+          items:
+            type: string
+            example: '612103bc20aaf1e4d5e84cc6, 612103bc20aaf1e4d5e84cc6'
+    languageItems:
+      type: object
+      properties:
+        items:
+          type: array
+          items:
+            $ref: '#/components/schemas/language'
+    paginatedLanguage:
+      type: object
+      allOf:
+        - $ref: '#/components/schemas/paginationMetaData'
+        - $ref: '#/components/schemas/languageItems'
+  parameters:
+    authorFieldsQuery:
+      name: fields
+      in: query
+      description: Select specific fields to return in the response
+      schema:
+        type: string
+        anyOf:
+          - $ref: '#/components/schemas/author'
+        format: 'field1,field2,...,fieldn'
+        example: 'id,name,picture'
+        minProperties: 1
+    keywordQuery:
+      name: search
+      in: query
+      required: false
+      description: Search items containing this keyword
+      schema:
+        type: string
+        example: java
+        minLength: 1
+    pageQuery:
+      name: page
+      in: query
+      required: false
+      description: Page's number of items to retrieve
+      schema:
+        type: integer
+        example: 5
+        minimum: 1
+    yearGroupQuery:
+      name: yearGroup
+      in: query
+      required: false
+      description: Name of a year's group
+      schema:
+        type: string
+        example: 2000s
+    languageFieldsQuery:
+      name: fields
+      in: query
+      required: false
+      description: Select specific fields to return in the response
+      schema:
+        type: string
+        anyOf:
+          - $ref: '#/components/schemas/author'
+        format: 'field1,field2,...,fieldn'
+        example: 'id,name,company,authors'
+        minProperties: 1
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+security:
+  - bearerAuth: []

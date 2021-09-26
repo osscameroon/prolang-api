@@ -6,8 +6,10 @@ const PublicLayout = ({ children }: PropsWithChildren<{}>) => {
   return (
     <div>
       <PublicHeader />
-      {children}
-      <PublicFooter />
+      <div className="relative top-[65px]">
+        {children}
+        <PublicFooter />
+      </div>
     </div>
   );
 };

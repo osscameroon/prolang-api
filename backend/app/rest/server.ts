@@ -44,7 +44,7 @@ export const setupRestEndpoints = (app: Application) => {
   app.use('/', userRoute());
   app.use('/', statRoute());
 
-  app.use(express.static(path.join(__dirname, '../../../public')));
+  app.use(express.static(path.join(__dirname, '../../public')));
 
   app.use(notFoundMiddleware);
 
