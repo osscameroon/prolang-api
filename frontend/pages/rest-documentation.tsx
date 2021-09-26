@@ -9,4 +9,4 @@ const RestDocumentation = () => {
   );
 };
 
-export default withPublicLayout(RestDocumentation, 'API Documentation');
+export default withPublicLayout(RestDocumentation, { path: 'rest-documentation', title: 'API Documentation' });

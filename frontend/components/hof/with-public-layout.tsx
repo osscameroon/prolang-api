@@ -1,16 +1,25 @@
 import { FC, ReactElement } from 'react';
-
-import PublicLayout from '@components/layout/public/public-layout';
 import Head from 'next/head';
 
-const withPublicLayout = (Wrapped: FC<any>, title: string): (() => ReactElement) => {
+import PublicLayout from '@components/layout/public/public-layout';
+import { PageSeo } from '@components/common/seo';
+
+type WithPublicLayoutProps = {
+  title: string;
+  path?: string;
+};
+
+const withPublicLayout = (Wrapped: FC<any>, props: WithPublicLayoutProps): (() => ReactElement) => {
   return () => {
+    const { path, title } = props;
+
     return (
       <PublicLayout>
         <Head>
-          <title>Prolang - {title}</title>
+          <title>{title} | Prolang</title>
         </Head>
-        <Wrapped />
+        <PageSeo title={title} path={path}/>
+        <Wrapped/>
       </PublicLayout>
     );
   };

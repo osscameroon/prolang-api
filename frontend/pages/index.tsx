@@ -73,4 +73,4 @@ const Home = () => {
   );
 };
 
-export default withPublicLayout(Home, 'Home');
+export default withPublicLayout(Home, { title: 'Home' });

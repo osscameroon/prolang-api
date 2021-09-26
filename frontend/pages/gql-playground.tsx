@@ -35,4 +35,4 @@ const GraphQLPlayground = () => {
   );
 };
 
-export default withPublicLayout(GraphQLPlayground, 'GraphQL Playground');
+export default withPublicLayout(GraphQLPlayground, { path: 'gql-playground', title: 'GraphQL Playground' });
