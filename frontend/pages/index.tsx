@@ -9,7 +9,7 @@ import { Tile } from '@components/common/tile';
 
 const Home = () => {
   return (
-    <div className="relative top-[65px]">
+    <div>
       <div className="w-full">
         <div className="w-2/3 mx-auto overflow-y-auto">
           <div className="bg-white dark:bg-gray-800 ">

@@ -6,7 +6,7 @@ import TwitterIcon from '@components/icons/twitter';
 
 const PublicFooter = () => {
   return (
-    <footer className="w-full border-t-2 shadow border-gray-50 mt-12 relative">
+    <footer className="w-full bg-white shadow relative">
       <div className="w-full flex items-center justify-between m-auto text-gray-800 text-sm md:flex-row max-w-6xl h-16">
         <div>© Copyright 2021. OSS Cameroon.</div>
         <div className="flex items-center">
