@@ -26,10 +26,10 @@ const GlobalSeo = () => {
       description,
       images: [
         {
-          alt: 'Og Image Alt',
-          height: 640,
+          alt: 'Homepage image alt',
+          height: 575,
           url: `${baseUrl}/assets/img/og.png`,
-          width: 1280,
+          width: 1245,
         },
       ],
       locale: 'en-US',

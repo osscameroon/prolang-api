@@ -1,7 +1,7 @@
 import { RedocStandalone } from 'redoc';
 import { withPublicLayout } from '@components/hof/with-public-layout';
 
-const RestDocumentation = () => {
+const Documentation = () => {
   return (
     <div className="min-h-[calc(100vh-130px)]">
       <RedocStandalone specUrl={process.env.NEXT_PUBLIC_API_DOC_URL} />
@@ -9,4 +9,4 @@ const RestDocumentation = () => {
   );
 };
 
-export default withPublicLayout(RestDocumentation, { path: 'rest-documentation', title: 'API Documentation' });
+export default withPublicLayout(Documentation, { path: '/documentation', title: 'API Documentation' });

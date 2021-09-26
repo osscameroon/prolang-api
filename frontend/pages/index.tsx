@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { ArrowCircleRightIcon, DesktopComputerIcon, } from '@heroicons/react/outline';
+import { ArrowCircleRightIcon, TerminalIcon } from '@heroicons/react/outline';
 
 import { withPublicLayout } from '@components/hof/with-public-layout';
 import MicroserviceIcon from '@components/icons/microservice';
@@ -21,7 +21,7 @@ const Home = () => {
               </h2>
               <div className="lg:mt-8 lg:flex-shrink-0">
                 <div className="mt-12 inline-flex rounded-md shadow">
-                  <Link href="/rest-documentation">
+                  <Link href="/documentation">
                     <a className="py-4 px-6 bg-blue-600 hover:bg-blue-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
                       Go to Documentation
                     </a>
@@ -34,31 +34,31 @@ const Home = () => {
       </div>
       <div className="w-full bg-blue-100 pt-10 pb-20 dark:bg-gray-800" >
         <div className="w-2/3 mx-auto">
-          <div className="w-full text-center uppercase font-bold text-3xl text-blue-700">Features</div>
+          <div className="w-full text-center uppercase font-bold text-3xl text-blue-700">Fetch mode</div>
           <p className="mt-2 mb-4 text-2xl text-center leading-8 tracking-tight text-gray-900 dark:text-white">
-            Two ways to browse programing languages
+            Retrieve data using the mode that suits you
           </p>
           <div className="w-full flex justify-around">
             <Tile
               icon={<MicroserviceIcon />}
               title="REST"
               linkText="View documentation"
-              linkHref="/rest-documentation"
+              linkHref="/documentation"
               linkIcon={<ArrowCircleRightIcon className="ml-2 h-6 w-6" />}
             >
-              Encompassing today’s website design technology to integrated and build solutions
-              relevant to your business.
+              Easy to start and integrate in existing application because you don't need to learn
+              a query language first.
             </Tile>
 
             <Tile
               icon={<GraphqlIcon />}
               title="GraphQL"
               linkText="Go to playground"
-              linkHref="/gql-playground"
-              linkIcon={<DesktopComputerIcon className="ml-2 h-6 w-6" />}
+              linkHref="/playground"
+              linkIcon={<TerminalIcon className="ml-2 h-6 w-6" />}
             >
-              Encompassing today’s website design technology to integrated and build solutions
-              relevant to your business.
+              Retrieve only the data you need in a structured way. Make one network call to fetch all the data linked
+              together.
             </Tile>
           </div>
         </div>

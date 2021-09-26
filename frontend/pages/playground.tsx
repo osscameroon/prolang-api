@@ -13,7 +13,7 @@ const GraphQLPlayground = () => {
         <p>
           <div className="flex flex-col">
             <div className="mb-2">1. Write your query on the left pane.</div>
-            <div className="flex mb-2">2. Click on the play button <span className="mx-2"><PlayIcon /></span> to execute the query.</div>
+            <div className="flex mb-2">2. Click on the play button <span className="mx-2 text-blue-500"><PlayIcon /></span> to execute the query.</div>
             <div>3. View the result on the right pane.</div>
           </div>
         </p>
@@ -35,4 +35,4 @@ const GraphQLPlayground = () => {
   );
 };
 
-export default withPublicLayout(GraphQLPlayground, { path: 'gql-playground', title: 'GraphQL Playground' });
+export default withPublicLayout(GraphQLPlayground, { path: '/playground', title: 'GraphQL Playground' });
