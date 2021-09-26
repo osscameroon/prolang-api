@@ -17,12 +17,12 @@ const Home = () => {
               <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
                 <span className="block">The API to browse programming languages</span>
                 <div className="mt-4"/>
-                <span className="block text-indigo-500">From the beginning until today</span>
+                <span className="block text-blue-500">From the beginning until today</span>
               </h2>
               <div className="lg:mt-8 lg:flex-shrink-0">
                 <div className="mt-12 inline-flex rounded-md shadow">
                   <Link href="/rest-documentation">
-                    <a className="py-4 px-6 bg-indigo-600 hover:bg-indigo-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
+                    <a className="py-4 px-6 bg-blue-600 hover:bg-blue-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
                       Go to Documentation
                     </a>
                   </Link>
@@ -32,9 +32,9 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-purple-100 pt-10 pb-20 dark:bg-gray-800" >
+      <div className="w-full bg-blue-100 pt-10 pb-20 dark:bg-gray-800" >
         <div className="w-2/3 mx-auto">
-          <div className="w-full text-center uppercase font-bold text-3xl text-indigo-500">Features</div>
+          <div className="w-full text-center uppercase font-bold text-3xl text-blue-700">Features</div>
           <p className="mt-2 mb-4 text-2xl text-center leading-8 tracking-tight text-gray-900 dark:text-white">
             Two ways to browse programing languages
           </p>
@@ -65,7 +65,7 @@ const Home = () => {
       </div>
       <div className="w-full bg-white py-10 dark:bg-gray-800" >
         <div className="w-2/3 mx-auto">
-          <div className="w-full text-center uppercase font-bold text-3xl text-indigo-500">Popular languages</div>
+          <div className="w-full text-center uppercase font-bold text-3xl text-blue-700">Popular languages</div>
           <LanguageCard />
         </div>
       </div>
