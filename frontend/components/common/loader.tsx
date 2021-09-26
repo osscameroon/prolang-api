@@ -3,6 +3,18 @@ import classNames from 'classnames';
 type LoaderProps = {
   scope?: 'page' | 'component';
 };
+type SpinnerProps = {
+  text?: string;
+}
+
+const Spinner = ({ text = 'Loading...' }: SpinnerProps) => {
+  return (
+    <>
+      <div className="loader ease-linear rounded-full border-4 border-t-4 border-purple-500 h-12 w-12 mb-4" />
+      <h2 className="text-center text-purple-500 text-xl font-semibold">{text}</h2>
+    </>
+  );
+};
 
 const Loader = ({ scope = 'component' }: LoaderProps) => {
   const loaderClasses = classNames(
@@ -15,10 +27,9 @@ const Loader = ({ scope = 'component' }: LoaderProps) => {
 
   return (
     <div className={loaderClasses}>
-      <div className="loader ease-linear rounded-full border-4 border-t-4 border-purple-500 h-12 w-12 mb-4" />
-      <h2 className="text-center text-purple-500 text-xl font-semibold">Loading...</h2>
+      <Spinner />
     </div>
   );
 };
 
-export { Loader };
+export { Loader, Spinner };
