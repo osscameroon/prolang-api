@@ -21,7 +21,7 @@ const Tile = ({ children, icon, linkHref, linkIcon, linkText, title }: TileProps
       </p>
 
       <Link href={linkHref}>
-        <a className="flex justify-center py-2 px-4 mt-6 bg-blue-600 hover:bg-blue-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold rounded-lg ">
+        <a className="flex justify-center py-2 px-4 mt-6 w-full text-base font-semibold rounded-lg bg-white border-2 border-blue-700 text-blue-700">
           {linkText} {' '}
           {linkIcon}
         </a>
