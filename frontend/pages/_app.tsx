@@ -1,11 +1,15 @@
+import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
+import { useRouter } from 'next/router';
 import { CookiesProvider } from 'react-cookie';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ErrorBoundary } from 'react-error-boundary';
+
 import MainLayout from '@components/layout/main';
 import { AppError } from '@components/common/app-error';
 import { GlobalSeo } from '@components/common/seo';
+import { pageView } from '@utils/gtag';
 
 import 'react-toastify/dist/ReactToastify.css';
 import '@styles/globals.css';
@@ -13,6 +17,20 @@ import '@styles/globals.css';
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0 } } });
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
+  const router = useRouter();
+
+  useEffect(() => {
+    const handleRouteChange = (url: string) => {
+      pageView(url);
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
+  }, [router.events]);
+
   return (
     <CookiesProvider>
       <QueryClientProvider client={queryClient}>
