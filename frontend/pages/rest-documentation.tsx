@@ -1,5 +1,4 @@
 import { RedocStandalone } from 'redoc';
-
 import { withPublicLayout } from '@components/hof/with-public-layout';
 
 const RestDocumentation = () => {
@@ -10,4 +9,4 @@ const RestDocumentation = () => {
   );
 };
 
-export default withPublicLayout(RestDocumentation);
+export default withPublicLayout(RestDocumentation, 'API Documentation');
