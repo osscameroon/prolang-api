@@ -7,7 +7,7 @@ const GraphQLPlayground = () => {
   const [loading, setLoading] = useState(true);
 
   return (
-    <div className="w-2/3 mx-auto min-h-[calc(100vh-130px)]" >
+    <div className="w-2/3 mx-auto min-h-[calc(100vh-130px)]">
       <div className="pt-4 mb-4">
         <h1 className="text-2xl font-bold mb-4">GraphQL Playground</h1>
         <p>
@@ -35,4 +35,4 @@ const GraphQLPlayground = () => {
   );
 };
 
-export default withPublicLayout(GraphQLPlayground);
+export default withPublicLayout(GraphQLPlayground, 'GraphQL Playground');
