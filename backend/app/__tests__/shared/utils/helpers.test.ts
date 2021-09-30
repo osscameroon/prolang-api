@@ -41,7 +41,7 @@ describe('Test Helpers - extractQueryFields', () => {
 });
 
 describe('Others helpers functions', () => {
-  test('remove query string fron the URL path', () => {
+  test('remove query string from the URL path', () => {
     expect(removeQueryStringIfExist('/api/languages?fields=id,name')).toMatchInlineSnapshot(`"/api/languages"`);
     expect(removeQueryStringIfExist('/years-groups')).toMatchInlineSnapshot(`"/years-groups"`);
     expect(removeQueryStringIfExist('/authors/all?search=ban&page=3')).toMatchInlineSnapshot(`"/authors/all"`);
