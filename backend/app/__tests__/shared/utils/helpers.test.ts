@@ -1,4 +1,4 @@
-import { extractQueryFields } from '../../../shared/utils/helpers';
+import { extractQueryFields, removeQueryStringIfExist } from '../../../shared/utils/helpers';
 
 describe('Test Helpers - extractQueryFields', () => {
   test('No fields passed as argument', () => {
@@ -37,5 +37,13 @@ describe('Test Helpers - extractQueryFields', () => {
       keyword: 'C++',
       page: 5,
     });
+  });
+});
+
+describe('Others helpers functions', () => {
+  test('remove query string fron the URL path', () => {
+    expect(removeQueryStringIfExist('/api/languages?fields=id,name')).toMatchInlineSnapshot(`"/api/languages"`);
+    expect(removeQueryStringIfExist('/years-groups')).toMatchInlineSnapshot(`"/years-groups"`);
+    expect(removeQueryStringIfExist('/authors/all?search=ban&page=3')).toMatchInlineSnapshot(`"/authors/all"`);
   });
 });
