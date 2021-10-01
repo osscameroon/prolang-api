@@ -1,4 +1,4 @@
-import { extractQueryFields, removeQueryStringIfExist } from '../../../shared/utils/helpers';
+import { extractQueryFields, generateRoutePrefix, removeQueryStringIfExist } from '../../../shared/utils/helpers';
 
 describe('Test Helpers - extractQueryFields', () => {
   test('No fields passed as argument', () => {
@@ -45,5 +45,13 @@ describe('Others helpers functions', () => {
     expect(removeQueryStringIfExist('/api/languages?fields=id,name')).toMatchInlineSnapshot(`"/api/languages"`);
     expect(removeQueryStringIfExist('/years-groups')).toMatchInlineSnapshot(`"/years-groups"`);
     expect(removeQueryStringIfExist('/authors/all?search=ban&page=3')).toMatchInlineSnapshot(`"/authors/all"`);
+  });
+
+  test.only('Generate route prefix with path specified', () => {
+    expect(generateRoutePrefix('users')).toMatchObject(['/api/users', '/private/users']);
+  });
+
+  test.only('Generate route prefix with no path', () => {
+    expect(generateRoutePrefix('')).toMatchObject(['/api/', '/private/']);
   });
 });
