@@ -24,8 +24,10 @@ const requestPlugin: ApolloServerPlugin = {
           const { http } = context.request;
 
           const input: CreateRequestLogInput = {
+            duration: null,
             endpoint: selection.name.value,
             ipAddress: http?.headers ? http?.headers.get('x-forwarded-for') : null,
+            statusCode: 200,
             type: RequestTypeEnum.graphql,
           };
 

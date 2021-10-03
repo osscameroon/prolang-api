@@ -70,14 +70,18 @@ export enum RequestTypeEnum {
 }
 
 export type RequestLogDocument = Document & {
+  duration: number | null;
   endpoint: string;
   ipAddress: string | null;
+  statusCode: number | null;
   type: RequestTypeEnum;
 };
 
 export type CreateRequestLogInput = {
+  duration: RequestLogDocument['duration'];
   endpoint: RequestLogDocument['endpoint'];
   ipAddress: RequestLogDocument['ipAddress'];
+  statusCode: RequestLogDocument['statusCode'];
   type: RequestLogDocument['type'];
 };
 

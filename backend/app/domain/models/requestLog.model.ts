@@ -3,6 +3,10 @@ import { RequestLogDocument, RequestTypeEnum } from '../../shared/types/models';
 
 const requestLogSchema = new Schema(
   {
+    duration: {
+      default: null,
+      type: Schema.Types.Number,
+    },
     endpoint: {
       required: true,
       type: Schema.Types.String,
@@ -10,6 +14,10 @@ const requestLogSchema = new Schema(
     ipAddress: {
       index: true,
       type: Schema.Types.String,
+    },
+    statusCode: {
+      default: null,
+      type: Schema.Types.Number,
     },
     type: {
       enum: RequestTypeEnum,
