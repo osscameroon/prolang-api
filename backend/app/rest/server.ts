@@ -4,11 +4,11 @@ import cors from 'cors';
 
 import { commonRoute } from './routes/common.route';
 import { yearGroupRoute } from './routes/yearGroup.route';
-import { notFoundMiddleware } from '../shared/core/middleware/notFound';
+import { notFoundMiddleware } from '../shared/core/middleware/notFoundMiddleware';
 import { authorRoute } from './routes/author.route';
 import { languageRoute } from './routes/language.route';
-import { logRequestMiddleware } from '../shared/core/middleware/logRequest';
-import { rateLimiterMiddleware } from '../shared/core/middleware/rateLimiter';
+import { logRequestMiddleware } from '../shared/core/middleware/logRequestMiddleware';
+import { rateLimiterMiddleware } from '../shared/core/middleware/rateLimiterMiddleware';
 import { Sentry } from '../shared/core/sentry';
 import { errorHandlerMiddleware } from '../shared/core/middleware/errorMiddleware';
 import { AUTH_ENABLED, SENTRY_ENABLED } from '../shared/core/config';
