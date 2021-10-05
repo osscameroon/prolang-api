@@ -3,6 +3,7 @@ import requestLogService from '../../../domain/services/requestLog.service';
 import { CreateRequestLogInput } from '../../types/models';
 import { selectRequestType } from '../../utils/helpers';
 import { getDurationInMilliseconds } from '../../utils/request';
+import { CLIENT_ORIGIN } from '../config';
 
 /**
  * @link https://ipirozhenko.com/blog/measuring-requests-duration-nodejs-express/
@@ -12,19 +13,12 @@ import { getDurationInMilliseconds } from '../../utils/request';
  * @param next
  */
 export const logRequestMiddleware = async (req: Request, res: Response, next: NextFunction) => {
-  /*const { connection, ip, url } = req;
-
-  const input: CreateRequestLogInput = {
-    endpoint: url,
-    ipAddress: connection?.remoteAddress || ip,
-    type: selectRequestType(url),
-  };
-
-  await requestLogService.create(input);
-
-  return next();*/
-  const { connection, ip, url } = req;
   const start = process.hrtime();
+  const { connection, ip, url } = req;
+
+  if (req.headers['x-client-origin'] === CLIENT_ORIGIN) {
+    return next();
+  }
 
   const input: CreateRequestLogInput = {
     duration: null,

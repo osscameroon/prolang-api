@@ -28,7 +28,7 @@ export const startGraphqlServer = async (app: Application) => {
   });
 
   const server = new ApolloServer({
-    // TODO type the object
+    // TODO type the object and make codegen recognize it
     context: async ({ req, res }) => {
       return {
         ip: req.connection?.remoteAddress || req.ip,

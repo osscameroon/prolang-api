@@ -14,6 +14,7 @@ export const useAxios = (apiPath?: string) => {
 
   instance.defaults.headers.common['Accept'] = 'application/json';
   instance.defaults.headers.common['Content-Type'] = 'application/json';
+  instance.defaults.headers.common['x-client-origin'] = process.env.NEXT_PUBLIC_CLIENT_ORIGIN;
 
   if (cookie) {
     instance.defaults.headers.common['Authorization'] = `Bearer ${cookie}`;
