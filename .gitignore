@@ -125,7 +125,5 @@ build
 !.yarn/sdks
 !.yarn/versions
 
-backend/app/graphql/types
-
 !frontend/typings
 notes.txt

@@ -3,11 +3,14 @@ import { FieldNode, OperationDefinitionNode, parse } from 'graphql';
 import { CreateRequestLogInput, RequestTypeEnum } from '../../shared/types/models';
 import requestLogService from '../../domain/services/requestLog.service';
 import { getDurationInMilliseconds } from '../../shared/utils/request';
+import { GraphQLRequestContext } from 'apollo-server-types/src/index';
+import { AppContext } from '../types/common';
 
 const requestPlugin: ApolloServerPlugin = {
+  // @ts-ignore
   requestDidStart: async () => {
     return {
-      didResolveOperation: async (context) => {
+      didResolveOperation: async (context: GraphQLRequestContext<AppContext>) => {
         const {
           request: { query },
         } = context;

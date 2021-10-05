@@ -10,6 +10,7 @@ import depthLimit from 'graphql-depth-limit';
 import sentryPlugin from './utils/sentryPlugin';
 import requestPlugin from './utils/requestPlugin';
 import { resolvers } from './resolvers';
+import { AppContext } from './types/common';
 
 export const startGraphqlServer = async (app: Application) => {
   const schema = loadSchemaSync('**/*.graphql', {
@@ -28,8 +29,7 @@ export const startGraphqlServer = async (app: Application) => {
   });
 
   const server = new ApolloServer({
-    // TODO type the object and make codegen recognize it
-    context: async ({ req, res }) => {
+    context: async ({ req, res }): Promise<AppContext> => {
       return {
         ip: req.connection?.remoteAddress || req.ip,
         reqStartTime: process.hrtime(),

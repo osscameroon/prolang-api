@@ -8,6 +8,16 @@ generates:
         Language: ../../shared/types/models#LanguageDocument
         Author: ../../shared/types/models#AuthorDocument
         YearGroup: ../../shared/types/models#YearGroupDocument
+      scalars:
+        Date: Date
+      customResolverFn: |
+        (
+          parent: TParent,
+          args: TArgs,
+          context: TContext,
+          info?: GraphQLResolveInfo
+        ) => Promise<TResult> | TResult;
+      contextType: ./common#AppContext
     plugins:
       - "typescript"
       - "typescript-resolvers"
