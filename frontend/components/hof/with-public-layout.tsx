@@ -1,4 +1,4 @@
-import { FC, ReactElement } from 'react';
+import { ComponentType } from 'react';
 import Head from 'next/head';
 
 import PublicLayout from '@components/layout/public/public-layout';
@@ -9,8 +9,8 @@ type WithPublicLayoutProps = {
   path?: string;
 };
 
-const withPublicLayout = (Wrapped: FC<any>, props: WithPublicLayoutProps): (() => ReactElement) => {
-  return () => {
+function withPublicLayout<T>(WrappedComponent: ComponentType<T>, props: WithPublicLayoutProps) {
+  return (wrappedComponentProps: T) => {
     const { path, title } = props;
 
     return (
@@ -19,10 +19,10 @@ const withPublicLayout = (Wrapped: FC<any>, props: WithPublicLayoutProps): (() =
           <title>{title} | Prolang</title>
         </Head>
         <PageSeo title={title} path={path}/>
-        <Wrapped/>
+        <WrappedComponent {...wrappedComponentProps} />
       </PublicLayout>
     );
   };
-};
+}
 
 export { withPublicLayout };

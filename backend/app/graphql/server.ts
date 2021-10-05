@@ -28,6 +28,14 @@ export const startGraphqlServer = async (app: Application) => {
   });
 
   const server = new ApolloServer({
+    // TODO type the object
+    context: async ({ req, res }) => {
+      return {
+        ip: req.connection?.remoteAddress || req.ip,
+        reqStartTime: process.hrtime(),
+        xRes: res,
+      };
+    },
     introspection: true,
     plugins: [ApolloServerPluginLandingPageGraphQLPlayground(), sentryPlugin, requestPlugin],
     schema: schemaWithResolvers,
