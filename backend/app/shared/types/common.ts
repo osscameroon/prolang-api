@@ -11,3 +11,5 @@ export type TokenPayload = {
   id: string;
   role: UserRoleEnum;
 };
+
+export type Undefined<T> = T | undefined;

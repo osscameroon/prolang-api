@@ -1,11 +1,12 @@
 import { ApolloServerPlugin } from 'apollo-server-plugin-base';
 import { FieldNode, OperationDefinitionNode, parse } from 'graphql';
+import * as querystring from 'querystring';
+
 import { CreateRequestLogInput, RequestTypeEnum } from '../../shared/types/models';
 import requestLogService from '../../domain/services/requestLog.service';
 import { getDurationInMilliseconds } from '../../shared/utils/request';
 import { GraphQLRequestContext } from 'apollo-server-types/src/index';
 import { AppContext } from '../types/common';
-import * as querystring from 'querystring';
 
 const generateEndpointURL = (operation: string, args: any[][]) => {
   if (args.length === 0) {

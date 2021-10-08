@@ -53,5 +53,6 @@ describe('Others helpers functions', () => {
 
   test.only('Generate route prefix with no path', () => {
     expect(generateRoutePrefix('')).toMatchObject(['/api/', '/private/']);
+    expect(generateRoutePrefix('users')).toMatchObject(['/api/users', '/private/users']);
   });
 });

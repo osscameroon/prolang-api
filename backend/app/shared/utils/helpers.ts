@@ -1,6 +1,7 @@
 import { Request } from 'express';
 import { RequestTypeEnum } from '../types/models';
 import { PRIVATE_ROUTE_PREFIX, PUBLIC_ROUTE_PREFIX } from './constants';
+import { Undefined } from '../types/common';
 
 const parseQueryFields = (fields?: string) => {
   if (!fields) {
@@ -14,13 +15,13 @@ const parseQueryFields = (fields?: string) => {
 };
 
 export const extractQueryFields = (query: Request['query']) => {
-  const page = parseInt((query.page as string | undefined) || '1');
+  const page = parseInt((query.page as Undefined<string>) || '1');
 
   return {
-    fields: parseQueryFields(query.fields as string | undefined),
-    keyword: query.search as string | undefined,
+    fields: parseQueryFields(query.fields as Undefined<string>),
+    keyword: query.search as Undefined<string>,
     page: page || 1,
-    yearGroupName: query.yearGroup as string | undefined,
+    yearGroupName: query.yearGroup as Undefined<string>,
   };
 };
 
