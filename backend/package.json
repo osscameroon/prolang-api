@@ -74,6 +74,7 @@
     "minimatch": "^3.0.4",
     "mongoose": "^6.0.8",
     "rate-limiter-flexible": "^2.2.4",
+    "testcontainers": "^7.21.0",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.5"
   }
