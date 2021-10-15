@@ -4,26 +4,31 @@ import { GenericContainer, StartedTestContainer } from 'testcontainers';
 
 import { connectToDatabase } from '../../shared/core/database';
 
+jest.setTimeout(60000);
+
 // @ts-ignore
 let runningContainer: StartedTestContainer;
+const databaseUser = 'user';
+const databasePassword = 'password';
+const databasePort = 27017;
 
 beforeAll(async () => {
   const container = new GenericContainer('mongo:4.4');
 
   runningContainer = await container
-    .withExposedPorts(27018)
-    .withEnv('MONGO_INITDB_ROOT_USERNAME', 'user')
-    .withEnv('MONGO_INITDB_ROOT_PASSWORD', 'password')
-    //.withEnv('MONGO_INITDB_DATABASE', 'prolang')
+    .withExposedPorts(databasePort)
+    .withEnv('MONGO_INITDB_ROOT_USERNAME', databaseUser)
+    .withEnv('MONGO_INITDB_ROOT_PASSWORD', databasePassword)
     .start();
 
-  console.log(runningContainer.getHost());
+  const runningPort = runningContainer.getMappedPort(databasePort);
 
-  await connectToDatabase();
-}, 120000);
+  const databaseURL = `mongodb://${databaseUser}:${databasePassword}@localhost:${runningPort}/admin`;
+
+  await connectToDatabase(databaseURL);
+});
 
 afterAll(async () => {
-  console.log('connection closed');
   await mongoose.connection.close();
 
   if (runningContainer) {

@@ -1,7 +1,7 @@
 import http from 'http';
 import express from 'express';
 
-import { BASE_URL, SERVER_PORT } from './shared/core/config';
+import { BASE_URL, SERVER_PORT, DATABASE_URL } from './shared/core/config';
 import { connectToDatabase } from './shared/core/database';
 import { setupRestEndpoints } from './rest/server';
 import { logger } from './shared/core/logger';
@@ -15,7 +15,7 @@ export const startServer = async () => {
 
   const graphqlServer = await startGraphqlServer(app);
 
-  await connectToDatabase();
+  await connectToDatabase(DATABASE_URL);
 
   await loadUsers();
 

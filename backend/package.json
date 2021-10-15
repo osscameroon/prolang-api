@@ -22,7 +22,7 @@
     "eslint:fix": "eslint --fix",
     "generate:types": "graphql-codegen",
     "start": "nodemon --watch \"*.ts\" --watch \".env\" --exec \"ts-node\" ./app/index.ts",
-    "test": "jest"
+    "test": "DEBUG=testcontainers* jest"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.1.1",
@@ -47,6 +47,7 @@
     "jest": "^27.0.6",
     "nodemon": "^2.0.12",
     "prettier": "^2.3.2",
+    "testcontainers": "^7.21.0",
     "ts-jest": "^27.0.5",
     "ts-node": "^10.2.0",
     "typescript": "^4.3.5"
@@ -74,7 +75,6 @@
     "minimatch": "^3.0.4",
     "mongoose": "^6.0.8",
     "rate-limiter-flexible": "^2.2.4",
-    "testcontainers": "^7.21.0",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.5"
   }

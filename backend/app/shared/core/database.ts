@@ -1,14 +1,13 @@
 import mongoose, { ConnectOptions } from 'mongoose';
-import { DATABASE_URL } from './config';
 
 mongoose.Promise = global.Promise;
 
-const connectToDatabase = async (): Promise<void> => {
+const connectToDatabase = async (databaseUrl: string): Promise<void> => {
   const options: ConnectOptions = {
     autoIndex: true,
   };
 
-  await mongoose.connect(DATABASE_URL, options);
+  await mongoose.connect(databaseUrl, options);
 };
 
 export { connectToDatabase };
