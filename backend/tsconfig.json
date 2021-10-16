@@ -15,7 +15,7 @@
     "noImplicitReturns": false,
     "moduleResolution": "node",
     "baseUrl": "./",
-    "types": ["jest"],
+    "types": ["jest", "node"],
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "experimentalDecorators": true,

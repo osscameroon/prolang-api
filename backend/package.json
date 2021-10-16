@@ -21,6 +21,7 @@
     "build": "yarn tsc",
     "eslint:fix": "eslint --fix",
     "generate:types": "graphql-codegen",
+    "sanitize": "ts-node app/shared/utils/sanitizeData.ts",
     "start": "nodemon --watch \"*.ts\" --watch \".env\" --exec \"ts-node\" ./app/index.ts",
     "test": "DEBUG=testcontainers* jest"
   },
