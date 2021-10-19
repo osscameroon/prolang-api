@@ -1,15 +1,25 @@
-import { FC, ReactElement } from 'react';
+import { ComponentType } from 'react';
+import Head from 'next/head';
 
 import PrivateLayout from '@components/layout/private/private-layout';
 
-const withPrivateLayout = (Wrapped: FC<any>): (() => ReactElement) => {
-  return () => {
+type WithPrivateLayoutProps = {
+  title: string;
+};
+
+function withPrivateLayout<T>(WrappedComponent: ComponentType<T>, props: WithPrivateLayoutProps) {
+  return (wrappedComponentProps: T) => {
+    const { title } = props;
+
     return (
       <PrivateLayout>
-        <Wrapped />
+        <Head>
+          <title>{title} | Prolang</title>
+        </Head>
+        <WrappedComponent {...wrappedComponentProps} />
       </PrivateLayout>
     );
   };
-};
+}
 
 export { withPrivateLayout };

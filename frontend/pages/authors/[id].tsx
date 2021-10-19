@@ -22,4 +22,4 @@ const UpdateAuthorDataLoader = () => {
   return <Loader />;
 };
 
-export default withPrivateLayout(UpdateAuthorDataLoader);
+export default withPrivateLayout(UpdateAuthorDataLoader, { title: 'Edit author' });

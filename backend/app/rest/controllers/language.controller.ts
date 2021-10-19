@@ -60,7 +60,7 @@ const search = async (req: Request, res: Response) => {
     yearGroup?._id,
   );
 
-  return res.json({ data: { ...result, items: transformLanguageResponse(result.items) } });
+  return res.json({ data: { ...result, items: transformLanguageResponse(sor) } });
 };
 
 const getByIdOrName = async (req: Request, res: Response) => {

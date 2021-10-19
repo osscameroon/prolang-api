@@ -185,4 +185,4 @@ const Languages = () => {
   );
 };
 
-export default withPrivateLayout(Languages);
+export default withPrivateLayout(Languages, { title: 'Languages list' });

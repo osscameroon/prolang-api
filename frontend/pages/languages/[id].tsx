@@ -31,4 +31,4 @@ const UpdateLanguageDataLoader = () => {
   return <ResourceNotFound name="Language" />;
 };
 
-export default withPrivateLayout(UpdateLanguageDataLoader);
+export default withPrivateLayout(UpdateLanguageDataLoader, { title: 'Edit language' });

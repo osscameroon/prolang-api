@@ -100,4 +100,4 @@ const NewLanguageLoader = () => {
   return null;
 };
 
-export default withPrivateLayout(NewLanguageLoader);
+export default withPrivateLayout(NewLanguageLoader, { title: 'New language' });

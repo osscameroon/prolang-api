@@ -22,4 +22,4 @@ const UpdateUserDataLoader = () => {
   return <ResourceNotFound name="User" />;
 };
 
-export default withPrivateLayout(UpdateUserDataLoader);
+export default withPrivateLayout(UpdateUserDataLoader, { title: 'Edit user' });

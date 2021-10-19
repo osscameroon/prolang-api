@@ -50,4 +50,4 @@ const NewUser = () => {
   );
 };
 
-export default withPrivateLayout(NewUser);
+export default withPrivateLayout(NewUser, { title: 'New user' });

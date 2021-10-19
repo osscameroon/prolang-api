@@ -155,4 +155,4 @@ const Authors = () => {
   );
 };
 
-export default withPrivateLayout(Authors);
+export default withPrivateLayout(Authors, { title: 'Authors list' });

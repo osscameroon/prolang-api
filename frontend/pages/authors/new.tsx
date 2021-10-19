@@ -40,4 +40,4 @@ const NewAuthor = () => {
   );
 };
 
-export default withPrivateLayout(NewAuthor);
+export default withPrivateLayout(NewAuthor, { title: 'New author' });

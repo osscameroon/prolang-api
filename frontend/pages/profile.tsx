@@ -18,4 +18,4 @@ const ProfileDataLoader = () => {
   return <ResourceNotFound name="Planner" />;
 };
 
-export default withPrivateLayout(ProfileDataLoader);
+export default withPrivateLayout(ProfileDataLoader, { title: 'User profile' });

@@ -112,4 +112,4 @@ const Users = () => {
   );
 };
 
-export default withPrivateLayout(Users);
+export default withPrivateLayout(Users, { title: 'Users list' });

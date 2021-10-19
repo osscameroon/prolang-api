@@ -39,4 +39,4 @@ const Dashboard = () => {
   );
 };
 
-export default withPrivateLayout(Dashboard);
+export default withPrivateLayout(Dashboard, { title: 'Dashboard' });
