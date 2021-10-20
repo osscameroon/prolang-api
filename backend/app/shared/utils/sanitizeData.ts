@@ -1,4 +1,5 @@
 import mongoose from 'mongoose';
+import { flatten, uniq } from 'lodash';
 
 import { connectToDatabase } from '../core/database';
 import { DATABASE_URL } from '../core/config';
@@ -41,12 +42,31 @@ const findAuthorsWithNoLanguage = async () => {
   await Promise.all(promises);
 };
 
+const findDanglingLanguagesIdInLanguages = async () => {
+  console.log('\nFind languages with dangling languages id');
+  const languages: LanguageDocument[] = await languageService.findAll();
+
+  const allPrecedessors = uniq(flatten(languages.map((language) => language.predecessors)));
+
+  const promises = allPrecedessors.map(async (id) => {
+    const language = await languageService.findById(id);
+
+    if (!language) {
+      console.log('Id => ', id);
+    }
+  });
+
+  await Promise.all(promises);
+};
+
 (async () => {
   await connectToDatabase(DATABASE_URL);
 
   await findDanglingAuthorsIdInLanguages();
 
   await findAuthorsWithNoLanguage();
+
+  await findDanglingLanguagesIdInLanguages();
 
   await mongoose.connection.close();
 
