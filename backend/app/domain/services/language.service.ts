@@ -97,7 +97,7 @@ const count = async () => {
   return LanguageModel.countDocuments();
 };
 
-const update = async (id: string, input: UpdateLanguageInput) => {
+const update = async (id: string, input: Partial<UpdateLanguageInput>) => {
   await LanguageModel.updateOne({ _id: id }, { ...input });
 };
 

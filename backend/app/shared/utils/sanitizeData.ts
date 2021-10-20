@@ -43,16 +43,22 @@ const findAuthorsWithNoLanguage = async () => {
 };
 
 const findDanglingLanguagesIdInLanguages = async () => {
-  console.log('\nFind languages with dangling languages id');
+  console.log('\nFind languages with dangling predecessors id');
   const languages: LanguageDocument[] = await languageService.findAll();
 
-  const allPrecedessors = uniq(flatten(languages.map((language) => language.predecessors)));
+  const allPredecessors = uniq(flatten(languages.map((language) => language.predecessors)));
 
-  const promises = allPrecedessors.map(async (id) => {
+  const promises = allPredecessors.map(async (id) => {
     const language = await languageService.findById(id);
 
     if (!language) {
-      console.log('Id => ', id);
+      const successors: LanguageDocument[] = await languageService.findSuccessors(id);
+
+      for (const lang of successors) {
+        const newPredecessors = lang.predecessors.filter((l) => l.toString() !== id.toString());
+
+        await languageService.update(lang.id, { predecessors: newPredecessors });
+      }
     }
   });
 
