@@ -1,0 +1,8 @@
+.idea
+node_modules
+dist
+build
+notes.txt
+__tests__
+logs
+.next
