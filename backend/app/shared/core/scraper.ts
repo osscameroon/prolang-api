@@ -15,6 +15,7 @@ import { logger } from './logger';
 import languageService from '../../domain/services/language.service';
 import authorService from '../../domain/services/author.service';
 import yearGroupService from '../../domain/services/yearGroup.service';
+import { DATABASE_URL } from './config';
 
 const retrieveData = (content: string) => {
   const $ = cheerio.load(content);
@@ -143,7 +144,7 @@ const scrapeAndSeedDatabase = async () => {
   const response = await axios.get(PROGRAMMING_PAGE_URL);
   const languages = retrieveData(response.data);
 
-  await connectToDatabase();
+  await connectToDatabase(DATABASE_URL);
 
   await yearGroupService.createNotListedGroup();
 
