@@ -11,7 +11,7 @@ RUN yarn build
 
 # Build the backend
 WORKDIR backend
-COPY app codegen.yml package.json tsconfig.json yarn.lock ./
+COPY backend/app backend/codegen.yml backend/package.json backend/tsconfig.json backend/yarn.lock ./
 RUN yarn install
 RUN yarn generate:types && yarn tsc -b
 
