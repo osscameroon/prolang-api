@@ -13,7 +13,7 @@ export const startServer = async () => {
 
   const httpServer = http.createServer(app);
 
-  const graphqlServer = await startGraphqlServer(app);
+  const graphqlServer = await startGraphqlServer(app, httpServer);
 
   await connectToDatabase(DATABASE_URL);
 

@@ -1,30 +1,32 @@
-FROM node:14-buster as builder
+#FROM node:14-buster as builder
+FROM node:14-buster
 
 RUN addgroup --system tecogroup && adduser --shell /bin/bash --ingroup tecogroup teco
+RUN mkdir apidoc backend
 
 # Build API Doc
-RUN mkdir apidoc backend
 WORKDIR apidoc
-COPY apidoc/* .
+COPY apidoc .
 RUN yarn install
 RUN yarn build
 
 # Build the backend
-WORKDIR backend
-COPY backend/app backend/codegen.yml backend/package.json backend/tsconfig.json backend/yarn.lock ./
+WORKDIR /backend
+COPY backend/app ./app
+COPY backend/codegen.yml backend/package.json backend/tsconfig.json backend/yarn.lock ./
 RUN yarn install
 RUN yarn generate:types && yarn tsc -b
 
-# Build the application
-FROM node:current-alpine AS prolang
-ENV NODE_ENV=production
-WORKDIR /app
-COPY --from=builder /backend/package.json yarn.lock ./
-COPY --from=builder /backend/yarn.lock ./
-RUN yarn install --production
-RUN mkdir -p public/spec && cp .env.backend .env
-COPY --from=builder /backend/build ./app
-COPY --from=builder /apidoc/build/index.html ./build/rest/docs
-COPY --from=builder /apidoc/dist/openapi.yaml ./public
+## Build the application
+#FROM node:current-alpine AS prolang
+#ENV NODE_ENV=production
+#WORKDIR /app
+#COPY --from=builder /backend/package.json yarn.lock ./
+#COPY --from=builder /backend/yarn.lock ./
+#RUN yarn install --production
+#RUN mkdir -p public/spec && cp .env.backend .env
+#COPY --from=builder /backend/build ./app
+#COPY --from=builder /apidoc/build/index.html ./build/rest/docs
+#COPY --from=builder /apidoc/dist/openapi.yaml ./public
 
 

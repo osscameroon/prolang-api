@@ -1,18 +1,19 @@
 import { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { ApolloServerPluginLandingPageGraphQLPlayground } from 'apollo-server-core';
+import { ApolloServerPluginLandingPageGraphQLPlayground, ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
 import { createComplexityRule, simpleEstimator } from 'graphql-query-complexity';
 import depthLimit from 'graphql-depth-limit';
+import { Server } from 'http';
 
 import sentryPlugin from './utils/sentryPlugin';
 import requestPlugin from './utils/requestPlugin';
 import { resolvers } from './resolvers';
 import { AppContext } from './types/common';
 
-export const startGraphqlServer = async (app: Application) => {
+export const startGraphqlServer = async (app: Application, httpServer: Server) => {
   const schema = loadSchemaSync('**/*.graphql', {
     loaders: [new GraphQLFileLoader()],
   });
@@ -37,7 +38,12 @@ export const startGraphqlServer = async (app: Application) => {
       };
     },
     introspection: true,
-    plugins: [ApolloServerPluginLandingPageGraphQLPlayground(), sentryPlugin, requestPlugin],
+    plugins: [
+      ApolloServerPluginLandingPageGraphQLPlayground(),
+      ApolloServerPluginDrainHttpServer({ httpServer }),
+      sentryPlugin,
+      requestPlugin,
+    ],
     schema: schemaWithResolvers,
     validationRules: [depthLimitRule, complexityRule],
   });
