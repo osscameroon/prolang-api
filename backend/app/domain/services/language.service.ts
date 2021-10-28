@@ -108,7 +108,7 @@ const findOneOrFail = async (filter: FilterQuery<LanguageDocument>, populateFiel
     throw new Error(RESOURCE_NOT_FOUND);
   }
 
-  return language;
+  return language as unknown;
 };
 
 const deleteById = async (id: string) => {

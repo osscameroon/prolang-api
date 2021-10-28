@@ -1,5 +1,7 @@
 {
   "compilerOptions": {
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
     "target": "es5",
     "module": "commonjs",
     "lib": ["ES6"],
@@ -20,7 +22,7 @@
     "esModuleInterop": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "skipLibCheck": true
+    "typeRoots": ["node_modules/@types"]
   },
   "include": [
     "./app/**/*"

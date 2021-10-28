@@ -40,7 +40,7 @@ export const startGraphqlServer = async (app: Application, httpServer: Server) =
     introspection: true,
     plugins: [
       ApolloServerPluginLandingPageGraphQLPlayground(),
-      ApolloServerPluginDrainHttpServer({ httpServer }),
+      ApolloServerPluginDrainHttpServer({ httpServer }), // graceful shutdown
       sentryPlugin,
       requestPlugin,
     ],
