@@ -33,7 +33,7 @@ const UpdateLanguage = ({ authors, language, languages, yearGroups }: UpdateLang
       link: language.link || undefined,
       longName: language.longName || undefined,
       name: language.name,
-      predecessors: languageOptions.filter(({ value }) => Boolean(language.predecessors?.find(({ id }) => value === id))),
+      predecessors: languageOptions.filter(({ value }) => language.predecessors?.some(({ id }) => value === id)),
       yearConfirmed: YEAR_CONFIRMED_OPTION.find((option) => option.value === `${language.yearConfirmed}`) || YEAR_CONFIRMED_OPTION[0],
       yearGroup: yearGroupOptions.find(option => option.value === language.yearGroup?.id) || yearGroupOptions[0],
       years: language.years.join(' - ')
