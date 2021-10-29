@@ -15,10 +15,10 @@
     "graphql",
     "open-api"
   ],
-  "main": "build/app/index.js",
+  "main": "src/index.js",
   "license": "MIT",
   "scripts": {
-    "build": "yarn tsc",
+    "build": "tsc --project tsconfig.prod.json",
     "eslint:fix": "eslint --fix",
     "generate:types": "graphql-codegen",
     "sanitize": "ts-node app/shared/utils/sanitizeData.ts",
@@ -79,8 +79,5 @@
     "rate-limiter-flexible": "^2.2.4",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.5"
-  },
-  "resolutions": {
-    "apollo-server-types": "3.1.1"
   }
 }
