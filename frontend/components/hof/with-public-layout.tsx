@@ -10,7 +10,9 @@ type WithPublicLayoutProps = {
 };
 
 function withPublicLayout<T>(WrappedComponent: ComponentType<T>, props: WithPublicLayoutProps) {
+  // eslint-disable-next-line react/display-name
   return (wrappedComponentProps: T) => {
+    // eslint-disable-next-line react/prop-types
     const { path, title } = props;
 
     return (

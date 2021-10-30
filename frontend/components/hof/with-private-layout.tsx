@@ -8,7 +8,9 @@ type WithPrivateLayoutProps = {
 };
 
 function withPrivateLayout<T>(WrappedComponent: ComponentType<T>, props: WithPrivateLayoutProps) {
+  // eslint-disable-next-line react/display-name
   return (wrappedComponentProps: T) => {
+    // eslint-disable-next-line react/prop-types
     const { title } = props;
 
     return (

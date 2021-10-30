@@ -6,7 +6,7 @@ const Redirect = ({ path }: { path: string }) => {
 
   useEffect(() => {
     router.push(path);
-  }, []);
+  }, [path, router]);
 
   return <></>;
 };
