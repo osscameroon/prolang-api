@@ -8,7 +8,9 @@
     "start": "next start",
     "lint": "next lint",
     "cypress:open": "cypress open",
-    "test": "start-server-and-test dev 5701 cypress:open"
+    "cypress:run": "cypress run",
+    "test": "start-server-and-test dev 5701 cypress:open",
+    "test:ci": "start-server-and-test dev 5701 cypress:run"
   },
   "dependencies": {
     "@headlessui/react": "^1.3.0",
