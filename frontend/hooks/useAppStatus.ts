@@ -18,6 +18,8 @@ export const useAppStatus = () => {
   };
 
   useEffect(() => {
+    updateStatus();
+
     const id = setInterval(updateStatus, 5000);
 
     return () => clearInterval(id);

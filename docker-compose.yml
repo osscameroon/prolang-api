@@ -1,0 +1,69 @@
+services:
+  db:
+    container_name: prolang-db
+    image: mongo:4.4
+    restart: unless-stopped
+    volumes:
+      - "${API_VOLUME_PATH:-~/prolang}/db:/db/data"
+    ports:
+      - 27018:27017
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=dbuser
+      - MONGO_INITDB_ROOT_PASSWORD=D6fTawP364rERxGZCgse4FMcym
+    networks:
+      - prolang-network
+  api:
+    container_name: prolang-api
+    build:
+      context: .
+      dockerfile: Dockerfile.api
+    restart: unless-stopped
+    volumes:
+      - "${API_VOLUME_PATH:-~/prolang}/api/logs:/app/logs"
+    ports:
+      - "5730:5700"
+    environment:
+      - NODE_ENV=development
+      - SERVER_PORT=5700
+      - BASE_URL=http://localhost:5700
+      - DATABASE_URL=mongodb://dbuser:D6fTawP364rERxGZCgse4FMcym@db:27017/admin
+      - PAGINATION_LIMIT=30
+      - MAX_REQUEST_LIMIT=600
+      - MAX_REQUEST_WINDOW=900
+      - SENTRY_ENABLED=false
+      - SENTRY_DSN=
+      - JWT_SECRET=Ds87Uvpv-9843XayjUf
+      - JWT_EXPIRE=86400
+      - AUTH_ENABLED=true
+      - ADMIN_PASSWORD=password
+      - CLIENT_ORIGIN=client
+    links:
+      - db
+    depends_on:
+      - db
+    networks:
+      - prolang-network
+  web:
+    container_name: prolang-web
+    build:
+      context: .
+      dockerfile: Dockerfile.web
+      args:
+        - NEXT_PUBLIC_API_URL=http://localhost:5730
+        - NEXT_PUBLIC_API_DOC_URL=http://localhost:5730/spec/prolang.yaml
+        - NEXT_PUBLIC_GRAPHQL_URL=http://localhost:5730/graphql
+        - NEXT_PUBLIC_GA_ID=
+        - NEXT_PUBLIC_CLIENT_ORIGIN=client
+    restart: unless-stopped
+    ports:
+      - "3030:3000"
+    links:
+      - api
+    depends_on:
+      - api
+    networks:
+      - prolang-network
+
+networks:
+  prolang-network:
+    driver: bridge
