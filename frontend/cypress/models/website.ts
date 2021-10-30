@@ -1,6 +1,11 @@
 import { cySelector } from '@cypress/models/utils';
+import { NotFound } from '@cypress/models/not-found';
 
 class Website {
+  notFound = new NotFound();
+
+  constructor() {}
+
   expectHomePageToBeDisplayed() {
     cy.url().should('include', '/');
     cy.get('h2 > span.block').contains('The API to browse programming languages');

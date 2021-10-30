@@ -14,7 +14,7 @@ const PageNotFound = () => {
 
         <div className="flex justify-center mt-8">
           <Link href="/">
-            <a className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white bg-red-600 border border-transparent rounded-lg focus:outline-none">
+            <a className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white bg-red-600 border border-transparent rounded-lg focus:outline-none" data-cy="lnk-home">
                 Go to the home page
             </a>
           </Link>

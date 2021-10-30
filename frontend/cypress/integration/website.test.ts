@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 
-import { Website } from '@cypress/models/Website';
+import { Website } from '@cypress/models/website';
 
 context('Navigate on the website', () => {
   before(() => {
@@ -15,7 +15,7 @@ context('Navigate on the website', () => {
     cy.visit('/');
   });
 
-  it('should navigate to the website', () => {
+  it('should navigate on the website pages', () => {
     const website = new Website();
 
     website.expectHomePageToBeDisplayed();
@@ -27,7 +27,18 @@ context('Navigate on the website', () => {
     website.navigateToHomePage();
   });
 
-  // it('should 404', () => {});
+  it.only('should display page for not found url', () => {
+    const website = new Website();
+
+    website.notFound.navigateToUnknownPage();
+
+    website.notFound.expectNotFoundPageToBeDisplayed();
+
+    website.notFound.goBackToHomePage();
+
+    website.expectHomePageToBeDisplayed();
+  });
+
   // it('should maintenance website', () => {});
   // it('should redirect unauthenticated user to home page', () => {});
 });
