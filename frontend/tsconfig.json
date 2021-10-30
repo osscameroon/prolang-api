@@ -19,6 +19,9 @@
       "@components/*": [
         "components/*"
       ],
+      "@cypress/*": [
+        "cypress/*"
+      ],
       "@styles/*": [
         "styles/*"
       ],

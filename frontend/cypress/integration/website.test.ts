@@ -1,7 +1,8 @@
 /// <reference types="cypress" />
 
-// @ts-ignore
-context('Navigate on home page', () => {
+import { Website } from '@cypress/models/Website';
+
+context('Navigate on the website', () => {
   before(() => {
     cy.clearLocalStorageSnapshot();
   });
@@ -14,14 +15,19 @@ context('Navigate on home page', () => {
     cy.visit('/');
   });
 
-  it('should render homepage', function () {
-    cy.url().should('include', '/');
-    cy.get('h2 > span.block').contains('The API to browse programming languages');
+  it('should navigate to the website', () => {
+    const website = new Website();
 
-    // The new url should include "/about"
-    cy.url().should('include', '/about');
+    website.expectHomePageToBeDisplayed();
 
-    // The new page should contain an h1 with "About page"
-    cy.get('h1').contains('About Page');
+    website.navigateToDocumentationPage();
+
+    website.navigateToPlaygroundPage();
+
+    website.navigateToHomePage();
   });
+
+  // it('should 404', () => {});
+  // it('should maintenance website', () => {});
+  // it('should redirect unauthenticated user to home page', () => {});
 });
