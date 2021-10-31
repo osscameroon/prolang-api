@@ -1,5 +1,6 @@
 import { rest } from 'msw';
 import { apiSpec } from './fixtures/apidoc';
+import { currentUserData, dashboardStatData, loginUserData } from './fixtures/api-response';
 
 export const handlers = [
   rest.get('http://localhost:5700/api/health', (req, res, ctx) => {
@@ -51,10 +52,25 @@ export const handlers = [
     return res(
       ctx.status(200),
       ctx.json({
-        data: {
-          expiresIn: new Date().getTime(),
-          token: 'jwt-token',
-        }
+        data: loginUserData,
+      })
+    );
+  }),
+
+  rest.get('http://localhost:5700/private/users/me', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        data: currentUserData,
+      })
+    );
+  }),
+
+  rest.get('http://localhost:5700/private/stat/summary', (req, res, ctx) => {
+    return res(
+      ctx.status(200),
+      ctx.json({
+        data: dashboardStatData,
       })
     );
   }),

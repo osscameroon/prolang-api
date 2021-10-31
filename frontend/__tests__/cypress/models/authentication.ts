@@ -1,4 +1,5 @@
 import { cySelector } from './utils';
+import { COOKIE_NAME } from '@utils/constants';
 
 class Authentication {
   goToLoginPage() {
@@ -23,6 +24,22 @@ class Authentication {
       .find('.Toastify__toast-body')
       .eq(0)
       .contains('The credential is invalid.');
+  }
+
+  expectToBeRedirectedToDashboard() {
+    cy.url().should('include', '/dashboard');
+  }
+
+  expectCookieToHaveBeenSet() {
+    cy.getCookie(COOKIE_NAME).should('exist').and('have.property', 'value', 'jwt-token');
+  }
+
+  loginUserAutomatically() {
+    cy.setCookie(COOKIE_NAME, 'jwt-token');
+  }
+
+  expectCookieToHaveBeenDestroyed() {
+    cy.getCookie(COOKIE_NAME).should('not.exist');
   }
 }
 
