@@ -1,6 +1,7 @@
 /// <reference types="cypress" />
 
 import { Website } from '@cypress/models/website';
+import { cySelector } from '@cypress/models/utils';
 
 context('Navigate on the website', () => {
   before(() => {
@@ -27,7 +28,7 @@ context('Navigate on the website', () => {
     website.navigateToHomePage();
   });
 
-  it.only('should display page for not found url', () => {
+  it('should display page for not found url', () => {
     const website = new Website();
 
     website.notFound.navigateToUnknownPage();
@@ -39,6 +40,27 @@ context('Navigate on the website', () => {
     website.expectHomePageToBeDisplayed();
   });
 
-  // it('should maintenance website', () => {});
+  it.only('should maintenance website', () => {
+    cy.window().then(window => {
+      // @ts-ignore
+      const { worker, rest } = window.msw;
+
+      worker.use(
+        // @ts-ignore
+        rest.get('http://localhost:5700/api/health', (_req, res, ctx) => {
+          return res(
+            ctx.status(500),
+            ctx.json({})
+          );
+        })
+      );
+    });
+    cy.wait(500);
+    cy.get('h2').contains('Maintenance in progress...');
+    cy.get(cySelector('lnk-email'))
+      .should('have.attr', 'href', 'mailto:tericcabel@yahoo.com?subject=Prolang website down')
+      .contains('Contact the admin');
+  });
+
   // it('should redirect unauthenticated user to home page', () => {});
 });
