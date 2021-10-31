@@ -16,7 +16,7 @@ import '@styles/globals.css';
 
 const queryClient = new QueryClient({ defaultOptions: { queries: { retry: 0 } } });
 
-if (process.env.NODE_ENV === 'development' && Boolean(process.browser)) {
+if (process.env.NEXT_PUBLIC_APP_ENV === 'test' && Boolean(process.browser)) {
   const { worker } = require('../__tests__/mocks/browser');
 
   worker.start();

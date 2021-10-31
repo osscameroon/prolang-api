@@ -1,5 +1,7 @@
+export const API_BASE_URL = 'http://localhost:5700';
+
 export const apiUrl = (path: string) => {
-  return `http://localhost:5700/api${path}`;
+  return `${API_BASE_URL}/api${path}`;
 };
 
 export const mockHealthCheckRequestToReturnBadStatus = () => {
@@ -13,3 +15,4 @@ export const mockHealthCheckRequestToReturnBadStatus = () => {
     );
   });
 };
+

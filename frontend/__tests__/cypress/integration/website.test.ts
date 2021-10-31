@@ -1,7 +1,9 @@
 /// <reference types="cypress" />
 
 import { Website } from '../models/website';
-import { mockHealthCheckRequestToReturnBadStatus } from '../../mocks/utils';
+import {
+  mockHealthCheckRequestToReturnBadStatus
+} from '../../mocks/utils';
 
 context('Navigate on the website', () => {
   before(() => {
@@ -16,7 +18,7 @@ context('Navigate on the website', () => {
     cy.visit('/');
   });
 
-  it.only('should navigate on the website pages', () => {
+  it('should navigate on the website pages', () => {
     const website = new Website();
 
     website.expectHomePageToBeDisplayed();
