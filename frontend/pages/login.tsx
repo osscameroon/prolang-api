@@ -58,15 +58,17 @@ export default function Home() {
                     name="email"
                     type="email"
                     placeholder="jane.doe@email.com"
+                    data-cy="input-email"
                     isRequired
                   />
                   <FormInput
                     label="Password"
                     name="password"
                     type="password"
+                    data-cy="input-password"
                     isRequired
                   />
-                  <Button text="Log in" className="w-full justify-center mt-12" loading={loginMutation.isLoading} />
+                  <Button text="Log in" className="w-full justify-center mt-12" loading={loginMutation.isLoading} data-cy="btn-submit" />
                 </form>
               </FormProvider>
 
