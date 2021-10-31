@@ -5,5 +5,13 @@ import { handlers } from './handlers';
 export const worker = setupWorker(...handlers);
 
 // Expose methods globally to make them available in integration tests
-// @ts-ignore
 window.msw = { rest, worker };
+
+declare global {
+  interface Window {
+    msw: {
+      rest: typeof rest;
+      worker: typeof worker;
+    }
+  }
+}

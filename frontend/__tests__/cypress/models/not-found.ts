@@ -1,4 +1,4 @@
-import { cySelector } from '@cypress/models/utils';
+import { cySelector } from './utils';
 
 class NotFound {
   navigateToUnknownPage() {

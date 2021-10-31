@@ -1,8 +1,10 @@
-import { cySelector } from '@cypress/models/utils';
-import { NotFound } from '@cypress/models/not-found';
+import { cySelector } from './utils';
+import { NotFound } from './not-found';
+import { Maintenance } from './maintenance';
 
 class Website {
   notFound = new NotFound();
+  maintenance = new Maintenance();
 
   constructor() {}
 
@@ -25,6 +27,10 @@ class Website {
   navigateToHomePage() {
     cy.get(cySelector('lnk-home')).click();
     cy.url().should('include', '/');
+  }
+
+  goToDashboard() {
+    cy.visit('/dashboard');
   }
 }
 
