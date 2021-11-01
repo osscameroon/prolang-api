@@ -3,5 +3,6 @@ postcss.config.js
 next.config.js
 next-env.d.ts
 __mocks__
+__tests__
 jest.config.js
 jest.setup.js

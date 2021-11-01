@@ -2,12 +2,12 @@ import React from 'react';
 import { render, screen } from '@testing-library/react';
 import Home from '../../pages/index';
 
-describe('Home', () => {
-  it('renders a heading', () => {
+describe('Home Page', () => {
+  it('should render the full page', () => {
     render(<Home />);
 
     const heading = screen.getByRole('heading', {
-      name: /welcome to next\.js!/i,
+      name: /The API to browse programming languages From the beginning until today/i,
     });
 
     // @ts-ignore

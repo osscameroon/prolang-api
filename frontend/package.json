@@ -1,7 +1,8 @@
 {
   "name": "prolang-ui",
   "version": "1.0.0",
-  "private": true,
+  "private": false,
+  "license": "MIT",
   "scripts": {
     "dev": "next dev -p 5701",
     "build": "next build",
@@ -60,7 +61,6 @@
     "prettier": "^2.3.2",
     "start-server-and-test": "^1.14.0",
     "tailwindcss": "^2.2.15",
-    "ts-jest": "^27.0.7",
     "typescript": "4.3.5"
   },
   "msw": {
