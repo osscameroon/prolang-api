@@ -14,7 +14,7 @@ module.exports = {
     '**/__tests__/ui/*.(ts|tsx)'
   ],
   'setupFilesAfterEnv': [
-    '<rootDir>/jest.setup.js'
+    '<rootDir>/jest.setup.ts'
   ],
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: [

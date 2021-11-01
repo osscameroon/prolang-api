@@ -10,7 +10,6 @@ describe('Home Page', () => {
       name: /The API to browse programming languages From the beginning until today/i,
     });
 
-    // @ts-ignore
     expect(heading).toBeInTheDocument();
   });
 });
