@@ -1,6 +1,7 @@
 import React, {PropsWithChildren} from 'react';
 import { QueryClient, QueryClientProvider } from "react-query";
-import { render, fireEvent, cleanup, screen } from '@testing-library/react';
+import { render, fireEvent, screen } from '@testing-library/react';
+import userEvent  from '@testing-library/user-event';
 import {act} from "react-dom/test-utils";
 import {rest} from 'msw'
 import {setupServer} from 'msw/node'
@@ -30,7 +31,6 @@ describe.only('Login page', () => {
   beforeAll(() => server.listen());
 
   afterEach(() => {
-    cleanup();
     server.resetHandlers();
   });
 
@@ -39,11 +39,8 @@ describe.only('Login page', () => {
   it('should display errors when inputs are empty', async () => {
     render(<Login />, { wrapper });
 
-    // const loginForm = screen.getByTestId('login-form');
-    // screen.debug(loginForm);
-
     await act(async () => {
-      fireEvent.click(screen.getByTestId('btn-submit'));
+      fireEvent.click(screen.getByRole('button', { name: /Log in/i }));
     })
 
     const inputEmail = screen.getByRole('textbox', { name: /Email address*/i });
@@ -59,25 +56,16 @@ describe.only('Login page', () => {
     const badEmailValue = 'this-is-bad-email';
     const validPasswordValue = 'Passw04D$';
 
-    const  { container } = render(<Login />, { wrapper });
+    render(<Login />, { wrapper });
 
     const inputEmail = screen.getByRole('textbox', { name: /Email address*/i });
-    const inputPassword = container.querySelector("input[name='password']");
+    const inputPassword = screen.getByLabelText(/password*/i);
 
     await act(async () => {
-      fireEvent.input(inputEmail, {
-        target: {
-          value: badEmailValue
-        }
-      });
-      // @ts-ignore
-      fireEvent.input(inputPassword, {
-        target: {
-          value: validPasswordValue
-        }
-      });
+      userEvent.type(inputEmail, badEmailValue);
+      userEvent.type(inputPassword, validPasswordValue);
 
-      fireEvent.click(screen.getByTestId('btn-submit'));
+      fireEvent.click(screen.getByRole('button', { name: /Log in/i }));
     })
 
     // @ts-ignore

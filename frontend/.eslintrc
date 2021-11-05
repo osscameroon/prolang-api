@@ -1,5 +1,6 @@
 {
-  "extends": ["next", "next/core-web-vitals", "prettier"],
+  "extends": ["next", "next/core-web-vitals", "prettier", "plugin:jest-dom/recommended"],
+  "plugins": ["testing-library", "jest-dom"],
   "rules": {
     "quotes": ["warn", "single"],
     "semi": "warn",

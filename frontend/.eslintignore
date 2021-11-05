@@ -4,5 +4,6 @@ next.config.js
 next-env.d.ts
 __mocks__
 __tests__
+!__tests__/ui
 jest.config.js
 jest.setup.ts

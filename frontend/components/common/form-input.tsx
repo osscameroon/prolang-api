@@ -20,14 +20,14 @@ const FormInput = (props: FormInputProps) => {
     'mt-1 block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-300 focus:ring focus:ring-indigo-200 focus:ring-opacity-50',
     className,
   );
+  const inputLabel = `${label}${isRequired ? '*' : ''}`;
 
   return (
-    <label className="block text-sm mb-6">
+    <label htmlFor={inputProps.name} className="block text-sm mb-6">
       <span className="font-bold text-gray-700 dark:text-gray-400">
-        {label}
-        {isRequired ? '*' : ''}
+        {inputLabel}
       </span>
-      <input className={inputClasses} autoComplete="off" {...inputProps} {...(inputProps.name ? register(inputProps.name) : {})} />
+      <input className={inputClasses} autoComplete="off" id={inputProps.name} {...inputProps} {...(inputProps.name ? register(inputProps.name) : {})} />
       {errorMessage && <span className="text-xs text-red-600 dark:text-red-400 form-error">{errorMessage}</span>}
     </label>
   );

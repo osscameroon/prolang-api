@@ -49,7 +49,7 @@ export default function Login() {
       <div className="flex items-center min-h-[calc(100vh-130px)] p-6 bg-gray-50 dark:bg-gray-900">
         <div className="h-full w-1/4 mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
           <div className="flex items-center justify-center p-6 sm:p-12 md:w-full">
-            <div className="w-full" data-testid="login-form">
+            <div className="w-full">
               <h1 className="mb-8 text-xl font-semibold text-gray-700 dark:text-gray-200">Log into Prolang</h1>
               <FormProvider {...formMethods}>
                 <form onSubmit={formMethods.handleSubmit(handleLogin)}>
@@ -68,7 +68,7 @@ export default function Login() {
                     data-testid="input-password"
                     isRequired
                   />
-                  <Button text="Log in" className="w-full justify-center mt-12" loading={loginMutation.isLoading} data-testid="btn-submit" />
+                  <Button text="Log in" className="w-full justify-center mt-12" loading={loginMutation.isLoading} />
                 </form>
               </FormProvider>
 
