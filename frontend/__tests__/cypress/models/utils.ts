@@ -1,1 +1,1 @@
-export const cySelector = (s: string) => `[data-cy=${s}]`;
+export const cySelector = (s: string) => `[data-testid=${s}]`;

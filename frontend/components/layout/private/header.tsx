@@ -35,9 +35,9 @@ const PrivateHeader = () => {
               onClick={toggleProfileMenuOpen}
               aria-label="Account"
               aria-haspopup="true"
-              data-cy="btn-account-menu"
+              data-testid="btn-account-menu"
             >
-              <div className="mr-2" data-cy="username">{fullName}</div>
+              <div className="mr-2" data-testid="username">{fullName}</div>
               <LetterAvatar name={fullName} size={32} />
             </button>
             {isProfileMenuOpen && <ProfileMenu closeModal={toggleProfileMenuOpen} handleLogout={logout} />}

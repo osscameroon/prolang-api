@@ -18,7 +18,7 @@ const loginSchema = yup.object().shape({
 
 type LoginFormValues = yup.InferType<typeof loginSchema>;
 
-export default function Home() {
+export default function Login() {
   const router = useRouter();
   const { saveToken } = useAuth();
   const loginMutation = useLogin();
@@ -49,7 +49,7 @@ export default function Home() {
       <div className="flex items-center min-h-[calc(100vh-130px)] p-6 bg-gray-50 dark:bg-gray-900">
         <div className="h-full w-1/4 mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
           <div className="flex items-center justify-center p-6 sm:p-12 md:w-full">
-            <div className="w-full">
+            <div className="w-full" data-testid="login-form">
               <h1 className="mb-8 text-xl font-semibold text-gray-700 dark:text-gray-200">Log into Prolang</h1>
               <FormProvider {...formMethods}>
                 <form onSubmit={formMethods.handleSubmit(handleLogin)}>
@@ -58,17 +58,17 @@ export default function Home() {
                     name="email"
                     type="email"
                     placeholder="jane.doe@email.com"
-                    data-cy="input-email"
+                    data-testid="input-email"
                     isRequired
                   />
                   <FormInput
                     label="Password"
                     name="password"
                     type="password"
-                    data-cy="input-password"
+                    data-testid="input-password"
                     isRequired
                   />
-                  <Button text="Log in" className="w-full justify-center mt-12" loading={loginMutation.isLoading} data-cy="btn-submit" />
+                  <Button text="Log in" className="w-full justify-center mt-12" loading={loginMutation.isLoading} data-testid="btn-submit" />
                 </form>
               </FormProvider>
 

@@ -17,17 +17,17 @@ const PublicHeader = () => {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <Link href="/">
-                    <a className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-base font-light" data-cy="lnk-home">
+                    <a className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-base font-light" data-testid="lnk-home">
                       Home
                     </a>
                   </Link>
                   <Link href="/documentation">
-                    <a className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-base font-light" data-cy="lnk-documentation">
+                    <a className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-base font-light" data-testid="lnk-documentation">
                       Documentation
                     </a>
                   </Link>
                   <Link href="/playground">
-                    <a className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-base font-light" data-cy="lnk-playground">
+                    <a className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-base font-light" data-testid="lnk-playground">
                       GraphQL
                     </a>
                   </Link>
