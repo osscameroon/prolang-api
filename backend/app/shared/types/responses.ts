@@ -1,7 +1,18 @@
 import { YearGroupDocument, AuthorDocument, LanguageDocument, UserDocument } from './models';
 
+export type HttpResponseData<T> = {
+  data: T;
+};
+
 export type YearGroupResponse = {
   id: YearGroupDocument['_id'];
+  name: YearGroupDocument['name'];
+  position: YearGroupDocument['position'];
+};
+
+export type YearGroupEnhancedResponse = {
+  id: YearGroupDocument['_id'];
+  languageCount: number;
   name: YearGroupDocument['name'];
   position: YearGroupDocument['position'];
 };

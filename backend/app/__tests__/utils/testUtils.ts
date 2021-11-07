@@ -15,7 +15,7 @@ const handleAxiosRequestFailure = ({ response }: AxiosError) => {
   });
 };
 
-// const resolveAxiosError = (e: any) => e;
+const resolveAxiosError = (e: any) => e;
 
 const startServer = async () => {
   const app = express();
@@ -49,4 +49,4 @@ const initializeServerAndApiClient = async (): Promise<TestInstance> => {
   return { apiClient, httpServer };
 };
 
-export { initializeServerAndApiClient };
+export { initializeServerAndApiClient, resolveAxiosError };

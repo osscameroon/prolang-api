@@ -1,8 +1,10 @@
 // This file is executed once in the worker before executing each test file.
 import mongoose from 'mongoose';
 import { GenericContainer, StartedTestContainer } from 'testcontainers';
+import yearGroupService from '../../domain/services/yearGroup.service';
 
 import { connectToDatabase } from '../../shared/core/database';
+import { yearGroupsInput } from './fixtures';
 
 jest.setTimeout(60000);
 
@@ -26,6 +28,8 @@ beforeAll(async () => {
   const databaseURL = `mongodb://${databaseUser}:${databasePassword}@localhost:${runningPort}/admin`;
 
   await connectToDatabase(databaseURL);
+
+  await Promise.all(yearGroupsInput.map((input) => yearGroupService.findOrCreate(input)));
 });
 
 afterAll(async () => {
