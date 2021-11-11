@@ -1,5 +1,6 @@
 import path from 'path';
 import { Router, Request, Response } from 'express';
+import { sendEvent } from '../../shared/core/status';
 
 const commonRoute = () => {
   const router = Router();
@@ -8,8 +9,12 @@ const commonRoute = () => {
     res.sendFile(path.join(__dirname, '../docs/index.html'));
   });
 
-  router.get('/api/health', (_req: Request, res: Response) => {
-    res.json({ message: 'Ok' });
+  router.get('/api/health', (req: Request, res: Response) => {
+    if (req.headers.accept && req.headers.accept == 'text/event-stream') {
+      sendEvent(req, res);
+    } else {
+      res.json({ message: 'Ok' });
+    }
   });
 
   return router;
