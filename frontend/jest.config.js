@@ -11,7 +11,7 @@ module.exports = {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
   'testMatch': [
-    '**/__tests__/ui/*.(ts|tsx)'
+    '**/__tests__/ui/**/*.(ts|tsx)'
   ],
   'setupFilesAfterEnv': [
     '<rootDir>/jest.setup.ts'

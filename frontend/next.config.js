@@ -1,3 +1,5 @@
+const pkg = require('./package.json')
+
 module.exports = {
   reactStrictMode: true,
   webpack: (config, options) => {
@@ -7,5 +9,7 @@ module.exports = {
     }
 
     return config;
-  }
+  },
+  // avoid random BUILD_ID
+  generateBuildId: () => pkg.version,
 }
