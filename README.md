@@ -7,3 +7,14 @@ Get information about programming languages
 - Yarn or NPM
 - MongoDB 4+
 
+## Installation
+
+## Backend
+
+## Apidoc
+
+## Frontend
+
+## Testing
+
+## Deployment
