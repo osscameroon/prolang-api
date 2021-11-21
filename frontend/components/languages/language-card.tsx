@@ -66,7 +66,7 @@ const languages: LightLanguage[] = [
 
 const LanguageCard = () => {
   return (
-    <div className="w-full flex flex-wrap justify-between xs:flex-column">
+    <div className="w-full flex flex-wrap justify-between xs:flex-column sm:justify-around">
       {languages.map((language) => (
         <LanguageCardItem data={language} key={language.name} />
       ))}

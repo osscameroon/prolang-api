@@ -11,7 +11,7 @@ const Home = () => {
   return (
     <div>
       <div className="w-full">
-        <div className="xs:w-full sm:w-2/3 mx-auto overflow-y-auto">
+        <div className="xs:w-full sm:w-5/6 md:w-2/3 mx-auto overflow-y-auto">
           <div className="bg-white dark:bg-gray-800 ">
             <div className="text-center w-full mx-auto py-16 px-4 sm:px-6 lg:py-32 lg:px-8 z-20">
               <h2 className="xs:text-2xl font-extrabold text-black dark:text-white sm:text-4xl">
@@ -38,7 +38,7 @@ const Home = () => {
           <p className="mt-2 mb-4 text-2xl xs:text-xl text-center leading-8 tracking-tight text-gray-900 dark:text-white">
             Retrieve data using the mode that suits you
           </p>
-          <div className="w-full xs:flex-column sm:flex-row sm:flex sm:justify-between">
+          <div className="w-full xs:flex-column sm:flex-row sm:flex sm:justify-around md:justify-between">
             <Tile
               icon={<MicroserviceIcon />}
               title="REST"
@@ -64,7 +64,7 @@ const Home = () => {
         </div>
       </div>
       <div className="w-full bg-white py-10 dark:bg-gray-800">
-        <div className="xs:w-full md:w-11/12 xl:w-[90%] w-2/3 xs:px-4 mx-auto">
+        <div className="xs:w-full md:w-11/12 xl:w-[90%] 2xl:w-2/3 xs:px-4 mx-auto">
           <div className="w-full text-center uppercase font-bold text-3xl xs:text-2xl text-blue-700">
             Popular languages
           </div>
