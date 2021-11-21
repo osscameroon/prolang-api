@@ -11,12 +11,12 @@ const Home = () => {
   return (
     <div>
       <div className="w-full">
-        <div className="w-2/3 mx-auto overflow-y-auto">
+        <div className="xs:w-full sm:w-2/3 mx-auto overflow-y-auto">
           <div className="bg-white dark:bg-gray-800 ">
             <div className="text-center w-full mx-auto py-16 px-4 sm:px-6 lg:py-32 lg:px-8 z-20">
-              <h2 className="text-3xl font-extrabold text-black dark:text-white sm:text-4xl">
+              <h2 className="xs:text-2xl font-extrabold text-black dark:text-white sm:text-4xl">
                 <span className="block">The API to browse programming languages</span>
-                <div className="mt-4"/>
+                <div className="mt-4" />
                 <span className="block text-blue-500">From the beginning until today</span>
               </h2>
               <div className="lg:mt-8 lg:flex-shrink-0">
@@ -32,13 +32,13 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-blue-100 pt-10 pb-20 dark:bg-gray-800" >
-        <div className="w-2/3 mx-auto">
-          <div className="w-full text-center uppercase font-bold text-3xl text-blue-700">Fetch mode</div>
-          <p className="mt-2 mb-4 text-2xl text-center leading-8 tracking-tight text-gray-900 dark:text-white">
+      <div className="w-full bg-blue-100 pt-10 xs:pb-8 sm:pb-20 dark:bg-gray-800">
+        <div className="xs:w-full md:w-11/12 xl:w-2/3 xs:px-4 mx-auto">
+          <div className="w-full text-center uppercase font-bold text-3xl xs:text-2xl text-blue-700">Fetch mode</div>
+          <p className="mt-2 mb-4 text-2xl xs:text-xl text-center leading-8 tracking-tight text-gray-900 dark:text-white">
             Retrieve data using the mode that suits you
           </p>
-          <div className="w-full flex justify-around">
+          <div className="w-full xs:flex-column sm:flex-row sm:flex sm:justify-between">
             <Tile
               icon={<MicroserviceIcon />}
               title="REST"
@@ -46,8 +46,8 @@ const Home = () => {
               linkHref="/documentation"
               linkIcon={<ArrowCircleRightIcon className="ml-2 h-6 w-6" />}
             >
-              Easy to start and integrate in existing application because you don't need to learn
-              a query language first.
+              Easy to start and integrate in existing application because you don't need to learn a query language
+              first.
             </Tile>
 
             <Tile
@@ -63,9 +63,11 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <div className="w-full bg-white py-10 dark:bg-gray-800" >
-        <div className="w-2/3 mx-auto">
-          <div className="w-full text-center uppercase font-bold text-3xl text-blue-700">Popular languages</div>
+      <div className="w-full bg-white py-10 dark:bg-gray-800">
+        <div className="xs:w-full md:w-11/12 xl:w-[90%] w-2/3 xs:px-4 mx-auto">
+          <div className="w-full text-center uppercase font-bold text-3xl xs:text-2xl text-blue-700">
+            Popular languages
+          </div>
           <LanguageCard />
         </div>
       </div>

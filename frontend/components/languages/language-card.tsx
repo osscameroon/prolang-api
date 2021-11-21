@@ -11,64 +11,65 @@ const languages: LightLanguage[] = [
   {
     author: 'Brendan Eich',
     company: 'Netscape',
-    icon: <JavascriptIcon/>,
+    icon: <JavascriptIcon />,
     link: 'https://en.wikipedia.org/wiki/JavaScript',
     name: 'Javascript',
     predecessors: ['LiveScript'],
-    yearOfCreation: 1995
+    yearOfCreation: 1995,
   },
   {
     author: 'Bjarne Stroustrup',
     company: 'ISO/IEC JTC1',
-    icon: <CppIcon/>,
+    icon: <CppIcon />,
     link: 'https://en.wikipedia.org/wiki/C%2B%2B',
     name: 'C++',
     predecessors: ['C'],
-    yearOfCreation: 1983
+    yearOfCreation: 1983,
   },
   {
     author: 'Ken Thompson',
     company: 'Google',
-    icon: <GolangIcon/>,
+    icon: <GolangIcon />,
     link: 'https://en.wikipedia.org/wiki/Go_(programming_language)',
     name: 'Golang',
     predecessors: ['C', 'Limbo', 'Oberon'],
-    yearOfCreation: 2009
+    yearOfCreation: 2009,
   },
   {
     author: 'James Gosling',
     company: 'Sun Microsystems',
-    icon: <JavaIcon/>,
+    icon: <JavaIcon />,
     link: 'https://en.wikipedia.org/wiki/Java_(programming_language)',
     name: 'Java',
     predecessors: ['C', 'C++', 'Objective C'],
-    yearOfCreation: 1995
+    yearOfCreation: 1995,
   },
   {
     author: 'Guido Van Rossum',
     company: 'Python Software Foundation',
-    icon: <PythonIcon/>,
+    icon: <PythonIcon />,
     link: 'https://en.wikipedia.org/wiki/Python_(programming_language)',
     name: 'Python',
     predecessors: ['ABC', 'C'],
-    yearOfCreation: 1991
+    yearOfCreation: 1991,
   },
   {
     author: 'Anders Hejlsberg',
     company: 'Microsoft',
-    icon: <CsharpIcon/>,
+    icon: <CsharpIcon />,
     link: 'https://en.wikipedia.org/wiki/C_Sharp_(programming_language)',
     name: 'C#',
     predecessors: ['C', 'C++', 'Delphi', 'Java'],
-    yearOfCreation: 2000
+    yearOfCreation: 2000,
   },
 ];
 
-
 const LanguageCard = () => {
   return (
-    <div className="w-full flex flex-wrap justify-between">
-      {languages.map((language) => <LanguageCardItem data={language} key={language.name} />)}
+    <div className="w-full flex flex-wrap justify-between xs:flex-column">
+      {languages.map((language) => (
+        <LanguageCardItem data={language} key={language.name} />
+      ))}
     </div>
   );
 };

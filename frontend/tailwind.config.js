@@ -17,6 +17,10 @@ module.exports = {
         sans: ['Inter', ...defaultTheme.fontFamily.sans],
       },
     },
+    screens: {
+      'xs': {'max': '639px'},
+      ...defaultTheme.screens,
+    }
   },
   plugins: [require('@tailwindcss/forms')],
 };
