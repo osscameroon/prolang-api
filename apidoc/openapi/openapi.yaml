@@ -16,7 +16,7 @@ info:
 #    altText: Prolang API
 externalDocs:
   description: If you are looking for the GraphQL version, checkout this link.
-  url: 'http://localhost:5700/graphql' # 'https://prolang.com/graphql'
+  url: 'https://api.prolang.com/graphql'
 servers:
   - url: 'http://localhost:5700/{basePath}'
     description: Local development server
@@ -447,10 +447,3 @@ components:
         format: "field1,field2,...,fieldn"
         example: "id,name,company,authors"
         minProperties: 1
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-security:
-  - bearerAuth: [ ]

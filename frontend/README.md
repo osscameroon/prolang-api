@@ -1,18 +1,18 @@
 # Prolang UI
 
-A web interface to manage programming languages data
+A Web interface to manage programming languages data
 
-# Prerequisites
+### Prerequisites
 - Node.js 12+
 - Yarn or NPM
 
-# Setup
+### Setup
 ```shell
 yarn install
 cp .env.template .env.development.local
 ```
 
-# Start the project
+### Start the project for development
 ```shell
 yarn dev
 ```

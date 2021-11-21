@@ -1,37 +1,23 @@
-This is an **example** API to demonstrate features of the OpenAPI specification.
+This page describes how to consume the API following the REST API standard.
+You need an HTTP client to query the endpoints. 
 
-# Introduction
+You can use:
+* [Postman](https://www.postman.com/downloads)
+* [Insomnia](https://insomnia.rest/download)
+* [Hoppscotch](https://hoppscotch.io/)
 
-This API definition is intended to to be a good starting point for
-describing your API in 
+Or whatever client you are comfortable with.
 
-[OpenAPI/Swagger
-format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
+## API request logging
 
-It also demonstrates features of the
-[create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
-and 
+When sending a request to the API, the information about the are stored to process
+some analytics. Here are the data stored: **the path**, **the IP address**, 
+**the response status** and **the execution time**.
 
-the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
-the standard OpenAPI syntax, we use a few 
-
-[vendor
-extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).
+## Disable request logging
+If for some reason you don't want your request to be logged, you can disable it by
+adding a custom header when sending your request.
+* Header name: **x-client-origin**
+* Header value: **brwsr**
 
 
-# OpenAPI Specification
-
-The goal of The OpenAPI Specification is to define a standard,
-language-agnostic interface to REST APIs which
-
-allows both humans and computers to discover and understand the capabilities
-of the service without access to source
-
-code, documentation, or through network traffic inspection. When properly
-defined via OpenAPI, a consumer can 
-
-understand and interact with the remote service with a minimal amount of
-implementation logic. Similar to what
-
-interfaces have done for lower-level programming, OpenAPI removes the
-guesswork in calling the service.
