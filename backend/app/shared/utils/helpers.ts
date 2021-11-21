@@ -44,8 +44,10 @@ export const removeQueryStringIfExist = (route: string) => {
 };
 
 export const generateRoutePrefix = (endpoint: string) => {
-  const publicPrefix = `${PUBLIC_ROUTE_PREFIX}/${endpoint}`;
-  const privatePrefix = `${PRIVATE_ROUTE_PREFIX}/${endpoint}`;
+  const privatePath = endpoint === '/' ? '' : `/${endpoint}`;
+
+  const publicPrefix = `${PUBLIC_ROUTE_PREFIX}${endpoint === '/' ? '' : endpoint}`;
+  const privatePrefix = `${PRIVATE_ROUTE_PREFIX}${privatePath}`;
 
   return [publicPrefix, privatePrefix];
 };

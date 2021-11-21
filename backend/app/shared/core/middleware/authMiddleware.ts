@@ -8,7 +8,18 @@ import { TokenPayload } from '../../types/common';
 import { removeQueryStringIfExist } from '../../utils/helpers';
 import { NOT_AUTHENTICATED } from '../../utils/constants';
 
-const allowedRoutes: string[] = ['/', '/health', '/api', '/api/**', '/private/users/auth', '/spec/prolang.yaml'];
+const allowedRoutes: string[] = [
+  '/',
+  '/health',
+  '/authors',
+  '/authors/**',
+  '/years-groups',
+  '/years-groups/**',
+  '/languages',
+  '/languages/**',
+  '/private/users/auth',
+  '/spec/prolang.yaml',
+];
 
 const decodeJwtToken = (token: string, jwtSecret: string): Promise<JwtPayload> => {
   return new Promise((resolve, reject): void => {
@@ -52,8 +63,10 @@ export const authMiddleware = async (req: any, res: Response, next: NextFunction
       req.user = decoded;
 
       return next();
-    } catch (err) {
-      logger.error(err);
+    } catch (err: any) {
+      if (err.message && !err.message.includes('jwt expired')) {
+        logger.error(err);
+      }
     }
   }
 

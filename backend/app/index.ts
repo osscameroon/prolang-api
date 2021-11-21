@@ -22,7 +22,7 @@ export const startServer = async () => {
   setupRestEndpoints(app);
 
   httpServer.listen(SERVER_PORT, async () => {
-    logger.info(`Rest server ready at ${BASE_URL}/api`);
+    logger.info(`Rest server ready at ${BASE_URL}`);
 
     logger.info(`GraphQL server ready at ${BASE_URL}${graphqlServer.graphqlPath}`);
   });

@@ -5,11 +5,11 @@ import { sendEvent } from '../../shared/core/status';
 const commonRoute = () => {
   const router = Router();
 
-  router.get('/api', async (_req: Request, res: Response) => {
+  router.get('/', async (_req: Request, res: Response) => {
     res.sendFile(path.join(__dirname, '../docs/index.html'));
   });
 
-  router.get('/api/health', (req: Request, res: Response) => {
+  router.get('/health', (req: Request, res: Response) => {
     if (req.headers.accept && req.headers.accept == 'text/event-stream') {
       sendEvent(req, res);
     } else {

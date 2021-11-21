@@ -40,7 +40,7 @@ const startServer = async () => {
 const initializeServerAndApiClient = async (): Promise<TestInstance> => {
   const httpServer = await startServer();
   // @ts-ignore
-  const baseURL = `http://localhost:${httpServer.address().port}/api`;
+  const baseURL = `http://localhost:${httpServer.address().port}`;
 
   const apiClient = axios.create({ baseURL });
 

@@ -42,17 +42,16 @@ describe('Test Helpers - extractQueryFields', () => {
 
 describe('Others helpers functions', () => {
   test('remove query string from the URL path', () => {
-    expect(removeQueryStringIfExist('/api/languages?fields=id,name')).toMatchInlineSnapshot(`"/api/languages"`);
+    expect(removeQueryStringIfExist('/languages?fields=id,name')).toMatchInlineSnapshot(`"/languages"`);
     expect(removeQueryStringIfExist('/years-groups')).toMatchInlineSnapshot(`"/years-groups"`);
     expect(removeQueryStringIfExist('/authors/all?search=ban&page=3')).toMatchInlineSnapshot(`"/authors/all"`);
   });
 
-  test.only('Generate route prefix with path specified', () => {
-    expect(generateRoutePrefix('users')).toMatchObject(['/api/users', '/private/users']);
+  test('Generate route prefix with path specified', () => {
+    expect(generateRoutePrefix('users')).toMatchObject(['/users', '/private/users']);
   });
 
-  test.only('Generate route prefix with no path', () => {
-    expect(generateRoutePrefix('')).toMatchObject(['/api/', '/private/']);
-    expect(generateRoutePrefix('users')).toMatchObject(['/api/users', '/private/users']);
+  test('Generate route prefix with no path', () => {
+    expect(generateRoutePrefix('/')).toMatchObject(['/', '/private']);
   });
 });

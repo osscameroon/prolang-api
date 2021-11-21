@@ -15,7 +15,7 @@ export const NOT_AUTHENTICATED = 'Access to this resource requires authenticatio
 export const ADMIN_PASSWORD_NOT_SET = 'The admin password not set.';
 export const RESOURCE_NOT_FOUND = 'The resource not found.';
 
-export const PUBLIC_ROUTE_PREFIX = '/api';
+export const PUBLIC_ROUTE_PREFIX = '/';
 export const PRIVATE_ROUTE_PREFIX = '/private';
 
 export const RECORD_NOT_FOUND_MESSAGE = (model: string, id: string) => {
