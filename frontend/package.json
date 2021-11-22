@@ -59,13 +59,14 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest-dom": "^3.9.2",
     "eslint-plugin-testing-library": "^5.0.0",
+    "eventsourcemock": "^2.0.0",
     "jest": "^27.3.1",
     "msw": "^0.35.0",
     "postcss": "^8.3.5",
     "prettier": "^2.3.2",
     "start-server-and-test": "^1.14.0",
-    "tailwindcss": "^2.2.15",
-    "typescript": "4.3.5"
+    "tailwindcss": "^2.2.16",
+    "typescript": "4.4.4"
   },
   "msw": {
     "workerDirectory": "public"

@@ -1,5 +1,5 @@
 module.exports = {
-  'moduleNameMapper': {
+  moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/__mocks__/styleMock.js',
     '^.+\\.(jpg|jpeg|png|gif|webp|avif|svg)$': '<rootDir>/__mocks__/fileMock.js',
     '^@components/(.*)$': '<rootDir>/components/$1',
@@ -7,24 +7,13 @@ module.exports = {
     '^@utils/(.*)$': '<rootDir>/utils/$1',
     '^@typings/(.*)$': '<rootDir>/typings/$1',
   },
-  'transform': {
+  transform: {
     '^.+\\.(js|jsx|ts|tsx)$': ['babel-jest', { presets: ['next/babel'] }],
   },
-  'testMatch': [
-    '**/__tests__/ui/**/*.(ts|tsx)'
-  ],
-  'setupFilesAfterEnv': [
-    '<rootDir>/jest.setup.ts'
-  ],
+  testMatch: ['**/__tests__/ui/**/*.(ts|tsx)'],
+  setupFilesAfterEnv: ['<rootDir>/__tests__/setup/jest.setup.ts'],
+  setupFiles: ['<rootDir>/__tests__/setup/dom.setup.js'],
   testEnvironment: 'jsdom',
-  testPathIgnorePatterns: [
-    './.next/',
-    './node_modules/'
-  ],
-  collectCoverageFrom: [
-    '**/*.{js,jsx,ts,tsx}',
-    '!**/*.d.ts',
-    '!**/node_modules/**',
-  ],
+  testPathIgnorePatterns: ['./.next/', './node_modules/'],
+  collectCoverageFrom: ['**/*.{js,jsx,ts,tsx}', '!**/*.d.ts', '!**/node_modules/**'],
 };
-

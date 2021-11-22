@@ -1,34 +1,32 @@
-import React, {PropsWithChildren} from 'react';
-import { QueryClient, QueryClientProvider } from "react-query";
+import React, { PropsWithChildren } from 'react';
+import { QueryClient, QueryClientProvider } from 'react-query';
 import { render, fireEvent, screen } from '@testing-library/react';
-import userEvent  from '@testing-library/user-event';
-import {act} from "react-dom/test-utils";
-import {rest} from 'msw'
-import {setupServer} from 'msw/node'
-import Login from "../../pages/login";
+import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
+import { rest } from 'msw';
+import { setupServer } from 'msw/node';
+
+import Login from '../../pages/login';
 
 const queryClient = new QueryClient();
 
 const wrapper = ({ children }: PropsWithChildren<any>) => (
-    <QueryClientProvider client={queryClient}>
-      {children}
-    </QueryClientProvider>
+  <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
 );
 
 const server = setupServer(
-    rest.get('http://localhost:5700/api/health', (req, res, ctx) => {
-      return res(
-          ctx.status(200),
-          ctx.json({ message: 'Ok' })
-      );
-    }),
-    rest.post('/private/users/auth', (req, res, ctx) => {
-      return res(ctx.json({ greeting: 'hello there' }))
-    }),
-)
+  rest.get('http://localhost:5700/health', (req, res, ctx) => {
+    return res(ctx.status(200), ctx.json({ message: 'Ok' }));
+  }),
+  rest.post('/private/users/auth', (req, res, ctx) => {
+    return res(ctx.json({ greeting: 'hello there' }));
+  }),
+);
 
 describe.only('Login page', () => {
-  beforeAll(() => server.listen());
+  beforeAll(() => {
+    server.listen();
+  });
 
   afterEach(() => {
     server.resetHandlers();
@@ -41,7 +39,7 @@ describe.only('Login page', () => {
 
     await act(async () => {
       fireEvent.click(screen.getByRole('button', { name: /Log in/i }));
-    })
+    });
 
     const inputEmail = screen.getByRole('textbox', { name: /Email address*/i });
 
@@ -66,7 +64,7 @@ describe.only('Login page', () => {
       userEvent.type(inputPassword, validPasswordValue);
 
       fireEvent.click(screen.getByRole('button', { name: /Log in/i }));
-    })
+    });
 
     // @ts-ignore
     expect(inputEmail.value).toEqual(badEmailValue);
