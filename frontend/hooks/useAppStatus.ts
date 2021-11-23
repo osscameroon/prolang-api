@@ -3,19 +3,23 @@ import { useState, useEffect } from 'react';
 export const useAppStatus = () => {
   const [status, setStatus] = useState(true);
 
+  const changeStatus = (state: boolean) => {
+    setStatus(process.env.NEXT_PUBLIC_APP_ENV === 'test' ? true : state);
+  };
+
   useEffect(() => {
-    const source = new EventSource(`${process.env.NEXT_PUBLIC_API_URL}/health`);
+    const source = new window.EventSource(`${process.env.NEXT_PUBLIC_API_URL}/health`);
 
     source.addEventListener('open', () => {
-      setStatus(true);
+      changeStatus(true);
     });
 
     source.addEventListener('message', (_e) => {
-      setStatus(true);
+      changeStatus(true);
     });
 
     source.addEventListener('error', (_e) => {
-      setStatus(false);
+      changeStatus(false);
     });
 
     return () => {

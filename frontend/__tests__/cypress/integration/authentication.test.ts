@@ -1,6 +1,3 @@
-// @ts-ignore
-import EventSource, { sources } from 'eventsourcemock';
-
 import { Authentication } from '../models/authentication';
 import { Dashboard } from '../models/dashboard';
 import { AdminHeader } from '../models/admin-header';
@@ -17,13 +14,7 @@ context('Authentication workflow', () => {
     cy.closeReactQueryWindow();
     cy.saveLocalStorage();
 
-    cy.visit('/', {
-      onBeforeLoad(window: Cypress.AUTWindow) {
-        window.EventSource = EventSource;
-        // @ts-ignore
-        window.mockEventSources = sources;
-      },
-    });
+    cy.visit('/');
   });
 
   it('should display error notice when invalid credentials given', () => {
