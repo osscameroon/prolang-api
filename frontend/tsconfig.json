@@ -33,6 +33,11 @@
       ]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    "node_modules/cypress/types/cypress-global-vars.d.ts",
+  ],
   "exclude": ["node_modules", "__tests__/cypress", "node_modules/cypress"]
 }

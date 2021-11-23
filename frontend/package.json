@@ -12,7 +12,7 @@
     "cypress:run": "cypress run --project ./__tests__",
     "test": "NEXT_PUBLIC_API_URL=http://localhost:5700 jest",
     "test:it": "NODE_ENV=test start-server-and-test dev 5701 cypress:open",
-    "test:it:ci": "NODE_ENV=test start-server-and-test dev 5701 cypress run --headless --parallel",
+    "test:it:ci": "NODE_ENV=test start-server-and-test dev 5701 cypress:run",
     "generate:mock": "npx msw init public/"
   },
   "dependencies": {
