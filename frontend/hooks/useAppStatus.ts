@@ -4,7 +4,7 @@ export const useAppStatus = () => {
   const [status, setStatus] = useState(true);
 
   useEffect(() => {
-    const source = new EventSource(`${process.env.NEXT_PUBLIC_API_URL}/api/health`);
+    const source = new EventSource(`${process.env.NEXT_PUBLIC_API_URL}/health`);
 
     source.addEventListener('open', () => {
       setStatus(true);

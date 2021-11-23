@@ -3,21 +3,17 @@ import { apiSpec } from './fixtures/apidoc';
 import { currentUserData, dashboardStatData, loginUserData } from './fixtures/api-response';
 
 export const handlers = [
-  rest.get('http://localhost:5700/api/health', (req, res, ctx) => {
+  rest.get('http://localhost:5700/health', (req, res, ctx) => {
     return res(
       ctx.status(200),
       ctx.json({
-        message: 'Ok'
-      })
+        message: 'Ok',
+      }),
     );
   }),
 
   rest.get('http://localhost:5700/spec/prolang.yaml', (_req, res, ctx) => {
-    return res(
-      ctx.status(200),
-      ctx.set('Content-Type', 'text/yaml; charset=UTF-8'),
-      ctx.text(apiSpec)
-    );
+    return res(ctx.status(200), ctx.set('Content-Type', 'text/yaml; charset=UTF-8'), ctx.text(apiSpec));
   }),
 
   rest.get('http://localhost:5700/graphql', (_req, res, ctx) => {
@@ -34,7 +30,7 @@ export const handlers = [
           <body>
           </body>
         </html>
-      `)
+      `),
     );
   }),
 
@@ -43,17 +39,14 @@ export const handlers = [
     const { email } = req.body;
 
     if (email === 'user@email.com') {
-      return res(
-        ctx.status(400),
-        ctx.json({ message: 'Login failed: Invalid credentials' })
-      );
+      return res(ctx.status(400), ctx.json({ message: 'Login failed: Invalid credentials' }));
     }
 
     return res(
       ctx.status(200),
       ctx.json({
         data: loginUserData,
-      })
+      }),
     );
   }),
 
@@ -62,7 +55,7 @@ export const handlers = [
       ctx.status(200),
       ctx.json({
         data: currentUserData,
-      })
+      }),
     );
   }),
 
@@ -71,7 +64,7 @@ export const handlers = [
       ctx.status(200),
       ctx.json({
         data: dashboardStatData,
-      })
+      }),
     );
   }),
 ];

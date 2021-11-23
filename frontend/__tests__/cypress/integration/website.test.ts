@@ -1,9 +1,9 @@
 /// <reference types="cypress" />
+// @ts-ignore
+import EventSource, { sources } from 'eventsourcemock';
 
 import { Website } from '../models/website';
-import {
-  mockHealthCheckRequestToReturnBadStatus
-} from '../../mocks/utils';
+import { mockHealthCheckRequestToReturnBadStatus } from '../../mocks/utils';
 
 context('Navigate on the website', () => {
   before(() => {
@@ -15,7 +15,13 @@ context('Navigate on the website', () => {
     cy.closeReactQueryWindow();
     cy.saveLocalStorage();
 
-    cy.visit('/');
+    cy.visit('/', {
+      onBeforeLoad(window: Cypress.AUTWindow) {
+        window.EventSource = EventSource;
+        // @ts-ignore
+        window.mockEventSources = sources;
+      },
+    });
   });
 
   it('should navigate on the website pages', () => {
@@ -43,6 +49,7 @@ context('Navigate on the website', () => {
   });
 
   it('should maintenance website', () => {
+    cy.window().its('mockEventSources').its('http://localhost:5700/health').invoke('emit', 'error');
     const website = new Website();
 
     mockHealthCheckRequestToReturnBadStatus();

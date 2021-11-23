@@ -61,14 +61,13 @@ export default function Login() {
                     data-testid="input-email"
                     isRequired
                   />
-                  <FormInput
-                    label="Password"
-                    name="password"
-                    type="password"
-                    data-testid="input-password"
-                    isRequired
+                  <FormInput label="Password" name="password" type="password" data-testid="input-password" isRequired />
+                  <Button
+                    text="Log in"
+                    className="w-full justify-center mt-12"
+                    loading={loginMutation.isLoading}
+                    data-testid="btn-submit"
                   />
-                  <Button text="Log in" className="w-full justify-center mt-12" loading={loginMutation.isLoading} />
                 </form>
               </FormProvider>
 
