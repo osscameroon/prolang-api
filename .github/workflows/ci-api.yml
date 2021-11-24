@@ -1,40 +1,60 @@
-# This workflow will build a Java project with Maven
-# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-maven
-
 name: Backend Continuous Integration
 on:
   push:
     branches: [ main ]
     paths:
-      - 'wedding-api/**'
+      - 'backend/**'
   pull_request:
     branches: [ main ]
     paths:
-      - 'wedding-api/**'
+      - 'backend/**'
 
 jobs:
   build:
+    defaults:
+      run:
+        working-directory: ./backend
+    name: build
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    
-    - name: Set up JDK 11
-      uses: actions/setup-java@v2
-      with:
-        java-version: '11'
-        distribution: 'adopt'
-        
-    - name: Cache Maven packages
-      uses: actions/cache@v2
-      with:
-        path: ~/.m2
-        key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-        restore-keys: ${{ runner.os }}-m2
-        
-    - name: Run test
-      run: mvn --batch-mode --update-snapshots verify
-      working-directory: ./wedding-api
+      - uses: actions/checkout@v2
+      - name: Set up Node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        env:
+          NODE_ENV: test
+          SERVER_PORT: 5710
+          BASE_URL: http://localhost:5710
+          DATABASE_URL: "mongodb://root:password@localhost:27017/test"
+          PAGINATION_LIMIT: 30
+          MAX_REQUEST_LIMIT: 100
+          MAX_REQUEST_WINDOW: 900
+          SENTRY_ENABLED: false
+          SENTRY_DSN: none
+          JWT_SECRET: none
+          JWT_EXPIRE: 86400
+          AUTH_ENABLED: false
+          ADMIN_PASSWORD: password
+        run: yarn test
 
   package:
     if: ${{ github.ref == 'refs/heads/main' }}
@@ -43,41 +63,6 @@ jobs:
       - build
     steps:
       - uses: actions/checkout@v2
-
-      - name: Set up JDK 11
-        uses: actions/setup-java@v2
-        with:
-          java-version: '11'
-          distribution: 'adopt'
-
-      - name: Cache Maven packages
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
-          restore-keys: ${{ runner.os }}-m2
-
-      - name: Copy configuration file for production
-        uses: prewk/s3-cp-action@v2
-        with:
-          aws_region: ${{ secrets.AWS_REGION }}
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          source: ${{ secrets.BUCKET_FOLDER_PATH }}/application-prod.properties
-          dest: ./wedding-api/src/main/resources
-
-      - name: Copy Firebase configuratioon file
-        uses: prewk/s3-cp-action@v2
-        with:
-          aws_region: ${{ secrets.AWS_REGION }}
-          aws_access_key_id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          aws_secret_access_key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          source: ${{ secrets.BUCKET_FOLDER_PATH }}/ursuleric-firebase-adminsdk-hekt3-b31e0d3197.json
-          dest: ./wedding-api/src/main/resources/fcm
-
-      - name: Package application for production
-        run: mvn clean install -DskipTests -Pprod
-        working-directory: wedding-api
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1
@@ -94,8 +79,7 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ./wedding-api
-          file: ./wedding-api/Dockerfile.prod
+          context: ..
+          file: Dockerfile.api
           push: true
-          tags: tericcabrel/wedding-api:latest
-
+          tags: tericcabrel/prolang-api:latest
