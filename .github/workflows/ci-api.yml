@@ -1,0 +1,86 @@
+name: Backend Continuous Integration
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+  pull_request:
+    branches: [ main ]
+    paths:
+      - 'backend/**'
+      - '.github/workflows/ci-api.yml'
+
+jobs:
+  build:
+    defaults:
+      run:
+        working-directory: ./backend
+    name: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node 14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-build-${{ env.cache-name }}-
+            ${{ runner.os }}-build-
+            ${{ runner.os }}-
+
+      - name: Install dependencies
+        run: yarn install
+
+      - name: Run tests
+        env:
+          NODE_ENV: test
+          SERVER_PORT: 5710
+          BASE_URL: http://localhost:5710
+          DATABASE_URL: "mongodb://root:password@localhost:27017/test"
+          PAGINATION_LIMIT: 30
+          MAX_REQUEST_LIMIT: 100
+          MAX_REQUEST_WINDOW: 900
+          SENTRY_ENABLED: false
+          SENTRY_DSN: none
+          JWT_SECRET: none
+          JWT_EXPIRE: 86400
+          AUTH_ENABLED: false
+          ADMIN_PASSWORD: password
+        run: yarn test
+
+  package:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    needs:
+      - build
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up QEMU
+        uses: docker/setup-qemu-action@v1
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Dashboard to DockerHub
+        uses: docker/login-action@v1
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push
+        uses: docker/build-push-action@v2
+        with:
+          context: ..
+          file: Dockerfile.api
+          push: true
+          tags: tericcabrel/prolang-api:latest
