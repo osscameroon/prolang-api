@@ -8,6 +8,7 @@ on:
     branches: [ main ]
     paths:
       - 'backend/**'
+      - './github/workflows/ci-api.yml'
 
 jobs:
   build:
@@ -39,6 +40,9 @@ jobs:
       - name: Install dependencies
         run: yarn install
 
+      - name: Lint the project
+        run: yarn eslint:fix
+
       - name: Run tests
         env:
           NODE_ENV: test
@@ -50,7 +54,7 @@ jobs:
           MAX_REQUEST_WINDOW: 900
           SENTRY_ENABLED: false
           # SENTRY_DSN:
-          JWT_SECRET: none
+          JWT_SECRET: super-jwt-secret
           JWT_EXPIRE: 86400
           AUTH_ENABLED: false
           ADMIN_PASSWORD: password
