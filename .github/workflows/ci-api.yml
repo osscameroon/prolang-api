@@ -44,12 +44,12 @@ jobs:
           NODE_ENV: test
           SERVER_PORT: 5710
           BASE_URL: http://localhost:5710
-          DATABASE_URL: "mongodb://root:password@localhost:27017/test"
+          DATABASE_URL: "mongodb://localhost:27017/test"
           PAGINATION_LIMIT: 30
           MAX_REQUEST_LIMIT: 100
           MAX_REQUEST_WINDOW: 900
           SENTRY_ENABLED: false
-          SENTRY_DSN: none
+          # SENTRY_DSN:
           JWT_SECRET: none
           JWT_EXPIRE: 86400
           AUTH_ENABLED: false
