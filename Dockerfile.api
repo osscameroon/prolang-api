@@ -32,4 +32,4 @@ COPY --chown=node:node --from=builder /apidoc/dist/openapi.yaml ./public/spec
 
 EXPOSE 5991
 
-CMD ["node", "src/index.ts"]
+CMD ["node", "src/index.js"]

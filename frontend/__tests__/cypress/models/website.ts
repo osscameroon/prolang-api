@@ -15,6 +15,7 @@ class Website {
 
   navigateToDocumentationPage() {
     cy.get(cySelector('lnk-documentation')).should('have.attr', 'href', '/documentation').click();
+    cy.wait(2000);
     cy.url().should('include', '/documentation');
   }
 

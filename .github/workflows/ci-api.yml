@@ -8,10 +8,11 @@ on:
     branches: [ main ]
     paths:
       - 'backend/**'
-      - './github/workflows/ci-api.yml'
+      - '.github/workflows/ci-api.yml'
 
 jobs:
   build:
+    if: ${{ github.ref == 'refs/heads/main' }}
     defaults:
       run:
         working-directory: ./backend
@@ -61,10 +62,13 @@ jobs:
         run: yarn test
 
   package:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    # if: ${{ github.ref == 'refs/heads/main' }}
+    defaults:
+      run:
+        working-directory: .
     runs-on: ubuntu-latest
-    needs:
-      - build
+#    needs:
+#      - build
     steps:
       - uses: actions/checkout@v2
 
@@ -83,7 +87,28 @@ jobs:
       - name: Build and push
         uses: docker/build-push-action@v2
         with:
-          context: ..
+          context: .
           file: Dockerfile.api
           push: true
           tags: tericcabrel/prolang-api:latest
+
+  deploy:
+    if: ${{ github.ref == 'refs/heads/main' }}
+    defaults:
+      run:
+        working-directory: .
+    runs-on: ubuntu-latest
+    needs:
+      - package
+    steps:
+      - uses: actions/checkout@v2
+      - name: Add Server key
+        run: |
+          touch key.txt && cat ${{ secrets.SERVER_KEY }} >> key.txt
+          chmod 600 key.txt
+      - name: Deploy the application
+        run: |
+          export SUSER=${{ secrets.SERVER_USER }}
+          export SNAME=${{ secrets.SERVER_NAME }}
+          export SPORT=${{ secrets.SERVER_PORT }}
+          ./deploy.sh
