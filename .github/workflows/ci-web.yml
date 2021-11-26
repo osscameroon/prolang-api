@@ -9,6 +9,12 @@ on:
     paths:
       - 'frontend/**'
       - '.github/workflows/ci-web.yml'
+  workflow_dispatch:
+    inputs:
+      should_docker:
+        description: 'Indicate if we want to build the docker image or not'
+        required: true
+        default: 'no'
 
 jobs:
   build:
@@ -16,7 +22,6 @@ jobs:
       run:
         working-directory: ./frontend
     name: build
-    if: ${{ github.ref == 'refs/heads/main' }}
     runs-on: ubuntu-latest
 
     steps:
@@ -53,12 +58,11 @@ jobs:
         NEXT_PUBLIC_API_URL: http://localhost:5700
         NEXT_PUBLIC_API_DOC_URL: http://localhost:5700/spec/prolang.yaml
         NEXT_PUBLIC_GRAPHQL_URL: http://localhost:5700/graphql
-        # NEXT_PUBLIC_GA_ID:
         NEXT_PUBLIC_CLIENT_ORIGIN: browsing
       run: yarn test:it:ci
 
   package:
-    if: ${{ github.ref == 'refs/heads/main' }}
+    if: ${{ github.ref == 'refs/heads/main' && github.event.inputs.should_docker == 'yes' }}
     runs-on: ubuntu-latest
     needs:
       - build

@@ -8,6 +8,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "export": "next export",
     "cypress:open": "cypress open --project ./__tests__",
     "cypress:run": "cypress run --project ./__tests__",
     "test": "NEXT_PUBLIC_API_URL=http://localhost:5700 jest",
