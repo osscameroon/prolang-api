@@ -1,68 +1,60 @@
 openapi: 3.0.3
 info:
   title: Programming languages API
-  description: >
-    This is an **example** API to demonstrate features of the OpenAPI
-    specification.
+  description: >+
+    This page describes how to consume the API following the REST API standard.
+
+    You need an HTTP client to query the endpoints. 
 
 
-    # Introduction
+    You can use: [Postman](https://www.postman.com/downloads),
+    [Insomnia](https://insomnia.rest/download),
+    [Hoppscotch](https://hoppscotch.io/)
 
 
-    This API definition is intended to to be a good starting point for
-
-    describing your API in 
+    Or whatever client you are comfortable with.
 
 
-    [OpenAPI/Swagger
+    ## Data Pagination
 
-    format](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/3.0.2.md).
+    For each response returned, only thirty items will be inside the body. You
+    will also have metadata
 
-
-    It also demonstrates features of the
-
-    [create-openapi-repo](https://github.com/Redocly/create-openapi-repo) tool
-
-    and 
+    that will help you query the following data.
 
 
-    the [Redoc](https://github.com/Redocly/Redoc) documentation engine. Beyond
+    ## Rate Limiting
 
-    the standard OpenAPI syntax, we use a few 
+    There is a maximum number of calls you can make on every endpoint during a
+    specific interval.
 
-
-    [vendor
-
-    extensions](https://github.com/Redocly/Redoc/blob/master/docs/redoc-vendor-extensions.md).
-
+    In a window of fifteen minutes, you can make one hundred requests on any
+    endpoints.
 
 
-    # OpenAPI Specification
+    ## API request logging
 
 
-    The goal of The OpenAPI Specification is to define a standard,
+    When sending a request to the API, the information about it is stored to
+    process
 
-    language-agnostic interface to REST APIs which
+    some analytics. Here are the data stored: **the path**, **the IP address**, 
 
-
-    allows both humans and computers to discover and understand the capabilities
-
-    of the service without access to source
+    **the response status** and **the execution time**.
 
 
-    code, documentation, or through network traffic inspection. When properly
+    ## Disable request logging
 
-    defined via OpenAPI, a consumer can 
+    For some reason, if you don't want your request to be logged, you can
+    disable it by
+
+    adding a custom header when sending your request.
+
+    * Header name: **x-client-origin**
+
+    * Header value: **brwsr**
 
 
-    understand and interact with the remote service with a minimal amount of
-
-    implementation logic. Similar to what
-
-
-    interfaces have done for lower-level programming, OpenAPI removes the
-
-    guesswork in calling the service.
   version: 1.0.0
   contact:
     name: Eric Cabrel TIOGO
@@ -73,12 +65,18 @@ info:
     url: 'https://opensource.org/licenses/MIT'
 externalDocs:
   description: 'If you are looking for the GraphQL version, checkout this link.'
-  url: 'http://localhost:5700/graphql'
+  url: 'https://api.prolang.com/graphql'
 servers:
-  - url: 'http://localhost:5700/api'
+  - url: 'http://localhost:5700/{basePath}'
     description: Local development server
-  - url: 'https://prolang.com/api'
+    variables:
+      basePath:
+        default: api
+  - url: 'https://prolang.com/{basePath}'
     description: Production server
+    variables:
+      basePath:
+        default: api
 paths:
   /years-groups:
     get:
@@ -502,10 +500,3 @@ components:
         format: 'field1,field2,...,fieldn'
         example: 'id,name,company,authors'
         minProperties: 1
-  securitySchemes:
-    bearerAuth:
-      type: http
-      scheme: bearer
-      bearerFormat: JWT
-security:
-  - bearerAuth: []

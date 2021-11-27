@@ -1,4 +1,4 @@
-name: Backend Continuous Integration
+name: API
 on:
   push:
     branches: [ main ]
