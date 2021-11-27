@@ -28,7 +28,7 @@ RUN yarn install --production && \
 COPY --chown=node:node --from=builder /backend/build ./src
 COPY --chown=node:node --from=builder /apidoc/build/index.html ./src/rest/docs
 COPY --chown=node:node --from=builder /backend/logo.png ./public
-COPY --chown=node:node --from=builder /apidoc/dist/openapi.yaml ./public/spec/prolang.yml
+COPY --chown=node:node --from=builder /apidoc/dist/openapi.yaml ./public/spec/prolang.yaml
 
 EXPOSE 5991
 
