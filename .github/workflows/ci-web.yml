@@ -1,4 +1,4 @@
-name: Frontend Continuous Integration
+name: Website
 on:
   push:
     branches: [ main ]

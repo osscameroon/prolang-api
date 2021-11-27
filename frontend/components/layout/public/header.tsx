@@ -53,7 +53,7 @@ const PublicHeader = () => {
               </div>
             </div>
             <div className="block">
-              <div className="ml-4 flex items-center md:ml-6 xs:hidden sm:hidden">
+              <div className="ml-4 flex items-center md:ml-6 xs:hidden sm:hidden md:block">
                 <Link href="https://github.com/osscameroon/prolang-api">
                   <a className="p-1 rounded-full text-gray-200 hover:text-gray-200" target="_blank" rel="noreferrer">
                     <span className="sr-only">View github</span>
