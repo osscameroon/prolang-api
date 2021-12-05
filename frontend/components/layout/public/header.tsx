@@ -26,26 +26,17 @@ const PublicHeader = () => {
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
                   <Link href="/">
-                    <a
-                      className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-base font-light"
-                      data-testid="lnk-home"
-                    >
+                    <a className="navbar-link" data-testid="lnk-home">
                       Home
                     </a>
                   </Link>
                   <Link href="/documentation">
-                    <a
-                      className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-base font-light"
-                      data-testid="lnk-documentation"
-                    >
+                    <a className="navbar-link" data-testid="lnk-documentation">
                       Documentation
                     </a>
                   </Link>
                   <Link href="/playground">
-                    <a
-                      className="text-black hover:text-gray-800 dark:hover:text-white px-3 py-2 rounded-md text-base font-light"
-                      data-testid="lnk-playground"
-                    >
+                    <a className="navbar-link" data-testid="lnk-playground">
                       GraphQL
                     </a>
                   </Link>
@@ -76,26 +67,16 @@ const PublicHeader = () => {
           {isMenuOpened && (
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
               <Link href="/">
-                <a className="text-gray-800 hover:text-gray-300 block px-3 py-2 rounded-md text-base font-medium">
-                  Home
-                </a>
+                <a className="mobile-navbar-link">Home</a>
               </Link>
               <Link href="/documentation">
-                <a className="text-gray-800 hover:text-gray-300 block px-3 py-2 rounded-md text-base font-medium">
-                  Documentation
-                </a>
+                <a className="mobile-navbar-link">Documentation</a>
               </Link>
               <Link href="/playground">
-                <a className="text-gray-800 hover:text-gray-300 block px-3 py-2 rounded-md text-base font-medium">
-                  GraphQL
-                </a>
+                <a className="mobile-navbar-link">GraphQL</a>
               </Link>
               <Link href="https://github.com/osscameroon/prolang-api">
-                <a
-                  className="text-gray-800 hover:text-gray-300 block px-3 py-2 rounded-md text-base font-medium"
-                  target="_blank"
-                  rel="noreferrer"
-                >
+                <a className="mobile-navbar-link" target="_blank" rel="noreferrer">
                   GitHub Repository
                 </a>
               </Link>

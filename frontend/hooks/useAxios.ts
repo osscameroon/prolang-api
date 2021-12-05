@@ -25,7 +25,7 @@ export const useAxios = (apiPath?: string) => {
 };
 
 export const usePublicClient = () => {
-  return useAxios('api');
+  return useAxios();
 };
 
 export const usePrivateClient = () => {
