@@ -11,7 +11,7 @@ const LanguageCardItem = ({ data }: LanguageCardItemProps) => {
   const { author, company, icon, link, name, predecessors, yearOfCreation } = data;
 
   return (
-    <div className="xl:w-[30%] sm:w-[46%] md:w-[48%] xs:w-full px-8 py-8 bg-white mt-6 2xl:mb-6 md:mb-0 xs:mb-0 shadow rounded-lg dark:bg-gray-800 cursor-default">
+    <div className="px-8 py-8 bg-white shadow rounded-lg dark:bg-gray-800 cursor-default">
       <div className="font-bold text-base flex items-center justify-between">
         <div className="flex items-center">
           {icon}
