@@ -33,6 +33,9 @@ yarn-error.log*
 # vercel
 .vercel
 
-
 # msw
 mockServiceWorker.js
+
+# sitemap
+/public/robots.txt
+/public/sitemap.xml
