@@ -1,5 +1,8 @@
-import { RedocStandalone } from 'redoc';
+import dynamic from 'next/dynamic';
+import { RedocStandaloneProps } from 'redoc';
 import { withPublicLayout } from '@components/hof/with-public-layout';
+
+const RedocStandalone = dynamic<RedocStandaloneProps>(() => import('redoc').then((mod) => mod.RedocStandalone));
 
 const theme = {
   colors: {
