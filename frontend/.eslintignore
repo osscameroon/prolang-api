@@ -7,3 +7,4 @@ __tests__
 !__tests__/ui
 jest.config.js
 jest.setup.ts
+next-sitemap.js
