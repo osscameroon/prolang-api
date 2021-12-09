@@ -1,30 +1,28 @@
 import { useState, useEffect } from 'react';
+import axios from 'axios';
+import { noop } from '@utils/common';
+
+const fetchStatus = async () => {
+  const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/health`).catch(() => noop());
+
+  return response?.status === 200;
+};
 
 export const useAppStatus = () => {
   const [status, setStatus] = useState(true);
 
-  const changeStatus = (state: boolean) => {
-    setStatus(process.env.NEXT_PUBLIC_APP_ENV === 'test' ? true : state);
+  const updateStatus = async () => {
+    const appStatus = await fetchStatus();
+
+    setStatus(appStatus);
   };
 
   useEffect(() => {
-    const source = new window.EventSource(`${process.env.NEXT_PUBLIC_API_URL}/health`);
+    updateStatus();
 
-    source.addEventListener('open', () => {
-      changeStatus(true);
-    });
+    const id = setInterval(updateStatus, 30000);
 
-    source.addEventListener('message', (_e) => {
-      changeStatus(true);
-    });
-
-    source.addEventListener('error', (_e) => {
-      changeStatus(false);
-    });
-
-    return () => {
-      source.close();
-    };
+    return () => clearInterval(id);
   }, []);
 
   return status;

@@ -1,6 +1,6 @@
 /// <reference types="cypress" />
 import { Website } from '../models/website';
-import { mockHealthCheckRequestToReturnBadStatus } from '../../mocks/utils';
+import { mockHealthCheckRequestToReturnBadStatus } from '../support/utils';
 
 context('Navigate on the website', () => {
   before(() => {
@@ -39,7 +39,7 @@ context('Navigate on the website', () => {
     website.expectHomePageToBeDisplayed();
   });
 
-  it.skip('should maintenance website', () => {
+  it('should maintenance website', () => {
     const website = new Website();
 
     mockHealthCheckRequestToReturnBadStatus();

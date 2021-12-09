@@ -12,6 +12,12 @@ declare global {
     msw: {
       rest: typeof rest;
       worker: typeof worker;
-    }
+    };
+  }
+  interface AUTWindow {
+    msw: {
+      rest: typeof rest;
+      worker: typeof worker;
+    };
   }
 }
