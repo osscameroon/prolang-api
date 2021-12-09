@@ -23,7 +23,7 @@ const UpdateLanguage = ({ authors, language, languages, yearGroups }: UpdateLang
   const authorOptions = useMemo(() => formatOptions(authors), [authors]);
   const languageOptions = useMemo(() => formatOptions(languages), [languages]);
   const yearGroupOptions = useMemo(() => formatOptions(yearGroups), [yearGroups]);
-  
+
   const formMethods = useForm<UpdateLanguageFormValues>({
     defaultValues: {
       authors: authorOptions.filter(({ value }) => Boolean(language.authors?.find(({ id }) => value === id))),
@@ -34,9 +34,11 @@ const UpdateLanguage = ({ authors, language, languages, yearGroups }: UpdateLang
       longName: language.longName || undefined,
       name: language.name,
       predecessors: languageOptions.filter(({ value }) => language.predecessors?.some(({ id }) => value === id)),
-      yearConfirmed: YEAR_CONFIRMED_OPTION.find((option) => option.value === `${language.yearConfirmed}`) || YEAR_CONFIRMED_OPTION[0],
-      yearGroup: yearGroupOptions.find(option => option.value === language.yearGroup?.id) || yearGroupOptions[0],
-      years: language.years.join(' - ')
+      yearConfirmed:
+        YEAR_CONFIRMED_OPTION.find((option) => option.value === `${language.yearConfirmed}`) ||
+        YEAR_CONFIRMED_OPTION[0],
+      yearGroup: yearGroupOptions.find((option) => option.value === language.yearGroup?.id) || yearGroupOptions[0],
+      years: language.years.join(' - '),
     },
     resolver: yupResolver(languageFormSchema),
   });
@@ -57,7 +59,7 @@ const UpdateLanguage = ({ authors, language, languages, yearGroups }: UpdateLang
       predecessors: data.predecessors.map(({ value }) => value),
       yearConfirmed: data.yearConfirmed?.value === 'true',
       yearGroup: data.yearGroup.value,
-      years: data.years?.split('-').map((year) => parseInt(year.trim(), 10))
+      years: data.years?.split('-').map((year) => parseInt(year.trim(), 10)),
     };
 
     updateMutation.mutate(input, {

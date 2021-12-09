@@ -5,17 +5,16 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 
 module.exports = withBundleAnalyzer({
-  // put the rest of config here
   reactStrictMode: true,
-  swcMinify: true,
   webpack: (config, options) => {
-    // To fix redoc issue
+    // Fix redoc issue
     if (config.resolve.fallback) {
       config.resolve.fallback.fs = false;
     }
 
     return config;
   },
-  // avoid random BUILD_ID
+  experimental: { esmExternals: false },
+  // Prevent random BUILD_ID
   generateBuildId: () => pkg.version,
 });
