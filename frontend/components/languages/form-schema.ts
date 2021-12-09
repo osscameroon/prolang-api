@@ -21,12 +21,7 @@ export const languageFormSchema = yup.object().shape({
   years: yup.string().nullable(),
 });
 
-export type LanguageFormValues = yup.InferType<typeof languageFormSchema> & {
-  yearConfirmed: SelectOption;
-  years: SelectOption;
-  authors: SelectOption[];
-  predecessors: SelectOption[];
-};
+export type LanguageFormValues = yup.InferType<typeof languageFormSchema>;
 
 export type UpdateLanguageFormValues = {
   authors: SelectOption[];

@@ -25,7 +25,7 @@ const NewLanguage = ({ authors, languages, yearGroups }: NewLanguageProps) => {
   const authorOptions = useMemo(() => formatOptions(authors), [authors]);
   const languageOptions = useMemo(() => formatOptions(languages), [languages]);
   const yearGroupOptions = useMemo(() => formatOptions(yearGroups), [yearGroups]);
-  
+
   const initialValues: Partial<any> = {
     authors: [],
     predecessors: [],
@@ -55,7 +55,7 @@ const NewLanguage = ({ authors, languages, yearGroups }: NewLanguageProps) => {
         predecessors: data.predecessors.map(({ value }) => value),
         yearConfirmed: data.yearConfirmed?.value === 'true',
         yearGroup: data.yearGroup.value,
-        years: data.years?.split('-').map((year) => parseInt(year.trim(), 10))
+        years: data.years?.split('-').map((year) => parseInt(year.trim(), 10)) || [],
       },
       {
         onError: (error) => {
@@ -93,10 +93,10 @@ const NewLanguageLoader = () => {
     return <Loader />;
   }
 
-  if (!isLoading && (authorData && languageData && yearGroupData)) {
+  if (!isLoading && authorData && languageData && yearGroupData) {
     return <NewLanguage yearGroups={yearGroupData} authors={authorData} languages={languageData} />;
   }
-  
+
   return null;
 };
 
