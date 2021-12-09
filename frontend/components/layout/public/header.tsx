@@ -20,7 +20,7 @@ const PublicHeader = () => {
             <div className=" flex items-center">
               <Link href="/">
                 <a className="flex-shrink-0">
-                  <Img className="h-8 w-8" src="/assets/img/logo.png" alt="Logo" />
+                  <Img className="h-8 w-8" src="/assets/img/logo.png" width={32} height={32} alt="Logo" />
                 </a>
               </Link>
               <div className="hidden md:block">
@@ -55,6 +55,7 @@ const PublicHeader = () => {
             </div>
             <div className="-mr-2 flex md:hidden">
               <button
+                aria-label="Open menu"
                 className="text-gray-800 dark:text-white hover:text-blue-500 inline-flex items-center justify-center p-2 rounded-md"
                 onClick={() => openMenu()}
               >

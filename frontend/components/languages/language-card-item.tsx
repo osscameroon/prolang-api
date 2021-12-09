@@ -19,7 +19,7 @@ const LanguageCardItem = ({ data }: LanguageCardItemProps) => {
         </div>
         <div>
           <Link href={link}>
-            <a target="_blank" rel="noreferrer nopener">
+            <a target="_blank" rel="noreferrer nopener" aria-label="Learn more about the language">
               <ExternalIcon />
             </a>
           </Link>
