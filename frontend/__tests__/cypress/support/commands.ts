@@ -8,5 +8,5 @@
 import 'cypress-localstorage-commands';
 
 Cypress.Commands.add('closeReactQueryWindow', () => {
-  cy.setLocalStorage('reactQueryDevtoolsOpen', 'false');
+  return cy.setLocalStorage('reactQueryDevtoolsOpen', 'false');
 });
