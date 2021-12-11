@@ -122,4 +122,4 @@ We use GitHub Action for Continuous Integration and Continuous Delivery.
 
 ## License
 
-- [GPLv3](https://www.gnu.org/licenses/gpl-3.0-standalone.html)
+- [LICENSE: MIT](/LICENSE)

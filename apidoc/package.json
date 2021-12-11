@@ -2,6 +2,7 @@
   "name": "apidoc",
   "version": "1.0.0",
   "private": false,
+  "license": "MIT",
   "scripts": {
     "start": "openapi preview-docs",
     "build:spec": "openapi bundle -o dist/openapi.yaml",
