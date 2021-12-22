@@ -6,7 +6,7 @@ import { act } from 'react-dom/test-utils';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 
-import Login from '../../components/login/Login';
+import Login from '../../components/login/login';
 
 const queryClient = new QueryClient();
 
