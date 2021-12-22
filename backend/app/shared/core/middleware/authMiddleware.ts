@@ -1,4 +1,4 @@
-import jwt, { JwtPayload } from 'jsonwebtoken';
+import jwt, { JsonWebTokenError, JwtPayload } from 'jsonwebtoken';
 import { NextFunction, Response } from 'express';
 import minimatch from 'minimatch';
 
@@ -64,7 +64,9 @@ export const authMiddleware = async (req: any, res: Response, next: NextFunction
 
       return next();
     } catch (err: any) {
-      if (err.message && !err.message.includes('jwt expired')) {
+      const isJwtError = err instanceof JsonWebTokenError;
+
+      if (!isJwtError) {
         logger.error(err);
       }
     }
