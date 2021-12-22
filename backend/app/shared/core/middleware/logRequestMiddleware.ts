@@ -5,6 +5,12 @@ import { selectRequestType } from '../../utils/helpers';
 import { getDurationInMilliseconds } from '../../utils/request';
 import { CLIENT_ORIGIN } from '../config';
 
+const isWhiteListedURL = (requestURL: string) => {
+  const urls = ['/', '/health', '/spec/prolang.yaml'];
+
+  return urls.includes(requestURL);
+};
+
 /**
  * @link https://ipirozhenko.com/blog/measuring-requests-duration-nodejs-express/
  *
@@ -16,7 +22,7 @@ export const logRequestMiddleware = async (req: Request, res: Response, next: Ne
   const start = process.hrtime();
   const { connection, ip, url } = req;
 
-  if (req.headers['x-client-origin'] === CLIENT_ORIGIN) {
+  if (req.headers['x-client-origin'] === CLIENT_ORIGIN || isWhiteListedURL(req.originalUrl)) {
     return next();
   }
 
