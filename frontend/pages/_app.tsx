@@ -46,7 +46,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
             <Component {...pageProps} />
           </MainLayout>
         </ErrorBoundary>
-        <ReactQueryDevtools initialIsOpen />
+        {process.env.NODE_ENV !== 'production' && <ReactQueryDevtools initialIsOpen />}
       </QueryClientProvider>
     </CookiesProvider>
   );
