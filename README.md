@@ -7,7 +7,7 @@ Get information about programming languages
 [![Better Uptime Badge](https://betteruptime.com/status-badges/v1/monitor/bbu9.svg)](https://betteruptime.com/?utm_source=status_badge)
 ![Follow](https://img.shields.io/twitter/follow/osscameroon?style=social)
 
-![Website](https://prolanghistory.com/assets/img/og.png)
+[![Website](https://prolanghistory.com/assets/img/og.png)](https://prolanghistory.com)
 
 # Features
 - Retrieve all programming languages
