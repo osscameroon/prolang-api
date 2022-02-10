@@ -8,7 +8,7 @@ const PageNotFound = () => {
         <div className="flex justify-center text-2xl mb-4 text-red-600">
           <ExclamationCircleIcon className="w-16 h-16" />
         </div>
-        <h2 className="text-center font-bold text-3xl">Oops! The page not found</h2>
+        <h2 className="text-center font-bold text-3xl">Oops! The page not found.</h2>
 
         <p className="text-center text-xl my-10">It looks like the page you are looking for doesn't exists.</p>
 

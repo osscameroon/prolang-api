@@ -14,7 +14,7 @@ on:
       should_docker:
         description: 'Indicate if we want to build the docker image or not'
         required: true
-        default: 'no'
+        default: 'yes'
 
 jobs:
   build:

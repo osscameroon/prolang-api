@@ -3246,6 +3246,11 @@ eslint-plugin-testing-library@^5.0.0:
   dependencies:
     "@typescript-eslint/experimental-utils" "^5.0.0"
 
+eslint-plugin-use-encapsulation@^1.0.0:
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-use-encapsulation/-/eslint-plugin-use-encapsulation-1.0.0.tgz#351b4c6adac4a2eb54a604e0f62edb2a2dfec39c"
+  integrity sha512-OH0BVVT+7XkcGHf7v2chzMHqjWy1ddCBFaAk+N+ZP3I1NaebIOkuFPq0NSJyz09KvPFZYZFSqje+tg9jsZ/tZQ==
+
 eslint-scope@^5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/eslint-scope/-/eslint-scope-5.1.1.tgz#e786e59a66cb92b3f6c1fb0d508aab174848f48c"

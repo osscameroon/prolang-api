@@ -1,6 +1,6 @@
 {
   "extends": ["next", "next/core-web-vitals", "prettier", "plugin:jest-dom/recommended"],
-  "plugins": ["testing-library", "jest-dom"],
+  "plugins": ["testing-library", "jest-dom", "use-encapsulation"],
   "rules": {
     "quotes": ["warn", "single"],
     "semi": "warn",
@@ -32,6 +32,10 @@
     "react/display-name": "warn",
     "react/prop-types": "warn",
     "react/sort-prop-types": "warn",
-    "react/no-unescaped-entities": "off"
+    "react/no-unescaped-entities": "off",
+    "use-encapsulation/prefer-custom-hooks": [
+      "error",
+      { "allow": ["useCallback", "useMemo", "useState", "useRef", "useEffect"] }
+    ]
   }
 }

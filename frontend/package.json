@@ -64,6 +64,7 @@
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-jest-dom": "^3.9.2",
     "eslint-plugin-testing-library": "^5.0.0",
+    "eslint-plugin-use-encapsulation": "^1.0.0",
     "eventsourcemock": "^2.0.0",
     "jest": "^27.3.1",
     "msw": "^0.35.0",
