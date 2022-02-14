@@ -2,12 +2,12 @@ import Link from 'next/link';
 import { MenuIcon } from '@heroicons/react/outline';
 import { Img } from '@components/common/img';
 import GithubIcon from '@components/icons/github';
-import { useRef } from 'react';
 import { useClickOutside } from '@hooks/useClickOutside';
 import { useBooleanState } from '@hooks/useBooleanState';
+import { useCustomRef } from '@hooks/useCustomRef';
 
 const PublicHeader = () => {
-  const ref = useRef<any>();
+  const ref = useCustomRef<any>();
   const [isMenuOpened, openMenu, closeMenu] = useBooleanState(false);
 
   useClickOutside(ref, () => closeMenu());

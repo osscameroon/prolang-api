@@ -1,9 +1,8 @@
-import { useRef } from 'react';
-import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { UserIcon, CogIcon, LogoutIcon } from '@heroicons/react/outline';
 
 import { useClickOutside } from '@hooks/useClickOutside';
+import { useCustomRef } from '@hooks/useCustomRef';
 
 type ProfileMenuProps = {
   closeModal: () => void;
@@ -11,8 +10,7 @@ type ProfileMenuProps = {
 };
 
 const ProfileMenu = ({ closeModal, handleLogout }: ProfileMenuProps) => {
-  const router = useRouter();
-  const ref = useRef<any>();
+  const ref = useCustomRef<any>();
 
   useClickOutside(ref, () => closeModal());
 
