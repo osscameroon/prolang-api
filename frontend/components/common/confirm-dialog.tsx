@@ -1,8 +1,9 @@
-import { Fragment, useRef } from 'react';
+import { Fragment } from 'react';
 import { Dialog, Transition } from '@headlessui/react';
 import { ExclamationIcon } from '@heroicons/react/outline';
 
 import { Button } from '@components/common/button';
+import { useCustomRef } from '@hooks/useCustomRef';
 
 type ConfirmDialogProps = {
   cancelText?: string;
@@ -23,7 +24,7 @@ const ConfirmDialog = ({
   onConfirmButtonClick,
   open,
 }: ConfirmDialogProps) => {
-  const cancelButtonRef = useRef(null);
+  const cancelButtonRef = useCustomRef<any>(null);
 
   return (
     <Transition.Root show={open} as={Fragment}>
