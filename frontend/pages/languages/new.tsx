@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { useForm, FormProvider } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
@@ -12,8 +11,8 @@ import { useCreateLanguage } from '@hooks/request/mutation/useCreateLanguage';
 import { LANGUAGE_CREATED_MESSAGE, NETWORK_ERROR_MESSAGE, YEAR_CONFIRMED_OPTION } from '@utils/constants';
 import { getErrorMessage } from '@utils/axios';
 import { Loader } from '@components/common/loader';
-import { formatOptions } from '@utils/forms';
 import { useLoadLanguageFormData } from '@hooks/useLoadLanguageFormData';
+import { useFormatOptions } from '@hooks/useFormatOptions';
 
 type NewLanguageProps = {
   authors: Author[];
@@ -22,9 +21,7 @@ type NewLanguageProps = {
 };
 
 const NewLanguage = ({ authors, languages, yearGroups }: NewLanguageProps) => {
-  const authorOptions = useMemo(() => formatOptions(authors), [authors]);
-  const languageOptions = useMemo(() => formatOptions(languages), [languages]);
-  const yearGroupOptions = useMemo(() => formatOptions(yearGroups), [yearGroups]);
+  const [authorOptions, languageOptions, yearGroupOptions] = useFormatOptions(authors, languages, yearGroups);
 
   const initialValues: Partial<any> = {
     authors: [],

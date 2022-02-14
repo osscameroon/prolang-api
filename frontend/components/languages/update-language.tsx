@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
@@ -10,7 +9,7 @@ import { useUpdateLanguage } from '@hooks/request/mutation/useUpdateLanguage';
 import { YEAR_CONFIRMED_OPTION, NETWORK_ERROR_MESSAGE, LANGUAGE_UPDATED_MESSAGE } from '@utils/constants';
 import { getErrorMessage } from '@utils/axios';
 import { PageHeader } from '@components/common/page-header';
-import { formatOptions } from '@utils/forms';
+import { useFormatOptions } from '@hooks/useFormatOptions';
 
 type UpdateLanguageProps = {
   authors: Author[];
@@ -20,9 +19,7 @@ type UpdateLanguageProps = {
 };
 
 const UpdateLanguage = ({ authors, language, languages, yearGroups }: UpdateLanguageProps) => {
-  const authorOptions = useMemo(() => formatOptions(authors), [authors]);
-  const languageOptions = useMemo(() => formatOptions(languages), [languages]);
-  const yearGroupOptions = useMemo(() => formatOptions(yearGroups), [yearGroups]);
+  const [authorOptions, languageOptions, yearGroupOptions] = useFormatOptions(authors, languages, yearGroups);
 
   const formMethods = useForm<UpdateLanguageFormValues>({
     defaultValues: {

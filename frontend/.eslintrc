@@ -35,7 +35,7 @@
     "react/no-unescaped-entities": "off",
     "use-encapsulation/prefer-custom-hooks": [
       "error",
-      { "allow": ["useCallback", "useMemo", "useState", "useRef", "useEffect"] }
+      { "allow": ["useCallback", "useState", "useRef", "useEffect"] }
     ]
   }
 }
