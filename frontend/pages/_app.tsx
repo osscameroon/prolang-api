@@ -1,6 +1,4 @@
-import { useEffect } from 'react';
 import type { AppProps } from 'next/app';
-import { useRouter } from 'next/router';
 import { CookiesProvider } from 'react-cookie';
 import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
@@ -9,7 +7,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import MainLayout from '@components/layout/main';
 import { AppError } from '@components/common/app-error';
 import { GlobalSeo } from '@components/common/seo';
-import { pageView } from '@utils/gtag';
+import { useTrackPageView } from '@utils/gtag';
 
 import 'react-toastify/dist/ReactToastify.css';
 import '@styles/globals.css';
@@ -23,19 +21,7 @@ if (process.env.NEXT_PUBLIC_APP_ENV === 'test' && Boolean(process.browser)) {
 }
 
 const MyApp = ({ Component, pageProps }: AppProps) => {
-  const router = useRouter();
-
-  useEffect(() => {
-    const handleRouteChange = (url: string) => {
-      pageView(url);
-    };
-
-    router.events.on('routeChangeComplete', handleRouteChange);
-
-    return () => {
-      router.events.off('routeChangeComplete', handleRouteChange);
-    };
-  }, [router.events]);
+  useTrackPageView();
 
   return (
     <CookiesProvider>
