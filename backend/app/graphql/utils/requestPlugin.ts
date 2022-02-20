@@ -19,7 +19,7 @@ const generateEndpointURL = (operation: string, args: any[][]) => {
 };
 
 const requestPlugin: ApolloServerPlugin = {
-  // @ts-ignore
+  // @ts-ignore types mismatch
   requestDidStart: async () => {
     return {
       didResolveOperation: async (context: GraphQLRequestContext<AppContext>) => {
@@ -37,7 +37,7 @@ const requestPlugin: ApolloServerPlugin = {
 
             const operationDefinition = obj.definitions[0] as OperationDefinitionNode;
             const selection = operationDefinition.selectionSet.selections[0] as FieldNode;
-            // @ts-ignore
+            // @ts-ignore types mismatch
             const args = selection.arguments?.map((arg) => [arg.name.value, arg.value.value]) || [];
 
             const input: CreateRequestLogInput = {

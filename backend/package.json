@@ -19,7 +19,7 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc --project tsconfig.prod.json",
-    "eslint:fix": "eslint --fix",
+    "lint": "eslint --fix",
     "generate:types": "graphql-codegen",
     "sanitize": "ts-node app/shared/utils/sanitizeData.ts",
     "db:backup": "ts-node app/shared/utils/dbData.ts",

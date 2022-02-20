@@ -20,7 +20,13 @@ module.exports = {
     'prefer-const': 'warn',
     'no-use-before-define': 'warn',
     'max-len': ['warn', 120],
-    '@typescript-eslint/ban-ts-comment': 'off',
+    '@typescript-eslint/ban-ts-comment': [
+      'warn',
+      {
+        'ts-ignore': 'allow-with-description',
+        minimumDescriptionLength: 10
+      }
+    ],
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'sort-destructure-keys/sort-destructure-keys': 2,
