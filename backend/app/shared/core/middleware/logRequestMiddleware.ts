@@ -1,11 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
 import requestLogService from '../../../domain/services/requestLog.service';
 import { CreateRequestLogInput } from '../../types/models';
-import { selectRequestType } from '../../utils/helpers';
+import { isScamRoute, selectRequestType } from '../../utils/helpers';
 import { getDurationInMilliseconds } from '../../utils/request';
 import { CLIENT_ORIGIN } from '../config';
 
 const isWhiteListedURL = (requestURL: string) => {
+  console.log('youherelle => ', requestURL);
   const urls = ['/', '/health', '/spec/prolang.yaml'];
 
   return urls.includes(requestURL);
@@ -22,7 +23,11 @@ export const logRequestMiddleware = async (req: Request, res: Response, next: Ne
   const start = process.hrtime();
   const { connection, ip, url } = req;
 
-  if (req.headers['x-client-origin'] === CLIENT_ORIGIN || isWhiteListedURL(req.originalUrl)) {
+  if (
+    req.headers['x-client-origin'] === CLIENT_ORIGIN ||
+    isScamRoute(req.originalUrl) ||
+    isWhiteListedURL(req.originalUrl)
+  ) {
     return next();
   }
 
