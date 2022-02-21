@@ -51,3 +51,12 @@ export const generateRoutePrefix = (endpoint: string) => {
 
   return [publicPrefix, privatePrefix];
 };
+
+export const isScamRoute = (url: string) => {
+  const allowedPathsWithQueryString = ['/authors', '/authors/all', '/languages', '/languages/all', '/years-groups'];
+
+  const urlArray = url.split('?');
+  const [path] = urlArray;
+
+  return !allowedPathsWithQueryString.includes(path);
+};
