@@ -22,7 +22,8 @@
     "emitDecoratorMetadata": true
   },
   "include": [
-    "./app/**/*"
+    "./app/**/*",
+    ".eslintrc.js"
   ],
   "exclude": [
     "node_modules"

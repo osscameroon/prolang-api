@@ -5,6 +5,7 @@ module.exports = {
   parserOptions: {
     ecmaVersion: 2020,
     sourceType: 'module',
+    project: "tsconfig.json",
   },
   env: {
     es6: true,
@@ -31,6 +32,7 @@ module.exports = {
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'sort-destructure-keys/sort-destructure-keys': 2,
     '@typescript-eslint/member-ordering': 'warn',
+    '@typescript-eslint/prefer-nullish-coalescing': 'error',
     '@typescript-eslint/consistent-type-definitions': ['warn', 'type'],
     '@typescript-eslint/prefer-optional-chain': 'warn',
     '@typescript-eslint/no-unused-vars': [
