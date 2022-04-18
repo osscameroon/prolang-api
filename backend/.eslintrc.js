@@ -43,6 +43,7 @@ module.exports = {
     ],
     '@typescript-eslint/ban-ts-ignore': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
+    '@typescript-eslint/no-floating-promises': 'error',
     'prefer-destructuring': ['warn'],
     'prefer-template': 'warn',
     'object-shorthand': 'warn',

@@ -32,7 +32,7 @@ export const startGraphqlServer = async (app: Application, httpServer: Server) =
   const server = new ApolloServer({
     context: async ({ req, res }): Promise<AppContext> => {
       return {
-        ip: req.connection?.remoteAddress || req.ip,
+        ip: req.connection?.remoteAddress ?? req.ip,
         reqStartTime: process.hrtime(),
         xRes: res,
       };
