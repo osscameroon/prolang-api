@@ -30,7 +30,7 @@ export const startServer = async () => {
   return { graphqlServer, httpServer };
 };
 
-(async () => {
+void (async () => {
   await startServer();
 })();
 

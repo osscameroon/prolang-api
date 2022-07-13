@@ -1,3 +1,5 @@
+# Look this: https://github.com/osscameroon/blog/blob/main/Dockerfile - lighter docker image
+
 FROM node:14-buster AS setup
 WORKDIR /app
 COPY frontend/package.json ./

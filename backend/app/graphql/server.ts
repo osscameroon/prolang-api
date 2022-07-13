@@ -1,6 +1,11 @@
 import { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
-import { ApolloServerPluginLandingPageGraphQLPlayground, ApolloServerPluginDrainHttpServer } from 'apollo-server-core';
+import {
+  ApolloServerPluginLandingPageGraphQLPlayground,
+  ApolloServerPluginDrainHttpServer,
+  ApolloServerPluginLandingPageProductionDefault,
+  ApolloServerPluginLandingPageLocalDefault,
+} from 'apollo-server-core';
 import { loadSchemaSync } from '@graphql-tools/load';
 import { GraphQLFileLoader } from '@graphql-tools/graphql-file-loader';
 import { addResolversToSchema } from '@graphql-tools/schema';
@@ -41,6 +46,9 @@ export const startGraphqlServer = async (app: Application, httpServer: Server) =
     plugins: [
       ApolloServerPluginLandingPageGraphQLPlayground(),
       ApolloServerPluginDrainHttpServer({ httpServer }), // graceful shutdown
+      process.env.NODE_ENV
+        ? ApolloServerPluginLandingPageProductionDefault({ embed: true, graphRef: 'prolang-cureent' })
+        : ApolloServerPluginLandingPageLocalDefault({ embed: true }),
       sentryPlugin,
       requestPlugin,
     ],
