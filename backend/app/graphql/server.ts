@@ -1,7 +1,6 @@
 import { Application } from 'express';
 import { ApolloServer } from 'apollo-server-express';
 import {
-  ApolloServerPluginLandingPageGraphQLPlayground,
   ApolloServerPluginDrainHttpServer,
   ApolloServerPluginLandingPageProductionDefault,
   ApolloServerPluginLandingPageLocalDefault,
@@ -35,6 +34,7 @@ export const startGraphqlServer = async (app: Application, httpServer: Server) =
   });
 
   const server = new ApolloServer({
+    cache: 'bounded',
     context: async ({ req, res }): Promise<AppContext> => {
       return {
         ip: req.connection?.remoteAddress ?? req.ip,
@@ -44,7 +44,6 @@ export const startGraphqlServer = async (app: Application, httpServer: Server) =
     },
     introspection: true,
     plugins: [
-      ApolloServerPluginLandingPageGraphQLPlayground(),
       ApolloServerPluginDrainHttpServer({ httpServer }), // graceful shutdown
       process.env.NODE_ENV
         ? ApolloServerPluginLandingPageProductionDefault({ embed: true, graphRef: 'prolang-cureent' })
