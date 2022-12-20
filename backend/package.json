@@ -7,7 +7,7 @@
     "name": "Eric Cabrel TIOGO",
     "url": "https://tericcabrel.com"
   },
-  "homepage": "https://localhost",
+  "homepage": "https://prolanghistory.com",
   "keywords": [
     "programming languages",
     "rest",
@@ -25,7 +25,9 @@
     "db:backup": "ts-node app/shared/utils/dbData.ts",
     "start": "nodemon --watch \"*.ts\" --watch \".env\" --exec \"ts-node\" ./app/index.ts",
     "test": "jest --config jest.config.js",
-    "test:verbose": "DEBUG=testcontainers* jest"
+    "test:verbose": "DEBUG=testcontainers* jest",
+    "db:dev": "docker run -d --rm -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret -v dbdata:/db/data --name prolang-db -p 27018:27017 mongo:6.0",
+    "db:stop": "docker kill prolang-db && docker container prune"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.1.1",

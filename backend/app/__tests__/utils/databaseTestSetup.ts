@@ -8,14 +8,13 @@ import { yearGroupsInput } from './fixtures';
 
 jest.setTimeout(60000);
 
-// @ts-ignore
 let runningContainer: StartedTestContainer;
 const databaseUser = 'user';
 const databasePassword = 'password';
 const databasePort = 27017;
 
 beforeAll(async () => {
-  const container = new GenericContainer('mongo:4.4');
+  const container = new GenericContainer('mongo:6.0');
 
   runningContainer = await container
     .withExposedPorts(databasePort)
