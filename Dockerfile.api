@@ -1,4 +1,4 @@
-FROM node:14-buster as builder
+FROM node:18-buster as builder
 
 RUN mkdir apidoc backend
 
@@ -18,7 +18,7 @@ RUN yarn generate:types && yarn build
 RUN mkdir build/rest/docs && cp app/graphql/schema.graphql build/graphql
 
 ## Build the application
-FROM node:14-alpine AS prolang
+FROM node:18-alpine3.17 AS prolang
 ENV NODE_ENV=production
 WORKDIR /app
 COPY --chown=node:node --from=builder /backend/package.json /backend/yarn.lock ./

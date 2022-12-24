@@ -26,8 +26,9 @@
     "start": "nodemon --watch \"*.ts\" --watch \".env\" --exec \"ts-node\" ./app/index.ts",
     "test": "jest --config jest.config.js",
     "test:verbose": "DEBUG=testcontainers* jest",
-    "db:dev": "docker run -d --rm -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret -v dbdata:/db/data --name prolang-db -p 27018:27017 mongo:6.0",
-    "db:stop": "docker kill prolang-db && docker container prune"
+    "db:dev": "docker run -d --rm -e MONGO_INITDB_ROOT_USERNAME=root -e MONGO_INITDB_ROOT_PASSWORD=secret -v ${PWD}/dbdata:/data/db --name prolang-db -p 27047:27017 mongo:6.0",
+    "db:stop": "docker kill prolang-db && docker container prune -f",
+    "db:seed": "cd scripts && ./seed.sh"
   },
   "devDependencies": {
     "@graphql-codegen/cli": "^2.1.1",
