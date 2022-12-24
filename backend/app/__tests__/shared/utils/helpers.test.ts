@@ -45,7 +45,7 @@ describe('Test Helpers - extractQueryFields', () => {
   });
 });
 
-describe.only('Others helpers functions', () => {
+describe('Others helpers functions', () => {
   test('remove query string from the URL path', () => {
     expect(removeQueryStringIfExist('/languages?fields=id,name')).toMatchInlineSnapshot(`"/languages"`);
     expect(removeQueryStringIfExist('/years-groups')).toMatchInlineSnapshot(`"/years-groups"`);
@@ -60,7 +60,7 @@ describe.only('Others helpers functions', () => {
     expect(generateRoutePrefix('/')).toMatchObject(['/', '/private']);
   });
 
-  test.only('Verify if the url is from scam', () => {
+  test('Verify if the url is from scam', () => {
     expect(isScamRoute('/languages?fields=id,name')).toEqual(false);
     expect(isScamRoute('/?XDEBUG_SESSION_START=phpstorm')).toEqual(true);
     expect(isScamRoute('/years-groups')).toEqual(false);

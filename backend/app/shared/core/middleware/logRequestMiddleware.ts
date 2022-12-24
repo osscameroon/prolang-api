@@ -6,7 +6,6 @@ import { getDurationInMilliseconds } from '../../utils/request';
 import { CLIENT_ORIGIN } from '../config';
 
 const isWhiteListedURL = (requestURL: string) => {
-  console.log('youherelle => ', requestURL);
   const urls = ['/', '/health', '/spec/prolang.yaml'];
 
   return urls.includes(requestURL);
