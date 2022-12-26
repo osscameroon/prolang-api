@@ -12,12 +12,12 @@ const SidebarLink = ({ children, href }: PropsWithChildren<{ href: string }>) =>
   });
 
   return (
-    <Link href={href}>
-      <a className={linkClasses}>
-        {children}
-      </a>
-    </Link>
+    (<Link href={href} className={linkClasses}>
+
+      {children}
+
+    </Link>)
   );
 };
 
-export default SidebarLink;
+export { SidebarLink };

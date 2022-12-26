@@ -1,6 +1,5 @@
 import { HomeIcon, CollectionIcon, ViewBoardsIcon } from '@heroicons/react/outline';
-
-import SidebarLink from '@components/common/sidebar-link';
+import { SidebarLink } from '@components/common/sidebar-link';
 
 const PrivateSidebar = () => {
   return (
@@ -44,4 +43,4 @@ const PrivateSidebar = () => {
   );
 };
 
-export default PrivateSidebar;
+export { PrivateSidebar };

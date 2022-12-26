@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from 'react-query';
+import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
 
 import { usePublicClient } from '@hooks/useAxios';
 import {
@@ -21,7 +21,7 @@ export const useRetrieveLanguages = (
     .filter((query) => Boolean(query))
     .join('&');
 
-  return useQuery(
+  return useQuery<LanguageList, unknown, LanguageList, QueryKey>(
     `${QUERY_KEYS.getLanguages}-${queryString}`,
     async () => {
       const response = await axiosInstance.get<LanguageListResponseData>(`languages?${queryString}`);

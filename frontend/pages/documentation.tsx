@@ -1,6 +1,6 @@
 import dynamic from 'next/dynamic';
 import { RedocStandaloneProps } from 'redoc';
-import { withPublicLayout } from '@components/hof/with-public-layout';
+import { PublicLayout } from '@components/layout/public/public-layout';
 
 const RedocStandalone = dynamic<RedocStandaloneProps>(() => import('redoc').then((mod) => mod.RedocStandalone));
 
@@ -25,10 +25,12 @@ const theme = {
 
 const Documentation = () => {
   return (
-    <div className="min-h-[calc(100vh-130px)]">
-      <RedocStandalone specUrl={process.env.NEXT_PUBLIC_API_DOC_URL} options={{ theme }} />
-    </div>
+    <PublicLayout path='/documentation' title='API Documentation' >
+      <div className="min-h-[calc(100vh-130px)]">
+        <RedocStandalone specUrl={process.env.NEXT_PUBLIC_API_DOC_URL} options={{ theme }} />
+      </div>
+    </PublicLayout>
   );
 };
 
-export default withPublicLayout(Documentation, { path: '/documentation', title: 'API Documentation' });
+export default Documentation;

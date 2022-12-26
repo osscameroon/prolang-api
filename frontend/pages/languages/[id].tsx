@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
 
-import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { Loader } from '@components/common/loader';
 import { UpdateLanguage } from '@components/languages/update-language';
 import { ResourceNotFound } from '@components/common/resource-not-found';
 import { useRetrieveLanguage } from '@hooks/request/query/useRetrieveLanguage';
 import { useLoadLanguageFormData } from '@hooks/useLoadLanguageFormData';
+import { PrivateLayout } from '@components/layout/private/private-layout';
 
 const UpdateLanguageDataLoader = () => {
   const { query } = useRouter();
@@ -20,15 +20,18 @@ const UpdateLanguageDataLoader = () => {
   }
 
   if (!loading && data && yearGroupData && authorData && languageData) {
-    return <UpdateLanguage 
-      language={data}
-      yearGroups={yearGroupData || []}
-      languages={languageData}
-      authors={authorData}
-    />;
+    return (
+      <PrivateLayout title="Edit language">
+        <UpdateLanguage
+          language={data}
+          yearGroups={yearGroupData || []}
+          languages={languageData}
+          authors={authorData}
+        />
+      </PrivateLayout>);
   }
 
   return <ResourceNotFound name="Language" />;
 };
 
-export default withPrivateLayout(UpdateLanguageDataLoader, { title: 'Edit language' });
+export default UpdateLanguageDataLoader;

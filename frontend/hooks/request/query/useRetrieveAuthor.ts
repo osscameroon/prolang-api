@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from 'react-query';
+import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
 
 import { Author } from '@typings/common';
 import { usePublicClient } from '@hooks/useAxios';
@@ -7,7 +7,7 @@ import { QUERY_KEYS } from '@utils/constants';
 export const useRetrieveAuthor = (authorId: string, options?: UseQueryOptions<Author> | undefined) => {
   const axiosInstance = usePublicClient();
 
-  return useQuery(
+  return useQuery<Author, unknown, Author, QueryKey>(
     [QUERY_KEYS.getAuthor, authorId],
     async ({ queryKey: [, id] }) => {
       const response = await axiosInstance.get<{ data: any }>(`authors/${id}`);

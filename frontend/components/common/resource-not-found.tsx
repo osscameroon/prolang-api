@@ -17,10 +17,12 @@ const ResourceNotFound = ({ name }: ResourceNotFoundProps) => {
         <p className="text-center text-xl my-10">It looks like the item you are looking for doesn't exists.</p>
 
         <div className="flex justify-center mt-8">
-          <Link href="/dashboard">
-            <a className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white bg-red-600 border border-transparent rounded-lg focus:outline-none">
+          <Link
+            href="/dashboard"
+            className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white bg-red-600 border border-transparent rounded-lg focus:outline-none">
+            
               Go to dashboard
-            </a>
+            
           </Link>
         </div>
       </div>

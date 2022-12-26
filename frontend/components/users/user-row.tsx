@@ -34,14 +34,14 @@ const UserRow = ({ canDelete, canEdit, item, triggerDeleteDialog }: UserRowProps
       </td>
       <td className="flex justify-end px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
         {canEdit && (
-          <Link href={`/users/${item.id}`}>
-            <a
-              className="flex items-center justify-between px-1.5 py-1.5 text-lg font-medium leading-5 bg-white border border-transparent rounded-lg hover:border-purple-600 hover:text-purple-700 focus:outline-none"
-              aria-label="Edit"
-            >
-              <PencilIcon className="h-5 w-5 text-purple-600" />
-            </a>
-          </Link>
+          (<Link
+            href={`/users/${item.id}`}
+            className="flex items-center justify-between px-1.5 py-1.5 text-lg font-medium leading-5 bg-white border border-transparent rounded-lg hover:border-purple-600 hover:text-purple-700 focus:outline-none"
+            aria-label="Edit">
+
+            <PencilIcon className="h-5 w-5 text-purple-600" />
+
+          </Link>)
         )}
         {canDelete && (
           <button

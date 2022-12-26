@@ -2,9 +2,9 @@ import { Fragment, PropsWithChildren } from 'react';
 import Head from 'next/head';
 import { ToastContainer } from 'react-toastify';
 
-type MainLayoutProps = {};
+type Props = {};
 
-const MainLayout = ({ children }: PropsWithChildren<MainLayoutProps>) => {
+const MainLayout = ({ children }: PropsWithChildren<Props>) => {
   return (
     <Fragment>
       <Head>
@@ -29,4 +29,4 @@ const MainLayout = ({ children }: PropsWithChildren<MainLayoutProps>) => {
   );
 };
 
-export default MainLayout;
+export { MainLayout };

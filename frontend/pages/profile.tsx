@@ -1,7 +1,7 @@
-import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { Loader } from '@components/common/loader';
 import { ProfileForm } from '@components/profile/profile-form';
 import { ResourceNotFound } from '@components/common/resource-not-found';
+import { PrivateLayout } from '@components/layout/private/private-layout';
 import { useAuth } from '@hooks/useAuth';
 
 const ProfileDataLoader = () => {
@@ -12,10 +12,18 @@ const ProfileDataLoader = () => {
   }
 
   if (!loading && user) {
-    return <ProfileForm user={user} />;
+    return (
+      <PrivateLayout title="User profile">
+        <ProfileForm user={user} />
+      </PrivateLayout>
+    );
   }
 
-  return <ResourceNotFound name="Planner" />;
+  return (
+    <PrivateLayout title="User profile">
+      <ResourceNotFound name="User" />
+    </PrivateLayout>
+  );
 };
 
-export default withPrivateLayout(ProfileDataLoader, { title: 'User profile' });
+export default ProfileDataLoader;

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useQueryClient } from 'react-query';
 import router from 'next/router';
 
-import ProfileMenu from '@components/layout/private/profile-menu';
+import { ProfileMenu } from '@components/layout/private/profile-menu';
 import { LetterAvatar } from '@components/common/letter-avatar';
 import { useAuth } from '@hooks/useAuth';
 
@@ -48,4 +48,4 @@ const PrivateHeader = () => {
   );
 };
 
-export default PrivateHeader;
+export { PrivateHeader };
