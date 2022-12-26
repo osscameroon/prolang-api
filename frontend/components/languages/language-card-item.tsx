@@ -18,10 +18,14 @@ const LanguageCardItem = ({ data }: LanguageCardItemProps) => {
           <div className="ml-4">{name}</div>
         </div>
         <div>
-          <Link href={link}>
-            <a target="_blank" rel="noreferrer nopener" aria-label="Learn more about the language">
-              <ExternalIcon />
-            </a>
+          <Link
+            href={link}
+            target="_blank"
+            rel="noreferrer nopener"
+            aria-label="Learn more about the language">
+
+            <ExternalIcon />
+
           </Link>
         </div>
       </div>

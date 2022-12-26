@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 
 import { FilterQueryParams, PaginationChangeEventData, SelectOption } from '@typings/common';
-import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { Pagination } from '@components/pagination/pagination';
 import { SelectInput } from '@components/common/select-input';
 import { ConfirmDialog } from '@components/common/confirm-dialog';
@@ -24,6 +23,7 @@ import {
 } from '@utils/constants';
 import { formatYearGroupOption } from '@utils/forms';
 import { getErrorMessage } from '@utils/axios';
+import { PrivateLayout } from '@components/layout/private/private-layout';
 
 type LanguageSearchParams = FilterQueryParams & {
   yearGroup: SelectOption;
@@ -97,7 +97,7 @@ const Languages = () => {
   };
 
   return (
-    <>
+    <PrivateLayout title="Languages list">
       <div className="container px-6 mx-auto grid">
         <PageHeader text="Languages List" />
         <div className="flex flex-col">
@@ -123,13 +123,13 @@ const Languages = () => {
               />
             </div>
 
-            <Link href="/languages/new">
-              <a className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                <span className="mr-2" aria-hidden="true">
-                  <PlusIcon className="w-5 h-5" />
-                </span>
-                  New language
-              </a>
+            <Link
+              href="/languages/new"
+              className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+
+              <span className="mr-2" aria-hidden="true">
+                <PlusIcon className="w-5 h-5" />
+              </span>New language
             </Link>
           </div>
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -150,12 +150,12 @@ const Languages = () => {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {Boolean(data?.items.length) &&
-                    data?.items.map((item) => (
-                      <LanguageRow
-                        key={item.id}
-                        item={item} triggerDeleteDialog={() => onDeleteLanguageClick(item.id)}
-                      />
-                    ))}
+                  data?.items.map((item) => (
+                    <LanguageRow
+                      key={item.id}
+                      item={item} triggerDeleteDialog={() => onDeleteLanguageClick(item.id)}
+                    />
+                  ))}
 
                     {!Boolean(data?.items.length) && <TableNoRow colSpan={7} />}
                   </tbody>
@@ -181,8 +181,8 @@ const Languages = () => {
         onConfirmButtonClick={handleDeleteLanguageClick}
         onCancelButtonClick={closeDialog}
       />
-    </>
+    </PrivateLayout>
   );
 };
 
-export default withPrivateLayout(Languages, { title: 'Languages list' });
+export default Languages;

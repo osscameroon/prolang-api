@@ -1,9 +1,9 @@
-import PrivateLayout from '@components/layout/private/private-layout';
+import { PrivateLayout } from '@components/layout/private/private-layout';
 import { PageHeader } from '@components/common/page-header';
 
 const Settings = () => {
   return (
-    <PrivateLayout>
+    <PrivateLayout title="Settings">
       <div className="container px-6 mx-auto grid">
         <PageHeader text="Settings" />
       </div>

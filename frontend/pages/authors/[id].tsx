@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
 
-import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { Loader } from '@components/common/loader';
 import { UpdateAuthor } from '@components/authors/update-author';
 import { ResourceNotFound } from '@components/common/resource-not-found';
 import { useRetrieveAuthor } from '@hooks/request/query/useRetrieveAuthor';
+import { PrivateLayout } from '@components/layout/private/private-layout';
 
 const UpdateAuthorDataLoader = () => {
   const { query } = useRouter();
@@ -16,10 +16,14 @@ const UpdateAuthorDataLoader = () => {
   }
 
   if (isSuccess && data) {
-    return <UpdateAuthor author={data} />;
+    return (
+      <PrivateLayout title="Edit author">
+        <UpdateAuthor author={data} />
+      </PrivateLayout>
+    );
   }
 
   return <Loader />;
 };
 
-export default withPrivateLayout(UpdateAuthorDataLoader, { title: 'Edit author' });
+export default UpdateAuthorDataLoader;

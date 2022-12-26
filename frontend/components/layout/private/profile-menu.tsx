@@ -22,25 +22,23 @@ const ProfileMenu = ({ closeModal, handleLogout }: ProfileMenuProps) => {
       data-testid="account-menu-list"
     >
       <li className="flex">
-        <Link href="/profile">
-          <a
-            className="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-            href="#"
-          >
-            <UserIcon className="w-4 h-4 mr-3" aria-hidden="true" />
-            <span>Profile</span>
-          </a>
+        <Link
+          href="/profile"
+          className="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
+
+          <UserIcon className="w-4 h-4 mr-3" aria-hidden="true" />
+          <span>Profile</span>
+
         </Link>
       </li>
       <li className="flex">
-        <Link href="/settings">
-          <a
-            className="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200"
-            href="#"
-          >
-            <CogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
-            <span>Settings</span>
-          </a>
+        <Link
+          href="/settings"
+          className="inline-flex items-center w-full px-2 py-1 text-sm font-semibold transition-colors duration-150 rounded-md hover:bg-gray-100 hover:text-gray-800 dark:hover:bg-gray-800 dark:hover:text-gray-200">
+
+          <CogIcon className="w-4 h-4 mr-3" aria-hidden="true" />
+          <span>Settings</span>
+
         </Link>
       </li>
       <li className="flex">
@@ -58,4 +56,4 @@ const ProfileMenu = ({ closeModal, handleLogout }: ProfileMenuProps) => {
   );
 };
 
-export default ProfileMenu;
+export { ProfileMenu };

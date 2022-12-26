@@ -4,12 +4,12 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { FormInput } from '@components/common/form-input';
 import { Button } from '@components/common/button';
 
-type AuthorFormProps = {
+type Props = {
   isSubmitting?: boolean;
   isEditMode?: boolean;
 };
 
-const AuthorForm = ({ isEditMode = false, isSubmitting }: AuthorFormProps) => {
+const AuthorForm = ({ isEditMode = false, isSubmitting }: Props) => {
   const { control, formState: { errors } } = useFormContext();
 
   return (
@@ -38,6 +38,7 @@ const AuthorForm = ({ isEditMode = false, isSubmitting }: AuthorFormProps) => {
               name="birthDate"
               control={control}
               render={(field) => (
+                // @ts-ignore
                 <DatePicker
                   dateFormat="dd/MM/yyyy"
                   selected={field.field.value}

@@ -18,38 +18,45 @@ const PublicHeader = () => {
         <div className="max-w-7xl mx-auto px-8">
           <div className="flex items-center justify-between h-16">
             <div className=" flex items-center">
-              <Link href="/">
-                <a className="flex-shrink-0">
-                  <Img className="h-8 w-8" src="/assets/img/logo.png" width={32} height={32} alt="Logo" />
-                </a>
+              <Link href="/" className="flex-shrink-0">
+
+                <Img className="h-8 w-8" src="/assets/img/logo.png" width={32} height={32} alt="Logo" />
+
               </Link>
               <div className="hidden md:block">
                 <div className="ml-10 flex items-baseline space-x-4">
-                  <Link href="/">
-                    <a className="navbar-link" data-testid="lnk-home">
+                  <Link href="/" className="navbar-link" data-testid="lnk-home">
+                    
                       Home
-                    </a>
+                    
                   </Link>
-                  <Link href="/documentation">
-                    <a className="navbar-link" data-testid="lnk-documentation">
+                  <Link
+                    href="/documentation"
+                    className="navbar-link"
+                    data-testid="lnk-documentation">
+                    
                       Documentation
-                    </a>
+                    
                   </Link>
-                  <Link href="/playground">
-                    <a className="navbar-link" data-testid="lnk-playground">
+                  <Link href="/playground" className="navbar-link" data-testid="lnk-playground">
+                    
                       GraphQL
-                    </a>
+                    
                   </Link>
                 </div>
               </div>
             </div>
             <div className="block">
               <div className="ml-4 flex items-center md:ml-6 xs:hidden sm:hidden md:block">
-                <Link href="https://github.com/osscameroon/prolang-api">
-                  <a className="p-1 rounded-full text-gray-200 hover:text-gray-200" target="_blank" rel="noreferrer">
-                    <span className="sr-only">View github</span>
-                    <GithubIcon />
-                  </a>
+                <Link
+                  href="https://github.com/osscameroon/prolang-api"
+                  className="p-1 rounded-full text-gray-200 hover:text-gray-200"
+                  target="_blank"
+                  rel="noreferrer">
+
+                  <span className="sr-only">View github</span>
+                  <GithubIcon />
+
                 </Link>
               </div>
             </div>
@@ -67,19 +74,23 @@ const PublicHeader = () => {
         <div className="md:hidden" ref={ref}>
           {isMenuOpened && (
             <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-              <Link href="/">
-                <a className="mobile-navbar-link">Home</a>
+              <Link href="/" className="mobile-navbar-link">
+                Home
               </Link>
-              <Link href="/documentation">
-                <a className="mobile-navbar-link">Documentation</a>
+              <Link href="/documentation" className="mobile-navbar-link">
+                Documentation
               </Link>
-              <Link href="/playground">
-                <a className="mobile-navbar-link">GraphQL</a>
+              <Link href="/playground" className="mobile-navbar-link">
+                GraphQL
               </Link>
-              <Link href="https://github.com/osscameroon/prolang-api">
-                <a className="mobile-navbar-link" target="_blank" rel="noreferrer">
+              <Link
+                href="https://github.com/osscameroon/prolang-api"
+                className="mobile-navbar-link"
+                target="_blank"
+                rel="noreferrer">
+                
                   GitHub Repository
-                </a>
+                
               </Link>
             </div>
           )}
@@ -89,4 +100,4 @@ const PublicHeader = () => {
   );
 };
 
-export default PublicHeader;
+export { PublicHeader };

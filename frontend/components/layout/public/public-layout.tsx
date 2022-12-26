@@ -1,10 +1,17 @@
 import { PropsWithChildren } from 'react';
-import PublicHeader from '@components/layout/public/header';
-import PublicFooter from '@components/layout/public/footer';
+import Head from 'next/head';
+import { PublicHeader } from '@components/layout/public/header';
+import { PublicFooter } from '@components/layout/public/footer';
 import { useAppStatus } from '@hooks/useAppStatus';
-import Maintenance from '@components/common/maintenance';
+import { Maintenance } from '@components/common/maintenance';
+import { PageSeo } from '@components/common/seo';
 
-const PublicLayout = ({ children }: PropsWithChildren<{}>) => {
+type Props = {
+  path?: string;
+  title: string;
+};
+
+const PublicLayout = ({ children, path, title }: PropsWithChildren<Props>) => {
   const appStatus = useAppStatus();
 
   if (!appStatus) {
@@ -13,6 +20,10 @@ const PublicLayout = ({ children }: PropsWithChildren<{}>) => {
 
   return (
     <div>
+      <Head>
+        <title>{title} | Prolang</title>
+      </Head>
+      <PageSeo title={title} path={path}/>
       <PublicHeader />
       <div className="relative top-[65px]">
         {children}
@@ -22,4 +33,4 @@ const PublicLayout = ({ children }: PropsWithChildren<{}>) => {
   );
 };
 
-export default PublicLayout;
+export { PublicLayout };

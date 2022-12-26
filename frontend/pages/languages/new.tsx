@@ -3,7 +3,6 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { toast } from 'react-toastify';
 
 import { Author, Language, YearGroup } from '@typings/common';
-import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { LanguageForm } from '@components/languages/language-form';
 import { LanguageFormValues, languageFormSchema } from '@components/languages/form-schema';
 import { PageHeader } from '@components/common/page-header';
@@ -13,6 +12,7 @@ import { getErrorMessage } from '@utils/axios';
 import { Loader } from '@components/common/loader';
 import { useLoadLanguageFormData } from '@hooks/useLoadLanguageFormData';
 import { useFormatOptions } from '@hooks/useFormatOptions';
+import { PrivateLayout } from '@components/layout/private/private-layout';
 
 type NewLanguageProps = {
   authors: Author[];
@@ -91,10 +91,14 @@ const NewLanguageLoader = () => {
   }
 
   if (!isLoading && authorData && languageData && yearGroupData) {
-    return <NewLanguage yearGroups={yearGroupData} authors={authorData} languages={languageData} />;
+    return (
+      <PrivateLayout title="New language">
+        <NewLanguage yearGroups={yearGroupData} authors={authorData} languages={languageData} />
+      </PrivateLayout>
+    );
   }
 
   return null;
 };
 
-export default withPrivateLayout(NewLanguageLoader, { title: 'New language' });
+export default NewLanguageLoader;

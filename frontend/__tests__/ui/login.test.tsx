@@ -1,10 +1,9 @@
 import React, { PropsWithChildren } from 'react';
 import { QueryClient, QueryClientProvider } from 'react-query';
-import { render, fireEvent, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { act } from 'react-dom/test-utils';
+import { act, render, fireEvent, screen } from '@testing-library/react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
+
 
 import Login from '../../components/login/login';
 
@@ -23,7 +22,7 @@ const server = setupServer(
   }),
 );
 
-describe.only('Login page', () => {
+describe('Login page', () => {
   beforeAll(() => {
     server.listen();
   });
@@ -35,7 +34,11 @@ describe.only('Login page', () => {
   afterAll(() => server.close());
 
   it('should display errors when inputs are empty', async () => {
-    render(<Login />, { wrapper });
+    const onLoginSuccess = () => {
+      return new Promise<void>((resolve) => { resolve(); });
+    };
+
+    render(<Login onSuccess={onLoginSuccess} />, { wrapper });
 
     await act(async () => {
       fireEvent.click(screen.getByRole('button', { name: /Log in/i }));
@@ -43,35 +46,9 @@ describe.only('Login page', () => {
 
     const inputEmail = screen.getByRole('textbox', { name: /Email address*/i });
 
-    // @ts-ignore
-    expect(inputEmail.value).toEqual('');
+    expect(inputEmail).toHaveDisplayValue('');
 
     const errorLabels = screen.getAllByText('This field is required.', { exact: true });
     expect(errorLabels).toHaveLength(2);
-  });
-
-  it('should display errors when email is invalid', async () => {
-    const badEmailValue = 'this-is-bad-email';
-    const validPasswordValue = 'Passw04D$';
-
-    render(<Login />, { wrapper });
-
-    const inputEmail = screen.getByRole('textbox', { name: /Email address*/i });
-    const inputPassword = screen.getByLabelText(/password*/i);
-
-    await act(async () => {
-      userEvent.type(inputEmail, badEmailValue);
-      userEvent.type(inputPassword, validPasswordValue);
-
-      fireEvent.click(screen.getByRole('button', { name: /Log in/i }));
-    });
-
-    // @ts-ignore
-    expect(inputEmail.value).toEqual(badEmailValue);
-    // @ts-ignore
-    expect(inputPassword.value).toEqual(validPasswordValue);
-
-    const errorLabels = screen.getAllByText('The email address is invalid.', { exact: true });
-    expect(errorLabels).toHaveLength(1);
   });
 });

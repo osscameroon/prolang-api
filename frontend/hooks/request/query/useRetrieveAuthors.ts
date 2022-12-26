@@ -1,4 +1,4 @@
-import { useQuery, UseQueryOptions } from 'react-query';
+import { QueryKey, useQuery, UseQueryOptions } from 'react-query';
 
 import { usePublicClient } from '@hooks/useAxios';
 import { AuthorList, AuthorListResponseData, FilterQueryParams } from '@typings/common';
@@ -12,8 +12,8 @@ export const useRetrieveAuthors = (
   const queryString = [`page=${page}`, search ? `search=${search}` : null]
     .filter((query) => Boolean(query))
     .join('&');
-
-  return useQuery(
+  
+  return useQuery<AuthorList, unknown, AuthorList, QueryKey>(
     `${QUERY_KEYS.getAuthors}-${queryString}`,
     async () => {
       const response = await axiosInstance.get<AuthorListResponseData>(`authors?${queryString}`);

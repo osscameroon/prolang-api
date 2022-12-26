@@ -18,10 +18,12 @@ const Tile = ({ children, icon, linkHref, linkIcon, linkText, title }: TileProps
       </div>
       <p className="text-md text-gray-500 dark:text-gray-300 py-4">{children}</p>
 
-      <Link href={linkHref}>
-        <a className="flex justify-center py-2 px-4 mt-6 w-full text-base font-semibold rounded-lg bg-white border-2 border-blue-700 text-blue-700">
-          {linkText} {linkIcon}
-        </a>
+      <Link
+        href={linkHref}
+        className="flex justify-center py-2 px-4 mt-6 w-full text-base font-semibold rounded-lg bg-white border-2 border-blue-700 text-blue-700">
+
+        {linkText} {linkIcon}
+
       </Link>
     </div>
   );

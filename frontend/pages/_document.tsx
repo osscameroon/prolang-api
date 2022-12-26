@@ -1,7 +1,7 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document';
 import { GA_TRACKING_ID } from '@utils/gtag';
 
-class MyDocument extends Document {
+class AppDocument extends Document {
   render() {
     return (
       <Html lang="en">
@@ -37,4 +37,4 @@ class MyDocument extends Document {
   }
 }
 
-export default MyDocument;
+export default AppDocument;

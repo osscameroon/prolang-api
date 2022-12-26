@@ -21,7 +21,7 @@
     "types": [
       "node",
       "jest",
-      "@testing-library/jest-dom"
+      "@testing-library/jest-dom",
     ],
     "paths": {
       "@components/*": [

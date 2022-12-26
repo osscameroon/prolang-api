@@ -1,14 +1,17 @@
 import { PropsWithChildren } from 'react';
-import { useAuth } from '@hooks/useAuth';
+import Head from 'next/head';
 
-import PrivateHeader from '@components/layout/private/header';
-import PrivateSidebar from '@components/layout/private/sidebar';
+import { useAuth } from '@hooks/useAuth';
+import { PrivateHeader } from '@components/layout/private/header';
+import { PrivateSidebar } from '@components/layout/private/sidebar';
 import { Loader } from '@components/common/loader';
 import { Redirect } from '@components/common/redirect';
 
-type PrivateLayoutProps = {};
+type Props = {
+  title: string;
+};
 
-const PrivateLayout = ({ children }: PropsWithChildren<PrivateLayoutProps>) => {
+const PrivateLayout = ({ children, title }: PropsWithChildren<Props>) => {
   const { user, loading } = useAuth();
 
   if (loading) {
@@ -21,6 +24,9 @@ const PrivateLayout = ({ children }: PropsWithChildren<PrivateLayoutProps>) => {
 
   return (
     <div className="flex h-screen bg-gray-50 dark:bg-gray-900">
+      <Head>
+        <title>{title} | Prolang</title>
+      </Head>
       <PrivateSidebar />
       <div className="flex flex-col flex-1">
         <PrivateHeader />
@@ -30,4 +36,4 @@ const PrivateLayout = ({ children }: PropsWithChildren<PrivateLayoutProps>) => {
   );
 };
 
-export default PrivateLayout;
+export { PrivateLayout };

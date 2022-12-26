@@ -4,7 +4,7 @@ import { QueryClient, QueryClientProvider } from 'react-query';
 import { ReactQueryDevtools } from 'react-query/devtools';
 import { ErrorBoundary } from 'react-error-boundary';
 
-import MainLayout from '@components/layout/main';
+import { MainLayout } from '@components/layout/main';
 import { AppError } from '@components/common/app-error';
 import { GlobalSeo } from '@components/common/seo';
 import { useTrackPageView } from '@utils/gtag';

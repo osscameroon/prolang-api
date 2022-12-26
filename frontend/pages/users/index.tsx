@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 import { PlusIcon } from '@heroicons/react/outline';
 
-import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { ConfirmDialog } from '@components/common/confirm-dialog';
 import { Loader } from '@components/common/loader';
 import { UserRow } from '@components/users/user-row';
@@ -16,6 +15,7 @@ import { PageHeader } from '@components/common/page-header';
 import { useAuth } from '@hooks/useAuth';
 import { useDeleteUser } from '@hooks/request/mutation/useDeleteUser';
 import { getErrorMessage } from '@utils/axios';
+import { PrivateLayout } from '@components/layout/private/private-layout';
 
 const Users = () => {
   const { user } = useAuth();
@@ -53,19 +53,19 @@ const Users = () => {
   };
 
   return (
-    <>
+    <PrivateLayout title="Users list">
       <div className="container px-6 mx-auto grid">
         <PageHeader text="Users List" />
 
         <div className="flex flex-col">
           <div className="py-4 flex justify-end">
-            <Link href="/users/new">
-              <a className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                <span className="mr-2" aria-hidden="true">
-                  <PlusIcon className="w-5 h-5" />
-                </span>
-                  New user
-              </a>
+            <Link
+              href="/users/new"
+              className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+
+              <span className="mr-2" aria-hidden="true">
+                <PlusIcon className="w-5 h-5" />
+              </span>New user
             </Link>
           </div>
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -84,15 +84,15 @@ const Users = () => {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {Boolean(data?.length) &&
-                    data?.map((item) => (
-                      <UserRow
-                        key={item.id}
-                        item={item}
-                        triggerDeleteDialog={() => onDeleteUserClick(item.id)}
-                        canEdit={true}
-                        canDelete={user?.role === 'admin'}
-                      />
-                    ))}
+                  data?.map((item) => (
+                    <UserRow
+                      key={item.id}
+                      item={item}
+                      triggerDeleteDialog={() => onDeleteUserClick(item.id)}
+                      canEdit={true}
+                      canDelete={user?.role === 'admin'}
+                    />
+                  ))}
 
                     {!Boolean(data?.length) && <TableNoRow colSpan={5} />}
                   </tbody>
@@ -108,8 +108,7 @@ const Users = () => {
         onConfirmButtonClick={handleDeleteUserClick}
         onCancelButtonClick={closeDialog}
       />
-    </>
-  );
+    </PrivateLayout>);
 };
 
-export default withPrivateLayout(Users, { title: 'Users list' });
+export default Users;

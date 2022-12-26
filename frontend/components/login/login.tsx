@@ -1,10 +1,9 @@
-import { useRouter } from 'next/router';
 import { FormProvider, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 
-import PublicLayout from '@components/layout/public/public-layout';
+import { PublicLayout } from '@components/layout/public/public-layout';
 import { BAD_LOGIN_MESSAGE, FORM_ERRORS } from '@utils/constants';
 import { FormInput } from '@components/common/form-input';
 import { Button } from '@components/common/button';
@@ -16,10 +15,13 @@ const loginSchema = yup.object().shape({
   password: yup.string().required(FORM_ERRORS.fieldRequired),
 });
 
+type Props = {
+  onSuccess: () => Promise<void>;
+};
+
 type LoginFormValues = yup.InferType<typeof loginSchema>;
 
-export default function Login() {
-  const router = useRouter();
+export default function Login({ onSuccess }: Props) {
   const { saveToken } = useAuth();
   const loginMutation = useLogin();
 
@@ -38,14 +40,14 @@ export default function Login() {
         onSuccess: async (response) => {
           saveToken(response.data.data.token);
 
-          await router.push('/dashboard');
+          await onSuccess();
         },
       },
     );
   };
 
   return (
-    <PublicLayout>
+    <PublicLayout title="Log in">
       <div className="flex items-center min-h-[calc(100vh-130px)] p-6 bg-gray-50 dark:bg-gray-900">
         <div className="h-full w-1/4 mx-auto overflow-hidden bg-white rounded-lg shadow-xl dark:bg-gray-800">
           <div className="flex items-center justify-center p-6 sm:p-12 md:w-full">

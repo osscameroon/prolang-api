@@ -5,7 +5,6 @@ import Link from 'next/link';
 import { toast } from 'react-toastify';
 
 import { FilterQueryParams, PaginationChangeEventData } from '@typings/common';
-import { withPrivateLayout } from '@components/hof/with-private-layout';
 import { Pagination } from '@components/pagination/pagination';
 import { ConfirmDialog } from '@components/common/confirm-dialog';
 import { TableNoRow } from '@components/common/table-no-row';
@@ -20,6 +19,7 @@ import { useRetrieveAuthors } from '@hooks/request/query/useRetrieveAuthors';
 import { AuthorRow } from '@components/authors/author-row';
 import { useDeleteAuthor } from '@hooks/request/mutation/useDeleteAuthor';
 import { getErrorMessage } from '@utils/axios';
+import { PrivateLayout } from '@components/layout/private/private-layout';
 
 const Authors = () => {
   const [isDialogOpen, openDialog, closeDialog] = useBooleanState(false);
@@ -77,7 +77,7 @@ const Authors = () => {
   };
 
   return (
-    <>
+    <PrivateLayout title="Authors list">
       <div className="container px-6 mx-auto grid">
         <PageHeader text="Authors List" />
         <div className="flex flex-col">
@@ -97,13 +97,13 @@ const Authors = () => {
               </div>
             </div>
 
-            <Link href="/authors/new">
-              <a className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
-                <span className="mr-2" aria-hidden="true">
-                  <UserAddIcon className="w-5 h-5" />
-                </span>
-                  New author
-              </a>
+            <Link
+              href="/authors/new"
+              className="flex items-center justify-between px-4 py-2 text-sm font-medium leading-5 text-white transition-colors duration-150 bg-purple-600 border border-transparent rounded-lg active:bg-purple-600 hover:bg-purple-700 focus:outline-none focus:shadow-outline-purple">
+
+              <span className="mr-2" aria-hidden="true">
+                <UserAddIcon className="w-5 h-5" />
+              </span>New author
             </Link>
           </div>
           <div className="-my-2 overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -123,9 +123,9 @@ const Authors = () => {
                   </thead>
                   <tbody className="bg-white divide-y divide-gray-200">
                     {Boolean(data?.items.length) &&
-                    data?.items.map((item) => (
-                      <AuthorRow key={item.id} item={item} triggerDeleteDialog={() => onDeleteAuthorClick(item.id)} />
-                    ))}
+                  data?.items.map((item) => (
+                    <AuthorRow key={item.id} item={item} triggerDeleteDialog={() => onDeleteAuthorClick(item.id)} />
+                  ))}
 
                     {!Boolean(data?.items.length) && <TableNoRow colSpan={7} />}
                   </tbody>
@@ -151,8 +151,7 @@ const Authors = () => {
         onConfirmButtonClick={handleDeleteAuthorClick}
         onCancelButtonClick={closeDialog}
       />
-    </>
-  );
+    </PrivateLayout>);
 };
 
-export default withPrivateLayout(Authors, { title: 'Authors list' });
+export default Authors;

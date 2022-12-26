@@ -1,15 +1,15 @@
 import Link from 'next/link';
 import { ArrowCircleRightIcon, TerminalIcon } from '@heroicons/react/outline';
 
-import { withPublicLayout } from '@components/hof/with-public-layout';
 import MicroserviceIcon from '@components/icons/microservice';
 import GraphqlIcon from '@components/icons/graphql';
 import { LanguageCard } from '@components/languages/language-card';
 import { Tile } from '@components/common/tile';
+import { PublicLayout } from '@components/layout/public/public-layout';
 
 const Home = () => {
   return (
-    <div>
+    <PublicLayout title="Home">
       <div className="w-full">
         <div className="xs:w-full sm:w-5/6 md:w-2/3 mx-auto overflow-y-auto">
           <div className="bg-white dark:bg-gray-800 ">
@@ -21,10 +21,10 @@ const Home = () => {
               </h2>
               <div className="lg:mt-8 lg:flex-shrink-0">
                 <div className="mt-12 inline-flex rounded-md shadow">
-                  <Link href="/documentation">
-                    <a className="py-4 px-6 bg-blue-600 hover:bg-blue-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
+                  <Link
+                    href="/documentation"
+                    className="py-4 px-6 bg-blue-600 hover:bg-blue-700 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md rounded-lg">
                       Go to Documentation
-                    </a>
                   </Link>
                 </div>
               </div>
@@ -71,8 +71,8 @@ const Home = () => {
           <LanguageCard />
         </div>
       </div>
-    </div>
+    </PublicLayout>
   );
 };
 
-export default withPublicLayout(Home, { title: 'Home' });
+export default Home;
